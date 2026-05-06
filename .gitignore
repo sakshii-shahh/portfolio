@@ -1,0 +1,19 @@
+# macOS
+.DS_Store
+
+# Editor artifacts
+.vscode/
+.idea/
+*.swp
+
+# Old/unused asset variants — only garden-mb.svg is referenced in HTML
+assets/garden-1*
+assets/garden-2*
+assets/garden-3*
+assets/garden-wide*
+assets/garden-mb.b64
+assets/botanical/
+
+# Backups
+*.bak
+*-backup-*/

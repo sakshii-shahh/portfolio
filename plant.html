@@ -1,0 +1,969 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Plant — Sakshi's Garden</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Fraunces:ital,wght@0,400..600;1,400..600&family=Geist:wght@400;500&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f0e8d2;
+      --bg-elev: #f6efdb;
+      --bg-card: #e8e0c5;
+      --ink: #3a2818;
+      --ink-soft: #5a4632;
+      --ink-mute: #8a7a5e;
+      --rule: #cdc0a0;
+      --accent: #ec6478;
+      --accent-soft: #f7d4dc;
+      --accent-deep: #b13e58;
+      --leaf: #4ea862;
+      --leaf-light: #5fbe75;
+      --leaf-dark: #3a8a4f;
+      --leaf-soft: #d8eedc;
+
+      --display: "Bricolage Grotesque", system-ui, sans-serif;
+      --serif: "Instrument Serif", Georgia, serif;
+      --sans: "Geist", "Inter", system-ui, sans-serif;
+      --mono: "Geist Mono", ui-monospace, monospace;
+
+      --r-md: 12px;
+      --r-lg: 18px;
+      --r-xl: 22px;
+      --ease: cubic-bezier(.22,.61,.36,1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; }
+    html { -webkit-font-smoothing: antialiased; }
+
+    /* Paper-grain texture — bridges the watercolor welcome to the rest of the site */
+    body::before {
+      content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 1;
+      opacity: .35;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='2' seed='4'/><feColorMatrix values='0 0 0 0 0.55  0 0 0 0 0.42  0 0 0 0 0.22  0 0 0 0.07 0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>");
+      mix-blend-mode: multiply;
+    }
+
+    body {
+      background: var(--bg); color: var(--ink);
+      font-family: var(--sans);
+      min-height: 100vh; height: 100vh;
+      overflow: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; }
+
+    @media (hover: hover) and (pointer: fine) {
+      body, body * { cursor: none !important; }
+    }
+    .cursor-dot {
+      position: fixed; top: 0; left: 0; pointer-events: none; z-index: 999;
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--accent);
+      transform: translate(-50%, -50%);
+      transition: width .2s var(--ease), height .2s var(--ease), opacity .2s var(--ease);
+    }
+    body.cursor-grow .cursor-dot { width: 30px; height: 30px; opacity: .85; }
+    @media (hover: none) { .cursor-dot { display: none; } }
+
+    /* TOP BAR */
+    .top {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 20px 32px;
+      max-width: 1280px; margin: 0 auto;
+      height: 64px;
+    }
+    .brand {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: var(--display);
+      font-size: 16px; font-weight: 600;
+      letter-spacing: -.005em;
+      color: var(--ink);
+      text-decoration: none;
+      transition: color .2s var(--ease);
+    }
+    .brand:hover { color: var(--accent-deep); }
+    .brand-dot {
+      width: 9px; height: 9px; border-radius: 50%; background: var(--accent);
+      flex-shrink: 0;
+    }
+    .top-back {
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--ink-mute);
+      transition: color .2s var(--ease);
+    }
+    .top-back:hover { color: var(--ink); }
+
+    /* PLANT PAGE LAYOUT — single viewport */
+    .plant-page {
+      max-width: 1240px; margin: 0 auto;
+      padding: 0 32px 24px;
+      height: calc(100vh - 64px);
+      display: flex; flex-direction: column;
+      overflow: hidden;
+    }
+
+    .plant-head {
+      text-align: center;
+      padding: 14px 0 24px;
+    }
+    .plant-head .greeting {
+      font-family: var(--mono); font-size: 13px; font-weight: 400;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--ink-soft);
+      line-height: 1.7;
+      margin: 0;
+    }
+    .plant-head .greeting .softer { color: var(--ink-mute); }
+
+    /* TWO-COLUMN BODY: form + sticky preview */
+    .plant-shell {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 56px;
+      align-items: stretch;
+      min-height: 0;
+    }
+    @media (max-width: 980px) {
+      .plant-shell { grid-template-columns: 1fr; gap: 24px; }
+      body { overflow-y: auto; height: auto; }
+      .plant-page { height: auto; }
+    }
+
+    .plant-form {
+      display: flex; flex-direction: column;
+      gap: 18px; min-width: 0;
+    }
+    .plant-side {
+      display: flex; flex-direction: column;
+      gap: 14px; align-items: stretch;
+      min-width: 0;
+    }
+
+    /* STEP — typography matches site (italic saffron display number) */
+    .step { }
+    .step-label {
+      display: flex; align-items: baseline; gap: 14px;
+      font-family: var(--display); font-weight: 500;
+      font-size: 16px;
+      color: var(--ink);
+      margin: 0 0 10px;
+      letter-spacing: -.005em;
+    }
+    .step-label .num {
+      font-family: var(--display);
+      font-style: italic; font-weight: 400;
+      color: var(--accent);
+      font-size: 22px;
+      line-height: 1;
+    }
+    /* When a step is "done" — just a quiet color shift, no tick, no emoji */
+    .step.done .step-label .num {
+      color: var(--leaf-dark);
+    }
+
+    /* FLOWER GRID */
+    .flower-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 8px;
+    }
+    @media (max-width: 760px) { .flower-grid { grid-template-columns: repeat(3, 1fr); } }
+    .flower-option {
+      background: var(--bg-elev);
+      border: 1.5px solid var(--rule);
+      border-radius: var(--r-md);
+      padding: 8px 6px 6px;
+      display: flex; flex-direction: column; align-items: center; gap: 2px;
+      transition: all .25s var(--ease);
+    }
+    .flower-option:hover { background: var(--bg-card); border-color: var(--rule); transform: translateY(-2px); }
+    .flower-option.selected {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      box-shadow: 0 6px 14px -10px rgba(20,18,12,0.18);
+    }
+    .flower-option svg { width: 100%; height: 64px; }
+    .flower-option .label {
+      font-family: var(--mono); font-size: 9.5px;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--ink-mute);
+    }
+    .flower-option.selected .label { color: var(--accent-deep); font-weight: 500; }
+
+    /* POT GRID */
+    .pot-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+    }
+    @media (max-width: 540px) { .pot-grid { grid-template-columns: repeat(3, 1fr); } }
+    .pot-option {
+      background: var(--bg-elev);
+      border: 1.5px solid var(--rule);
+      border-radius: var(--r-md);
+      padding: 8px 6px 6px;
+      display: flex; flex-direction: column; align-items: center; gap: 2px;
+      transition: all .25s var(--ease);
+    }
+    .pot-option:hover { background: var(--bg-card); transform: translateY(-2px); }
+    .pot-option.selected {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      box-shadow: 0 6px 14px -10px rgba(20,18,12,0.18);
+    }
+    .pot-option svg { width: 100%; height: 48px; }
+    .pot-option .label {
+      font-family: var(--mono); font-size: 9.5px;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--ink-mute);
+    }
+    .pot-option.selected .label { color: var(--accent-deep); font-weight: 500; }
+
+    /* NAME INPUT */
+    .name-input-wrap {
+      display: flex; gap: 10px; align-items: center;
+    }
+    .name-input {
+      flex: 1; padding: 12px 16px;
+      font-family: var(--display); font-weight: 500;
+      font-size: 16px;
+      background: var(--bg-elev);
+      border: 1.5px solid var(--rule);
+      border-radius: var(--r-md);
+      color: var(--ink); outline: none;
+      transition: border-color .25s var(--ease), background .25s var(--ease);
+    }
+    .name-input:focus {
+      border-color: var(--accent);
+      background: var(--bg-card);
+    }
+    .name-input::placeholder {
+      font-family: var(--display); font-style: italic; color: var(--ink-mute);
+    }
+    .name-counter {
+      font-family: var(--mono); font-size: 11px;
+      color: var(--ink-mute);
+      letter-spacing: .04em;
+      min-width: 48px; text-align: right;
+    }
+
+    /* PREVIEW (right column) */
+    .preview {
+      flex: 1;
+      padding: 24px 20px;
+      background: linear-gradient(180deg, var(--bg-elev) 0%, var(--leaf-soft) 100%);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-xl);
+      display: flex; flex-direction: column; align-items: center; gap: 12px;
+      position: relative; overflow: hidden;
+    }
+    .preview::before {
+      content: ""; position: absolute; inset: 0;
+      background-image: radial-gradient(rgba(78,168,98,0.10) 1px, transparent 1px);
+      background-size: 14px 14px; pointer-events: none;
+    }
+    .preview-stage {
+      flex: 1; width: 100%;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; z-index: 1;
+      min-height: 220px;
+    }
+    .preview-caption {
+      font-family: var(--mono); font-size: 10.5px; font-weight: 500;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--ink-mute);
+      position: relative; z-index: 1;
+      text-align: center;
+    }
+    .preview-caption.ready { color: var(--leaf-dark); }
+
+    /* Composite plant render — flower + pot stacked, names on pot.
+       This is the SAME render used in preview, success, and lawn.
+       Width is set by --plant-w (default 180px), everything else scales. */
+    .plant-render {
+      --plant-w: 180px;
+      width: var(--plant-w);
+      display: flex; flex-direction: column; align-items: center;
+      transition: opacity .35s var(--ease);
+    }
+    .plant-render.empty { opacity: .3; }
+    .pr-flower {
+      width: 75%;
+      aspect-ratio: 60 / 90;
+      display: block;
+    }
+    .pr-flower svg { width: 100%; height: 100%; display: block; }
+    .pr-pot {
+      width: 95%;
+      aspect-ratio: 90 / 80;
+      margin-top: -3%;
+      position: relative;
+    }
+    .pr-pot svg { width: 100%; height: 100%; display: block; }
+    .pr-name {
+      position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+      font-family: var(--display); font-weight: 600;
+      font-size: calc(var(--plant-w) * 0.07);
+      letter-spacing: -.005em; pointer-events: none;
+      max-width: 65%; text-align: center;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+
+    .step-label .optional {
+      font-family: var(--mono); font-size: 10px; font-weight: 400;
+      color: var(--ink-mute);
+      letter-spacing: .12em; text-transform: uppercase;
+      margin-left: 6px;
+      font-style: normal;
+    }
+
+    /* PLANT BUTTON */
+    .actions {
+      display: flex; flex-direction: column; align-items: center; gap: 10px;
+      padding-top: 4px;
+    }
+    .plant-btn {
+      width: 100%;
+      padding: 16px 32px;
+      background: var(--ink); color: var(--bg);
+      border: 0; border-radius: 999px;
+      font-family: var(--display); font-weight: 600;
+      font-size: 15px; letter-spacing: .04em;
+      text-transform: uppercase;
+      transition: background .25s var(--ease), transform .25s var(--ease), opacity .25s var(--ease);
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .plant-btn:disabled { opacity: .35; pointer-events: none; }
+    .plant-btn:not(:disabled):hover {
+      background: var(--accent); transform: translateY(-2px);
+    }
+    .skip-link {
+      font-size: 12px; color: var(--ink-mute);
+      transition: color .2s var(--ease);
+      position: relative; padding: 2px 0;
+    }
+    .skip-link:hover { color: var(--ink); }
+    .skip-link::after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: 0;
+      height: 1px; background: currentColor; opacity: .35;
+    }
+
+    /* SUCCESS — watercolor sky + lawn, painterly clouds, layered grass */
+    .success {
+      position: fixed; inset: 0; z-index: 100;
+      background:
+        /* layered greens — painterly lawn */
+        linear-gradient(180deg, transparent 0%, transparent 52%, #cce4b8 54%, #b8d59a 70%, #9cc88e 100%),
+        /* soft sky */
+        linear-gradient(180deg, #d4e8ec 0%, #c8e0e4 50%, #b8d2cc 56%, transparent 56%);
+      display: grid; grid-template-rows: auto 1fr auto;
+      justify-items: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity .6s var(--ease), transform 1.0s var(--ease);
+      overflow: hidden;
+      padding: 7vh 24px 4vh;
+    }
+    .success.show { opacity: 1; pointer-events: auto; }
+
+    /* watercolor wash texture — bleeds + edges */
+    .success::before {
+      content: ""; position: absolute; inset: 0; pointer-events: none;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='280' height='280'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='3' seed='7'/><feColorMatrix values='0 0 0 0 0.35  0 0 0 0 0.5  0 0 0 0 0.3  0 0 0 0.08 0'/></filter><rect width='280' height='280' filter='url(%23n)'/></svg>");
+      mix-blend-mode: multiply; opacity: .55; z-index: 0;
+    }
+
+    /* soft watercolor clouds in the sky */
+    .sky-clouds {
+      position: absolute; top: 6vh; left: 0; right: 0;
+      height: 18vh; pointer-events: none; z-index: 1;
+      opacity: 0;
+      animation: fadeIn 1.1s .2s var(--ease) forwards;
+    }
+    .sky-clouds svg { width: 100%; height: 100%; display: block; }
+
+    /* grass blades silhouette in front of the visitor pots */
+    .grass-blades {
+      position: absolute; left: 0; right: 0; bottom: 6vh;
+      height: 16vh; pointer-events: none; z-index: 4;
+      opacity: 0;
+      animation: fadeIn 1.0s .45s var(--ease) forwards;
+    }
+    .grass-blades svg { width: 100%; height: 100%; display: block; }
+
+    .success-head {
+      text-align: center;
+      position: relative; z-index: 3;
+      animation: fadeUp .6s var(--ease) both;
+    }
+    .success-head .success-mono {
+      font-family: var(--mono); font-size: 13.5px; font-weight: 500;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: #1f4030;
+      line-height: 1.7;
+      text-shadow: 0 1px 2px rgba(255,255,255,.5);
+      margin: 0;
+      background: rgba(251,246,229,.55);
+      padding: 12px 26px;
+      border-radius: 14px;
+      backdrop-filter: blur(8px);
+    }
+    .success-head .success-mono .softer { color: rgba(31,64,48,.62); }
+
+    /* user's plant — DROPS down into the lawn (planting moment) */
+    .success-center {
+      display: flex; align-items: flex-end; justify-content: center;
+      flex: 1;
+      position: relative; z-index: 3;
+    }
+    .success-center .plant-render {
+      --plant-w: clamp(180px, 22vw, 240px);
+      animation: drop-in 1.1s .25s cubic-bezier(.5,1.6,.4,1) both;
+      transform-origin: 50% 100%;
+    }
+    @keyframes drop-in {
+      0%   { transform: translateY(-180px) rotate(-6deg); opacity: 0; }
+      55%  { transform: translateY(8px) rotate(2deg); opacity: 1; }
+      75%  { transform: translateY(-4px) rotate(-1deg); }
+      100% { transform: translateY(0) rotate(0); opacity: 1; }
+    }
+
+    /* sparkle around the planted spot */
+    .plant-sparkle {
+      position: absolute;
+      width: 14px; height: 14px;
+      pointer-events: none;
+      opacity: 0;
+      animation: sparkle 1s 1.1s var(--ease) forwards;
+    }
+    .plant-sparkle svg { width: 100%; height: 100%; display: block; }
+    .ps-1 { left: 30%; bottom: 22%; }
+    .ps-2 { right: 28%; bottom: 28%; animation-delay: 1.25s; }
+    .ps-3 { left: 38%; bottom: 30%; animation-delay: 1.4s; width: 10px; height: 10px; }
+    @keyframes sparkle {
+      0% { opacity: 0; transform: scale(.4) rotate(0deg); }
+      40% { opacity: 1; transform: scale(1.2) rotate(60deg); }
+      100% { opacity: 0; transform: scale(1) rotate(120deg); }
+    }
+
+    /* lawn ribbon — other plants nestled in the grass */
+    .lawn-ribbon {
+      display: flex; align-items: flex-end; justify-content: center;
+      gap: 18px; flex-wrap: nowrap;
+      max-width: 100%; overflow: hidden;
+      padding: 18px 0 6px;
+      position: relative; z-index: 2;
+    }
+    .lawn-ribbon .plant-render {
+      --plant-w: clamp(56px, 8vw, 90px);
+      animation: fadeUp .6s var(--ease) both;
+      opacity: .9;
+      transition: transform .25s var(--ease), opacity .25s var(--ease);
+    }
+    .lawn-ribbon .plant-render:hover { opacity: 1; transform: translateY(-4px); }
+    .lawn-ribbon .plant-render:nth-child(1) { animation-delay: 1.4s; }
+    .lawn-ribbon .plant-render:nth-child(2) { animation-delay: 1.5s; }
+    .lawn-ribbon .plant-render:nth-child(3) { animation-delay: 1.6s; }
+    .lawn-ribbon .plant-render:nth-child(4) { animation-delay: 1.7s; }
+    .lawn-ribbon .plant-render:nth-child(5) { animation-delay: 1.8s; }
+    .lawn-ribbon .plant-render:nth-child(6) { animation-delay: 1.9s; }
+
+    .redirect-hint {
+      margin-top: 18px;
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--ink-mute);
+      animation: fadeUp .6s 1.7s var(--ease) both;
+    }
+    .redirect-hint .ldot { display: none; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: none; }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* MOV-style outbound transition: cream wash gently rolls in,
+       success scene fades + lifts, lands at home */
+    .success.leaving {
+      transition: transform 1.1s cubic-bezier(.55,.05,.4,1), opacity 1.0s var(--ease);
+      transform: translateY(-32px) scale(.96);
+      opacity: 0;
+    }
+    .leave-wash {
+      position: fixed; inset: 0; z-index: 200;
+      background: var(--bg);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 1.1s cubic-bezier(.55,.05,.4,1);
+    }
+    .leave-wash.show { opacity: 1; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor-dot" aria-hidden="true"></div>
+
+  <header class="top">
+    <a href="home.html" class="brand">
+      <span class="brand-dot"></span> sakshi shah
+    </a>
+    <a href="index.html" class="top-back">← back to welcome</a>
+  </header>
+
+  <main class="plant-page">
+
+    <div class="plant-head">
+      <p class="greeting">
+        WELCOME IN.<br/>
+        <span class="softer">I HOPE YOU ENJOY YOUR TIME SEEING MY BLOOMED &amp; BLOOMING PROJECTS.</span>
+      </p>
+    </div>
+
+    <div class="plant-shell">
+
+      <!-- LEFT: form -->
+      <div class="plant-form">
+
+        <section class="step" id="step-flower">
+          <p class="step-label"><span class="num">01</span> Pick your flower</p>
+          <div class="flower-grid" id="flowerGrid"></div>
+        </section>
+
+        <section class="step" id="step-pot">
+          <p class="step-label"><span class="num">02</span> Pick your pot</p>
+          <div class="pot-grid" id="potGrid"></div>
+        </section>
+
+        <section class="step" id="step-name">
+          <p class="step-label"><span class="num">03</span> Add your name</p>
+          <div class="name-input-wrap">
+            <input class="name-input" id="nameInput" type="text" placeholder="Your name (or leave blank)" maxlength="20" />
+            <span class="name-counter" id="nameCounter">0/20</span>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- RIGHT: live preview + plant button -->
+      <div class="plant-side">
+        <div class="preview">
+          <div class="preview-stage" id="previewStage">
+            <!-- composite plant rendered by JS -->
+          </div>
+          <span class="preview-caption" id="previewCaption">Pick a flower and a pot</span>
+        </div>
+        <div class="actions">
+          <button class="plant-btn" id="plantBtn" disabled>Plant it</button>
+          <a class="skip-link" href="home.html">SKIP — TAKE ME STRAIGHT TO THE WORK</a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- SUCCESS — sky + lawn scene, plant drops into the grass, ribbon below -->
+  <div class="success" id="success" aria-hidden="true">
+
+    <!-- grass blades silhouette -->
+    <div class="grass-blades" aria-hidden="true">
+      <svg viewBox="0 0 1200 180" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <g fill="#7eb86b" opacity=".55">
+          <path d="M40 180 Q 38 140 50 100 Q 56 130 56 180 Z"/>
+          <path d="M120 180 Q 118 130 132 80 Q 140 120 140 180 Z"/>
+          <path d="M200 180 Q 198 150 208 110 Q 214 140 214 180 Z"/>
+          <path d="M300 180 Q 296 120 314 70 Q 322 110 322 180 Z"/>
+          <path d="M420 180 Q 418 140 432 100 Q 438 130 438 180 Z"/>
+          <path d="M560 180 Q 556 130 574 80 Q 582 120 582 180 Z"/>
+          <path d="M700 180 Q 698 150 710 105 Q 716 138 716 180 Z"/>
+          <path d="M840 180 Q 836 120 856 70 Q 864 110 864 180 Z"/>
+          <path d="M960 180 Q 958 140 970 100 Q 976 130 976 180 Z"/>
+          <path d="M1080 180 Q 1076 130 1094 80 Q 1102 120 1102 180 Z"/>
+        </g>
+        <g fill="#5fa055" opacity=".5">
+          <path d="M80 180 Q 78 150 88 120 Q 94 145 94 180 Z"/>
+          <path d="M250 180 Q 248 145 260 110 Q 266 140 266 180 Z"/>
+          <path d="M380 180 Q 376 130 392 90 Q 400 125 400 180 Z"/>
+          <path d="M520 180 Q 518 150 530 115 Q 536 145 536 180 Z"/>
+          <path d="M660 180 Q 656 125 674 80 Q 682 120 682 180 Z"/>
+          <path d="M780 180 Q 778 150 790 110 Q 796 142 796 180 Z"/>
+          <path d="M900 180 Q 896 130 914 85 Q 922 122 922 180 Z"/>
+          <path d="M1020 180 Q 1018 150 1030 115 Q 1036 145 1036 180 Z"/>
+          <path d="M1140 180 Q 1136 130 1154 85 Q 1162 122 1162 180 Z"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="success-head">
+      <p class="success-mono" id="successHead">
+        PLANTED.<br/>
+        <span class="softer">WELCOME TO THE LAWN.</span>
+      </p>
+    </div>
+    <div class="success-center" id="successCenter">
+      <!-- user's plant rendered here -->
+      <span class="plant-sparkle ps-1" aria-hidden="true">
+        <svg viewBox="0 0 14 14"><path d="M7 1 L8 5.5 L13 7 L8 8.5 L7 13 L6 8.5 L1 7 L6 5.5 Z" fill="#f6c54a"/></svg>
+      </span>
+      <span class="plant-sparkle ps-2" aria-hidden="true">
+        <svg viewBox="0 0 14 14"><path d="M7 1 L8 5.5 L13 7 L8 8.5 L7 13 L6 8.5 L1 7 L6 5.5 Z" fill="#fdfaf2"/></svg>
+      </span>
+      <span class="plant-sparkle ps-3" aria-hidden="true">
+        <svg viewBox="0 0 14 14"><path d="M7 1 L8 5.5 L13 7 L8 8.5 L7 13 L6 8.5 L1 7 L6 5.5 Z" fill="#ec6478"/></svg>
+      </span>
+    </div>
+    <div>
+      <div class="lawn-ribbon" id="lawnRibbon">
+        <!-- other plants rendered here -->
+      </div>
+      <p class="redirect-hint">
+        taking you to the work page<span class="ldot"></span><span class="ldot"></span><span class="ldot"></span>
+      </p>
+    </div>
+  </div>
+
+  <script>
+    /* ======================================================
+       FLOWER + POT DEFINITIONS — SVGs reused in picker, preview, lawn
+       Each flower has stem + leaves baked in.
+       ====================================================== */
+    /* Watercolor-style flowers — layered washes, irregular edges, soft seams.
+       Each uses 2-3 stacked tones to suggest brush bleeding. */
+    const FLOWERS = [
+      {
+        id: 'hibiscus', label: 'hibiscus',
+        svg: `<svg viewBox="0 0 60 90" xmlns="http://www.w3.org/2000/svg">
+          <path d="M30 90 Q 32 60 30 36" stroke="#5e8a4f" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+          <path d="M30 64 Q 12 60 4 46 Q 6 38 16 42 Q 26 48 30 58 Z" fill="#7eb86b"/>
+          <path d="M14 50 Q 22 46 28 54" stroke="#3d6b2c" stroke-width=".8" fill="none" opacity=".5"/>
+          <path d="M30 52 Q 50 46 56 30 Q 50 24 44 28 Q 34 34 30 46 Z" fill="#5fa055"/>
+          <path d="M12 32 Q 4 22 12 12 Q 22 14 24 26 Q 22 32 12 32 Z" fill="#e85a5a"/>
+          <path d="M14 26 Q 8 18 14 12 Q 22 16 22 26 Z" fill="#f4a8a8" opacity=".7"/>
+          <path d="M48 32 Q 56 22 48 12 Q 38 14 36 26 Q 38 32 48 32 Z" fill="#e85a5a"/>
+          <path d="M46 26 Q 52 18 46 12 Q 38 16 38 26 Z" fill="#f4a8a8" opacity=".7"/>
+          <path d="M30 8 Q 22 4 14 10 Q 18 22 30 22 Q 42 22 46 10 Q 38 4 30 8 Z" fill="#e85a5a"/>
+          <path d="M30 14 Q 24 10 22 16 Q 30 20 38 16 Q 36 10 30 14 Z" fill="#f4a8a8" opacity=".7"/>
+          <path d="M28 32 Q 30 24 32 32 L 30 38 Z" fill="#f6c54a"/>
+          <circle cx="30" cy="38" r="2.2" fill="#c87a18"/>
+        </svg>`
+      },
+      {
+        id: 'peony', label: 'peony',
+        svg: `<svg viewBox="0 0 60 90" xmlns="http://www.w3.org/2000/svg">
+          <path d="M30 90 Q 30 60 30 36" stroke="#5e8a4f" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+          <path d="M30 64 Q 12 60 4 46 Q 8 38 18 42 Q 26 48 30 58 Z" fill="#7eb86b"/>
+          <path d="M30 52 Q 50 46 54 32 Q 50 26 44 30 Q 34 34 30 46 Z" fill="#5fa055"/>
+          <ellipse cx="30" cy="22" rx="18" ry="14" fill="#f4a8b6"/>
+          <ellipse cx="30" cy="22" rx="13" ry="11" fill="#ec6478" opacity=".85"/>
+          <path d="M16 22 Q 22 8 30 14 Q 28 22 16 22 Z" fill="#f4a8b6" opacity=".7"/>
+          <path d="M44 22 Q 38 8 30 14 Q 32 22 44 22 Z" fill="#f4a8b6" opacity=".7"/>
+          <path d="M22 18 Q 28 12 36 16 Q 38 22 32 26 Q 24 24 22 18 Z" fill="#ec6478"/>
+          <ellipse cx="30" cy="22" rx="5" ry="4" fill="#b13e58" opacity=".9"/>
+          <circle cx="29" cy="20" r="1.2" fill="#f6c54a" opacity=".8"/>
+        </svg>`
+      },
+      {
+        id: 'lavender', label: 'lavender',
+        svg: `<svg viewBox="0 0 60 90" xmlns="http://www.w3.org/2000/svg">
+          <path d="M30 90 Q 30 60 30 42" stroke="#5e8a4f" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+          <path d="M30 68 Q 14 64 6 50 Q 10 42 18 46 Q 26 52 30 62 Z" fill="#7eb86b"/>
+          <path d="M30 56 Q 46 50 50 36 Q 44 32 38 36 Q 32 42 30 52 Z" fill="#5fa055"/>
+          <ellipse cx="30" cy="6" rx="6" ry="7.5" fill="#a878c6" opacity=".55"/>
+          <ellipse cx="30" cy="6" rx="4" ry="5.5" fill="#a878c6"/>
+          <ellipse cx="24" cy="14" rx="6" ry="7.5" fill="#a878c6" opacity=".55"/>
+          <ellipse cx="24" cy="14" rx="4" ry="5.5" fill="#9460b0"/>
+          <ellipse cx="36" cy="14" rx="6" ry="7.5" fill="#a878c6" opacity=".55"/>
+          <ellipse cx="36" cy="14" rx="4" ry="5.5" fill="#9460b0"/>
+          <ellipse cx="20" cy="24" rx="6" ry="7.5" fill="#cfb0e0" opacity=".7"/>
+          <ellipse cx="30" cy="22" rx="6" ry="8" fill="#a878c6"/>
+          <ellipse cx="40" cy="24" rx="6" ry="7.5" fill="#cfb0e0" opacity=".7"/>
+          <ellipse cx="24" cy="32" rx="5" ry="7" fill="#9460b0" opacity=".85"/>
+          <ellipse cx="36" cy="32" rx="5" ry="7" fill="#9460b0" opacity=".85"/>
+          <ellipse cx="30" cy="40" rx="4" ry="5.5" fill="#7e4ea0"/>
+        </svg>`
+      },
+      {
+        id: 'tulip', label: 'tulip',
+        svg: `<svg viewBox="0 0 60 90" xmlns="http://www.w3.org/2000/svg">
+          <path d="M30 90 Q 30 60 30 32" stroke="#5e8a4f" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+          <path d="M30 68 Q 12 64 4 48 Q 8 40 18 44 Q 26 50 30 60 Z" fill="#7eb86b"/>
+          <path d="M30 56 Q 46 50 50 36 Q 44 32 38 36 Q 32 42 30 52 Z" fill="#5fa055"/>
+          <path d="M18 38 Q 12 18 22 10 Q 30 14 28 38 Z" fill="#f4a8b6"/>
+          <path d="M42 38 Q 48 18 38 10 Q 30 14 32 38 Z" fill="#f4a8b6"/>
+          <path d="M22 38 Q 22 14 30 8 Q 38 14 38 38 Z" fill="#ec6478"/>
+          <path d="M26 12 Q 30 8 34 14 Q 32 26 30 36" stroke="#b13e58" stroke-width=".8" fill="none" opacity=".5"/>
+          <path d="M22 24 Q 30 18 38 24" stroke="#fbcdd8" stroke-width=".6" fill="none" opacity=".7"/>
+        </svg>`
+      },
+      {
+        id: 'sunflower', label: 'sunflower',
+        svg: `<svg viewBox="0 0 60 90" xmlns="http://www.w3.org/2000/svg">
+          <path d="M30 90 Q 30 60 30 38" stroke="#5e8a4f" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+          <path d="M30 68 Q 12 64 4 48 Q 8 40 18 44 Q 26 50 30 60 Z" fill="#7eb86b"/>
+          <path d="M30 56 Q 46 50 50 36 Q 44 32 38 36 Q 32 42 30 52 Z" fill="#5fa055"/>
+          <g transform="translate(30 22)">
+            <ellipse cx="0" cy="-13" rx="5" ry="10" fill="#f6c54a" opacity=".7"/>
+            <ellipse cx="0" cy="-13" rx="3.6" ry="9" fill="#f6c54a"/>
+            <ellipse cx="9" cy="-9" rx="5" ry="10" fill="#f6c54a" opacity=".7" transform="rotate(45)"/>
+            <ellipse cx="9" cy="-9" rx="3.6" ry="9" fill="#f6c54a" transform="rotate(45)"/>
+            <ellipse cx="13" cy="0" rx="10" ry="5" fill="#f6c54a" opacity=".7"/>
+            <ellipse cx="13" cy="0" rx="9" ry="3.6" fill="#f6c54a"/>
+            <ellipse cx="9" cy="9" rx="5" ry="10" fill="#f6c54a" opacity=".7" transform="rotate(-45)"/>
+            <ellipse cx="9" cy="9" rx="3.6" ry="9" fill="#f6c54a" transform="rotate(-45)"/>
+            <ellipse cx="0" cy="13" rx="5" ry="10" fill="#f6c54a" opacity=".7"/>
+            <ellipse cx="0" cy="13" rx="3.6" ry="9" fill="#f6c54a"/>
+            <ellipse cx="-9" cy="9" rx="5" ry="10" fill="#f6c54a" opacity=".7" transform="rotate(45)"/>
+            <ellipse cx="-9" cy="9" rx="3.6" ry="9" fill="#f6c54a" transform="rotate(45)"/>
+            <ellipse cx="-13" cy="0" rx="10" ry="5" fill="#f6c54a" opacity=".7"/>
+            <ellipse cx="-13" cy="0" rx="9" ry="3.6" fill="#f6c54a"/>
+            <ellipse cx="-9" cy="-9" rx="5" ry="10" fill="#f6c54a" opacity=".7" transform="rotate(-45)"/>
+            <ellipse cx="-9" cy="-9" rx="3.6" ry="9" fill="#f6c54a" transform="rotate(-45)"/>
+          </g>
+          <circle cx="30" cy="22" r="7" fill="#7a4818"/>
+          <circle cx="30" cy="22" r="4.5" fill="#5a3010"/>
+        </svg>`
+      },
+      {
+        id: 'cosmos', label: 'cosmos',
+        svg: `<svg viewBox="0 0 60 90" xmlns="http://www.w3.org/2000/svg">
+          <path d="M30 90 Q 30 60 30 38" stroke="#5e8a4f" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+          <path d="M30 68 Q 12 64 4 48 Q 8 40 18 44 Q 26 50 30 60 Z" fill="#7eb86b"/>
+          <path d="M30 56 Q 46 50 50 36 Q 44 32 38 36 Q 32 42 30 52 Z" fill="#5fa055"/>
+          <g transform="translate(30 22)">
+            <path d="M0 -18 Q -8 -12 -6 0 Q 6 0 8 -12 Q 8 -18 0 -18 Z" fill="#fbcdd8" opacity=".75"/>
+            <path d="M0 -16 Q -6 -10 -4 0 Q 4 0 6 -10 Q 6 -16 0 -16 Z" fill="#f4a8b6"/>
+            <path d="M14 -8 Q 8 -2 12 6 Q 18 4 18 -6 Q 18 -10 14 -8 Z" fill="#f4a8b6" transform="rotate(72)"/>
+            <path d="M14 -8 Q 8 -2 12 6 Q 18 4 18 -6 Q 18 -10 14 -8 Z" fill="#f4a8b6" transform="rotate(144)"/>
+            <path d="M14 -8 Q 8 -2 12 6 Q 18 4 18 -6 Q 18 -10 14 -8 Z" fill="#f4a8b6" transform="rotate(216)"/>
+            <path d="M14 -8 Q 8 -2 12 6 Q 18 4 18 -6 Q 18 -10 14 -8 Z" fill="#f4a8b6" transform="rotate(288)"/>
+          </g>
+          <circle cx="30" cy="22" r="5.5" fill="#f6c54a"/>
+          <circle cx="30" cy="22" r="3" fill="#c87a18"/>
+        </svg>`
+      },
+    ];
+
+    const POTS = [
+      { id: 'terracotta', label: 'terra',   body: '#c8602f', rim: '#a04a0c', textC: '#fdf3eb' },
+      { id: 'cobalt',     label: 'cobalt',  body: '#2a5fc4', rim: '#1a3a8a', textC: '#eef2ff' },
+      { id: 'cream',      label: 'cream',   body: '#ebe3d0', rim: '#c8b894', textC: '#3a3530' },
+      { id: 'matte',      label: 'matte',   body: '#1a1a1a', rim: '#000',    textC: '#f4f1ea' },
+      { id: 'saffron',    label: 'saffron', body: '#d96a1a', rim: '#a04a0c', textC: '#fdf3eb' },
+    ];
+
+    function potSvg(p) {
+      return `<svg viewBox="0 0 90 80" xmlns="http://www.w3.org/2000/svg">
+        <path d="M14 16 L76 16 L70 76 L20 76 Z" fill="${p.body}"/>
+        <rect x="11" y="14" width="68" height="7" rx="1" fill="${p.rim}"/>
+      </svg>`;
+    }
+
+    /* ======================================================
+       STATE — pre-select a default flower + pot so empty state
+       is never lonely. User can change or just click plant.
+       ====================================================== */
+    const state = { flower: 'cosmos', pot: 'cream', name: '' };
+
+    const flowerGrid = document.getElementById('flowerGrid');
+    FLOWERS.forEach(f => {
+      const btn = document.createElement('button');
+      btn.className = 'flower-option';
+      btn.dataset.id = f.id;
+      btn.type = 'button';
+      btn.innerHTML = `${f.svg}<span class="label">${f.label}</span>`;
+      btn.addEventListener('click', () => selectFlower(f.id));
+      flowerGrid.appendChild(btn);
+    });
+
+    const potGrid = document.getElementById('potGrid');
+    POTS.forEach(p => {
+      const btn = document.createElement('button');
+      btn.className = 'pot-option';
+      btn.dataset.id = p.id;
+      btn.type = 'button';
+      btn.innerHTML = `${potSvg(p)}<span class="label">${p.label}</span>`;
+      btn.addEventListener('click', () => selectPot(p.id));
+      potGrid.appendChild(btn);
+    });
+
+    function selectFlower(id) {
+      state.flower = id;
+      flowerGrid.querySelectorAll('.flower-option').forEach(b => {
+        b.classList.toggle('selected', b.dataset.id === id);
+      });
+      document.getElementById('step-flower').classList.add('done');
+      updatePreview();
+    }
+    function selectPot(id) {
+      state.pot = id;
+      potGrid.querySelectorAll('.pot-option').forEach(b => {
+        b.classList.toggle('selected', b.dataset.id === id);
+      });
+      document.getElementById('step-pot').classList.add('done');
+      updatePreview();
+    }
+
+    const nameInput = document.getElementById('nameInput');
+    const nameCounter = document.getElementById('nameCounter');
+    nameInput.addEventListener('input', () => {
+      state.name = nameInput.value.trim();
+      nameCounter.textContent = `${nameInput.value.length}/20`;
+      document.getElementById('step-name').classList.toggle('done', state.name.length > 0);
+      updatePreview();
+    });
+
+    /* ======================================================
+       COMPOSITE PLANT RENDER — single source of truth.
+       Used by: live preview, success center, lawn ribbon.
+       ====================================================== */
+    function renderPlantHTML(plant) {
+      const f = plant.flower ? FLOWERS.find(x => x.id === plant.flower) : null;
+      const p = plant.pot ? POTS.find(x => x.id === plant.pot) : null;
+      const isEmpty = !f || !p;
+      const flowerSvg = f ? f.svg : `<svg viewBox="0 0 60 90"><path d="M30 90 L30 50" stroke="#d8d4c8" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="30" cy="30" r="16" fill="#d8d4c8"/></svg>`;
+      const potHtml = p ? potSvg(p) : `<svg viewBox="0 0 90 80"><path d="M14 16 L76 16 L70 76 L20 76 Z" fill="#d8d4c8"/><rect x="11" y="14" width="68" height="7" fill="#bcb8aa"/></svg>`;
+      const nameColor = p ? p.textC : 'rgba(255,255,255,0.92)';
+      return `<div class="plant-render${isEmpty ? ' empty' : ''}">
+        <div class="pr-flower">${flowerSvg}</div>
+        <div class="pr-pot">${potHtml}<span class="pr-name" style="color:${nameColor}">${escapeHtml(plant.name || '')}</span></div>
+      </div>`;
+    }
+
+    const previewStage = document.getElementById('previewStage');
+    const previewCaption = document.getElementById('previewCaption');
+    const plantBtn = document.getElementById('plantBtn');
+
+    function updatePreview() {
+      previewStage.innerHTML = renderPlantHTML({
+        flower: state.flower, pot: state.pot, name: state.name,
+      });
+
+      // EVERYTHING is optional — plant button always enabled, no required fields
+      plantBtn.disabled = false;
+      previewCaption.classList.add('ready');
+      previewCaption.textContent = 'READY TO PLANT — OR PICK YOUR OWN';
+    }
+
+    // sync default selection into the UI on load
+    if (state.flower) {
+      flowerGrid.querySelectorAll('.flower-option').forEach(b => {
+        b.classList.toggle('selected', b.dataset.id === state.flower);
+      });
+      document.getElementById('step-flower').classList.add('done');
+    }
+    if (state.pot) {
+      potGrid.querySelectorAll('.pot-option').forEach(b => {
+        b.classList.toggle('selected', b.dataset.id === state.pot);
+      });
+      document.getElementById('step-pot').classList.add('done');
+    }
+    updatePreview();
+
+    /* ======================================================
+       SEEDED PLANTS — feel inhabited from day one
+       ====================================================== */
+    const SEED_PLANTS = [
+      { flower: 'lavender',  pot: 'cobalt',     name: 'megan' },
+      { flower: 'sunflower', pot: 'terracotta', name: 'arjun' },
+      { flower: 'cosmos',    pot: 'cream',      name: 'kashyap' },
+      { flower: 'hibiscus',  pot: 'matte',      name: 'jess' },
+      { flower: 'tulip',     pot: 'saffron',    name: 'itti' },
+      { flower: 'peony',     pot: 'cobalt',     name: 'anonymous' },
+    ];
+
+    /* ======================================================
+       PLANT IT — save, build lawn, auto-redirect
+       ====================================================== */
+    plantBtn.addEventListener('click', () => {
+      const garden = JSON.parse(localStorage.getItem('sakshi_garden') || '[]');
+      const newPlant = {
+        flower: state.flower, pot: state.pot,
+        name: state.name || '',
+        when: Date.now(),
+      };
+      garden.push(newPlant);
+      try {
+        localStorage.setItem('sakshi_garden', JSON.stringify(garden));
+        localStorage.setItem('sakshi_welcomed', '1');
+      } catch {}
+
+      // Center: user's plant
+      document.getElementById('successCenter').innerHTML = renderPlantHTML(newPlant);
+
+      // Lawn ribbon: 6 seed plants below
+      const ribbonEl = document.getElementById('lawnRibbon');
+      ribbonEl.innerHTML = SEED_PLANTS.map(p => renderPlantHTML(p)).join('');
+
+      // Personalize header if a name was entered
+      const head = document.getElementById('successHead');
+      if (state.name) {
+        head.innerHTML = `welcome, <span class="serif">${escapeHtml(state.name)}.</span>`;
+      } else {
+        head.innerHTML = `welcome to the <span class="serif">lawn.</span>`;
+      }
+
+      document.getElementById('success').classList.add('show');
+
+      // After ~3s, glide out: success fades up, cream wash rolls in, then nav.
+      setTimeout(() => {
+        const wash = document.createElement('div');
+        wash.className = 'leave-wash';
+        document.body.appendChild(wash);
+        // trigger transitions on next frame
+        requestAnimationFrame(() => {
+          document.getElementById('success').classList.add('leaving');
+          wash.classList.add('show');
+        });
+        setTimeout(() => { window.location.href = 'home.html'; }, 1100);
+      }, 3000);
+    });
+
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+
+    /* ======================================================
+       CURSOR
+       ====================================================== */
+    const dotEl = document.querySelector('.cursor-dot');
+    let mx = innerWidth/2, my = innerHeight/2;
+    let visible = false;
+    document.addEventListener('mousemove', (e) => {
+      mx = e.clientX; my = e.clientY;
+      if (!visible) { dotEl.style.opacity = '1'; visible = true; }
+    });
+    document.addEventListener('mouseleave', () => { dotEl.style.opacity = '0'; visible = false; });
+    dotEl.style.opacity = '0';
+    function tick() {
+      dotEl.style.transform = `translate(${mx}px, ${my}px) translate(-50%,-50%)`;
+      requestAnimationFrame(tick);
+    }
+    tick();
+    document.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => document.body.classList.add('cursor-grow'));
+      el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-grow'));
+    });
+    new MutationObserver(() => {
+      document.querySelectorAll('.flower-option, .pot-option').forEach(el => {
+        if (!el.__cursorBound) {
+          el.addEventListener('mouseenter', () => document.body.classList.add('cursor-grow'));
+          el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-grow'));
+          el.__cursorBound = true;
+        }
+      });
+    }).observe(document.body, { childList: true, subtree: true });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,1113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>DP House of Media · Sakshi Shah</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Fraunces:ital,wght@0,400..600;1,400..600&family=Geist:wght@400;500&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f0e8d2;
+      --bg-elev: #f6efdb;
+      --bg-card: #e8e0c5;
+      --ink: #3a2818;
+      --ink-soft: #5a4632;
+      --ink-mute: #8a7a5e;
+      --rule: #cdc0a0;
+      --rule-strong: #b8a988;
+      --accent: #ec6478;
+      --accent-soft: #f7d4dc;
+      --accent-deep: #b13e58;
+      --secondary: #5e8a4f;
+      --secondary-soft: #d4dfb8;
+      --leaf: #4ea862;
+      --leaf-deep: #3d6b2c;
+      --black-card: #1c1a13;
+      --footer-bg: #2c4a36;
+
+      --display: "Bricolage Grotesque", system-ui, sans-serif;
+      --serif: "Fraunces", Georgia, serif;
+      --sans: "Geist", "Inter", system-ui, -apple-system, sans-serif;
+      --mono: "Geist Mono", ui-monospace, monospace;
+
+      --r-md: 12px;
+      --r-lg: 18px;
+      --r-xl: 22px;
+      --ease: cubic-bezier(.22,.61,.36,1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; }
+    html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+
+    body::before {
+      content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 1;
+      opacity: .35;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='2' seed='4'/><feColorMatrix values='0 0 0 0 0.55  0 0 0 0 0.42  0 0 0 0 0.22  0 0 0 0.07 0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>");
+      mix-blend-mode: multiply;
+    }
+
+    body {
+      background: var(--bg); color: var(--ink);
+      font-family: var(--sans); font-size: 16px; line-height: 1.65;
+      min-height: 100vh;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    button { font-family: inherit; cursor: pointer; }
+
+    @media (hover: hover) and (pointer: fine) {
+      body, body * { cursor: none !important; }
+    }
+    .cursor-dot {
+      position: fixed; top: 0; left: 0; pointer-events: none; z-index: 999;
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--accent);
+      transform: translate(-50%, -50%);
+      transition: width .25s var(--ease), height .25s var(--ease), opacity .25s var(--ease);
+    }
+    body.cursor-grow .cursor-dot { width: 30px; height: 30px; opacity: .85; }
+    @media (hover: none) { .cursor-dot { display: none; } }
+
+    /* ============ LAYOUT — full width ============ */
+    .shell {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      width: 100%;
+      margin: 0;
+      min-height: 100vh;
+      position: relative;
+    }
+    .sidebar {
+      padding: 36px 28px 28px;
+      position: sticky; top: 0;
+      height: 100vh;
+      display: flex; flex-direction: column;
+      border-right: 1px solid var(--rule);
+      background: var(--bg);
+    }
+    .main {
+      padding: 48px 96px 60px;
+      min-width: 0;
+    }
+    /* Readable column — paragraphs comfortable up to ~80ch, headlines wider.
+       Visuals/hero/banner remain full bleed. */
+    .main > .case-tags,
+    .main > .case-lede,
+    .main > .visit-btn,
+    .main > .section > .section-eyebrow,
+    .main > .section > p,
+    .main > .section > ol {
+      max-width: 1080px;
+    }
+    .main > .case-title,
+    .main > .section > .section-title,
+    .main > .next {
+      max-width: 1280px;
+    }
+    .main > .section > .pull-quote {
+      max-width: 36ch;
+    }
+    @media (max-width: 980px) {
+      .shell { grid-template-columns: 1fr; }
+      .sidebar {
+        position: static; height: auto;
+        border-right: 0; border-bottom: 1px solid var(--rule);
+        padding: 24px 24px 18px;
+      }
+      .main { padding: 32px 24px 48px; }
+    }
+
+    /* ============ SIDEBAR — TOC ============ */
+    .back-home {
+      font-family: var(--mono); font-size: 11.5px; font-weight: 500;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: var(--ink-soft);
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-bottom: 36px;
+      transition: color .2s var(--ease);
+    }
+    .back-home:hover { color: var(--accent); }
+
+    .toc {
+      background: var(--bg-card);
+      border-radius: var(--r-lg);
+      padding: 18px 14px 14px;
+      border: 1px solid var(--rule);
+    }
+    .toc-label {
+      font-family: var(--mono); font-size: 10.5px; font-weight: 500;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: var(--ink-mute);
+      padding: 0 8px 12px;
+      margin: 0;
+    }
+    .toc ol {
+      list-style: none; padding: 0; margin: 0;
+      display: flex; flex-direction: column; gap: 2px;
+    }
+    .toc a {
+      display: block;
+      padding: 9px 12px;
+      border-radius: 8px;
+      font-size: 14.5px;
+      color: var(--ink);
+      transition: background .2s var(--ease), color .2s var(--ease);
+      letter-spacing: -.005em;
+    }
+    .toc a:hover { background: var(--bg-elev); }
+    .toc a.active {
+      background: var(--bg-elev);
+      font-weight: 500;
+    }
+    .toc a .num {
+      font-family: var(--mono); font-size: 12.5px;
+      color: var(--ink-mute); margin-right: 8px;
+      font-feature-settings: "tnum";
+    }
+    .toc a.active .num { color: var(--accent); }
+
+    .sidebar-foot {
+      margin-top: auto; padding-top: 24px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .back-top {
+      font-family: var(--mono); font-size: 11px; font-weight: 500;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: var(--ink-soft);
+      display: inline-flex; align-items: center; gap: 6px;
+      transition: color .2s var(--ease);
+    }
+    .back-top:hover { color: var(--accent); }
+    .mascot {
+      width: 28px; height: 36px;
+      background: var(--ink); border-radius: 6px;
+      position: relative;
+    }
+    .mascot::before, .mascot::after {
+      content: ""; position: absolute; top: 11px;
+      width: 5px; height: 5px; background: var(--bg);
+      border-radius: 50%;
+    }
+    .mascot::before { left: 6px; }
+    .mascot::after { right: 6px; }
+
+    /* ============ HERO ============ */
+    .hero {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      background: #d9e6f7;
+      margin-bottom: 32px;
+      box-shadow: 0 8px 28px -16px rgba(20, 18, 12, 0.18);
+      position: relative;
+    }
+    .hero img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* ============ HEAD BLOCK ============ */
+    .case-tags {
+      display: flex; gap: 8px; margin-bottom: 18px;
+    }
+    .case-tag {
+      font-family: var(--mono); font-size: 10.5px; font-weight: 500;
+      letter-spacing: .14em; text-transform: uppercase;
+      padding: 6px 12px;
+      background: color-mix(in srgb, var(--ink-soft) 5%, transparent);
+      border: 1px solid color-mix(in srgb, var(--ink-soft) 22%, transparent);
+      border-radius: 999px;
+      color: var(--ink-soft);
+    }
+    .case-tag.research {
+      background: color-mix(in srgb, var(--secondary) 14%, transparent);
+      border-color: color-mix(in srgb, var(--secondary) 38%, transparent);
+      color: color-mix(in srgb, var(--secondary) 90%, var(--ink));
+    }
+    .case-tag.shipped {
+      background: color-mix(in srgb, var(--leaf) 14%, transparent);
+      border-color: color-mix(in srgb, var(--leaf) 38%, transparent);
+      color: color-mix(in srgb, var(--leaf-deep) 80%, var(--ink));
+    }
+
+    .case-title {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: clamp(40px, 5.4vw, 64px);
+      line-height: 1.04;
+      letter-spacing: -.015em;
+      margin: 0 0 20px;
+      color: var(--ink);
+      display: flex; align-items: baseline; gap: 16px;
+    }
+    .case-title .star {
+      color: var(--accent);
+      font-family: var(--display);
+      font-weight: 400;
+      font-size: .7em;
+      flex-shrink: 0;
+    }
+
+    .case-lede {
+      font-size: 17px;
+      color: var(--ink-soft);
+      line-height: 1.65;
+      margin: 0 0 28px;
+      max-width: 70ch;
+    }
+    .case-lede strong { color: var(--ink); font-weight: 500; }
+    .case-lede a {
+      color: var(--ink); font-weight: 500;
+      text-decoration: underline;
+      text-decoration-color: var(--rule);
+      text-underline-offset: 3px;
+    }
+    .case-lede a:hover { text-decoration-color: var(--accent); color: var(--accent); }
+
+    .visit-btn {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 14px 24px;
+      width: 100%; max-width: 100%;
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      background: transparent;
+      font-family: var(--display); font-size: 14.5px; font-weight: 500;
+      color: var(--ink);
+      letter-spacing: -.005em;
+      transition: background .2s var(--ease), border-color .2s var(--ease), transform .2s var(--ease);
+      margin-bottom: 32px;
+      text-align: center;
+    }
+    .visit-btn:hover {
+      background: var(--bg-elev); border-color: var(--rule-strong);
+      transform: translateY(-2px);
+    }
+    .visit-btn .arrow { transition: transform .25s var(--ease); }
+    .visit-btn:hover .arrow { transform: translateX(3px); }
+
+    /* ============ PROJECT BANNER ============ */
+    .project-banner {
+      background: var(--accent);
+      color: #fbf6e5;
+      border-radius: var(--r-xl);
+      padding: 28px 36px;
+      margin-bottom: 80px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 36px;
+    }
+    @media (max-width: 760px) {
+      .project-banner { grid-template-columns: repeat(2, 1fr); gap: 28px; padding: 24px 28px; }
+    }
+    .pb-col-label {
+      font-family: var(--mono); font-size: 11px; font-weight: 500;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: rgba(251, 246, 229, 0.72);
+      margin: 0 0 10px;
+    }
+    .pb-col-val {
+      font-family: var(--display); font-size: 15px; font-weight: 500;
+      line-height: 1.5;
+      color: #fbf6e5;
+    }
+    .pb-col-val span { display: block; }
+    .pb-col-val .softer { color: rgba(251, 246, 229, 0.78); }
+
+    /* ============ SECTIONS ============ */
+    .section { margin-bottom: 80px; scroll-margin-top: 32px; }
+    .section-eyebrow {
+      font-family: var(--mono); font-size: 11px; font-weight: 500;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: var(--ink-mute);
+      margin: 0 0 14px;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: clamp(28px, 3.8vw, 42px);
+      line-height: 1.1; letter-spacing: -.01em;
+      margin: 0 0 20px;
+      color: var(--ink);
+    }
+    .section p {
+      font-size: 16px; color: var(--ink-soft);
+      line-height: 1.7; margin: 0 0 18px;
+      max-width: 70ch;
+    }
+    .section p strong { color: var(--ink); font-weight: 500; }
+    .section ol {
+      counter-reset: item;
+      padding: 0; margin: 0 0 18px; list-style: none;
+      max-width: 70ch;
+    }
+    .section ol li {
+      counter-increment: item;
+      padding-left: 28px; position: relative;
+      margin-bottom: 10px;
+      color: var(--ink-soft);
+      line-height: 1.7;
+    }
+    .section ol li::before {
+      content: counter(item) ".";
+      position: absolute; left: 0; top: 0;
+      font-family: var(--mono); color: var(--ink-mute);
+      font-size: 14px;
+    }
+
+    /* ============ FEATURE LIST + INTERACTIVE MOCKUP ============ */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
+      gap: 40px;
+      align-items: start;
+      margin-top: 28px;
+    }
+    @media (max-width: 760px) { .feature-grid { grid-template-columns: 1fr; gap: 24px; } }
+
+    .feature-list {
+      display: flex; flex-direction: column;
+      gap: 12px;
+    }
+    .feature-item {
+      background: var(--bg-card);
+      border: 1.5px solid var(--rule);
+      border-radius: var(--r-lg);
+      padding: 18px 22px;
+      cursor: pointer;
+      transition: border-color .25s var(--ease), background .25s var(--ease), transform .25s var(--ease);
+    }
+    .feature-item:hover, .feature-item.is-active {
+      border-color: var(--accent);
+      background: var(--bg-elev);
+      transform: translateX(2px);
+    }
+    .feature-item h4 {
+      font-family: var(--display); font-size: 17px; font-weight: 600;
+      letter-spacing: -.005em;
+      margin: 0 0 6px;
+      color: var(--ink);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .feature-item h4 .num {
+      font-family: var(--mono); font-size: 11px; font-weight: 500;
+      color: var(--ink-mute); letter-spacing: .14em;
+    }
+    .feature-item.is-active h4 .num { color: var(--accent); }
+    .feature-item p {
+      font-size: 14.5px; color: var(--ink-soft);
+      line-height: 1.55; margin: 0;
+    }
+
+    /* Phone-frame mockup container with stacked screens */
+    .feature-mockup {
+      position: sticky; top: 36px;
+      aspect-ratio: 9 / 16;
+      max-width: 360px;
+      margin: 0 auto;
+      width: 100%;
+      background: linear-gradient(160deg, #1c1a13 0%, #2a2618 100%);
+      border-radius: 36px;
+      padding: 14px;
+      box-shadow: 0 24px 60px -24px rgba(20,18,12,.4),
+                  0 4px 12px -4px rgba(20,18,12,.18);
+      overflow: hidden;
+      position: relative;
+    }
+    .feature-mockup::before {
+      /* notch */
+      content: ""; position: absolute; top: 14px; left: 50%;
+      transform: translateX(-50%);
+      width: 90px; height: 22px;
+      background: #0f0e0a;
+      border-radius: 14px;
+      z-index: 5;
+    }
+    .feature-mockup .screen {
+      position: absolute; inset: 14px;
+      border-radius: 26px;
+      background: #fbf6e5;
+      overflow: hidden;
+      opacity: 0;
+      transform: scale(.96);
+      transition: opacity .4s var(--ease), transform .4s var(--ease);
+      padding: 38px 18px 18px;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .feature-mockup .screen.is-active { opacity: 1; transform: scale(1); }
+
+    .ms-statusbar {
+      display: flex; justify-content: space-between; align-items: center;
+      font-family: var(--mono); font-size: 9px; color: var(--ink-soft);
+      letter-spacing: .1em; padding: 0 4px;
+    }
+    .ms-h {
+      font-family: var(--display); font-weight: 600;
+      font-size: 19px; line-height: 1.15; letter-spacing: -.01em;
+      color: var(--ink); margin: 6px 0 2px;
+    }
+    .ms-sub {
+      font-family: var(--mono); font-size: 9.5px;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--ink-mute); margin-bottom: 6px;
+    }
+    .ms-card {
+      background: var(--bg); border: 1px solid var(--rule);
+      border-radius: 12px; padding: 10px 12px;
+      font-size: 11.5px; color: var(--ink-soft);
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .ms-card.coral { background: var(--accent-soft); border-color: color-mix(in srgb, var(--accent) 35%, transparent); }
+    .ms-card.sage  { background: var(--secondary-soft); border-color: color-mix(in srgb, var(--secondary) 35%, transparent); }
+    .ms-card .row { display: flex; justify-content: space-between; align-items: center; }
+    .ms-card .row strong { color: var(--ink); font-weight: 600; font-size: 12px; }
+    .ms-pill {
+      display: inline-block; padding: 2px 8px;
+      font-family: var(--mono); font-size: 8.5px; letter-spacing: .1em;
+      text-transform: uppercase; border-radius: 999px;
+      background: var(--bg-card); color: var(--ink-soft);
+    }
+    .ms-pill.green { background: color-mix(in srgb, var(--leaf) 18%, transparent); color: var(--leaf-deep); }
+    .ms-pill.amber { background: #f6e4a8; color: #8a6418; }
+    .ms-bar {
+      height: 6px; border-radius: 3px;
+      background: var(--bg-card);
+      position: relative; overflow: hidden;
+    }
+    .ms-bar > span { position: absolute; left: 0; top: 0; bottom: 0; background: var(--accent); border-radius: 3px; }
+
+    .ms-step {
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 6px 0; font-size: 11px; color: var(--ink-soft);
+      position: relative;
+    }
+    .ms-step .dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      flex-shrink: 0; margin-top: 3px;
+      background: var(--bg-card); border: 2px solid var(--rule);
+    }
+    .ms-step.done .dot { background: var(--leaf); border-color: var(--leaf); }
+    .ms-step.now .dot { background: var(--accent); border-color: var(--accent); box-shadow: 0 0 0 4px rgba(236,100,120,.18); }
+    .ms-step strong { color: var(--ink); display: block; font-size: 12px; font-weight: 600; }
+    .ms-step + .ms-step::before {
+      content: ""; position: absolute; left: 4px; top: -8px;
+      width: 2px; height: 16px; background: var(--rule);
+    }
+
+    .ms-field {
+      display: flex; flex-direction: column; gap: 2px;
+      padding: 8px 10px; border: 1px solid var(--rule);
+      border-radius: 8px; background: var(--bg);
+    }
+    .ms-field .lbl {
+      font-family: var(--mono); font-size: 8.5px;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--ink-mute);
+    }
+    .ms-field .val { font-size: 11.5px; color: var(--ink); font-weight: 500; }
+    .ms-field.dim { background: var(--bg-card); }
+    .ms-field.dim .val { color: var(--ink-mute); }
+
+    /* ============ DUO IMAGE ROW ============ */
+    .duo {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin: 28px 0;
+    }
+    @media (max-width: 760px) { .duo { grid-template-columns: 1fr; } }
+    .duo-tile {
+      background: var(--bg-card);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-lg);
+      aspect-ratio: 16 / 11;
+      display: grid; place-items: center;
+      color: var(--ink-mute);
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: .14em; text-transform: uppercase;
+      overflow: hidden;
+    }
+    .duo-tile img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* ============ PULL QUOTE ============ */
+    .pull-quote {
+      font-family: var(--serif); font-style: italic;
+      font-size: clamp(22px, 2.6vw, 30px);
+      line-height: 1.35; letter-spacing: -.005em;
+      color: var(--ink);
+      padding: 36px 0;
+      margin: 36px 0;
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+      max-width: 26ch;
+    }
+
+    /* ============ IMPACT — big stat blocks ============ */
+    .impact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin: 36px 0 24px;
+    }
+    @media (max-width: 760px) { .impact-grid { grid-template-columns: 1fr; } }
+    .impact-card {
+      background: var(--bg-card);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-xl);
+      padding: 28px 26px;
+      display: flex; flex-direction: column;
+      min-height: 220px;
+      transition: border-color .2s var(--ease), transform .2s var(--ease);
+    }
+    .impact-card:hover { border-color: var(--rule-strong); transform: translateY(-3px); }
+    .impact-card.coral { background: var(--accent); color: #fbf6e5; border-color: transparent; }
+    .impact-card.coral .impact-num { color: #fbf6e5; }
+    .impact-card.coral .impact-lbl { color: rgba(251,246,229,.78); }
+    .impact-card.coral .impact-desc { color: rgba(251,246,229,.85); }
+    .impact-card.sage { background: color-mix(in srgb, var(--secondary) 22%, var(--bg-elev)); border-color: color-mix(in srgb, var(--secondary) 35%, transparent); }
+    .impact-num {
+      font-family: var(--serif); font-weight: 500;
+      font-size: clamp(48px, 6vw, 76px);
+      line-height: .95; letter-spacing: -.025em;
+      color: var(--accent);
+      margin: 0 0 12px;
+    }
+    .impact-card.sage .impact-num { color: var(--leaf-deep); }
+    .impact-lbl {
+      font-family: var(--mono); font-size: 10.5px;
+      letter-spacing: .16em; text-transform: uppercase;
+      color: var(--ink-mute);
+      margin-bottom: 8px;
+    }
+    .impact-desc {
+      font-size: 14px; color: var(--ink-soft);
+      line-height: 1.55; margin: 0; margin-top: auto;
+    }
+
+    /* ============ TESTIMONIALS ============ */
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-top: 28px;
+    }
+    @media (max-width: 760px) { .testimonial-grid { grid-template-columns: 1fr; } }
+    .testimonial {
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-xl);
+      padding: 26px 28px;
+      display: flex; flex-direction: column; gap: 18px;
+      transition: border-color .2s var(--ease), transform .2s var(--ease);
+    }
+    .testimonial:hover { border-color: var(--rule-strong); transform: translateY(-2px); }
+    .testimonial-quote {
+      font-family: var(--serif); font-style: italic;
+      font-size: 18px; line-height: 1.5;
+      color: var(--ink); margin: 0;
+    }
+    .testimonial-quote::before { content: "“"; color: var(--accent); font-size: 28px; line-height: 0; vertical-align: -.18em; margin-right: 4px; }
+    .testimonial-author {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .testimonial-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--accent-soft);
+      display: grid; place-items: center;
+      color: var(--accent-deep);
+      font-family: var(--display); font-weight: 600; font-size: 15px;
+      flex-shrink: 0;
+    }
+    .testimonial-meta {
+      display: flex; flex-direction: column; gap: 2px;
+    }
+    .testimonial-name {
+      font-family: var(--display); font-weight: 600; font-size: 14.5px;
+      color: var(--ink);
+    }
+    .testimonial-role {
+      font-family: var(--mono); font-size: 10.5px;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--ink-mute);
+    }
+
+    /* ============ NEXT ============ */
+    .next {
+      margin-top: 100px;
+      padding-top: 48px;
+      border-top: 1px solid var(--rule);
+    }
+    .next-label {
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: var(--ink-mute);
+      margin-bottom: 10px;
+    }
+    .next-link {
+      display: inline-flex; align-items: baseline; gap: 16px;
+      font-family: var(--serif); font-weight: 500;
+      font-size: clamp(28px, 3.6vw, 42px);
+      line-height: 1.1; letter-spacing: -.01em;
+      color: var(--ink);
+      transition: color .2s var(--ease);
+    }
+    .next-link:hover { color: var(--accent); }
+    .next-link .arr { font-family: var(--display); font-size: .55em; color: var(--accent); }
+
+    /* ============ FOOTER ============ */
+    footer {
+      grid-column: 1 / -1;
+      background: var(--footer-bg);
+      color: rgba(240, 232, 210, 0.85);
+      border-radius: 28px 28px 0 0;
+      padding: 96px 64px 64px;
+      position: relative; overflow: hidden;
+      margin-top: 32px;
+    }
+    @media (max-width: 980px) { footer { padding: 64px 32px 48px; border-radius: 24px 24px 0 0; } }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      column-gap: 56px;
+      position: relative; z-index: 2;
+      align-items: start;
+      max-width: 1480px; margin: 0 auto;
+    }
+    .footer-grid .footer-col { min-width: 160px; }
+    @media (max-width: 980px) { .footer-grid { grid-template-columns: 1fr 1fr; column-gap: 32px; } }
+    @media (max-width: 600px) { .footer-grid { grid-template-columns: 1fr; column-gap: 0; row-gap: 32px; } }
+    .footer-quote {
+      font-family: var(--serif); font-weight: 400;
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: 1.18; letter-spacing: -.012em;
+      color: #f4ecd0; margin: 0 0 18px; max-width: 20ch;
+    }
+    .footer-quote .em { font-style: italic; color: #f4ecd0; }
+    .footer-attr {
+      font-family: var(--mono); font-size: 10.5px; letter-spacing: .18em;
+      text-transform: uppercase; color: rgba(240, 232, 210, 0.5);
+    }
+    .footer-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+    .footer-col a {
+      color: rgba(240, 232, 210, 0.55);
+      font-family: var(--mono); font-size: 11.5px; font-weight: 500;
+      letter-spacing: .2em; text-transform: uppercase;
+      transition: color .2s var(--ease);
+    }
+    .footer-col a:hover { color: #f4ecd0; }
+    .footer-col li.divider { height: 14px; }
+    .footer-col li.back a {
+      color: rgba(240, 232, 210, 0.78);
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .footer-col li.back a::before { content: "+ "; color: rgba(240, 232, 210, 0.5); }
+    .footer-col li.back a:hover { color: var(--accent-soft); }
+
+    /* ============ ENTRANCE ============ */
+    .reveal { opacity: 0; transform: translateY(10px); animation: rise .7s var(--ease) forwards; }
+    .reveal.d1 { animation-delay: .05s; } .reveal.d2 { animation-delay: .12s; }
+    .reveal.d3 { animation-delay: .18s; } .reveal.d4 { animation-delay: .24s; }
+    @keyframes rise { to { opacity: 1; transform: none; } }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor-dot" aria-hidden="true"></div>
+
+  <div class="shell">
+
+    <!-- ============ SIDEBAR ============ -->
+    <aside class="sidebar">
+      <a class="back-home" href="home.html">← Home</a>
+
+      <div class="toc">
+        <p class="toc-label">Table of Contents</p>
+        <ol>
+          <li><a href="#context" class="toc-link active"><span class="num">01.</span>Context</a></li>
+          <li><a href="#research" class="toc-link"><span class="num">02.</span>Research</a></li>
+          <li><a href="#solution" class="toc-link"><span class="num">03.</span>The solution</a></li>
+          <li><a href="#flows" class="toc-link"><span class="num">04.</span>Key flows</a></li>
+          <li><a href="#impact" class="toc-link"><span class="num">05.</span>Impact</a></li>
+          <li><a href="#reflection" class="toc-link"><span class="num">06.</span>Reflection</a></li>
+        </ol>
+      </div>
+
+      <div class="sidebar-foot">
+        <a class="back-top" href="#top">↑ Back to top</a>
+      </div>
+    </aside>
+
+    <!-- ============ MAIN ============ -->
+    <main class="main" id="top">
+
+      <!-- HERO -->
+      <div class="hero reveal">
+        <img src="https://framerusercontent.com/images/N7w1YubiD84GL7EiMPkmWlm8O6Q.png?width=1600" alt="IBM Deal Registration interface" />
+      </div>
+
+      <!-- TAGS + TITLE + LEDE -->
+      <div class="case-tags reveal d1">
+        <span class="case-tag">Brand · Web</span>
+        <span class="case-tag shipped">Shipped</span>
+      </div>
+
+      <h1 class="case-title reveal d1">
+        <span>A studio site that finally felt like the work</span>
+      </h1>
+
+      <p class="case-lede reveal d2">
+        I rebuilt the brand site for <strong>DP House of Media</strong> — a small studio whose online presence didn't match the quality of their work in the room. End-to-end: brand refresh, IA, design, build.
+      </p>
+
+      <a class="visit-btn reveal d2" href="#">
+        <span>Visit DP House</span>
+        <span class="arrow">→</span>
+      </a>
+
+      <!-- PROJECT BANNER -->
+      <div class="project-banner reveal d3">
+        <div>
+          <p class="pb-col-label">Role</p>
+          <div class="pb-col-val">
+            <span>Brand · Web Designer</span>
+          </div>
+        </div>
+        <div>
+          <p class="pb-col-label">Team</p>
+          <div class="pb-col-val">
+            <span class="softer">with</span><span>DP House founders</span>
+          </div>
+        </div>
+        <div>
+          <p class="pb-col-label">Timeline</p>
+          <div class="pb-col-val">
+            <span>2024</span><span class="softer">solo · 8 weeks</span>
+          </div>
+        </div>
+        <div>
+          <p class="pb-col-label">Skills</p>
+          <div class="pb-col-val">
+            <span>Brand</span><span>Web Design</span><span>Front-end</span>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ============ 01. CONTEXT ============ -->
+      <section class="section" id="context">
+        <p class="section-eyebrow">Context</p>
+        <h2 class="section-title">A studio that overdelivered in person, underdelivered online.</h2>
+        <p>
+          DP House had a strong word-of-mouth reputation but a portfolio site that read as a generic agency template. Inquiries were dropping. The disconnect was costing them work.
+        </p>
+        <p>
+          Internally, this looked like <strong>missing pipeline visibility</strong>. From the partner side, it
+          looked like a bureaucratic gate that didn't pay them back. Both sides were losing.
+        </p>
+      </section>
+
+      <!-- ============ 02. RESEARCH ============ -->
+      <section class="section" id="research">
+        <p class="section-eyebrow">Research</p>
+        <h2 class="section-title">Listening to their actual voice</h2>
+        <p>
+          Three founder conversations. Two pages of language they actually used to describe the work. One clear realization: the studio was funny, sharp, and specific — and none of that was on the site.
+        </p>
+        <ol>
+          <li>Partners abandoned mid-flow when fields they didn't have data for were marked required.</li>
+          <li>Approval status was opaque — reps would re-submit the same deal three times to "wake it up."</li>
+          <li>The form treated every deal like a net-new enterprise opportunity, even for $5k SaaS renewals.</li>
+        </ol>
+        <p>
+          The synthesis became a tight problem statement: <strong>the form didn't match the shape of the work.</strong>
+        </p>
+      </section>
+
+
+      <!-- ============ 03. THE SOLUTION ============ -->
+      <section class="section" id="solution">
+        <p class="section-eyebrow">The solution</p>
+        <h2 class="section-title">A site that reads like the room they're in.</h2>
+        <p>
+          Editorial layout, the founders' actual voice in the copy, project pages that lead with the why instead of the deliverable. Bold typography, generous space, and zero stock-photo energy.
+        </p>
+        <div class="duo">
+          <div class="duo-tile">Before — flat form</div>
+          <div class="duo-tile">After — archetype-led flow</div>
+        </div>
+        <p>
+          We also stripped the registration form down to its essentials. <strong>Required fields dropped from 24 to 9</strong> on the
+          most common path. Everything else became conditional, postponed, or pre-filled.
+        </p>
+      </section>
+
+      <!-- ============ 04. KEY FLOWS / FEATURES ============ -->
+      <section class="section" id="flows">
+        <p class="section-eyebrow">Key flows</p>
+        <h2 class="section-title">Three pages did 80% of the lifting.</h2>
+        <p>
+          A focused IA — three core pages, each doing one job well.
+        </p>
+
+        <div class="feature-grid">
+          <div class="feature-list" id="featureList">
+            <div class="feature-item is-active" data-screen="renewal">
+              <h4><span class="num">01</span> Quick-register a renewal</h4>
+              <p>Pre-fills 80% of fields from the existing customer record. A rep can register and submit in under 60 seconds.</p>
+            </div>
+            <div class="feature-item" data-screen="timeline">
+              <h4><span class="num">02</span> Status timeline</h4>
+              <p>Replaces the legacy approved/pending/rejected dropdown with a live timeline showing exactly what's happened and what's next.</p>
+            </div>
+            <div class="feature-item" data-screen="handoff">
+              <h4><span class="num">03</span> Save, share, hand off</h4>
+              <p>Reps can save mid-form drafts and share them with a co-rep — fixing the #1 complaint about the legacy flow.</p>
+            </div>
+            <div class="feature-item" data-screen="conditional">
+              <h4><span class="num">04</span> Conditional fields</h4>
+              <p>The form asks for what's relevant, when it's relevant. Fields appear only after the deal type clarifies what's needed.</p>
+            </div>
+          </div>
+
+          <div class="feature-mockup" aria-label="Interactive mockup">
+            <!-- Screen 1: Quick renewal — pre-filled form -->
+            <div class="screen is-active" data-id="renewal">
+              <div class="ms-statusbar"><span>9:41</span><span>●●●</span></div>
+              <p class="ms-sub">Register · Renewal</p>
+              <p class="ms-h">Acme Corp renewal</p>
+              <div class="ms-card"><div class="row"><strong>$48,200</strong><span class="ms-pill green">Pre-filled</span></div><span>From CRM record · 12mo</span></div>
+              <div class="ms-field dim"><span class="lbl">Account</span><span class="val">Acme Corp · Tier 2</span></div>
+              <div class="ms-field dim"><span class="lbl">Region</span><span class="val">North America</span></div>
+              <div class="ms-field"><span class="lbl">Close date</span><span class="val">Mar 14, 2025</span></div>
+              <div class="ms-card coral" style="margin-top:auto"><div class="row"><strong>Submit registration</strong><span>→</span></div></div>
+            </div>
+
+            <!-- Screen 2: Status timeline -->
+            <div class="screen" data-id="timeline">
+              <div class="ms-statusbar"><span>9:41</span><span>●●●</span></div>
+              <p class="ms-sub">Deal · #DR-7821</p>
+              <p class="ms-h">Status timeline</p>
+              <div class="ms-step done"><span class="dot"></span><span><strong>Submitted</strong>Mon · 9:14 AM</span></div>
+              <div class="ms-step done"><span class="dot"></span><span><strong>Auto-validated</strong>Mon · 9:14 AM</span></div>
+              <div class="ms-step now"><span class="dot"></span><span><strong>In review</strong>IBM partner ops · 1 day</span></div>
+              <div class="ms-step"><span class="dot"></span><span><strong>Approved</strong>Estimated by Wed</span></div>
+              <div class="ms-step"><span class="dot"></span><span><strong>Locked</strong>—</span></div>
+            </div>
+
+            <!-- Screen 3: Save / hand off -->
+            <div class="screen" data-id="handoff">
+              <div class="ms-statusbar"><span>9:41</span><span>●●●</span></div>
+              <p class="ms-sub">Drafts · 3 active</p>
+              <p class="ms-h">Hand to a co-rep</p>
+              <div class="ms-card"><div class="row"><strong>Globex expansion</strong><span class="ms-pill amber">Draft</span></div><span>Last edit · you · 2h ago</span></div>
+              <div class="ms-card sage"><div class="row"><strong>Initech net-new</strong><span class="ms-pill green">Shared</span></div><span>With · D. Patel · 1d ago</span></div>
+              <div class="ms-card"><div class="row"><strong>Soylent renewal</strong><span class="ms-pill">Draft</span></div><span>Last edit · K. Lee · 3d ago</span></div>
+              <div class="ms-card coral" style="margin-top:auto"><div class="row"><strong>Share with co-rep</strong><span>→</span></div></div>
+            </div>
+
+            <!-- Screen 4: Conditional fields -->
+            <div class="screen" data-id="conditional">
+              <div class="ms-statusbar"><span>9:41</span><span>●●●</span></div>
+              <p class="ms-sub">Register · Step 2 of 3</p>
+              <p class="ms-h">Tell us about the deal</p>
+              <div class="ms-card"><div class="row"><strong>Deal type</strong><span class="ms-pill green">Renewal</span></div><span>Selected · 9 fields shown</span></div>
+              <div class="ms-bar"><span style="width:62%"></span></div>
+              <p class="ms-sub" style="margin-bottom:0">Required for this path</p>
+              <div class="ms-field"><span class="lbl">Renewal value</span><span class="val">$ 48,200</span></div>
+              <div class="ms-field"><span class="lbl">Term length</span><span class="val">12 months</span></div>
+              <div class="ms-field dim"><span class="lbl">Net-new fields · hidden</span><span class="val">— (not relevant)</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ============ 05. IMPACT ============ -->
+      <section class="section" id="impact">
+        <p class="section-eyebrow">Impact</p>
+        <h2 class="section-title">What changed when partners stopped routing around us.</h2>
+        <p>
+          The redesign rolled out to a 12-account pilot, then expanded to 200+ accounts over Q3. Three months
+          post-launch, the numbers told the story:
+        </p>
+
+        <div class="impact-grid">
+          <div class="impact-card coral">
+            <p class="impact-num">30%</p>
+            <p class="impact-lbl">faster cycle time</p>
+            <p class="impact-desc">From first registration to closed-won, measured across 200+ accounts.</p>
+          </div>
+          <div class="impact-card sage">
+            <p class="impact-num">62%</p>
+            <p class="impact-lbl">less form abandonment</p>
+            <p class="impact-desc">Required-field reduction (24 → 9) was the biggest single lever.</p>
+          </div>
+          <div class="impact-card">
+            <p class="impact-num">200+</p>
+            <p class="impact-lbl">enterprise accounts</p>
+            <p class="impact-desc">Rolled out from a 12-account pilot to the full Partner Plus footprint.</p>
+          </div>
+        </div>
+
+        <!-- Testimonials -->
+        <p class="section-eyebrow" style="margin-top:48px;">What partners said</p>
+        <div class="testimonial-grid">
+          <div class="testimonial">
+            <p class="testimonial-quote">Honestly, the timeline alone saved me three follow-up emails this week. I can finally see what's actually happening with my deal.</p>
+            <div class="testimonial-author">
+              <span class="testimonial-avatar">DP</span>
+              <div class="testimonial-meta">
+                <span class="testimonial-name">D. Patel</span>
+                <span class="testimonial-role">Partner Rep · Mid-market SI</span>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial">
+            <p class="testimonial-quote">The renewal flow used to take 15 minutes and now takes under one. That's the difference between registering a deal and not bothering.</p>
+            <div class="testimonial-author">
+              <span class="testimonial-avatar">MR</span>
+              <div class="testimonial-meta">
+                <span class="testimonial-name">M. Rodriguez</span>
+                <span class="testimonial-role">Channel Account Manager · Reseller</span>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial">
+            <p class="testimonial-quote">Sakshi pushed for the archetype framing early. It changed the shape of the entire program — not just the form. We're shipping faster as a team because of it.</p>
+            <div class="testimonial-author">
+              <span class="testimonial-avatar">JC</span>
+              <div class="testimonial-meta">
+                <span class="testimonial-name">J. Chen</span>
+                <span class="testimonial-role">Eng Lead · IBM Partner Cloud</span>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial">
+            <p class="testimonial-quote">She brought research, design, and our partner-side reality into one room. The numbers are the proof, but the way she got there is what I'd hire her for again.</p>
+            <div class="testimonial-author">
+              <span class="testimonial-avatar">AT</span>
+              <div class="testimonial-meta">
+                <span class="testimonial-name">A. Thompson</span>
+                <span class="testimonial-role">Director of Product · IBM Partner Plus</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 06. REFLECTION ============ -->
+      <section class="section" id="reflection">
+        <p class="section-eyebrow">Reflection</p>
+        <h2 class="section-title">What I'd do differently next time</h2>
+        <p>
+          The biggest unlock wasn't the form redesign — it was the <strong>archetype framing</strong>. Once we stopped
+          treating "a deal" as one shape and started designing around the three real shapes, every other
+          decision got easier. I'd push to find that framing earlier next time, even at the cost of slower
+          discovery.
+        </p>
+        <p>
+          The thing I'd revisit: we deferred the admin-side dashboard to a later phase. With more time I'd have
+          designed both sides in parallel — the partner experience can only be as fast as the IBM-side review,
+          and that loop is still the rate-limiter.
+        </p>
+      </section>
+
+      <!-- ============ NEXT ============ -->
+      <div class="next">
+        <p class="next-label">Next</p>
+        <a class="next-link" href="home.html#work">
+          <span>Money20 — financial-literacy for teens</span>
+          <span class="arr">→</span>
+        </a>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ============ FOOTER ============ -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <h2 class="footer-quote">
+          Stories worth growing.<br/>
+          <span class="em">Why not yours?</span>
+        </h2>
+        <span class="footer-attr">— a thing I believe</span>
+      </div>
+      <div class="footer-col">
+        <ul>
+          <li><a href="mailto:sakshishah@u.northwestern.edu">Email</a></li>
+          <li><a href="https://www.linkedin.com/in/sakshiishahh/" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://github.com/" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://read.cv/" target="_blank" rel="noopener">Read.cv</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <ul>
+          <li><a href="home.html">Home</a></li>
+          <li><a href="about.html">About Me</a></li>
+          <li><a href="ai.html">AI Practices</a></li>
+          <li><a href="plant.html">Visitor's Lawn</a></li>
+          <li class="divider"></li>
+          <li class="back"><a href="index.html">Back to garden</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mockup swap on feature hover
+    (function(){
+      const items = document.querySelectorAll('#featureList .feature-item');
+      const screens = document.querySelectorAll('.feature-mockup .screen');
+      function show(id){
+        items.forEach(it => it.classList.toggle('is-active', it.dataset.screen === id));
+        screens.forEach(s => s.classList.toggle('is-active', s.dataset.id === id));
+      }
+      items.forEach(it => {
+        it.addEventListener('mouseenter', () => show(it.dataset.screen));
+        it.addEventListener('focus', () => show(it.dataset.screen));
+      });
+    })();
+
+    // Active section in TOC
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const sections = Array.from(tocLinks).map(a => document.querySelector(a.getAttribute('href')));
+    const linkBySection = new Map(sections.map((s, i) => [s, tocLinks[i]]));
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(a => a.classList.remove('active'));
+          const link = linkBySection.get(entry.target);
+          if (link) link.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-30% 0px -50% 0px', threshold: 0 });
+    sections.forEach(s => s && observer.observe(s));
+
+    // Cursor
+    const dotEl = document.querySelector('.cursor-dot');
+    let mx = innerWidth/2, my = innerHeight/2;
+    let visible = false;
+    document.addEventListener('mousemove', (e) => {
+      mx = e.clientX; my = e.clientY;
+      if (!visible) { dotEl.style.opacity = '1'; visible = true; }
+    });
+    document.addEventListener('mouseleave', () => { dotEl.style.opacity = '0'; visible = false; });
+    dotEl.style.opacity = '0';
+    function tick() {
+      dotEl.style.transform = `translate(${mx}px, ${my}px) translate(-50%,-50%)`;
+      requestAnimationFrame(tick);
+    }
+    tick();
+    document.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => document.body.classList.add('cursor-grow'));
+      el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-grow'));
+    });
+  </script>
+
+</body>
+</html>
