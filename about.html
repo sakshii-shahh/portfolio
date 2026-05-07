@@ -309,6 +309,32 @@
       width: fit-content;
     }
     .lawn-pill:hover {
+      background: var(--bg-card); border-color: var(--rule-strong);
+      transform: translateX(2px);
+    }
+    .lawn-pill .plant-ico {
+      width: 22px; height: 22px;
+      display: grid; place-items: center;
+      background: var(--secondary-soft, #d4dfb8);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .lawn-pill .plant-ico svg { width: 16px; height: 16px; }
+
+    .lawn-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-top: 14px;
+      padding: 7px 12px 7px 9px;
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      font-family: var(--mono); font-size: 10.5px;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--ink-soft);
+      transition: background .2s var(--ease), border-color .2s var(--ease), transform .2s var(--ease);
+      width: fit-content;
+    }
+    .lawn-pill:hover {
       background: var(--bg-card);
       border-color: var(--rule-strong);
       transform: translateX(2px);
@@ -1051,6 +1077,20 @@
         <a href="https://drive.google.com/file/d/1afD_cw5tKiNqtMyKyFIy7jgnxFl-OphD/view?usp=sharing" target="_blank" rel="noopener">Resume</a>
         <a href="https://read.cv/" target="_blank" rel="noopener">Read.cv</a>
       </div>
+
+      <a class="lawn-pill reveal d5" href="lawn.html" aria-label="my plant">
+        <span class="plant-ico" aria-hidden="true">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 12 L8 6.5" stroke="#3d6b2c" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+            <path d="M8 8.4 Q 4.4 7 4.4 4.6 Q 7 5.4 8 7.6" fill="#5fbe75"/>
+            <path d="M8 7.6 Q 11.6 6.6 11.6 4 Q 9 4.8 8 7" fill="#79d18a"/>
+            <ellipse cx="8" cy="3.6" rx="1.6" ry="1.4" fill="#ec6478"/>
+            <rect x="5.6" y="11.2" width="4.8" height="3" rx=".6" fill="#c98a64"/>
+            <rect x="5.2" y="10.8" width="5.6" height="1.2" rx=".4" fill="#a86b48"/>
+          </svg>
+        </span>
+        <span>my plant →</span>
+      </a>
 
       <div class="sidebar-bottom">
         <span class="clock" id="clock">—</span>

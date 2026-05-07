@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Visitor's Lawn — Sakshi Shah</title>
-  <meta name="description" content="A watercolor lawn of every visitor who has planted a flower at Sakshi Shah's portfolio garden. Click any flower to see its visitor card." />
+  <meta name="description" content="A watercolor lawn of every visitor who has planted a flower at Sakshi Shah's portfolio garden. Hover any pot for the visitor's note; click to see their card." />
 
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://portfolio-sakshi-shah.vercel.app/lawn.html" />
@@ -22,6 +22,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Fraunces:ital,wght@0,400..600;1,400..600&family=Geist:wght@400;500&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/butterflies.css" />
   <script src="assets/butterflies.js" defer></script>
+  <script src="assets/flowers.js"></script>
   <style>
     :root {
       --bg: #f0e8d2;
@@ -47,9 +48,7 @@
       --sans: "Geist", "Inter", system-ui, -apple-system, sans-serif;
       --mono: "Geist Mono", ui-monospace, monospace;
 
-      --r-md: 12px;
-      --r-lg: 18px;
-      --r-xl: 22px;
+      --r-md: 12px; --r-lg: 18px; --r-xl: 22px;
       --ease: cubic-bezier(.22,.61,.36,1);
     }
 
@@ -115,11 +114,10 @@
       }
     }
 
-    /* ============ SIDEBAR ============ */
+    /* ============ SIDEBAR (matches home.html pattern) ============ */
     .avatar {
       width: 88px; height: 88px; border-radius: 22px; overflow: hidden;
-      border: 1px solid var(--rule);
-      background: var(--accent-soft);
+      border: 1px solid var(--rule); background: var(--accent-soft);
       margin-bottom: 22px;
     }
     .avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -178,6 +176,32 @@
     .find-links a + a::before { content: ","; color: var(--ink-mute); margin-right: 4px; }
     .find-links a:hover { color: var(--accent); }
 
+    .lawn-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-top: 14px;
+      padding: 7px 12px 7px 9px;
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      font-family: var(--mono); font-size: 10.5px;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--ink-soft);
+      transition: background .2s var(--ease), border-color .2s var(--ease), transform .2s var(--ease);
+      width: fit-content;
+    }
+    .lawn-pill:hover {
+      background: var(--bg-card); border-color: var(--rule-strong);
+      transform: translateX(2px);
+    }
+    .lawn-pill .plant-ico {
+      width: 22px; height: 22px;
+      display: grid; place-items: center;
+      background: var(--secondary-soft);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .lawn-pill .plant-ico svg { width: 16px; height: 16px; }
+
     .sidebar-bottom {
       margin-top: auto; padding-top: 18px;
       font-family: var(--mono); font-size: 10.5px;
@@ -186,15 +210,12 @@
     }
     .clock { color: var(--ink-soft); font-feature-settings: "tnum"; }
 
-    /* ============ LAWN HEADER ============ */
+    /* ============ HEADER (no counter, no top CTAs — quiet title only) ============ */
     .lawn-header {
-      padding: 56px 56px 24px;
-      display: flex; align-items: flex-start; justify-content: space-between;
-      gap: 32px; flex-wrap: wrap;
+      padding: 56px 56px 14px;
     }
-    @media (max-width: 980px) { .lawn-header { padding: 40px 28px 18px; } }
+    @media (max-width: 980px) { .lawn-header { padding: 40px 28px 12px; } }
 
-    .lawn-titles { max-width: 640px; }
     .lawn-title {
       font-family: var(--display); font-weight: 600;
       font-size: clamp(40px, 5.5vw, 64px);
@@ -208,69 +229,19 @@
     .lawn-sub {
       font-family: var(--serif); font-style: italic; font-weight: 400;
       font-size: clamp(16px, 1.4vw, 19px);
-      color: var(--ink-soft); margin: 0 0 14px;
+      color: var(--ink-soft); margin: 0;
       max-width: 50ch;
     }
-    .counter-chip {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 7px 14px;
-      background: var(--bg-elev);
-      border: 1px solid var(--rule);
-      border-radius: 999px;
-      font-family: var(--mono); font-size: 11.5px; font-weight: 500;
-      letter-spacing: .12em; text-transform: uppercase;
-      color: var(--ink-soft);
-    }
-    .counter-chip .pulse {
-      width: 7px; height: 7px; border-radius: 50%;
-      background: var(--accent); flex-shrink: 0;
-      animation: pulse-dot 2s ease-in-out infinite;
-    }
-    @keyframes pulse-dot {
-      0%,100% { opacity: 1; transform: scale(1); }
-      50% { opacity: .4; transform: scale(.8); }
-    }
 
-    .lawn-cta {
-      display: flex; gap: 10px; align-items: center; flex-shrink: 0;
-      padding-top: 8px;
-    }
-    .pill {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 11px 20px;
-      border-radius: 999px;
-      font-family: var(--mono); font-size: 11.5px; font-weight: 500;
-      letter-spacing: .14em; text-transform: uppercase;
-      transition: background .2s var(--ease), border-color .2s var(--ease), transform .2s var(--ease), color .2s var(--ease);
-      border: 1px solid transparent;
-      white-space: nowrap;
-    }
-    .pill.primary {
-      background: var(--accent); color: var(--cream);
-      border-color: var(--accent);
-    }
-    .pill.primary:hover {
-      background: var(--accent-deep); border-color: var(--accent-deep);
-      transform: translateY(-1px);
-    }
-    .pill.ghost {
-      background: var(--bg-elev); color: var(--ink-soft);
-      border-color: var(--rule);
-    }
-    .pill.ghost:hover {
-      background: var(--bg-card); border-color: var(--rule-strong);
-      color: var(--ink); transform: translateY(-1px);
-    }
-
-    /* ============ STATS ACCORDION ============ */
+    /* ============ STATS — first thing under the title, collapsed ============ */
     .stats {
-      margin: 0 56px 28px;
+      margin: 18px 56px 28px;
       border: 1px solid var(--rule);
       border-radius: var(--r-md);
       background: var(--bg-elev);
       overflow: hidden;
     }
-    @media (max-width: 980px) { .stats { margin: 0 28px 20px; } }
+    @media (max-width: 980px) { .stats { margin: 14px 28px 22px; } }
     .stats summary {
       list-style: none; cursor: pointer;
       padding: 12px 18px;
@@ -291,10 +262,7 @@
       gap: 1px; background: var(--rule);
       border-top: 1px solid var(--rule);
     }
-    .stat-cell {
-      background: var(--bg-elev);
-      padding: 14px 18px;
-    }
+    .stat-cell { background: var(--bg-elev); padding: 14px 18px; }
     .stat-label {
       font-family: var(--mono); font-size: 10px; font-weight: 500;
       letter-spacing: .16em; text-transform: uppercase;
@@ -307,11 +275,11 @@
     }
 
     /* ============ THE LAWN ============ */
-    .lawn-wrap { padding: 0 56px 60px; }
-    @media (max-width: 980px) { .lawn-wrap { padding: 0 0 40px; } }
+    .lawn-wrap { padding: 0 56px 24px; }
+    @media (max-width: 980px) { .lawn-wrap { padding: 0 0 20px; } }
     .lawn {
       position: relative;
-      width: 100%; height: 70vh; min-height: 540px;
+      width: 100%; height: 70vh; min-height: 560px;
       border-radius: var(--r-xl);
       overflow: hidden;
       background:
@@ -321,15 +289,13 @@
       box-shadow: inset 0 0 80px rgba(20,40,15,.25);
     }
     @media (max-width: 980px) {
-      .lawn { border-radius: 0; height: 80vh; min-height: 600px; }
+      .lawn { border-radius: 0; height: 78vh; min-height: 600px; }
     }
-    /* watercolor noise on the grass */
     .lawn::before {
       content: ""; position: absolute; inset: 0; pointer-events: none;
       background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='9'/><feColorMatrix values='0 0 0 0 0.20  0 0 0 0 0.35  0 0 0 0 0.15  0 0 0 0.18 0'/></filter><rect width='240' height='240' filter='url(%23g)'/></svg>");
-      mix-blend-mode: multiply; opacity: .5;
+      mix-blend-mode: multiply; opacity: .45;
     }
-    /* subtle grass blade silhouettes scattered along the bottom */
     .lawn::after {
       content: ""; position: absolute; left: 0; right: 0; bottom: 0;
       height: 22%; pointer-events: none; opacity: .35;
@@ -337,58 +303,130 @@
       background-size: 100% 100%;
     }
 
-    /* ============ FLOWERS ON LAWN ============ */
-    .flower {
+    /* ============ POT ENTRY (positioned absolutely on the lawn) ============ */
+    .pot-entry {
       position: absolute;
-      width: clamp(72px, 9vw, 110px); height: clamp(72px, 9vw, 110px);
+      width: clamp(88px, 9.5vw, 116px);
       transform: translate(-50%, -50%);
       background: none; border: none; padding: 0;
       z-index: 2;
       transition: transform .35s var(--ease), filter .35s var(--ease);
-      filter: drop-shadow(0 6px 8px rgba(20,40,15,.25));
+      filter: drop-shadow(0 8px 10px rgba(20,40,15,.30));
     }
-    .flower svg { width: 100%; height: 100%; display: block; pointer-events: none; }
-    .flower:hover, .flower:focus-visible {
-      transform: translate(-50%, -50%) scale(1.12) rotate(-4deg);
-      filter: drop-shadow(0 10px 14px rgba(20,40,15,.3));
+    .pot-entry:hover, .pot-entry:focus-visible {
+      transform: translate(-50%, -50%) scale(1.07);
+      filter: drop-shadow(0 12px 16px rgba(20,40,15,.35));
       z-index: 3;
       outline: none;
     }
-    .flower:focus-visible::after {
-      content: ""; position: absolute; inset: -8px; border-radius: 50%;
-      border: 2px dashed var(--cream);
+    .pot-entry .plant-render {
+      position: relative;
+      display: flex; flex-direction: column; align-items: center;
+      width: 100%;
     }
-    .flower.highlight {
-      animation: flower-glow 2.4s var(--ease);
-      z-index: 4;
+    .pot-entry .pr-flower {
+      width: 64%;
+      filter: drop-shadow(0 2px 3px rgba(20,40,15,.18));
     }
-    @keyframes flower-glow {
-      0% { filter: drop-shadow(0 0 0 rgba(255,255,255,0)) drop-shadow(0 6px 8px rgba(20,40,15,.25)); }
-      30% { filter: drop-shadow(0 0 22px rgba(251,246,229,.95)) drop-shadow(0 6px 8px rgba(20,40,15,.25)); }
-      100% { filter: drop-shadow(0 0 0 rgba(255,255,255,0)) drop-shadow(0 6px 8px rgba(20,40,15,.25)); }
+    .pot-entry .pr-flower svg { width: 100%; height: auto; display: block; }
+    .pot-entry .pr-pot {
+      position: relative; width: 100%; margin-top: -10%;
+    }
+    .pot-entry .pr-pot svg { width: 100%; height: auto; display: block; }
+    .pot-entry .pr-name {
+      position: absolute;
+      top: 60%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: var(--mono);
+      font-size: clamp(6.5px, 0.62vw, 8px);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-weight: 500;
+      white-space: nowrap;
+      pointer-events: none;
+      max-width: 78%;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    .flower-tip {
+    /* ============ FEATURED (visitor's just-planted pot) ============ */
+    .pot-entry.featured {
+      transform: translate(-50%, -50%) scale(1.15);
+      z-index: 5;
+    }
+    .pot-entry.featured:hover, .pot-entry.featured:focus-visible {
+      transform: translate(-50%, -50%) scale(1.22);
+    }
+    .pot-entry.featured::before {
+      content: "";
       position: absolute;
-      bottom: calc(100% + 6px); left: 50%;
-      transform: translateX(-50%);
-      padding: 6px 11px;
+      left: 50%; top: 65%;
+      transform: translate(-50%, -50%);
+      width: 130%; height: 60%;
+      border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(236,100,120,.55) 0%, rgba(236,100,120,.18) 45%, transparent 75%);
+      animation: glow-pulse 2.4s ease-in-out infinite;
+      pointer-events: none;
+      z-index: -1;
+    }
+    .pot-entry.featured.glow-fade::before {
+      animation: glow-pulse 2.4s ease-in-out infinite, glow-fade 2.5s ease-out forwards;
+    }
+    @keyframes glow-pulse {
+      0%, 100% { opacity: .85; transform: translate(-50%, -50%) scale(1); }
+      50%      { opacity: 1;   transform: translate(-50%, -50%) scale(1.06); }
+    }
+    @keyframes glow-fade {
+      to { opacity: 0; }
+    }
+
+    /* ============ HOVER QUOTE — sticky-note paper pill ============ */
+    .pot-quote {
+      position: absolute;
+      bottom: calc(100% - 4px); left: 50%;
+      transform: translateX(-50%) translateY(2px);
+      padding: 8px 14px;
       background: var(--cream);
       border: 1px solid var(--rule);
-      border-radius: 999px;
-      font-family: var(--mono); font-size: 10.5px; font-weight: 500;
-      letter-spacing: .12em; text-transform: uppercase;
+      border-radius: 14px;
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 1.3;
       color: var(--ink-soft);
       white-space: nowrap;
+      max-width: 240px;
       opacity: 0; pointer-events: none;
-      transition: opacity .2s var(--ease), transform .2s var(--ease);
-      box-shadow: 0 6px 14px -4px rgba(20,40,15,.25);
+      transition: opacity .22s var(--ease), transform .22s var(--ease);
+      box-shadow: 0 8px 18px -4px rgba(20,40,15,.32);
     }
-    .flower:hover .flower-tip,
-    .flower:focus-visible .flower-tip {
+    .pot-quote::after {
+      content: "";
+      position: absolute;
+      bottom: -5px; left: 50%; transform: translateX(-50%) rotate(45deg);
+      width: 9px; height: 9px;
+      background: var(--cream);
+      border-right: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+    }
+    .pot-entry:hover .pot-quote,
+    .pot-entry:focus-visible .pot-quote {
       opacity: 1;
-      transform: translateX(-50%) translateY(-2px);
+      transform: translateX(-50%) translateY(-4px);
     }
+
+    /* ============ BOTTOM "haven't planted" link ============ */
+    .lawn-footer-link {
+      display: block; text-align: center;
+      padding: 10px 56px 56px;
+      font-family: var(--mono); font-size: 11px; font-weight: 500;
+      letter-spacing: .2em; text-transform: lowercase;
+      color: var(--ink-mute);
+      transition: color .2s var(--ease);
+    }
+    .lawn-footer-link:hover { color: var(--accent); }
+    @media (max-width: 980px) { .lawn-footer-link { padding: 12px 28px 40px; } }
 
     /* ============ CARD MODAL ============ */
     .modal {
@@ -424,30 +462,18 @@
     }
     @media (max-width: 600px) {
       .modal { padding: 0; }
-      .card {
-        width: 100%; height: 100%; aspect-ratio: auto;
-        border-radius: 0;
-        padding: 32px 28px;
-      }
+      .card { width: 100%; height: 100%; aspect-ratio: auto; border-radius: 0; padding: 32px 28px; }
     }
 
-    .card-head {
-      display: flex; align-items: center; justify-content: space-between;
-      position: relative; z-index: 2;
-    }
-    .card-brand {
-      font-family: var(--serif); font-style: italic; font-weight: 500;
-      font-size: 14px;
-    }
-    .card-flower-mini { width: 36px; height: 36px; }
-    .card-flower-mini svg { width: 100%; height: 100%; display: block; }
+    .card-head { display: flex; align-items: center; justify-content: space-between; position: relative; z-index: 2; }
+    .card-brand { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 14px; }
+    .card-flower-mini { width: 44px; }
+    .card-flower-mini .plant-render { display: flex; flex-direction: column; align-items: center; }
+    .card-flower-mini .pr-flower { width: 100%; }
+    .card-flower-mini .pr-flower svg { width: 100%; height: auto; display: block; }
+    .card-flower-mini .pr-pot { display: none; }
 
-    .card-body {
-      flex: 1;
-      display: flex; flex-direction: column; justify-content: center;
-      padding: 18px 0 14px;
-      position: relative; z-index: 2;
-    }
+    .card-body { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 18px 0 14px; position: relative; z-index: 2; }
     .card-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 14px; }
     .card-label {
       font-family: var(--mono); font-size: 9.5px; font-weight: 500;
@@ -457,8 +483,7 @@
     .card-name {
       font-family: var(--display); font-weight: 600;
       font-size: clamp(22px, 3.4vw, 30px);
-      letter-spacing: -.01em; line-height: 1;
-      margin: 0;
+      letter-spacing: -.01em; line-height: 1; margin: 0;
       word-break: break-word;
     }
     .card-meta {
@@ -474,19 +499,10 @@
       border-top: 1px solid currentColor;
       opacity: .92;
     }
-    .card-sig {
-      flex: 1; min-height: 44px;
-      display: flex; align-items: flex-end;
-    }
+    .card-sig { flex: 1; min-height: 44px; display: flex; align-items: flex-end; }
     .card-sig svg { width: 100%; height: 44px; display: block; }
-    .card-sig-empty {
-      font-family: var(--serif); font-style: italic; font-size: 12px;
-      opacity: .55; padding-bottom: 6px;
-    }
-    .card-x {
-      font-family: var(--display); font-weight: 600; font-size: 24px;
-      line-height: 1; padding-bottom: 4px;
-    }
+    .card-sig-empty { font-family: var(--serif); font-style: italic; font-size: 12px; opacity: .55; padding-bottom: 6px; }
+    .card-x { font-family: var(--display); font-weight: 600; font-size: 24px; line-height: 1; padding-bottom: 4px; }
 
     .card-close {
       position: absolute; top: 14px; right: 16px;
@@ -499,12 +515,12 @@
     }
     .card-close:hover { background: rgba(255,255,255,.85); }
 
-    /* card color tints — set as CSS vars on the .card via JS data-attr */
-    .card[data-tint="coral"]   { background: #fbe6ea; color: #7a2d3c; }
-    .card[data-tint="pink"]    { background: #fbe9ee; color: #8a3a4e; }
-    .card[data-tint="apricot"] { background: #fcf1d9; color: #6a4216; }
-    .card[data-tint="sage"]    { background: #e6efd6; color: #3d6b2c; }
-    .card[data-tint="cream"]   { background: #fbf6e5; color: #5a4632; }
+    /* card tints — color matches pot color */
+    .card[data-tint="terracotta"] { background: #f9e6d8; color: #6a3416; }
+    .card[data-tint="cobalt"]     { background: #dde7fa; color: #1a3a8a; }
+    .card[data-tint="cream"]      { background: #fbf6e5; color: #5a4632; }
+    .card[data-tint="matte"]      { background: #2a2a2a; color: #f4f1ea; }
+    .card[data-tint="saffron"]    { background: #fbe8d3; color: #6a3416; }
 
     /* ============ REVEAL ============ */
     .reveal { opacity: 0; transform: translateY(8px); animation: rise .7s var(--ease) forwards; }
@@ -516,7 +532,7 @@
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
       .reveal { opacity: 1; transform: none; }
-      .flower:hover, .flower:focus-visible { transform: translate(-50%, -50%) scale(1.05); }
+      .pot-entry.featured::before { animation: none !important; opacity: .6; }
     }
   </style>
 </head>
@@ -541,26 +557,11 @@
         <div class="explore">
           <p class="explore-label">Explore</p>
           <nav class="explore-list">
-            <a class="explore-item" href="home.html">
-              <span><span class="num">01.</span>My Work</span>
-              <span class="arrow">→</span>
-            </a>
-            <a class="explore-item" href="about.html">
-              <span><span class="num">02.</span>About Me</span>
-              <span class="arrow">→</span>
-            </a>
-            <a class="explore-item" href="playground.html">
-              <span><span class="num">03.</span>Playground</span>
-              <span class="arrow">→</span>
-            </a>
-            <a class="explore-item" href="ai.html">
-              <span><span class="num">04.</span>AI Practices</span>
-              <span class="arrow">→</span>
-            </a>
-            <a class="explore-item active" href="lawn.html">
-              <span><span class="num">05.</span>Visitor's Lawn</span>
-              <span class="arrow">→</span>
-            </a>
+            <a class="explore-item" href="home.html"><span><span class="num">01.</span>My Work</span><span class="arrow">→</span></a>
+            <a class="explore-item" href="about.html"><span><span class="num">02.</span>About Me</span><span class="arrow">→</span></a>
+            <a class="explore-item" href="playground.html"><span><span class="num">03.</span>Playground</span><span class="arrow">→</span></a>
+            <a class="explore-item" href="ai.html"><span><span class="num">04.</span>AI Practices</span><span class="arrow">→</span></a>
+            <a class="explore-item active" href="lawn.html"><span><span class="num">05.</span>Visitor's Lawn</span><span class="arrow">→</span></a>
           </nav>
         </div>
       </div>
@@ -573,6 +574,20 @@
         <a href="https://read.cv/" target="_blank" rel="noopener">Read.cv</a>
       </div>
 
+      <a class="lawn-pill reveal d5" href="lawn.html" aria-label="my plant">
+        <span class="plant-ico" aria-hidden="true">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 12 L8 6.5" stroke="#3d6b2c" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+            <path d="M8 8.4 Q 4.4 7 4.4 4.6 Q 7 5.4 8 7.6" fill="#5fbe75"/>
+            <path d="M8 7.6 Q 11.6 6.6 11.6 4 Q 9 4.8 8 7" fill="#79d18a"/>
+            <ellipse cx="8" cy="3.6" rx="1.6" ry="1.4" fill="#ec6478"/>
+            <rect x="5.6" y="11.2" width="4.8" height="3" rx=".6" fill="#c98a64"/>
+            <rect x="5.2" y="10.8" width="5.6" height="1.2" rx=".4" fill="#a86b48"/>
+          </svg>
+        </span>
+        <span>my plant →</span>
+      </a>
+
       <div class="sidebar-bottom">
         <span class="clock" id="clock">—</span>
         <span>© 2026 Sakshi Shah</span>
@@ -583,34 +598,20 @@
     <main class="main">
 
       <header class="lawn-header">
-        <div class="lawn-titles reveal d1">
-          <h1 class="lawn-title">Visitor's <span class="em">Lawn</span></h1>
-          <p class="lawn-sub">every flower here was planted by someone who passed through.</p>
-          <span class="counter-chip"><span class="pulse" aria-hidden="true"></span><span>You're our <span id="counterNumber">—</span><sup>rd</sup> guest</span></span>
-        </div>
-        <div class="lawn-cta reveal d2">
-          <a class="pill primary" href="plant.html">plant your flower →</a>
-          <button class="pill ghost" id="shuffleBtn" type="button" aria-label="Shuffle flower positions">
-            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M3 4h2l8 8h2"/><path d="M3 12h2l3-3"/><path d="M11 4h4M13 2l2 2-2 2M13 10l2 2-2 2"/>
-            </svg>
-            shuffle
-          </button>
-        </div>
+        <h1 class="lawn-title reveal d1">Visitor's <span class="em">Lawn</span></h1>
+        <p class="lawn-sub reveal d2">every flower here was planted by someone who passed through.</p>
       </header>
 
-      <details class="stats reveal d3" id="statsDetails">
+      <details class="stats reveal d2" id="statsDetails">
         <summary><span>stats for nerds</span><span class="chev">⌃</span></summary>
-        <div class="stats-body" id="statsBody">
-          <!-- populated by JS -->
-        </div>
+        <div class="stats-body" id="statsBody"></div>
       </details>
 
       <section class="lawn-wrap reveal d3">
-        <div class="lawn" id="lawn" aria-label="A watercolor lawn populated with flowers planted by visitors">
-          <!-- flowers rendered by JS -->
-        </div>
+        <div class="lawn" id="lawn" aria-label="A watercolor lawn populated with potted flowers planted by visitors"></div>
       </section>
+
+      <a class="lawn-footer-link" href="plant.html">haven't planted yet? leave one →</a>
 
     </main>
   </div>
@@ -618,7 +619,7 @@
   <!-- ============ CARD MODAL ============ -->
   <div class="modal" id="cardModal" role="dialog" aria-modal="true" aria-labelledby="cardName" hidden>
     <div class="modal-backdrop" data-close></div>
-    <article class="card" id="card" data-tint="coral">
+    <article class="card" id="card" data-tint="terracotta">
       <button class="card-close" type="button" aria-label="Close" data-close>×</button>
       <div class="card-head">
         <span class="card-brand">Sakshi's Garden</span>
@@ -639,9 +640,7 @@
         </div>
       </div>
       <div class="card-foot">
-        <div class="card-sig" id="cardSig">
-          <span class="card-sig-empty">unsigned</span>
-        </div>
+        <div class="card-sig" id="cardSig"><span class="card-sig-empty">unsigned</span></div>
         <span class="card-x" aria-hidden="true">×</span>
       </div>
     </article>
@@ -651,328 +650,272 @@
     'use strict';
 
     // ============================================================
-    //  CONSTANTS
+    //  CONSTANTS + SEED DATA
     // ============================================================
-    const STORAGE_KEY = 'sakshi_lawn';
-    const FLOWER_TYPES = ['daisy', 'marigold', 'morning-glory', 'tulip'];
-    const COLOR_VARIANTS = ['coral', 'pink', 'apricot', 'sage', 'cream'];
+    var STORAGE_KEY = 'sakshi_lawn';
+    var STORAGE_VERSION = 2; // bumped — schema changed (flower/pot/quote)
+    var FIRST_CARD_NUMBER = 3275;
 
-    const ADJECTIVES = ['rainy','plum','drowsy','paper','apricot','porcelain','dappled','mossy','velvet','foggy','copper','hazel','twilight','brindle','marigold','vesper','briar','gilded','brassy','dusky'];
-    const NOUNS = ['reverie','orchid','atlas','keeper','weaver','trinket','lantern','compass','harbor','ember','almanac','whisper','postcard','tinder','refuge','anchor','prelude','brushstroke','halcyon','fable'];
-
-    // 18 seeded entries, oldest → newest
-    const SEED_DEFS = [
-      { name: 'RAINY REVERIE',     dayOffset: 28, type: 'daisy',         color: 'pink' },
-      { name: 'PLUM ORCHID',       dayOffset: 26, type: 'morning-glory', color: 'coral' },
-      { name: 'DROWSY ATLAS',      dayOffset: 24, type: 'marigold',      color: 'apricot' },
-      { name: 'PAPER KEEPER',      dayOffset: 22, type: 'tulip',         color: 'cream' },
-      { name: 'ABDULLAH',          dayOffset: 20, type: 'daisy',         color: 'apricot' },
-      { name: 'APRICOT WEAVER',    dayOffset: 18, type: 'marigold',      color: 'apricot' },
-      { name: 'PORCELAIN TRINKET', dayOffset: 16, type: 'daisy',         color: 'cream' },
-      { name: 'GISELE',            dayOffset: 14, type: 'tulip',         color: 'pink' },
-      { name: 'DAPPLED ORCHID',    dayOffset: 12, type: 'morning-glory', color: 'coral' },
-      { name: 'NIKHIL',            dayOffset: 11, type: 'daisy',         color: 'sage' },
-      { name: 'MOSSY LANTERN',     dayOffset:  9, type: 'tulip',         color: 'sage' },
-      { name: 'VELVET COMPASS',    dayOffset:  8, type: 'morning-glory', color: 'coral' },
-      { name: 'MARGAUX',           dayOffset:  6, type: 'marigold',      color: 'pink' },
-      { name: 'FOGGY BRUSHSTROKE', dayOffset:  5, type: 'daisy',         color: 'cream' },
-      { name: 'COPPER ALMANAC',    dayOffset:  4, type: 'marigold',      color: 'apricot' },
-      { name: 'ELI',               dayOffset:  3, type: 'morning-glory', color: 'pink' },
-      { name: 'TWILIGHT POSTCARD', dayOffset:  2, type: 'tulip',         color: 'coral' },
-      { name: 'DUSKY HALCYON',     dayOffset:  1, type: 'daisy',         color: 'sage' },
+    // Seeds use plant.html flower ids + pot ids (shared via LAWN_LIB)
+    var SEED_DEFS = [
+      { name:'RAINY REVERIE',     dayOffset:28, flower:'cosmos',    pot:'cream',      quote:'left rain on the leaves' },
+      { name:'PLUM ORCHID',       dayOffset:26, flower:'hibiscus',  pot:'matte',      quote:'this place breathes' },
+      { name:'DROWSY ATLAS',      dayOffset:24, flower:'sunflower', pot:'terracotta', quote:'on lunch break' },
+      { name:'PAPER KEEPER',      dayOffset:22, flower:'cosmos',    pot:'cream',      quote:'reading between the rows' },
+      { name:'ABDULLAH',          dayOffset:20, flower:'tulip',     pot:'saffron',    quote:'hi from istanbul' },
+      { name:'APRICOT WEAVER',    dayOffset:18, flower:'sunflower', pot:'saffron',    quote:'pretty work, pretty garden' },
+      { name:'PORCELAIN TRINKET', dayOffset:16, flower:'peony',     pot:'cream',      quote:'a small offering' },
+      { name:'GISELE',            dayOffset:14, flower:'tulip',     pot:'cobalt',     quote:'paris on a slow tuesday' },
+      { name:'DAPPLED ORCHID',    dayOffset:12, flower:'hibiscus',  pot:'terracotta', quote:'stayed five minutes too long' },
+      { name:'NIKHIL',            dayOffset:11, flower:'lavender',  pot:'cobalt',     quote:'studying for finals — break time' },
+      { name:'MOSSY LANTERN',     dayOffset: 9, flower:'lavender',  pot:'matte',      quote:'quietly impressed' },
+      { name:'VELVET COMPASS',    dayOffset: 8, flower:'peony',     pot:'cobalt',     quote:'taking the long way home' },
+      { name:'MARGAUX',           dayOffset: 6, flower:'peony',     pot:'cream',      quote:'thanks for the slow scroll' },
+      { name:'FOGGY BRUSHSTROKE', dayOffset: 5, flower:'cosmos',    pot:'matte',      quote:'a quiet visit' },
+      { name:'COPPER ALMANAC',    dayOffset: 4, flower:'sunflower', pot:'terracotta', quote:'planted a thought' },
+      { name:'ELI',               dayOffset: 3, flower:'tulip',     pot:'terracotta', quote:'hello from the desk' },
+      { name:'TWILIGHT POSTCARD', dayOffset: 2, flower:'lavender',  pot:'saffron',    quote:'leaving sunshine' },
+      { name:'DUSKY HALCYON',     dayOffset: 1, flower:'cosmos',    pot:'matte',      quote:'stopped to look closer' }
     ];
-    const FIRST_CARD_NUMBER = 3275; // first seed = 3275, last seed = 3292, next visitor = 3293
 
     // ============================================================
     //  HELPERS
     // ============================================================
-    function uuid() {
-      return 'p' + Date.now().toString(36) + Math.random().toString(36).slice(2, 9);
-    }
-    function pickRandom(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
-    function generateName() {
-      return (pickRandom(ADJECTIVES) + ' ' + pickRandom(NOUNS)).toUpperCase();
-    }
     function formatDate(d) {
-      const mm = String(d.getMonth() + 1).padStart(2, '0');
-      const dd = String(d.getDate()).padStart(2, '0');
-      const yy = String(d.getFullYear()).slice(-2);
-      return mm + '/' + dd + '/' + yy;
+      return String(d.getMonth()+1).padStart(2,'0') + '/' +
+             String(d.getDate()).padStart(2,'0') + '/' +
+             String(d.getFullYear()).slice(-2);
     }
-    function pad4(n) { return String(n).padStart(4, '0'); }
-    function ordinal(n) {
-      const s = ['th','st','nd','rd'], v = n % 100;
-      return s[(v - 20) % 10] || s[v] || s[0];
-    }
-    // % distance — non-overlapping placement
-    function placePosition(existing, minDistPct) {
-      for (let i = 0; i < 200; i++) {
-        const x = 6 + Math.random() * 88;
-        const y = 14 + Math.random() * 72;
-        let ok = true;
-        for (const p of existing) {
-          if (Math.hypot(p.position.x - x, p.position.y - y) < minDistPct) { ok = false; break; }
+    function pad4(n) { return String(n).padStart(4,'0'); }
+    function escapeHtml(s) { return LAWN_LIB.escapeHtml(s); }
+
+    function placePosition(existing, minDistPct, featuredCenter) {
+      // Featured pot anchors at center (50/52)
+      if (featuredCenter) return { x: 50, y: 52 };
+      for (var i = 0; i < 250; i++) {
+        var x = 7 + Math.random() * 86;
+        var y = 16 + Math.random() * 70;
+        var ok = true;
+        for (var j = 0; j < existing.length; j++) {
+          var p = existing[j].position;
+          if (!p) continue;
+          if (Math.hypot(p.x - x, p.y - y) < minDistPct) { ok = false; break; }
         }
-        if (ok) return { x, y };
+        if (ok) return { x: x, y: y };
       }
-      // fallback: random anywhere
-      return { x: 6 + Math.random() * 88, y: 14 + Math.random() * 72 };
+      return { x: 7 + Math.random() * 86, y: 16 + Math.random() * 70 };
     }
 
     // ============================================================
-    //  FLOWER SVG GENERATORS — watercolor stylized, parameterized by color
-    // ============================================================
-    const FLOWER_PALETTES = {
-      coral:   { petal: '#ec6478', petalDark: '#b13e58', center: '#3a2818', stem: '#3d6b2c', leaf: '#5e8a4f' },
-      pink:    { petal: '#f4a8b6', petalDark: '#ec6478', center: '#7a3a3a', stem: '#3d6b2c', leaf: '#5e8a4f' },
-      apricot: { petal: '#f6c97a', petalDark: '#d99c3e', center: '#7a4f1c', stem: '#3d6b2c', leaf: '#5e8a4f' },
-      sage:    { petal: '#a8c986', petalDark: '#5e8a4f', center: '#3d6b2c', stem: '#3d6b2c', leaf: '#4ea862' },
-      cream:   { petal: '#fbf6e5', petalDark: '#cdc0a0', center: '#a86b48', stem: '#3d6b2c', leaf: '#5e8a4f' },
-    };
-
-    function flowerSVG(type, color) {
-      const P = FLOWER_PALETTES[color] || FLOWER_PALETTES.coral;
-      switch (type) {
-        case 'daisy':         return daisySVG(P);
-        case 'marigold':      return marigoldSVG(P);
-        case 'morning-glory': return morningGlorySVG(P);
-        case 'tulip':         return tulipSVG(P);
-        default:              return daisySVG(P);
-      }
-    }
-    function daisySVG(P) {
-      // 8 oval petals around a circular center
-      const petals = [];
-      for (let i = 0; i < 8; i++) {
-        const a = (i / 8) * Math.PI * 2;
-        const cx = 50 + Math.cos(a) * 22;
-        const cy = 38 + Math.sin(a) * 22;
-        const rot = (a * 180 / Math.PI) + 90;
-        petals.push(`<ellipse cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" rx="9" ry="14" fill="${P.petal}" opacity=".95" transform="rotate(${rot.toFixed(1)} ${cx.toFixed(1)} ${cy.toFixed(1)})"/>`);
-      }
-      return `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <path d="M50 95 L50 55" stroke="${P.stem}" stroke-width="2.4" stroke-linecap="round" fill="none"/>
-        <path d="M50 75 Q 38 70 32 60 Q 44 64 50 70" fill="${P.leaf}" opacity=".9"/>
-        <path d="M50 80 Q 64 76 70 66 Q 58 70 50 76" fill="${P.leaf}" opacity=".85"/>
-        ${petals.join('')}
-        <circle cx="50" cy="38" r="9" fill="${P.center}" opacity=".88"/>
-        <circle cx="48" cy="36" r="2.5" fill="#fbf6e5" opacity=".4"/>
-      </svg>`;
-    }
-    function marigoldSVG(P) {
-      // dense layered petals — outer ring + inner ring
-      const outer = [], inner = [];
-      for (let i = 0; i < 12; i++) {
-        const a = (i / 12) * Math.PI * 2;
-        const cx = 50 + Math.cos(a) * 20;
-        const cy = 38 + Math.sin(a) * 20;
-        const rot = (a * 180 / Math.PI) + 90;
-        outer.push(`<ellipse cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" rx="7" ry="11" fill="${P.petal}" opacity=".92" transform="rotate(${rot.toFixed(1)} ${cx.toFixed(1)} ${cy.toFixed(1)})"/>`);
-      }
-      for (let i = 0; i < 8; i++) {
-        const a = (i / 8) * Math.PI * 2 + 0.2;
-        const cx = 50 + Math.cos(a) * 11;
-        const cy = 38 + Math.sin(a) * 11;
-        const rot = (a * 180 / Math.PI) + 90;
-        inner.push(`<ellipse cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" rx="5" ry="8" fill="${P.petalDark}" opacity=".88" transform="rotate(${rot.toFixed(1)} ${cx.toFixed(1)} ${cy.toFixed(1)})"/>`);
-      }
-      return `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <path d="M50 95 L50 55" stroke="${P.stem}" stroke-width="2.4" stroke-linecap="round" fill="none"/>
-        <path d="M50 78 Q 36 72 30 60 Q 44 64 50 72" fill="${P.leaf}" opacity=".88"/>
-        ${outer.join('')}
-        ${inner.join('')}
-        <circle cx="50" cy="38" r="5" fill="${P.center}" opacity=".9"/>
-      </svg>`;
-    }
-    function morningGlorySVG(P) {
-      // trumpet-shaped — wide bell up top, narrow base
-      return `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <path d="M50 95 L50 60" stroke="${P.stem}" stroke-width="2.4" stroke-linecap="round" fill="none"/>
-        <path d="M50 80 Q 64 76 70 66 Q 58 70 50 76" fill="${P.leaf}" opacity=".85"/>
-        <path d="M50 60 Q 22 50 18 22 Q 44 8 50 22 Q 56 8 82 22 Q 78 50 50 60 Z" fill="${P.petal}" opacity=".96"/>
-        <path d="M50 60 Q 30 50 26 28 Q 38 22 50 32 Q 62 22 74 28 Q 70 50 50 60 Z" fill="${P.petalDark}" opacity=".55"/>
-        <path d="M50 60 L50 26" stroke="${P.center}" stroke-width="1.6" opacity=".55" fill="none"/>
-        <ellipse cx="50" cy="56" rx="4.5" ry="2.5" fill="${P.center}" opacity=".7"/>
-      </svg>`;
-    }
-    function tulipSVG(P) {
-      // 3 cup petals
-      return `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <path d="M50 95 L50 50" stroke="${P.stem}" stroke-width="2.4" stroke-linecap="round" fill="none"/>
-        <path d="M50 70 Q 32 64 26 48 Q 42 52 50 60" fill="${P.leaf}" opacity=".88"/>
-        <path d="M50 70 Q 68 64 74 48 Q 58 52 50 60" fill="${P.leaf}" opacity=".82"/>
-        <path d="M28 42 Q 30 18 50 14 Q 50 32 42 52 Q 32 50 28 42 Z" fill="${P.petal}" opacity=".95"/>
-        <path d="M72 42 Q 70 18 50 14 Q 50 32 58 52 Q 68 50 72 42 Z" fill="${P.petal}" opacity=".95"/>
-        <path d="M40 50 Q 38 24 50 16 Q 62 24 60 50 Q 50 56 40 50 Z" fill="${P.petalDark}" opacity=".88"/>
-      </svg>`;
-    }
-
-    // ============================================================
-    //  STORAGE
+    //  STORAGE — load + seed (with v2 migration)
     // ============================================================
     function buildSeededState() {
-      const today = new Date();
-      const plants = SEED_DEFS.map((seed, i) => {
-        const d = new Date(today);
-        d.setDate(d.getDate() - seed.dayOffset);
+      var today = new Date();
+      var plants = SEED_DEFS.map(function(s, i) {
+        var d = new Date(today); d.setDate(d.getDate() - s.dayOffset);
         return {
           id: 'seed-' + i,
-          name: seed.name,
+          name: s.name,
           cardNumber: FIRST_CARD_NUMBER + i,
           date: formatDate(d),
           dateMs: d.getTime(),
-          flowerType: seed.type,
-          colorVariant: seed.color,
-          position: null, // computed when rendering
+          flower: s.flower,
+          pot: s.pot,
+          quote: s.quote,
+          position: null,
           signaturePath: null,
-          isSeed: true,
+          isSeed: true
         };
       });
       return {
-        visitorCount: FIRST_CARD_NUMBER + SEED_DEFS.length, // 3293
-        plants,
+        version: STORAGE_VERSION,
+        visitorCount: FIRST_CARD_NUMBER + SEED_DEFS.length,
         startedDateMs: plants[0].dateMs,
+        plants: plants
       };
     }
-
     function loadState() {
       try {
-        const raw = localStorage.getItem(STORAGE_KEY);
+        var raw = localStorage.getItem(STORAGE_KEY);
         if (!raw) {
-          const fresh = buildSeededState();
+          var fresh = buildSeededState();
           localStorage.setItem(STORAGE_KEY, JSON.stringify(fresh));
           return fresh;
         }
-        const parsed = JSON.parse(raw);
-        // sanity: must have plants array; if missing, reseed
-        if (!Array.isArray(parsed.plants) || parsed.plants.length === 0) {
-          const fresh = buildSeededState();
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(fresh));
-          return fresh;
+        var parsed = JSON.parse(raw);
+        // Migration: v1 → v2. If schema mismatch, reseed and merge any user plants.
+        if (!parsed.version || parsed.version < STORAGE_VERSION || !Array.isArray(parsed.plants)) {
+          var migrated = buildSeededState();
+          // best-effort: keep any non-seed plants from old data
+          if (Array.isArray(parsed && parsed.plants)) {
+            parsed.plants.forEach(function(old) {
+              if (old && !old.isSeed && old.name) {
+                migrated.plants.push({
+                  id: old.id || ('legacy-' + Date.now() + Math.random()),
+                  name: old.name,
+                  cardNumber: old.cardNumber || migrated.visitorCount,
+                  date: old.date || formatDate(new Date()),
+                  dateMs: old.dateMs || Date.now(),
+                  flower: old.flower || 'cosmos',
+                  pot: old.pot || 'terracotta',
+                  quote: old.quote || LAWN_LIB.pickQuote(),
+                  position: null,
+                  signaturePath: old.signaturePath || null,
+                  isSeed: false
+                });
+                migrated.visitorCount = Math.max(migrated.visitorCount, (old.cardNumber || 0) + 1);
+              }
+            });
+          }
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(migrated));
+          return migrated;
         }
         return parsed;
       } catch (e) {
         return buildSeededState();
       }
     }
+    function saveState(s) { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(s)); } catch (e) {} }
 
-    function saveState(state) {
-      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+    var STATE = loadState();
+
+    // Identify the freshly-planted record from URL hash (if any)
+    var FEATURED_ID = (window.location.hash || '').slice(1) || null;
+    if (FEATURED_ID && !STATE.plants.some(function(p) { return p.id === FEATURED_ID; })) {
+      FEATURED_ID = null;
+    }
+
+    // ============================================================
+    //  POSITIONING — featured anchored center, others scatter around
+    // ============================================================
+    function assignPositions() {
+      var placed = [];
+      // Featured first → center
+      if (FEATURED_ID) {
+        var feat = STATE.plants.find(function(p) { return p.id === FEATURED_ID; });
+        if (feat) {
+          feat.position = { x: 50, y: 52 };
+          placed.push(feat);
+        }
+      }
+      // Then everyone else
+      STATE.plants.forEach(function(p) {
+        if (p.position && p === placed[0]) return;
+        if (p.id === FEATURED_ID) return;
+        p.position = placePosition(placed, 14, false);
+        placed.push(p);
+      });
     }
 
     // ============================================================
     //  RENDERING
     // ============================================================
-    let STATE = loadState();
-
-    function assignPositions() {
-      const placed = [];
-      for (const plant of STATE.plants) {
-        plant.position = placePosition(placed, 11);
-        placed.push(plant);
-      }
-    }
-
     function renderLawn() {
-      const lawn = document.getElementById('lawn');
+      var lawn = document.getElementById('lawn');
       lawn.innerHTML = '';
-      for (const plant of STATE.plants) {
-        const btn = document.createElement('button');
-        btn.className = 'flower';
-        btn.type = 'button';
-        btn.dataset.id = plant.id;
-        btn.style.left = plant.position.x + '%';
-        btn.style.top = plant.position.y + '%';
-        btn.setAttribute('aria-label', `Open visitor card for ${plant.name}, ${plant.date}`);
-        btn.innerHTML = flowerSVG(plant.flowerType, plant.colorVariant) +
-          `<span class="flower-tip">${escapeHtml(plant.name)} · ${plant.date}</span>`;
-        btn.addEventListener('click', () => openCard(plant));
-        lawn.appendChild(btn);
-      }
-    }
-
-    function renderCounter() {
-      const n = STATE.visitorCount;
-      const numEl = document.getElementById('counterNumber');
-      numEl.textContent = n.toLocaleString();
-      // adjust ordinal suffix
-      const sup = numEl.parentNode.querySelector('sup');
-      if (sup) sup.textContent = ordinal(n);
+      var fragments = '';
+      STATE.plants.forEach(function(plant) {
+        var isFeatured = plant.id === FEATURED_ID;
+        var quote = plant.quote || LAWN_LIB.pickQuote();
+        fragments +=
+          '<button class="pot-entry' + (isFeatured ? ' featured glow-fade' : '') + '"' +
+          ' data-id="' + escapeHtml(plant.id) + '"' +
+          ' style="left:' + plant.position.x + '%; top:' + plant.position.y + '%;"' +
+          ' aria-label="Open visitor card for ' + escapeHtml(plant.name) + ', ' + escapeHtml(plant.date) + '">' +
+          LAWN_LIB.renderPotted({ flower: plant.flower, pot: plant.pot, name: plant.name }) +
+          '<span class="pot-quote">' + escapeHtml(quote) + '</span>' +
+          '</button>';
+      });
+      lawn.innerHTML = fragments;
+      // Wire clicks (delegation)
+      lawn.addEventListener('click', function(e) {
+        var btn = e.target.closest('.pot-entry');
+        if (!btn) return;
+        var id = btn.dataset.id;
+        var plant = STATE.plants.find(function(p) { return p.id === id; });
+        if (plant) openCard(plant);
+      });
     }
 
     function renderStats() {
-      const body = document.getElementById('statsBody');
-      const counts = {};
-      const nameCounts = {};
-      for (const p of STATE.plants) {
-        const key = `${p.flowerType} (${p.colorVariant})`;
-        counts[key] = (counts[key] || 0) + 1;
+      var body = document.getElementById('statsBody');
+      var counts = {};
+      var nameCounts = {};
+      STATE.plants.forEach(function(p) {
+        var k = (LAWN_LIB.FLOWERS.find(function(f) { return f.id === p.flower; }) || { label: p.flower }).label +
+                ' (' + (LAWN_LIB.POTS.find(function(o) { return o.id === p.pot; }) || { label: p.pot }).label + ')';
+        counts[k] = (counts[k] || 0) + 1;
         nameCounts[p.name] = (nameCounts[p.name] || 0) + 1;
-      }
-      const mostFlower = Object.entries(counts).sort((a,b) => b[1] - a[1])[0];
-      const mostName = Object.entries(nameCounts).sort((a,b) => b[1] - a[1])[0];
-      const startedDate = formatDate(new Date(STATE.startedDateMs || STATE.plants[0].dateMs));
-      const total = STATE.visitorCount.toLocaleString();
-      body.innerHTML = `
-        <div class="stat-cell"><p class="stat-label">Total visitors</p><p class="stat-val">${total}</p></div>
-        <div class="stat-cell"><p class="stat-label">Most-planted flower</p><p class="stat-val">${escapeHtml(mostFlower ? mostFlower[0] : '—')}</p></div>
-        <div class="stat-cell"><p class="stat-label">Most-popular planter</p><p class="stat-val">${escapeHtml(mostName ? mostName[0] : '—')}</p></div>
-        <div class="stat-cell"><p class="stat-label">Lawn started</p><p class="stat-val">${startedDate}</p></div>
-      `;
-    }
-
-    function escapeHtml(s) {
-      return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+      });
+      var mostFlower = Object.entries(counts).sort(function(a,b) { return b[1] - a[1]; })[0];
+      var mostName = Object.entries(nameCounts).sort(function(a,b) { return b[1] - a[1]; })[0];
+      var startedDate = formatDate(new Date(STATE.startedDateMs || STATE.plants[0].dateMs));
+      var total = (STATE.visitorCount || STATE.plants.length).toLocaleString();
+      body.innerHTML =
+        '<div class="stat-cell"><p class="stat-label">Total visitors</p><p class="stat-val">' + total + '</p></div>' +
+        '<div class="stat-cell"><p class="stat-label">Most-planted flower</p><p class="stat-val">' + escapeHtml(mostFlower ? mostFlower[0] : '—') + '</p></div>' +
+        '<div class="stat-cell"><p class="stat-label">Most-popular planter</p><p class="stat-val">' + escapeHtml(mostName ? mostName[0] : '—') + '</p></div>' +
+        '<div class="stat-cell"><p class="stat-label">Lawn started</p><p class="stat-val">' + startedDate + '</p></div>';
     }
 
     // ============================================================
     //  CARD MODAL
     // ============================================================
-    const modal = document.getElementById('cardModal');
-    const card = document.getElementById('card');
-    let lastFocused = null;
+    var modal = document.getElementById('cardModal');
+    var card = document.getElementById('card');
+    var lastFocused = null;
 
     function openCard(plant) {
       lastFocused = document.activeElement;
-      card.dataset.tint = plant.colorVariant;
+      card.dataset.tint = plant.pot || 'terracotta';
       document.getElementById('cardName').textContent = plant.name;
       document.getElementById('cardDate').textContent = plant.date;
       document.getElementById('cardNumber').textContent = 'NO. ' + pad4(plant.cardNumber);
-      document.getElementById('cardFlower').innerHTML = flowerSVG(plant.flowerType, plant.colorVariant);
-      const sigEl = document.getElementById('cardSig');
+      document.getElementById('cardFlower').innerHTML = LAWN_LIB.renderPotted({ flower: plant.flower, pot: plant.pot, name: '' });
+      var sigEl = document.getElementById('cardSig');
       if (plant.signaturePath) {
-        sigEl.innerHTML = `<svg viewBox="0 0 200 44" preserveAspectRatio="xMidYMax meet" xmlns="http://www.w3.org/2000/svg"><path d="${plant.signaturePath}" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>`;
+        sigEl.innerHTML = '<svg viewBox="0 0 200 44" preserveAspectRatio="xMidYMax meet" xmlns="http://www.w3.org/2000/svg"><path d="' + plant.signaturePath + '" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>';
       } else {
         sigEl.innerHTML = '<span class="card-sig-empty">unsigned</span>';
       }
       modal.hidden = false;
-      requestAnimationFrame(() => modal.classList.add('open'));
-      document.querySelector('.card-close').focus();
+      requestAnimationFrame(function() { modal.classList.add('open'); });
+      var closeBtn = document.querySelector('.card-close');
+      if (closeBtn) closeBtn.focus();
     }
-
     function closeCard() {
       modal.classList.remove('open');
-      setTimeout(() => {
+      setTimeout(function() {
         modal.hidden = true;
         if (lastFocused && lastFocused.focus) lastFocused.focus();
       }, 250);
     }
-
-    modal.addEventListener('click', e => {
+    modal.addEventListener('click', function(e) {
       if (e.target.dataset.close !== undefined) closeCard();
     });
-    document.addEventListener('keydown', e => {
+    document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape' && !modal.hidden) closeCard();
     });
 
     // ============================================================
-    //  SHUFFLE
+    //  FEATURED — center, glow, scroll-into-view, auto-open
     // ============================================================
-    document.getElementById('shuffleBtn').addEventListener('click', () => {
-      assignPositions();
-      saveState(STATE);
-      renderLawn();
-    });
+    function highlightFeatured() {
+      if (!FEATURED_ID) return;
+      var plant = STATE.plants.find(function(p) { return p.id === FEATURED_ID; });
+      if (!plant) return;
+      var btn = document.querySelector('.pot-entry[data-id="' + CSS.escape(FEATURED_ID) + '"]');
+      if (!btn) return;
+      var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      btn.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'center' });
+      // Auto-open card after a short delay so visitor sees their pot first, then the card
+      setTimeout(function() { openCard(plant); }, reduced ? 100 : 600);
+      // Glow auto-fades after 8s via CSS animation
+      setTimeout(function() {
+        if (btn) btn.classList.remove('glow-fade');
+        btn.style.setProperty('--glow-after', 'none');
+      }, 8000);
+    }
 
     // ============================================================
     //  INIT
@@ -980,70 +923,49 @@
     assignPositions();
     saveState(STATE);
     renderLawn();
-    renderCounter();
     renderStats();
+    setTimeout(highlightFeatured, 80);
 
     // ============================================================
-    //  HASH HIGHLIGHT — arriving from plant.html with #<id>
-    // ============================================================
-    function highlightFromHash() {
-      const hash = window.location.hash.slice(1);
-      if (!hash) return;
-      const target = STATE.plants.find(p => p.id === hash);
-      if (!target) return;
-      const btn = document.querySelector(`.flower[data-id="${CSS.escape(hash)}"]`);
-      if (!btn) return;
-      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      btn.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'center' });
-      btn.classList.add('highlight');
-      setTimeout(() => openCard(target), reduced ? 100 : 800);
-    }
-    setTimeout(highlightFromHash, 60);
-
-    // ============================================================
-    //  CURSOR
+    //  CURSOR + CLOCK
     // ============================================================
     (function() {
-      const dot = document.querySelector('.cursor-dot');
+      var dot = document.querySelector('.cursor-dot');
       if (!dot) return;
-      let x = innerWidth / 2, y = innerHeight / 2, tx = x, ty = y;
-      let visible = false;
-      document.addEventListener('mousemove', e => {
+      var x = innerWidth/2, y = innerHeight/2, tx = x, ty = y, visible = false;
+      document.addEventListener('mousemove', function(e) {
         tx = e.clientX; ty = e.clientY;
         if (!visible) { dot.style.opacity = '1'; visible = true; }
       });
-      document.addEventListener('mouseleave', () => { dot.style.opacity = '0'; visible = false; });
+      document.addEventListener('mouseleave', function() { dot.style.opacity = '0'; visible = false; });
       dot.style.opacity = '0';
       function tick() {
         x += (tx - x) * .22; y += (ty - y) * .22;
-        dot.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%)`;
+        dot.style.transform = 'translate(' + x + 'px, ' + y + 'px) translate(-50%, -50%)';
         requestAnimationFrame(tick);
       }
       tick();
-      document.addEventListener('mouseover', e => {
-        if (e.target.closest('a, button, .flower, summary')) document.body.classList.add('cursor-grow');
+      document.addEventListener('mouseover', function(e) {
+        if (e.target.closest('a, button, .pot-entry, summary')) document.body.classList.add('cursor-grow');
       });
-      document.addEventListener('mouseout', e => {
-        if (e.target.closest('a, button, .flower, summary')) document.body.classList.remove('cursor-grow');
+      document.addEventListener('mouseout', function(e) {
+        if (e.target.closest('a, button, .pot-entry, summary')) document.body.classList.remove('cursor-grow');
       });
     })();
 
-    // ============================================================
-    //  CLOCK
-    // ============================================================
     (function() {
-      const el = document.getElementById('clock');
+      var el = document.getElementById('clock');
+      if (!el) return;
       function tick() {
-        const d = new Date();
-        const h = d.getHours();
-        const m = String(d.getMinutes()).padStart(2,'0');
-        const s = String(d.getSeconds()).padStart(2,'0');
-        const period = h >= 12 ? 'PM' : 'AM';
-        const hh = String(((h + 11) % 12) + 1).padStart(2,'0');
-        el.textContent = `${hh}:${m}:${s} ${period}`;
+        var d = new Date();
+        var h = d.getHours();
+        var m = String(d.getMinutes()).padStart(2,'0');
+        var s = String(d.getSeconds()).padStart(2,'0');
+        var period = h >= 12 ? 'PM' : 'AM';
+        var hh = String(((h + 11) % 12) + 1).padStart(2,'0');
+        el.textContent = hh + ':' + m + ':' + s + ' ' + period;
       }
-      tick();
-      setInterval(tick, 1000);
+      tick(); setInterval(tick, 1000);
     })();
   </script>
 
