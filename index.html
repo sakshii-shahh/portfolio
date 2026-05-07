@@ -47,10 +47,10 @@
     position:relative;
   }
 
-  /* FULL-BLEED illustration BG */
+  /* FULL-BLEED illustration BG — sits inside .welcome wrapper, so absolute (not fixed) */
   .scene-bg{
-    position:fixed; inset:0;
-    width:100vw; height:100vh;
+    position:absolute; inset:0;
+    width:100%; height:100%;
     object-fit:cover;
     object-position:center center;
     z-index:0;
@@ -68,31 +68,63 @@
     mix-blend-mode:multiply; opacity:.22;
   }
 
-  .page{
-    position:relative; z-index:2;
-    height:100vh; width:100vw;
-    display:flex; flex-direction:column;
-    transition:transform 1.6s var(--ease), filter 1.4s var(--ease), opacity 1.2s var(--ease);
-  }
-  /* ZOOM-IN + FADE exit — page scales forward to 2.5x while a cream wash fades over */
-  .page{
-    transition:transform 1.5s cubic-bezier(.55,.05,.4,1), opacity 1.4s ease-out;
-    transform-origin:50% 50%;
-  }
-  .page.exiting{
-    transform:scale(2.5);
-    opacity:0;
+  /* WELCOME — wraps SVG + page so the entire scene transforms as one unit during exit */
+  .welcome{
+    position:relative;
+    width:100vw; height:100vh;
+    overflow:hidden;
   }
 
-  .cream-flood{
-    position:fixed; inset:0;
+  /* "STEPPING INTO THE GARDEN" exit — 4 phases over 1.5s
+     Phase 1 (0–200ms / 0–13.3%):    anticipation breath-in to scale .98
+     Phase 2 (200–1200ms / 13.3–80%): dolly forward to scale 1.18, opacity 0, blur 6px
+     Phase 3 (700–1500ms / 46.7–100%): cream wash blooms from click point (separate keyframes)
+     Phase 4 (1500ms):                navigate */
+  .welcome.exiting{
+    animation:scene-step-inside 1500ms linear forwards;
+    pointer-events:none;
+  }
+  @keyframes scene-step-inside{
+    0%    { transform:scale(1);    opacity:1; filter:blur(0px); animation-timing-function:cubic-bezier(.4,0,.2,1); }
+    13.3% { transform:scale(.98);  opacity:1; filter:blur(0px); animation-timing-function:cubic-bezier(.65,0,.35,1); }
+    80%   { transform:scale(1.18); opacity:0; filter:blur(6px); }
+    100%  { transform:scale(1.18); opacity:0; filter:blur(6px); }
+  }
+  /* Subtle button dim during Phase 1 — signals click was registered */
+  .welcome.exiting .cta{
+    opacity:.65;
+    transition:opacity 200ms cubic-bezier(.4,0,.2,1);
+  }
+  /* Freeze the ambient gentle zoom on the SVG during exit so only .welcome's scale drives motion */
+  .welcome.exiting .scene-bg{
+    animation-play-state:paused;
+  }
+
+  .page{
+    position:relative; z-index:2;
+    height:100%; width:100%;
+    display:flex; flex-direction:column;
+  }
+
+  /* CREAM WASH — radial-gradient overlay that blooms from the click point, overlapping Phase 2 */
+  .cream-wash{
+    position:fixed; top:0; left:0;
+    width:100vw; height:100vh;
     z-index:30;
     pointer-events:none;
-    background:var(--cream);
+    background:radial-gradient(circle, var(--bg) 0%, var(--bg) 70%, rgba(240,232,210,0) 100%);
+    transform:scale(0);
+    transform-origin:50% 50%;
     opacity:0;
-    transition:opacity 1.4s cubic-bezier(.4,0,.4,1);
   }
-  body.exiting-wash .cream-flood{ opacity:1; }
+  .cream-wash.blooming{
+    animation:wash-bloom 1500ms cubic-bezier(.22,.61,.36,1) forwards;
+  }
+  /* Stays invisible for first 700ms, then blooms scale 0→2.5 + opacity 0→1 over remaining 800ms */
+  @keyframes wash-bloom{
+    0%, 46.7% { transform:scale(0);   opacity:0; }
+    100%      { transform:scale(2.5); opacity:1; }
+  }
 
   /* WORDMARK — naked, just dot + name; no pill, no underline */
   .wordmark{
@@ -315,6 +347,9 @@
   @media (prefers-reduced-motion: reduce){
     *,*::before,*::after{animation:none !important;transition:none !important}
     .reveal{opacity:1;transform:none}
+    /* Exit fallback — simple 250ms cross-fade instead of the multi-phase scene */
+    .welcome.exiting{ opacity:0 !important; transition:opacity 250ms ease-out !important; }
+    .cream-wash.blooming{ opacity:1 !important; transform:scale(3) !important; transition:opacity 250ms ease-out !important; }
   }
 </style>
 </head>
@@ -322,10 +357,11 @@
 
 <div class="cursor-dot" aria-hidden="true"></div>
 
-<!-- Cream-wash overlay (only fades in during exit transition) -->
-<div class="cream-flood" aria-hidden="true"></div>
+<!-- Cream wash — radial-gradient bloom anchored at the click point during exit -->
+<div class="cream-wash" id="creamWash" aria-hidden="true"></div>
 
-<!-- Full-bleed illustration -->
+<!-- Welcome scene wrapper — SVG + page transform together as one unit -->
+<section class="welcome" id="welcome">
 <img id="sceneBg" class="scene-bg" alt="Watercolor garden scene" src="assets/garden-mb-v2.svg"/>
 
 <div class="page" id="page">
@@ -384,6 +420,7 @@
   </footer>
 
 </div>
+</section>
 
 <script>
   // Custom cursor tracking + grow on interactives
@@ -406,16 +443,23 @@
     });
   })();
 
-  // Page transition — page zooms forward, cream wash fades over, then navigate
+  // "Step inside" transition — 4-phase coordinated scene exit + cream-wash bloom from click point
   (function(){
     var enter=document.getElementById('enter');
     var skip=document.getElementById('skip');
-    var page=document.getElementById('page');
-    function go(){
-      // Trigger zoom-fade exit; navigate to planting flow
-      document.body.classList.add('exiting-wash');
-      page.classList.add('exiting');
-      setTimeout(function(){ window.location.href='plant.html'; }, 1500);
+    var welcome=document.getElementById('welcome');
+    var wash=document.getElementById('creamWash');
+    var prefersReduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function go(e){
+      // Anchor the cream-wash bloom at the click coordinates so it grows from where they tapped
+      var x=(e&&e.clientX!==undefined)?e.clientX:innerWidth/2;
+      var y=(e&&e.clientY!==undefined)?e.clientY:innerHeight*0.78;
+      wash.style.transformOrigin=x+'px '+y+'px';
+      // Trigger the unified scene exit + wash bloom — CSS keyframes do all the timing
+      welcome.classList.add('exiting');
+      wash.classList.add('blooming');
+      // Navigate after total animation duration (250ms when reduced-motion is on)
+      setTimeout(function(){ window.location.href='plant.html'; }, prefersReduced?250:1500);
     }
     function fast(){
       // Skip planting; go straight to the portfolio home
