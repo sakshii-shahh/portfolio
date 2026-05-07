@@ -1,0 +1,104 @@
+/* ============================================================
+   BUTTERFLY TRANSITION — shared across every page except index.
+   Wired via <link rel="stylesheet"> and <script defer> in <head>.
+   ============================================================ */
+
+/* Overlay sits above page content; clicks fall through */
+.butterfly-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  contain: strict;
+  overflow: hidden;
+}
+
+/* Each butterfly — a small SVG that flies along a CSS path */
+.butterfly {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--bsize, 50px);
+  height: var(--bsize, 50px);
+  pointer-events: none;
+  will-change: transform;
+  /* default: parked off-screen until animation kicks in */
+  transform: translate(110vw, 110vh);
+  animation-name: butterfly-path-1;
+  animation-duration: var(--bdur, 1200ms);
+  animation-delay: var(--bdelay, 0ms);
+  animation-timing-function: cubic-bezier(0.45, 0, 0.25, 1);
+  animation-fill-mode: forwards;
+}
+.butterfly[data-path="1"] { animation-name: butterfly-path-1; }
+.butterfly[data-path="2"] { animation-name: butterfly-path-2; }
+.butterfly[data-path="3"] { animation-name: butterfly-path-3; }
+.butterfly[data-path="4"] { animation-name: butterfly-path-4; }
+
+.butterfly-flap {
+  width: 100%;
+  height: 100%;
+  transform-origin: 50% 50%;
+  animation: butterfly-flap-cycle var(--bflap, 130ms) ease-in-out infinite;
+}
+.butterfly-flap svg {
+  width: 100%; height: 100%; display: block;
+  filter: drop-shadow(0 4px 6px rgba(20, 30, 15, .18));
+}
+
+/* Four flight paths — all bottom-right → top-left, varied curves */
+@keyframes butterfly-path-1 {
+  0%   { transform: translate(108vw, 108vh) rotate(-15deg) scale(1); }
+  35%  { transform: translate(60vw, 62vh)   rotate(-26deg) scale(1.05); }
+  65%  { transform: translate(28vw, 26vh)   rotate(-32deg) scale(1.03); }
+  100% { transform: translate(-22vw, -32vh) rotate(-30deg) scale(.95); }
+}
+@keyframes butterfly-path-2 {
+  0%   { transform: translate(112vw, 102vh) rotate(-8deg)  scale(1); }
+  30%  { transform: translate(72vw, 72vh)   rotate(-22deg) scale(1.06); }
+  60%  { transform: translate(35vw, 38vh)   rotate(-30deg) scale(1.02); }
+  100% { transform: translate(-18vw, -28vh) rotate(-36deg) scale(.94); }
+}
+@keyframes butterfly-path-3 {
+  0%   { transform: translate(105vw, 115vh) rotate(-12deg) scale(1); }
+  25%  { transform: translate(80vw, 82vh)   rotate(-18deg) scale(1.04); }
+  55%  { transform: translate(45vw, 36vh)   rotate(-26deg) scale(1.05); }
+  100% { transform: translate(-25vw, -25vh) rotate(-32deg) scale(.96); }
+}
+@keyframes butterfly-path-4 {
+  0%   { transform: translate(110vw, 96vh)  rotate(-20deg) scale(1); }
+  40%  { transform: translate(55vw, 60vh)   rotate(-26deg) scale(1.08); }
+  70%  { transform: translate(20vw, 28vh)   rotate(-32deg) scale(1.02); }
+  100% { transform: translate(-20vw, -36vh) rotate(-38deg) scale(.93); }
+}
+
+/* Wing flap — scaleY squash gives a top-down flapping feel */
+@keyframes butterfly-flap-cycle {
+  0%, 100% { transform: scaleY(1); }
+  50%      { transform: scaleY(.55); }
+}
+
+/* OUTGOING — content fades during link click */
+body.butterfly-leaving > *:not(.butterfly-overlay) {
+  opacity: 0;
+  transition: opacity 280ms ease;
+}
+
+/* INCOMING — content starts hidden, fades in after a 100ms beat */
+html.butterfly-arriving body > *:not(.butterfly-overlay) {
+  opacity: 0;
+  animation: butterfly-fade-in 400ms ease 100ms forwards;
+}
+@keyframes butterfly-fade-in { to { opacity: 1; } }
+
+/* REDUCED MOTION — flat 200ms cross-fade, no butterflies */
+@media (prefers-reduced-motion: reduce) {
+  .butterfly { display: none !important; }
+  body.butterfly-leaving > *:not(.butterfly-overlay) {
+    transition: opacity 200ms ease !important;
+  }
+  html.butterfly-arriving body > *:not(.butterfly-overlay) {
+    animation-duration: 200ms !important;
+    animation-delay: 0ms !important;
+  }
+}
