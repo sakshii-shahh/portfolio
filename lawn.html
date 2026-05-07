@@ -1,0 +1,1049 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Visitor's Lawn — Sakshi Shah</title>
+  <meta name="description" content="A watercolor lawn of every visitor who has planted a flower at Sakshi Shah's portfolio garden. Click any flower to see its visitor card." />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://portfolio-sakshi-shah.vercel.app/lawn.html" />
+  <meta property="og:title" content="Visitor's Lawn — Sakshi Shah" />
+  <meta property="og:description" content="A watercolor lawn of every visitor who has planted a flower at Sakshi Shah's portfolio garden." />
+  <meta property="og:image" content="https://framerusercontent.com/images/yWcAmam0HfUbCIUDWf7Pm80qu8I.jpeg?width=1200" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Visitor's Lawn — Sakshi Shah" />
+  <meta name="twitter:description" content="A watercolor lawn of every visitor who has planted a flower at Sakshi Shah's portfolio garden." />
+  <meta name="twitter:image" content="https://framerusercontent.com/images/yWcAmam0HfUbCIUDWf7Pm80qu8I.jpeg?width=1200" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Fraunces:ital,wght@0,400..600;1,400..600&family=Geist:wght@400;500&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f0e8d2;
+      --bg-elev: #f6efdb;
+      --bg-card: #e8e0c5;
+      --ink: #3a2818;
+      --ink-soft: #5a4632;
+      --ink-mute: #8a7a5e;
+      --rule: #cdc0a0;
+      --rule-strong: #b8a988;
+      --accent: #ec6478;
+      --accent-soft: #f7d4dc;
+      --accent-deep: #b13e58;
+      --secondary: #5e8a4f;
+      --secondary-soft: #d4dfb8;
+      --leaf: #4ea862;
+      --leaf-deep: #3d6b2c;
+      --cream: #fbf6e5;
+      --footer-bg: #2c4a36;
+
+      --display: "Bricolage Grotesque", system-ui, sans-serif;
+      --serif: "Fraunces", Georgia, serif;
+      --sans: "Geist", "Inter", system-ui, -apple-system, sans-serif;
+      --mono: "Geist Mono", ui-monospace, monospace;
+
+      --r-md: 12px;
+      --r-lg: 18px;
+      --r-xl: 22px;
+      --ease: cubic-bezier(.22,.61,.36,1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; }
+    html { -webkit-font-smoothing: antialiased; }
+
+    body {
+      background: var(--bg); color: var(--ink);
+      font-family: var(--sans); font-size: 15px; line-height: 1.55;
+      min-height: 100vh;
+    }
+    body::before {
+      content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 1;
+      opacity: .25;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='2' seed='4'/><feColorMatrix values='0 0 0 0 0.55  0 0 0 0 0.42  0 0 0 0 0.22  0 0 0 0.06 0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>");
+      mix-blend-mode: multiply;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; }
+
+    /* CUSTOM CURSOR */
+    @media (hover: hover) and (pointer: fine) {
+      body, body * { cursor: none !important; }
+    }
+    .cursor-dot {
+      position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--accent);
+      transform: translate(-50%, -50%);
+      transition: width .25s var(--ease), height .25s var(--ease), opacity .25s var(--ease);
+      will-change: transform;
+    }
+    body.cursor-grow .cursor-dot { width: 30px; height: 30px; opacity: .85; }
+    @media (hover: none) { .cursor-dot { display: none; } }
+
+    /* ============ SHELL ============ */
+    .shell {
+      display: grid;
+      grid-template-columns: 308px 1fr;
+      max-width: 1480px; margin: 0 auto;
+      min-height: 100vh;
+      position: relative; z-index: 2;
+    }
+    .sidebar {
+      padding: 32px 28px 24px;
+      position: sticky; top: 0;
+      height: 100vh;
+      display: flex; flex-direction: column;
+      overflow-y: auto;
+      border-right: 1px solid var(--rule);
+      background: var(--bg);
+    }
+    .sidebar::-webkit-scrollbar { width: 0; }
+    .main { padding: 0; min-width: 0; }
+
+    @media (max-width: 980px) {
+      .shell { grid-template-columns: 1fr; }
+      .sidebar {
+        padding: 24px 24px 18px;
+        position: static; height: auto;
+        border-right: 0; border-bottom: 1px solid var(--rule);
+      }
+    }
+
+    /* ============ SIDEBAR ============ */
+    .avatar {
+      width: 88px; height: 88px; border-radius: 22px; overflow: hidden;
+      border: 1px solid var(--rule);
+      background: var(--accent-soft);
+      margin-bottom: 22px;
+    }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .name {
+      font-family: var(--display); font-weight: 600;
+      font-size: 38px; line-height: .95; letter-spacing: -.025em;
+      margin: 0 0 6px;
+    }
+    .role-label {
+      font-family: var(--mono); font-size: 10.5px; font-weight: 500;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--ink-soft); margin: 0 0 16px;
+    }
+    .bio { color: var(--ink-soft); margin: 0 0 18px; font-size: 14px; line-height: 1.55; }
+    .bio strong { color: var(--ink); font-weight: 500; }
+
+    .explore-wrap { margin-bottom: 16px; }
+    .explore {
+      background: var(--bg-elev); border-radius: var(--r-lg);
+      padding: 12px 10px 10px;
+      border: 1px solid var(--rule);
+    }
+    .explore-label {
+      font-family: var(--mono); font-size: 10px; font-weight: 500;
+      letter-spacing: .16em; text-transform: uppercase;
+      color: var(--ink-mute); margin: 0 0 8px; padding-left: 6px;
+    }
+    .explore-list { display: flex; flex-direction: column; gap: 1px; }
+    .explore-item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 7px 10px; border-radius: 7px;
+      font-size: 14px; color: var(--ink);
+      transition: background .2s var(--ease);
+    }
+    .explore-item .num {
+      color: var(--ink-mute); font-feature-settings: "tnum"; margin-right: 10px;
+      font-family: var(--mono); font-size: 12px;
+    }
+    .explore-item .arrow {
+      opacity: .4; transition: all .2s var(--ease);
+      font-family: var(--mono); font-size: 13px; color: var(--ink-soft);
+    }
+    .explore-item:hover { background: var(--bg-card); }
+    .explore-item:hover .arrow { opacity: 1; transform: translateX(2px); color: var(--ink); }
+    .explore-item.active { background: var(--bg-card); color: var(--ink); font-weight: 500; }
+    .explore-item.active .num { color: var(--accent); font-weight: 500; }
+    .explore-item.active .arrow { opacity: 1; color: var(--accent); }
+
+    .find-label {
+      font-family: var(--mono); font-size: 10px; font-weight: 500;
+      letter-spacing: .16em; text-transform: uppercase;
+      color: var(--ink-mute); margin: 10px 0 6px;
+    }
+    .find-links { display: flex; flex-wrap: wrap; gap: 4px; font-size: 13.5px; color: var(--ink-soft); }
+    .find-links a { transition: color .2s var(--ease); padding: 1px 0; }
+    .find-links a + a::before { content: ","; color: var(--ink-mute); margin-right: 4px; }
+    .find-links a:hover { color: var(--accent); }
+
+    .sidebar-bottom {
+      margin-top: auto; padding-top: 18px;
+      font-family: var(--mono); font-size: 10.5px;
+      color: var(--ink-mute); letter-spacing: .03em;
+      display: flex; flex-direction: column; gap: 3px;
+    }
+    .clock { color: var(--ink-soft); font-feature-settings: "tnum"; }
+
+    /* ============ LAWN HEADER ============ */
+    .lawn-header {
+      padding: 56px 56px 24px;
+      display: flex; align-items: flex-start; justify-content: space-between;
+      gap: 32px; flex-wrap: wrap;
+    }
+    @media (max-width: 980px) { .lawn-header { padding: 40px 28px 18px; } }
+
+    .lawn-titles { max-width: 640px; }
+    .lawn-title {
+      font-family: var(--display); font-weight: 600;
+      font-size: clamp(40px, 5.5vw, 64px);
+      line-height: .98; letter-spacing: -.025em;
+      margin: 0 0 8px;
+    }
+    .lawn-title .em {
+      font-family: var(--serif); font-style: italic; font-weight: 400;
+      color: var(--accent);
+    }
+    .lawn-sub {
+      font-family: var(--serif); font-style: italic; font-weight: 400;
+      font-size: clamp(16px, 1.4vw, 19px);
+      color: var(--ink-soft); margin: 0 0 14px;
+      max-width: 50ch;
+    }
+    .counter-chip {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 7px 14px;
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      font-family: var(--mono); font-size: 11.5px; font-weight: 500;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+    .counter-chip .pulse {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--accent); flex-shrink: 0;
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50% { opacity: .4; transform: scale(.8); }
+    }
+
+    .lawn-cta {
+      display: flex; gap: 10px; align-items: center; flex-shrink: 0;
+      padding-top: 8px;
+    }
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 11px 20px;
+      border-radius: 999px;
+      font-family: var(--mono); font-size: 11.5px; font-weight: 500;
+      letter-spacing: .14em; text-transform: uppercase;
+      transition: background .2s var(--ease), border-color .2s var(--ease), transform .2s var(--ease), color .2s var(--ease);
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+    .pill.primary {
+      background: var(--accent); color: var(--cream);
+      border-color: var(--accent);
+    }
+    .pill.primary:hover {
+      background: var(--accent-deep); border-color: var(--accent-deep);
+      transform: translateY(-1px);
+    }
+    .pill.ghost {
+      background: var(--bg-elev); color: var(--ink-soft);
+      border-color: var(--rule);
+    }
+    .pill.ghost:hover {
+      background: var(--bg-card); border-color: var(--rule-strong);
+      color: var(--ink); transform: translateY(-1px);
+    }
+
+    /* ============ STATS ACCORDION ============ */
+    .stats {
+      margin: 0 56px 28px;
+      border: 1px solid var(--rule);
+      border-radius: var(--r-md);
+      background: var(--bg-elev);
+      overflow: hidden;
+    }
+    @media (max-width: 980px) { .stats { margin: 0 28px 20px; } }
+    .stats summary {
+      list-style: none; cursor: pointer;
+      padding: 12px 18px;
+      font-family: var(--mono); font-size: 11px; font-weight: 500;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: var(--ink-soft);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .stats summary::-webkit-details-marker { display: none; }
+    .stats summary .chev {
+      transition: transform .25s var(--ease);
+      font-family: var(--mono); font-size: 14px;
+    }
+    .stats[open] summary .chev { transform: rotate(180deg); }
+    .stats-body {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1px; background: var(--rule);
+      border-top: 1px solid var(--rule);
+    }
+    .stat-cell {
+      background: var(--bg-elev);
+      padding: 14px 18px;
+    }
+    .stat-label {
+      font-family: var(--mono); font-size: 10px; font-weight: 500;
+      letter-spacing: .16em; text-transform: uppercase;
+      color: var(--ink-mute); margin: 0 0 4px;
+    }
+    .stat-val {
+      font-family: var(--display); font-weight: 500;
+      font-size: 18px; color: var(--ink); letter-spacing: -.005em;
+      margin: 0;
+    }
+
+    /* ============ THE LAWN ============ */
+    .lawn-wrap { padding: 0 56px 60px; }
+    @media (max-width: 980px) { .lawn-wrap { padding: 0 0 40px; } }
+    .lawn {
+      position: relative;
+      width: 100%; height: 70vh; min-height: 540px;
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 30% 20%, #6fa55a 0%, transparent 55%),
+        radial-gradient(ellipse at 75% 80%, #4a8a40 0%, transparent 60%),
+        linear-gradient(180deg, #5e8a4f 0%, #4ea862 60%, #3d6b2c 100%);
+      box-shadow: inset 0 0 80px rgba(20,40,15,.25);
+    }
+    @media (max-width: 980px) {
+      .lawn { border-radius: 0; height: 80vh; min-height: 600px; }
+    }
+    /* watercolor noise on the grass */
+    .lawn::before {
+      content: ""; position: absolute; inset: 0; pointer-events: none;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='9'/><feColorMatrix values='0 0 0 0 0.20  0 0 0 0 0.35  0 0 0 0 0.15  0 0 0 0.18 0'/></filter><rect width='240' height='240' filter='url(%23g)'/></svg>");
+      mix-blend-mode: multiply; opacity: .5;
+    }
+    /* subtle grass blade silhouettes scattered along the bottom */
+    .lawn::after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: 0;
+      height: 22%; pointer-events: none; opacity: .35;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 200' preserveAspectRatio='none'><g fill='%232f5826'><path d='M30 200 Q 26 160 42 120 Q 48 160 48 200 Z'/><path d='M120 200 Q 116 165 134 130 Q 140 165 140 200 Z'/><path d='M210 200 Q 208 170 226 135 Q 232 170 232 200 Z'/><path d='M310 200 Q 304 155 320 110 Q 326 155 326 200 Z'/><path d='M410 200 Q 408 168 426 132 Q 432 168 432 200 Z'/><path d='M510 200 Q 504 158 520 116 Q 526 158 526 200 Z'/><path d='M610 200 Q 608 168 626 132 Q 632 168 632 200 Z'/><path d='M710 200 Q 706 162 722 124 Q 728 162 728 200 Z'/><path d='M810 200 Q 808 170 826 138 Q 832 170 832 200 Z'/><path d='M910 200 Q 904 156 920 114 Q 926 156 926 200 Z'/><path d='M1020 200 Q 1018 168 1036 132 Q 1042 168 1042 200 Z'/><path d='M1120 200 Q 1116 164 1134 128 Q 1140 164 1140 200 Z'/></g></svg>");
+      background-size: 100% 100%;
+    }
+
+    /* ============ FLOWERS ON LAWN ============ */
+    .flower {
+      position: absolute;
+      width: clamp(72px, 9vw, 110px); height: clamp(72px, 9vw, 110px);
+      transform: translate(-50%, -50%);
+      background: none; border: none; padding: 0;
+      z-index: 2;
+      transition: transform .35s var(--ease), filter .35s var(--ease);
+      filter: drop-shadow(0 6px 8px rgba(20,40,15,.25));
+    }
+    .flower svg { width: 100%; height: 100%; display: block; pointer-events: none; }
+    .flower:hover, .flower:focus-visible {
+      transform: translate(-50%, -50%) scale(1.12) rotate(-4deg);
+      filter: drop-shadow(0 10px 14px rgba(20,40,15,.3));
+      z-index: 3;
+      outline: none;
+    }
+    .flower:focus-visible::after {
+      content: ""; position: absolute; inset: -8px; border-radius: 50%;
+      border: 2px dashed var(--cream);
+    }
+    .flower.highlight {
+      animation: flower-glow 2.4s var(--ease);
+      z-index: 4;
+    }
+    @keyframes flower-glow {
+      0% { filter: drop-shadow(0 0 0 rgba(255,255,255,0)) drop-shadow(0 6px 8px rgba(20,40,15,.25)); }
+      30% { filter: drop-shadow(0 0 22px rgba(251,246,229,.95)) drop-shadow(0 6px 8px rgba(20,40,15,.25)); }
+      100% { filter: drop-shadow(0 0 0 rgba(255,255,255,0)) drop-shadow(0 6px 8px rgba(20,40,15,.25)); }
+    }
+
+    .flower-tip {
+      position: absolute;
+      bottom: calc(100% + 6px); left: 50%;
+      transform: translateX(-50%);
+      padding: 6px 11px;
+      background: var(--cream);
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      font-family: var(--mono); font-size: 10.5px; font-weight: 500;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--ink-soft);
+      white-space: nowrap;
+      opacity: 0; pointer-events: none;
+      transition: opacity .2s var(--ease), transform .2s var(--ease);
+      box-shadow: 0 6px 14px -4px rgba(20,40,15,.25);
+    }
+    .flower:hover .flower-tip,
+    .flower:focus-visible .flower-tip {
+      opacity: 1;
+      transform: translateX(-50%) translateY(-2px);
+    }
+
+    /* ============ CARD MODAL ============ */
+    .modal {
+      position: fixed; inset: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: center;
+      padding: 32px;
+      opacity: 0; pointer-events: none;
+      transition: opacity .25s var(--ease);
+    }
+    .modal.open { opacity: 1; pointer-events: auto; }
+    .modal-backdrop {
+      position: absolute; inset: 0;
+      background: rgba(28, 26, 19, 0.55);
+      backdrop-filter: blur(4px);
+    }
+    .card {
+      position: relative;
+      width: min(440px, 100%);
+      aspect-ratio: 1.58 / 1;
+      border-radius: 22px;
+      padding: 26px 28px 22px;
+      display: flex; flex-direction: column;
+      box-shadow: 0 32px 64px -16px rgba(20,40,15,.45), 0 0 0 1px rgba(58,40,24,.08);
+      transform: translateY(12px) scale(.97);
+      transition: transform .35s var(--ease);
+      overflow: hidden;
+    }
+    .modal.open .card { transform: translateY(0) scale(1); }
+    .card::before {
+      content: ""; position: absolute; inset: 0; pointer-events: none;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='c'><feTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='2' seed='7'/><feColorMatrix values='0 0 0 0 0.40  0 0 0 0 0.30  0 0 0 0 0.16  0 0 0 0.10 0'/></filter><rect width='220' height='220' filter='url(%23c)'/></svg>");
+      mix-blend-mode: multiply; opacity: .55; border-radius: inherit;
+    }
+    @media (max-width: 600px) {
+      .modal { padding: 0; }
+      .card {
+        width: 100%; height: 100%; aspect-ratio: auto;
+        border-radius: 0;
+        padding: 32px 28px;
+      }
+    }
+
+    .card-head {
+      display: flex; align-items: center; justify-content: space-between;
+      position: relative; z-index: 2;
+    }
+    .card-brand {
+      font-family: var(--serif); font-style: italic; font-weight: 500;
+      font-size: 14px;
+    }
+    .card-flower-mini { width: 36px; height: 36px; }
+    .card-flower-mini svg { width: 100%; height: 100%; display: block; }
+
+    .card-body {
+      flex: 1;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 18px 0 14px;
+      position: relative; z-index: 2;
+    }
+    .card-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 14px; }
+    .card-label {
+      font-family: var(--mono); font-size: 9.5px; font-weight: 500;
+      letter-spacing: .22em; text-transform: uppercase;
+      opacity: .7; margin: 0 0 4px;
+    }
+    .card-name {
+      font-family: var(--display); font-weight: 600;
+      font-size: clamp(22px, 3.4vw, 30px);
+      letter-spacing: -.01em; line-height: 1;
+      margin: 0;
+      word-break: break-word;
+    }
+    .card-meta {
+      font-family: var(--mono); font-size: 13.5px; font-weight: 500;
+      letter-spacing: .04em; margin: 0;
+      font-feature-settings: "tnum";
+    }
+
+    .card-foot {
+      position: relative; z-index: 2;
+      display: flex; align-items: flex-end; gap: 16px;
+      padding-top: 14px;
+      border-top: 1px solid currentColor;
+      opacity: .92;
+    }
+    .card-sig {
+      flex: 1; min-height: 44px;
+      display: flex; align-items: flex-end;
+    }
+    .card-sig svg { width: 100%; height: 44px; display: block; }
+    .card-sig-empty {
+      font-family: var(--serif); font-style: italic; font-size: 12px;
+      opacity: .55; padding-bottom: 6px;
+    }
+    .card-x {
+      font-family: var(--display); font-weight: 600; font-size: 24px;
+      line-height: 1; padding-bottom: 4px;
+    }
+
+    .card-close {
+      position: absolute; top: 14px; right: 16px;
+      z-index: 3;
+      background: rgba(255,255,255,.45); border: 1px solid rgba(58,40,24,.12);
+      width: 30px; height: 30px; border-radius: 50%;
+      display: grid; place-items: center;
+      font-family: var(--mono); font-size: 14px;
+      transition: background .2s var(--ease);
+    }
+    .card-close:hover { background: rgba(255,255,255,.85); }
+
+    /* card color tints — set as CSS vars on the .card via JS data-attr */
+    .card[data-tint="coral"]   { background: #fbe6ea; color: #7a2d3c; }
+    .card[data-tint="pink"]    { background: #fbe9ee; color: #8a3a4e; }
+    .card[data-tint="apricot"] { background: #fcf1d9; color: #6a4216; }
+    .card[data-tint="sage"]    { background: #e6efd6; color: #3d6b2c; }
+    .card[data-tint="cream"]   { background: #fbf6e5; color: #5a4632; }
+
+    /* ============ REVEAL ============ */
+    .reveal { opacity: 0; transform: translateY(8px); animation: rise .7s var(--ease) forwards; }
+    .reveal.d1 { animation-delay: .05s; } .reveal.d2 { animation-delay: .12s; }
+    .reveal.d3 { animation-delay: .2s; } .reveal.d4 { animation-delay: .28s; }
+    .reveal.d5 { animation-delay: .36s; }
+    @keyframes rise { to { opacity: 1; transform: none; } }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .reveal { opacity: 1; transform: none; }
+      .flower:hover, .flower:focus-visible { transform: translate(-50%, -50%) scale(1.05); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor-dot" aria-hidden="true"></div>
+
+  <div class="shell">
+
+    <!-- ============ SIDEBAR ============ -->
+    <aside class="sidebar">
+      <div class="avatar reveal">
+        <img src="https://framerusercontent.com/images/yWcAmam0HfUbCIUDWf7Pm80qu8I.jpeg?width=400" alt="Sakshi Shah" />
+      </div>
+      <h1 class="name reveal d1">Sakshi Shah</h1>
+      <p class="role-label reveal d1">Product Design @ Northwestern</p>
+      <p class="bio reveal d2">
+        I'm a product designer who builds where <strong>research, strategy, and care</strong> for the small details meet.
+      </p>
+
+      <div class="explore-wrap reveal d3">
+        <div class="explore">
+          <p class="explore-label">Explore</p>
+          <nav class="explore-list">
+            <a class="explore-item" href="home.html">
+              <span><span class="num">01.</span>My Work</span>
+              <span class="arrow">→</span>
+            </a>
+            <a class="explore-item" href="about.html">
+              <span><span class="num">02.</span>About Me</span>
+              <span class="arrow">→</span>
+            </a>
+            <a class="explore-item" href="playground.html">
+              <span><span class="num">03.</span>Playground</span>
+              <span class="arrow">→</span>
+            </a>
+            <a class="explore-item" href="ai.html">
+              <span><span class="num">04.</span>AI Practices</span>
+              <span class="arrow">→</span>
+            </a>
+            <a class="explore-item active" href="lawn.html">
+              <span><span class="num">05.</span>Visitor's Lawn</span>
+              <span class="arrow">→</span>
+            </a>
+          </nav>
+        </div>
+      </div>
+
+      <p class="find-label reveal d4">Find me at</p>
+      <div class="find-links reveal d4">
+        <a href="mailto:sakshishah@u.northwestern.edu">Email</a>
+        <a href="https://www.linkedin.com/in/sakshiishahh/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://drive.google.com/file/d/1afD_cw5tKiNqtMyKyFIy7jgnxFl-OphD/view?usp=sharing" target="_blank" rel="noopener">Resume</a>
+        <a href="https://read.cv/" target="_blank" rel="noopener">Read.cv</a>
+      </div>
+
+      <div class="sidebar-bottom">
+        <span class="clock" id="clock">—</span>
+        <span>© 2026 Sakshi Shah</span>
+      </div>
+    </aside>
+
+    <!-- ============ MAIN ============ -->
+    <main class="main">
+
+      <header class="lawn-header">
+        <div class="lawn-titles reveal d1">
+          <h1 class="lawn-title">Visitor's <span class="em">Lawn</span></h1>
+          <p class="lawn-sub">every flower here was planted by someone who passed through.</p>
+          <span class="counter-chip"><span class="pulse" aria-hidden="true"></span><span>You're our <span id="counterNumber">—</span><sup>rd</sup> guest</span></span>
+        </div>
+        <div class="lawn-cta reveal d2">
+          <a class="pill primary" href="plant.html">plant your flower →</a>
+          <button class="pill ghost" id="shuffleBtn" type="button" aria-label="Shuffle flower positions">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 4h2l8 8h2"/><path d="M3 12h2l3-3"/><path d="M11 4h4M13 2l2 2-2 2M13 10l2 2-2 2"/>
+            </svg>
+            shuffle
+          </button>
+        </div>
+      </header>
+
+      <details class="stats reveal d3" id="statsDetails">
+        <summary><span>stats for nerds</span><span class="chev">⌃</span></summary>
+        <div class="stats-body" id="statsBody">
+          <!-- populated by JS -->
+        </div>
+      </details>
+
+      <section class="lawn-wrap reveal d3">
+        <div class="lawn" id="lawn" aria-label="A watercolor lawn populated with flowers planted by visitors">
+          <!-- flowers rendered by JS -->
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ============ CARD MODAL ============ -->
+  <div class="modal" id="cardModal" role="dialog" aria-modal="true" aria-labelledby="cardName" hidden>
+    <div class="modal-backdrop" data-close></div>
+    <article class="card" id="card" data-tint="coral">
+      <button class="card-close" type="button" aria-label="Close" data-close>×</button>
+      <div class="card-head">
+        <span class="card-brand">Sakshi's Garden</span>
+        <span class="card-flower-mini" id="cardFlower" aria-hidden="true"></span>
+      </div>
+      <div class="card-body">
+        <p class="card-label">Visitor</p>
+        <h2 class="card-name" id="cardName">—</h2>
+        <div class="card-row">
+          <div>
+            <p class="card-label">Issued on</p>
+            <p class="card-meta" id="cardDate">—</p>
+          </div>
+          <div>
+            <p class="card-label">No.</p>
+            <p class="card-meta" id="cardNumber">—</p>
+          </div>
+        </div>
+      </div>
+      <div class="card-foot">
+        <div class="card-sig" id="cardSig">
+          <span class="card-sig-empty">unsigned</span>
+        </div>
+        <span class="card-x" aria-hidden="true">×</span>
+      </div>
+    </article>
+  </div>
+
+  <script>
+    'use strict';
+
+    // ============================================================
+    //  CONSTANTS
+    // ============================================================
+    const STORAGE_KEY = 'sakshi_lawn';
+    const FLOWER_TYPES = ['daisy', 'marigold', 'morning-glory', 'tulip'];
+    const COLOR_VARIANTS = ['coral', 'pink', 'apricot', 'sage', 'cream'];
+
+    const ADJECTIVES = ['rainy','plum','drowsy','paper','apricot','porcelain','dappled','mossy','velvet','foggy','copper','hazel','twilight','brindle','marigold','vesper','briar','gilded','brassy','dusky'];
+    const NOUNS = ['reverie','orchid','atlas','keeper','weaver','trinket','lantern','compass','harbor','ember','almanac','whisper','postcard','tinder','refuge','anchor','prelude','brushstroke','halcyon','fable'];
+
+    // 18 seeded entries, oldest → newest
+    const SEED_DEFS = [
+      { name: 'RAINY REVERIE',     dayOffset: 28, type: 'daisy',         color: 'pink' },
+      { name: 'PLUM ORCHID',       dayOffset: 26, type: 'morning-glory', color: 'coral' },
+      { name: 'DROWSY ATLAS',      dayOffset: 24, type: 'marigold',      color: 'apricot' },
+      { name: 'PAPER KEEPER',      dayOffset: 22, type: 'tulip',         color: 'cream' },
+      { name: 'ABDULLAH',          dayOffset: 20, type: 'daisy',         color: 'apricot' },
+      { name: 'APRICOT WEAVER',    dayOffset: 18, type: 'marigold',      color: 'apricot' },
+      { name: 'PORCELAIN TRINKET', dayOffset: 16, type: 'daisy',         color: 'cream' },
+      { name: 'GISELE',            dayOffset: 14, type: 'tulip',         color: 'pink' },
+      { name: 'DAPPLED ORCHID',    dayOffset: 12, type: 'morning-glory', color: 'coral' },
+      { name: 'NIKHIL',            dayOffset: 11, type: 'daisy',         color: 'sage' },
+      { name: 'MOSSY LANTERN',     dayOffset:  9, type: 'tulip',         color: 'sage' },
+      { name: 'VELVET COMPASS',    dayOffset:  8, type: 'morning-glory', color: 'coral' },
+      { name: 'MARGAUX',           dayOffset:  6, type: 'marigold',      color: 'pink' },
+      { name: 'FOGGY BRUSHSTROKE', dayOffset:  5, type: 'daisy',         color: 'cream' },
+      { name: 'COPPER ALMANAC',    dayOffset:  4, type: 'marigold',      color: 'apricot' },
+      { name: 'ELI',               dayOffset:  3, type: 'morning-glory', color: 'pink' },
+      { name: 'TWILIGHT POSTCARD', dayOffset:  2, type: 'tulip',         color: 'coral' },
+      { name: 'DUSKY HALCYON',     dayOffset:  1, type: 'daisy',         color: 'sage' },
+    ];
+    const FIRST_CARD_NUMBER = 3275; // first seed = 3275, last seed = 3292, next visitor = 3293
+
+    // ============================================================
+    //  HELPERS
+    // ============================================================
+    function uuid() {
+      return 'p' + Date.now().toString(36) + Math.random().toString(36).slice(2, 9);
+    }
+    function pickRandom(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+    function generateName() {
+      return (pickRandom(ADJECTIVES) + ' ' + pickRandom(NOUNS)).toUpperCase();
+    }
+    function formatDate(d) {
+      const mm = String(d.getMonth() + 1).padStart(2, '0');
+      const dd = String(d.getDate()).padStart(2, '0');
+      const yy = String(d.getFullYear()).slice(-2);
+      return mm + '/' + dd + '/' + yy;
+    }
+    function pad4(n) { return String(n).padStart(4, '0'); }
+    function ordinal(n) {
+      const s = ['th','st','nd','rd'], v = n % 100;
+      return s[(v - 20) % 10] || s[v] || s[0];
+    }
+    // % distance — non-overlapping placement
+    function placePosition(existing, minDistPct) {
+      for (let i = 0; i < 200; i++) {
+        const x = 6 + Math.random() * 88;
+        const y = 14 + Math.random() * 72;
+        let ok = true;
+        for (const p of existing) {
+          if (Math.hypot(p.position.x - x, p.position.y - y) < minDistPct) { ok = false; break; }
+        }
+        if (ok) return { x, y };
+      }
+      // fallback: random anywhere
+      return { x: 6 + Math.random() * 88, y: 14 + Math.random() * 72 };
+    }
+
+    // ============================================================
+    //  FLOWER SVG GENERATORS — watercolor stylized, parameterized by color
+    // ============================================================
+    const FLOWER_PALETTES = {
+      coral:   { petal: '#ec6478', petalDark: '#b13e58', center: '#3a2818', stem: '#3d6b2c', leaf: '#5e8a4f' },
+      pink:    { petal: '#f4a8b6', petalDark: '#ec6478', center: '#7a3a3a', stem: '#3d6b2c', leaf: '#5e8a4f' },
+      apricot: { petal: '#f6c97a', petalDark: '#d99c3e', center: '#7a4f1c', stem: '#3d6b2c', leaf: '#5e8a4f' },
+      sage:    { petal: '#a8c986', petalDark: '#5e8a4f', center: '#3d6b2c', stem: '#3d6b2c', leaf: '#4ea862' },
+      cream:   { petal: '#fbf6e5', petalDark: '#cdc0a0', center: '#a86b48', stem: '#3d6b2c', leaf: '#5e8a4f' },
+    };
+
+    function flowerSVG(type, color) {
+      const P = FLOWER_PALETTES[color] || FLOWER_PALETTES.coral;
+      switch (type) {
+        case 'daisy':         return daisySVG(P);
+        case 'marigold':      return marigoldSVG(P);
+        case 'morning-glory': return morningGlorySVG(P);
+        case 'tulip':         return tulipSVG(P);
+        default:              return daisySVG(P);
+      }
+    }
+    function daisySVG(P) {
+      // 8 oval petals around a circular center
+      const petals = [];
+      for (let i = 0; i < 8; i++) {
+        const a = (i / 8) * Math.PI * 2;
+        const cx = 50 + Math.cos(a) * 22;
+        const cy = 38 + Math.sin(a) * 22;
+        const rot = (a * 180 / Math.PI) + 90;
+        petals.push(`<ellipse cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" rx="9" ry="14" fill="${P.petal}" opacity=".95" transform="rotate(${rot.toFixed(1)} ${cx.toFixed(1)} ${cy.toFixed(1)})"/>`);
+      }
+      return `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 95 L50 55" stroke="${P.stem}" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+        <path d="M50 75 Q 38 70 32 60 Q 44 64 50 70" fill="${P.leaf}" opacity=".9"/>
+        <path d="M50 80 Q 64 76 70 66 Q 58 70 50 76" fill="${P.leaf}" opacity=".85"/>
+        ${petals.join('')}
+        <circle cx="50" cy="38" r="9" fill="${P.center}" opacity=".88"/>
+        <circle cx="48" cy="36" r="2.5" fill="#fbf6e5" opacity=".4"/>
+      </svg>`;
+    }
+    function marigoldSVG(P) {
+      // dense layered petals — outer ring + inner ring
+      const outer = [], inner = [];
+      for (let i = 0; i < 12; i++) {
+        const a = (i / 12) * Math.PI * 2;
+        const cx = 50 + Math.cos(a) * 20;
+        const cy = 38 + Math.sin(a) * 20;
+        const rot = (a * 180 / Math.PI) + 90;
+        outer.push(`<ellipse cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" rx="7" ry="11" fill="${P.petal}" opacity=".92" transform="rotate(${rot.toFixed(1)} ${cx.toFixed(1)} ${cy.toFixed(1)})"/>`);
+      }
+      for (let i = 0; i < 8; i++) {
+        const a = (i / 8) * Math.PI * 2 + 0.2;
+        const cx = 50 + Math.cos(a) * 11;
+        const cy = 38 + Math.sin(a) * 11;
+        const rot = (a * 180 / Math.PI) + 90;
+        inner.push(`<ellipse cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" rx="5" ry="8" fill="${P.petalDark}" opacity=".88" transform="rotate(${rot.toFixed(1)} ${cx.toFixed(1)} ${cy.toFixed(1)})"/>`);
+      }
+      return `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 95 L50 55" stroke="${P.stem}" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+        <path d="M50 78 Q 36 72 30 60 Q 44 64 50 72" fill="${P.leaf}" opacity=".88"/>
+        ${outer.join('')}
+        ${inner.join('')}
+        <circle cx="50" cy="38" r="5" fill="${P.center}" opacity=".9"/>
+      </svg>`;
+    }
+    function morningGlorySVG(P) {
+      // trumpet-shaped — wide bell up top, narrow base
+      return `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 95 L50 60" stroke="${P.stem}" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+        <path d="M50 80 Q 64 76 70 66 Q 58 70 50 76" fill="${P.leaf}" opacity=".85"/>
+        <path d="M50 60 Q 22 50 18 22 Q 44 8 50 22 Q 56 8 82 22 Q 78 50 50 60 Z" fill="${P.petal}" opacity=".96"/>
+        <path d="M50 60 Q 30 50 26 28 Q 38 22 50 32 Q 62 22 74 28 Q 70 50 50 60 Z" fill="${P.petalDark}" opacity=".55"/>
+        <path d="M50 60 L50 26" stroke="${P.center}" stroke-width="1.6" opacity=".55" fill="none"/>
+        <ellipse cx="50" cy="56" rx="4.5" ry="2.5" fill="${P.center}" opacity=".7"/>
+      </svg>`;
+    }
+    function tulipSVG(P) {
+      // 3 cup petals
+      return `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 95 L50 50" stroke="${P.stem}" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+        <path d="M50 70 Q 32 64 26 48 Q 42 52 50 60" fill="${P.leaf}" opacity=".88"/>
+        <path d="M50 70 Q 68 64 74 48 Q 58 52 50 60" fill="${P.leaf}" opacity=".82"/>
+        <path d="M28 42 Q 30 18 50 14 Q 50 32 42 52 Q 32 50 28 42 Z" fill="${P.petal}" opacity=".95"/>
+        <path d="M72 42 Q 70 18 50 14 Q 50 32 58 52 Q 68 50 72 42 Z" fill="${P.petal}" opacity=".95"/>
+        <path d="M40 50 Q 38 24 50 16 Q 62 24 60 50 Q 50 56 40 50 Z" fill="${P.petalDark}" opacity=".88"/>
+      </svg>`;
+    }
+
+    // ============================================================
+    //  STORAGE
+    // ============================================================
+    function buildSeededState() {
+      const today = new Date();
+      const plants = SEED_DEFS.map((seed, i) => {
+        const d = new Date(today);
+        d.setDate(d.getDate() - seed.dayOffset);
+        return {
+          id: 'seed-' + i,
+          name: seed.name,
+          cardNumber: FIRST_CARD_NUMBER + i,
+          date: formatDate(d),
+          dateMs: d.getTime(),
+          flowerType: seed.type,
+          colorVariant: seed.color,
+          position: null, // computed when rendering
+          signaturePath: null,
+          isSeed: true,
+        };
+      });
+      return {
+        visitorCount: FIRST_CARD_NUMBER + SEED_DEFS.length, // 3293
+        plants,
+        startedDateMs: plants[0].dateMs,
+      };
+    }
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) {
+          const fresh = buildSeededState();
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(fresh));
+          return fresh;
+        }
+        const parsed = JSON.parse(raw);
+        // sanity: must have plants array; if missing, reseed
+        if (!Array.isArray(parsed.plants) || parsed.plants.length === 0) {
+          const fresh = buildSeededState();
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(fresh));
+          return fresh;
+        }
+        return parsed;
+      } catch (e) {
+        return buildSeededState();
+      }
+    }
+
+    function saveState(state) {
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+    }
+
+    // ============================================================
+    //  RENDERING
+    // ============================================================
+    let STATE = loadState();
+
+    function assignPositions() {
+      const placed = [];
+      for (const plant of STATE.plants) {
+        plant.position = placePosition(placed, 11);
+        placed.push(plant);
+      }
+    }
+
+    function renderLawn() {
+      const lawn = document.getElementById('lawn');
+      lawn.innerHTML = '';
+      for (const plant of STATE.plants) {
+        const btn = document.createElement('button');
+        btn.className = 'flower';
+        btn.type = 'button';
+        btn.dataset.id = plant.id;
+        btn.style.left = plant.position.x + '%';
+        btn.style.top = plant.position.y + '%';
+        btn.setAttribute('aria-label', `Open visitor card for ${plant.name}, ${plant.date}`);
+        btn.innerHTML = flowerSVG(plant.flowerType, plant.colorVariant) +
+          `<span class="flower-tip">${escapeHtml(plant.name)} · ${plant.date}</span>`;
+        btn.addEventListener('click', () => openCard(plant));
+        lawn.appendChild(btn);
+      }
+    }
+
+    function renderCounter() {
+      const n = STATE.visitorCount;
+      const numEl = document.getElementById('counterNumber');
+      numEl.textContent = n.toLocaleString();
+      // adjust ordinal suffix
+      const sup = numEl.parentNode.querySelector('sup');
+      if (sup) sup.textContent = ordinal(n);
+    }
+
+    function renderStats() {
+      const body = document.getElementById('statsBody');
+      const counts = {};
+      const nameCounts = {};
+      for (const p of STATE.plants) {
+        const key = `${p.flowerType} (${p.colorVariant})`;
+        counts[key] = (counts[key] || 0) + 1;
+        nameCounts[p.name] = (nameCounts[p.name] || 0) + 1;
+      }
+      const mostFlower = Object.entries(counts).sort((a,b) => b[1] - a[1])[0];
+      const mostName = Object.entries(nameCounts).sort((a,b) => b[1] - a[1])[0];
+      const startedDate = formatDate(new Date(STATE.startedDateMs || STATE.plants[0].dateMs));
+      const total = STATE.visitorCount.toLocaleString();
+      body.innerHTML = `
+        <div class="stat-cell"><p class="stat-label">Total visitors</p><p class="stat-val">${total}</p></div>
+        <div class="stat-cell"><p class="stat-label">Most-planted flower</p><p class="stat-val">${escapeHtml(mostFlower ? mostFlower[0] : '—')}</p></div>
+        <div class="stat-cell"><p class="stat-label">Most-popular planter</p><p class="stat-val">${escapeHtml(mostName ? mostName[0] : '—')}</p></div>
+        <div class="stat-cell"><p class="stat-label">Lawn started</p><p class="stat-val">${startedDate}</p></div>
+      `;
+    }
+
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+
+    // ============================================================
+    //  CARD MODAL
+    // ============================================================
+    const modal = document.getElementById('cardModal');
+    const card = document.getElementById('card');
+    let lastFocused = null;
+
+    function openCard(plant) {
+      lastFocused = document.activeElement;
+      card.dataset.tint = plant.colorVariant;
+      document.getElementById('cardName').textContent = plant.name;
+      document.getElementById('cardDate').textContent = plant.date;
+      document.getElementById('cardNumber').textContent = 'NO. ' + pad4(plant.cardNumber);
+      document.getElementById('cardFlower').innerHTML = flowerSVG(plant.flowerType, plant.colorVariant);
+      const sigEl = document.getElementById('cardSig');
+      if (plant.signaturePath) {
+        sigEl.innerHTML = `<svg viewBox="0 0 200 44" preserveAspectRatio="xMidYMax meet" xmlns="http://www.w3.org/2000/svg"><path d="${plant.signaturePath}" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>`;
+      } else {
+        sigEl.innerHTML = '<span class="card-sig-empty">unsigned</span>';
+      }
+      modal.hidden = false;
+      requestAnimationFrame(() => modal.classList.add('open'));
+      document.querySelector('.card-close').focus();
+    }
+
+    function closeCard() {
+      modal.classList.remove('open');
+      setTimeout(() => {
+        modal.hidden = true;
+        if (lastFocused && lastFocused.focus) lastFocused.focus();
+      }, 250);
+    }
+
+    modal.addEventListener('click', e => {
+      if (e.target.dataset.close !== undefined) closeCard();
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && !modal.hidden) closeCard();
+    });
+
+    // ============================================================
+    //  SHUFFLE
+    // ============================================================
+    document.getElementById('shuffleBtn').addEventListener('click', () => {
+      assignPositions();
+      saveState(STATE);
+      renderLawn();
+    });
+
+    // ============================================================
+    //  INIT
+    // ============================================================
+    assignPositions();
+    saveState(STATE);
+    renderLawn();
+    renderCounter();
+    renderStats();
+
+    // ============================================================
+    //  HASH HIGHLIGHT — arriving from plant.html with #<id>
+    // ============================================================
+    function highlightFromHash() {
+      const hash = window.location.hash.slice(1);
+      if (!hash) return;
+      const target = STATE.plants.find(p => p.id === hash);
+      if (!target) return;
+      const btn = document.querySelector(`.flower[data-id="${CSS.escape(hash)}"]`);
+      if (!btn) return;
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      btn.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'center' });
+      btn.classList.add('highlight');
+      setTimeout(() => openCard(target), reduced ? 100 : 800);
+    }
+    setTimeout(highlightFromHash, 60);
+
+    // ============================================================
+    //  CURSOR
+    // ============================================================
+    (function() {
+      const dot = document.querySelector('.cursor-dot');
+      if (!dot) return;
+      let x = innerWidth / 2, y = innerHeight / 2, tx = x, ty = y;
+      let visible = false;
+      document.addEventListener('mousemove', e => {
+        tx = e.clientX; ty = e.clientY;
+        if (!visible) { dot.style.opacity = '1'; visible = true; }
+      });
+      document.addEventListener('mouseleave', () => { dot.style.opacity = '0'; visible = false; });
+      dot.style.opacity = '0';
+      function tick() {
+        x += (tx - x) * .22; y += (ty - y) * .22;
+        dot.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%)`;
+        requestAnimationFrame(tick);
+      }
+      tick();
+      document.addEventListener('mouseover', e => {
+        if (e.target.closest('a, button, .flower, summary')) document.body.classList.add('cursor-grow');
+      });
+      document.addEventListener('mouseout', e => {
+        if (e.target.closest('a, button, .flower, summary')) document.body.classList.remove('cursor-grow');
+      });
+    })();
+
+    // ============================================================
+    //  CLOCK
+    // ============================================================
+    (function() {
+      const el = document.getElementById('clock');
+      function tick() {
+        const d = new Date();
+        const h = d.getHours();
+        const m = String(d.getMinutes()).padStart(2,'0');
+        const s = String(d.getSeconds()).padStart(2,'0');
+        const period = h >= 12 ? 'PM' : 'AM';
+        const hh = String(((h + 11) % 12) + 1).padStart(2,'0');
+        el.textContent = `${hh}:${m}:${s} ${period}`;
+      }
+      tick();
+      setInterval(tick, 1000);
+    })();
+  </script>
+
+</body>
+</html>

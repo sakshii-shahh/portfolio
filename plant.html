@@ -896,9 +896,10 @@
     ];
 
     /* ======================================================
-       PLANT IT — save, build lawn, auto-redirect
+       PLANT IT — save to sakshi_lawn (new format), redirect to lawn.html#<id>
        ====================================================== */
     plantBtn.addEventListener('click', () => {
+      // Legacy write (kept so the existing success scene's logic doesn't change)
       const garden = JSON.parse(localStorage.getItem('sakshi_garden') || '[]');
       const newPlant = {
         flower: state.flower, pot: state.pot,
@@ -910,6 +911,9 @@
         localStorage.setItem('sakshi_garden', JSON.stringify(garden));
         localStorage.setItem('sakshi_welcomed', '1');
       } catch {}
+
+      // NEW: write to sakshi_lawn in the format consumed by lawn.html
+      const newRecordId = saveToLawn();
 
       // Center: user's plant
       document.getElementById('successCenter').innerHTML = renderPlantHTML(newPlant);
@@ -928,19 +932,103 @@
 
       document.getElementById('success').classList.add('show');
 
-      // After ~3s, glide out: success fades up, cream wash rolls in, then nav.
+      // After ~3s, glide out: success fades, cream wash rolls in, then redirect to lawn.html#<id>
       setTimeout(() => {
         const wash = document.createElement('div');
         wash.className = 'leave-wash';
         document.body.appendChild(wash);
-        // trigger transitions on next frame
         requestAnimationFrame(() => {
           document.getElementById('success').classList.add('leaving');
           wash.classList.add('show');
         });
-        setTimeout(() => { window.location.href = 'home.html'; }, 1100);
+        setTimeout(() => { window.location.href = 'lawn.html#' + newRecordId; }, 1100);
       }, 3000);
     });
+
+    /* ======================================================
+       saveToLawn — appends a new record to sakshi_lawn,
+       seeding the lawn first if the storage is empty.
+       Mirrors the format consumed by lawn.html.
+       ====================================================== */
+    function saveToLawn() {
+      const KEY = 'sakshi_lawn';
+      const FIRST_CARD_NUMBER = 3275;
+      const FLOWER_TYPE_MAP = {
+        cosmos:'daisy', lavender:'tulip', sunflower:'marigold',
+        hibiscus:'morning-glory', tulip:'tulip', peony:'marigold'
+      };
+      const POT_COLOR_MAP = {
+        cobalt:'sage', terracotta:'apricot', cream:'cream',
+        matte:'sage', saffron:'apricot'
+      };
+      const ADJ = ['rainy','plum','drowsy','paper','apricot','porcelain','dappled','mossy','velvet','foggy','copper','hazel','twilight','brindle','marigold','vesper','briar','gilded','brassy','dusky'];
+      const NOU = ['reverie','orchid','atlas','keeper','weaver','trinket','lantern','compass','harbor','ember','almanac','whisper','postcard','tinder','refuge','anchor','prelude','brushstroke','halcyon','fable'];
+      const SEED_DEFS = [
+        { name:'RAINY REVERIE',     dayOffset:28, type:'daisy',         color:'pink' },
+        { name:'PLUM ORCHID',       dayOffset:26, type:'morning-glory', color:'coral' },
+        { name:'DROWSY ATLAS',      dayOffset:24, type:'marigold',      color:'apricot' },
+        { name:'PAPER KEEPER',      dayOffset:22, type:'tulip',         color:'cream' },
+        { name:'ABDULLAH',          dayOffset:20, type:'daisy',         color:'apricot' },
+        { name:'APRICOT WEAVER',    dayOffset:18, type:'marigold',      color:'apricot' },
+        { name:'PORCELAIN TRINKET', dayOffset:16, type:'daisy',         color:'cream' },
+        { name:'GISELE',            dayOffset:14, type:'tulip',         color:'pink' },
+        { name:'DAPPLED ORCHID',    dayOffset:12, type:'morning-glory', color:'coral' },
+        { name:'NIKHIL',            dayOffset:11, type:'daisy',         color:'sage' },
+        { name:'MOSSY LANTERN',     dayOffset:9,  type:'tulip',         color:'sage' },
+        { name:'VELVET COMPASS',    dayOffset:8,  type:'morning-glory', color:'coral' },
+        { name:'MARGAUX',           dayOffset:6,  type:'marigold',      color:'pink' },
+        { name:'FOGGY BRUSHSTROKE', dayOffset:5,  type:'daisy',         color:'cream' },
+        { name:'COPPER ALMANAC',    dayOffset:4,  type:'marigold',      color:'apricot' },
+        { name:'ELI',               dayOffset:3,  type:'morning-glory', color:'pink' },
+        { name:'TWILIGHT POSTCARD', dayOffset:2,  type:'tulip',         color:'coral' },
+        { name:'DUSKY HALCYON',     dayOffset:1,  type:'daisy',         color:'sage' },
+      ];
+      function fmtDate(d) {
+        return String(d.getMonth()+1).padStart(2,'0') + '/' +
+               String(d.getDate()).padStart(2,'0') + '/' +
+               String(d.getFullYear()).slice(-2);
+      }
+      function whimsy() {
+        return (ADJ[Math.floor(Math.random()*ADJ.length)] + ' ' +
+                NOU[Math.floor(Math.random()*NOU.length)]).toUpperCase();
+      }
+      function buildSeeded() {
+        const today = new Date();
+        const plants = SEED_DEFS.map((s, i) => {
+          const d = new Date(today); d.setDate(d.getDate() - s.dayOffset);
+          return {
+            id: 'seed-'+i, name: s.name, cardNumber: FIRST_CARD_NUMBER + i,
+            date: fmtDate(d), dateMs: d.getTime(),
+            flowerType: s.type, colorVariant: s.color,
+            position: null, signaturePath: null, isSeed: true,
+          };
+        });
+        return { visitorCount: FIRST_CARD_NUMBER + SEED_DEFS.length, plants, startedDateMs: plants[0].dateMs };
+      }
+
+      let lawn;
+      try { lawn = JSON.parse(localStorage.getItem(KEY) || 'null'); }
+      catch (e) { lawn = null; }
+      if (!lawn || !Array.isArray(lawn.plants) || lawn.plants.length === 0) {
+        lawn = buildSeeded();
+      }
+
+      const id = 'p' + Date.now().toString(36) + Math.random().toString(36).slice(2,9);
+      const today = new Date();
+      const userName = state.name ? state.name.toUpperCase() : whimsy();
+      lawn.plants.push({
+        id, name: userName,
+        cardNumber: lawn.visitorCount,
+        date: fmtDate(today),
+        dateMs: today.getTime(),
+        flowerType: FLOWER_TYPE_MAP[state.flower] || 'daisy',
+        colorVariant: POT_COLOR_MAP[state.pot] || 'coral',
+        position: null, signaturePath: null, isSeed: false,
+      });
+      lawn.visitorCount = (lawn.visitorCount || (FIRST_CARD_NUMBER + SEED_DEFS.length)) + 1;
+      try { localStorage.setItem(KEY, JSON.stringify(lawn)); } catch (e) {}
+      return id;
+    }
 
     function escapeHtml(s) {
       return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
