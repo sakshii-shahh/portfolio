@@ -145,12 +145,12 @@
     flex-shrink:0;
   }
 
-  /* SKY ZONE — eyebrow + title + tagline, vertically centered in the sky portion */
+  /* SKY ZONE — eyebrow + title + tagline, anchored to the bottom of the sky (hugs the horizon) */
   .top{
     flex:0 0 60vh;
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    display:flex; flex-direction:column; align-items:center; justify-content:flex-end;
     gap:14px;
-    padding:0 6vw;
+    padding:0 6vw 60px;
     text-align:center;
     color:#3a4a55;
     text-shadow:0 1px 2px rgba(255,255,255,.35), 0 2px 14px rgba(255,255,255,.18);
@@ -180,11 +180,11 @@
     color:var(--accent);
   }
 
-  /* GRASS ZONE — CTA + skip; sits ~30-35% down into the grass */
+  /* GRASS ZONE — CTA + skip; anchored just below the horizon, in conversation with the tagline above */
   .bottom{
     flex:1;
     display:flex; flex-direction:column; align-items:center;
-    padding:13vh 6vw 0;
+    padding:60px 6vw 0;
     text-align:center;
     color:var(--cream);
     text-shadow:0 1px 2px rgba(20,40,15,.28), 0 2px 14px rgba(20,40,15,.18);
@@ -339,8 +339,8 @@
   @keyframes rise{to{opacity:1;transform:none}}
 
   @media (max-width:760px){
-    .top{flex-basis:60vh; gap:10px; padding:0 5vw}
-    .bottom{padding:9vh 5vw 0}
+    .top{flex-basis:60vh; gap:10px; padding:0 5vw 40px}
+    .bottom{padding:40px 5vw 0}
     .b1,.b2{display:none}
     .title{font-size:26px}
   }
