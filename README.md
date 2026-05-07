@@ -8,7 +8,7 @@ Static HTML/CSS/JS portfolio. No build step. No dependencies. Opens directly in 
 
 ```
 Portfolio/
-├── index.html                       Welcome — full-bleed watercolor garden, door transition
+├── index.html                       Welcome — full-bleed watercolor garden, zoom-fade transition
 ├── home.html                        Main work page (sidebar + projects + testimonials + footer)
 ├── about.html                       About me
 ├── ai.html                          AI Practices
@@ -152,7 +152,7 @@ These are quality-of-life fixes for a professional public deploy:
 
 ## Known interaction notes (so a fresh dev doesn't break them)
 
-- **Welcome → plant.html transition.** Click "step inside" triggers `body.exiting-wash` + `.page.exiting`, doors swing open, cream wash floods, then nav fires after 1.5s. Don't add `e.preventDefault()` to skip the wait.
+- **Welcome → plant.html transition.** Click "step inside" triggers `body.exiting-wash` + `.page.exiting`, the page scales forward to 2.5× while a cream wash fades over, then nav fires after 1.5s. Don't add `e.preventDefault()` to skip the wait. Background SVG is `assets/garden-mb-v2.svg` (the no-house v2 — title is centered in the empty mid-upper sky).
 - **Project hover scope.** `.grid-col-left` and `.grid-col-right` are independent flex columns. Hovering a card grows that column only — the other column doesn't shift.
 - **CGI card cursor.** `.card.coming-soon` triggers `body.cursor-soon` (neutral dark "Coming soon") instead of the default coral "View case study" pill. JS in home.html handles this via a class check.
 - **Visitor's Lawn nav item.** The hover-vocab swap uses `:has(.hover-label)`, so items without a `.hover-label` span (only Visitor's Lawn) keep their text on hover.

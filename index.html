@@ -74,53 +74,25 @@
     display:flex; flex-direction:column; justify-content:space-between;
     transition:transform 1.6s var(--ease), filter 1.4s var(--ease), opacity 1.2s var(--ease);
   }
-  /* DOOR-OPENING transition — heavy zoom into door + cream light blooms outward */
+  /* ZOOM-IN + FADE exit — page scales forward to 2.5x while a cream wash fades over */
   .page{
-    transition:transform 1.6s cubic-bezier(.7,0,.25,1), filter 1.5s var(--ease);
-    transform-origin:50% 56%;
+    transition:transform 1.5s cubic-bezier(.55,.05,.4,1), opacity 1.4s ease-out;
+    transform-origin:50% 50%;
   }
   .page.exiting{
-    transform:scale(4.6);
-    filter:blur(6px) brightness(1.12);
+    transform:scale(2.5);
+    opacity:0;
   }
 
-  /* Cream light flood — completely invisible until exit, then fades to full cream */
   .cream-flood{
     position:fixed; inset:0;
     z-index:30;
     pointer-events:none;
-    background:radial-gradient(circle at 50% 56%, rgba(251,246,229,1) 0%, rgba(251,246,229,1) 100%);
+    background:var(--cream);
     opacity:0;
-    transition:opacity 1.5s cubic-bezier(.6,.02,.4,1);
+    transition:opacity 1.4s cubic-bezier(.4,0,.4,1);
   }
   body.exiting-wash .cream-flood{ opacity:1; }
-
-  /* Door panels overlay — enlarged + better positioned */
-  .doorway{
-    position:fixed;
-    left:50%; top:55%;
-    transform:translate(-50%, -50%);
-    width:18vw; height:34vh;
-    min-width:160px; min-height:240px;
-    z-index:20;
-    perspective:1600px;
-    pointer-events:none;
-    opacity:0;
-    transition:opacity .2s var(--ease);
-  }
-  body.exiting-wash .doorway{ opacity:1; }
-  .door-leaf{
-    position:absolute; top:0; bottom:0; width:50%;
-    background:linear-gradient(180deg, #d6e8e6 0%, #a8c8c0 100%);
-    border:3px solid #7ba0a0;
-    box-shadow:inset 0 0 0 4px rgba(255,255,255,.4),
-               0 12px 30px -10px rgba(0,0,0,.25);
-    transition:transform 1.2s cubic-bezier(.55,.05,.4,1) .1s;
-  }
-  .door-leaf.left{ left:0; border-right:none; transform-origin:left center; }
-  .door-leaf.right{ right:0; border-left:none; transform-origin:right center; }
-  body.exiting-wash .door-leaf.left{ transform:rotateY(-118deg); }
-  body.exiting-wash .door-leaf.right{ transform:rotateY(118deg); }
 
   /* WORDMARK — naked, just dot + name; no pill, no underline */
   .wordmark{
@@ -141,10 +113,10 @@
     flex-shrink:0;
   }
 
-  /* TOP — title zone, sits on the BLUE sky */
+  /* TOP — title centered in the empty middle-upper sky (no house anymore) */
   .top{
     flex:0 0 auto;
-    padding:5vh 6vw .4vh;
+    padding:22vh 6vw 0;
     text-align:center;
     color:#3a4a55;
     text-shadow:0 1px 2px rgba(255,255,255,.35), 0 2px 14px rgba(255,255,255,.18);
@@ -174,14 +146,13 @@
     color:#e87a93;
   }
 
-  /* BOTTOM — sub + CTA + skip; pulled UP toward the house, lots of grass empty below */
+  /* BOTTOM — sub + CTA + skip; anchored to the grass */
   .bottom{
     flex:0 0 auto;
     padding:0 6vw 16vh;
     text-align:center;
     color:var(--cream);
     text-shadow:0 1px 2px rgba(20,40,15,.28), 0 2px 14px rgba(20,40,15,.18);
-    margin-top:-9vh;
     position:relative;
     z-index:3;
   }
@@ -348,15 +319,11 @@
 
 <div class="cursor-dot" aria-hidden="true"></div>
 
-<!-- Doorway transition overlays (only visible during exit) -->
-<div class="doorway" aria-hidden="true">
-  <div class="door-leaf left"></div>
-  <div class="door-leaf right"></div>
-</div>
+<!-- Cream-wash overlay (only fades in during exit transition) -->
 <div class="cream-flood" aria-hidden="true"></div>
 
 <!-- Full-bleed illustration -->
-<img id="sceneBg" class="scene-bg" alt="Watercolor garden scene" src="assets/garden-mb.svg"/>
+<img id="sceneBg" class="scene-bg" alt="Watercolor garden scene" src="assets/garden-mb-v2.svg"/>
 
 <div class="page" id="page">
 
@@ -436,13 +403,13 @@
     });
   })();
 
-  // Page transition — door opens, light floods, then navigate
+  // Page transition — page zooms forward, cream wash fades over, then navigate
   (function(){
     var enter=document.getElementById('enter');
     var skip=document.getElementById('skip');
     var page=document.getElementById('page');
     function go(){
-      // Trigger door-opening sequence; navigate to planting flow
+      // Trigger zoom-fade exit; navigate to planting flow
       document.body.classList.add('exiting-wash');
       page.classList.add('exiting');
       setTimeout(function(){ window.location.href='plant.html'; }, 1500);
