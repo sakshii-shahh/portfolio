@@ -71,7 +71,7 @@
   .page{
     position:relative; z-index:2;
     height:100vh; width:100vw;
-    display:flex; flex-direction:column; justify-content:space-between;
+    display:flex; flex-direction:column;
     transition:transform 1.6s var(--ease), filter 1.4s var(--ease), opacity 1.2s var(--ease);
   }
   /* ZOOM-IN + FADE exit — page scales forward to 2.5x while a cream wash fades over */
@@ -113,10 +113,12 @@
     flex-shrink:0;
   }
 
-  /* TOP — title centered in the empty middle-upper sky (no house anymore) */
+  /* SKY ZONE — eyebrow + title + tagline, vertically centered in the sky portion */
   .top{
-    flex:0 0 auto;
-    padding:22vh 6vw 0;
+    flex:0 0 60vh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:14px;
+    padding:0 6vw;
     text-align:center;
     color:#3a4a55;
     text-shadow:0 1px 2px rgba(255,255,255,.35), 0 2px 14px rgba(255,255,255,.18);
@@ -127,7 +129,7 @@
     font-size:11px; letter-spacing:.32em;
     text-transform:uppercase;
     color:rgba(58,74,85,.62);
-    margin:0 0 8px;
+    margin:0;
     font-weight:500;
   }
   .title{
@@ -143,13 +145,14 @@
     font-family:var(--serif);
     font-style:italic;
     font-weight:500;
-    color:#e87a93;
+    color:var(--accent);
   }
 
-  /* BOTTOM — sub + CTA + skip; anchored to the grass */
+  /* GRASS ZONE — CTA + skip; sits ~30-35% down into the grass */
   .bottom{
-    flex:0 0 auto;
-    padding:0 6vw 16vh;
+    flex:1;
+    display:flex; flex-direction:column; align-items:center;
+    padding:13vh 6vw 0;
     text-align:center;
     color:var(--cream);
     text-shadow:0 1px 2px rgba(20,40,15,.28), 0 2px 14px rgba(20,40,15,.18);
@@ -161,9 +164,9 @@
     font-style:italic;
     font-weight:400;
     font-size:clamp(13.5px,1.3vw,16.5px);
-    color:rgba(251,246,229,.94);
+    color:rgba(58,74,85,.78);
     line-height:1.5;
-    margin:0 auto 14px;
+    margin:0 auto;
     max-width:42ch;
   }
   .cta-row{
@@ -304,8 +307,8 @@
   @keyframes rise{to{opacity:1;transform:none}}
 
   @media (max-width:760px){
-    .top{padding:3.5vh 5vw 1vh}
-    .bottom{padding:1vh 5vw 3.5vh}
+    .top{flex-basis:60vh; gap:10px; padding:0 5vw}
+    .bottom{padding:9vh 5vw 0}
     .b1,.b2{display:none}
     .title{font-size:26px}
   }
@@ -363,18 +366,18 @@
     <span>sakshi shah</span>
   </a>
 
-  <!-- TOP — title on blue sky -->
+  <!-- SKY ZONE — eyebrow + title + tagline, vertically centered in the sky -->
   <header class="top">
     <p class="eyebrow reveal r1">welcome to</p>
     <h1 class="title reveal r2">
-      Sakshi's <span class="serif">Garden</span> of Growth
+      Sakshi's Garden of <span class="serif">Growth</span>
     </h1>
+    <p class="sub reveal r3">come on in to a small place where i build, design &amp; water ideas worth growing.</p>
   </header>
 
-  <!-- BOTTOM — sub + CTA on green grass -->
+  <!-- GRASS ZONE — CTA + skip on the lawn -->
   <footer class="bottom">
-    <p class="sub reveal r4">come on in to a small place where i build, design &amp; water ideas worth growing.</p>
-    <div class="cta-row reveal r5">
+    <div class="cta-row reveal r4">
       <button class="cta" id="enter">step inside</button>
       <button class="skip" id="skip">skip intro</button>
     </div>
