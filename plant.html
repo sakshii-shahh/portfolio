@@ -915,7 +915,7 @@
       } catch {}
 
       // NEW: write to sakshi_lawn in the format consumed by lawn.html
-      const newRecordId = saveToLawn();
+      saveToLawn();
 
       // Center: user's plant
       document.getElementById('successCenter').innerHTML = renderPlantHTML(newPlant);
@@ -943,7 +943,7 @@
           document.getElementById('success').classList.add('leaving');
           wash.classList.add('show');
         });
-        setTimeout(() => { window.location.href = 'lawn.html#' + newRecordId; }, 1100);
+        setTimeout(() => { window.location.href = 'home.html'; }, 1100);
       }, 3000);
     });
 
