@@ -998,10 +998,9 @@
     /* Stack, single row, vertical cards with real logos */
     .stack-grid {
       display: grid;
-      grid-template-columns: repeat(6, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 12px;
     }
-    @media (max-width: 1100px) { .stack-grid { grid-template-columns: repeat(3, 1fr); } }
     @media (max-width: 540px) { .stack-grid { grid-template-columns: repeat(2, 1fr); } }
     .stack-item {
       display: flex; flex-direction: column;
@@ -1163,35 +1162,50 @@
       margin-top: 4px;
     }
 
-    /* Resources */
-    .resources-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
-    }
-    @media (max-width: 760px) { .resources-grid { grid-template-columns: 1fr; } }
-    .resource-col h3 {
+    /* Resources, card-based with covers */
+    .resources-section { margin-bottom: 40px; }
+    .resources-section:last-child { margin-bottom: 0; }
+    .resources-section h3 {
       font-family: var(--mono); font-size: 11px; font-weight: 500;
-      letter-spacing: .14em; text-transform: uppercase;
-      color: var(--ink-mute); margin: 0 0 14px;
+      letter-spacing: .15em; text-transform: uppercase;
+      color: var(--ink-mute); margin: 0 0 18px;
     }
-    .resource-col ul {
-      list-style: none; padding: 0; margin: 0;
-      display: flex; flex-direction: column; gap: 10px;
+    .resource-cards {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
     }
-    .resource-col a {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-size: 14.5px; color: var(--ink);
-      transition: color .2s var(--ease);
+    @media (max-width: 760px) { .resource-cards { grid-template-columns: 1fr; } }
+    .resource-card {
+      background: var(--bg-elev); border: 1px solid var(--rule);
+      border-radius: var(--r-lg); padding: 16px;
+      display: flex; gap: 14px; align-items: center;
+      transition: transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease);
     }
-    .resource-col a:hover { color: var(--accent); }
-    .resource-col a::after {
-      content: "↗"; font-size: 11px; opacity: .4;
+    .resource-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--rule-strong);
+      box-shadow: 0 14px 30px -16px rgba(20,18,12,0.18);
     }
-    .resource-col li .by {
-      display: block;
-      font-size: 12.5px; color: var(--ink-mute);
-      margin-top: 2px;
+    .resource-card-cover {
+      width: 56px; height: 56px; flex-shrink: 0;
+      border-radius: 8px; overflow: hidden;
+      background: var(--bg-card);
+      display: grid; place-items: center;
     }
+    .resource-card-cover img { width: 100%; height: 100%; object-fit: cover; }
+    .resource-card-cover.tall { width: 48px; height: 70px; border-radius: 4px; }
+    .resource-card-info { flex: 1; min-width: 0; }
+    .resource-card-info strong {
+      display: block; font-family: var(--display); font-weight: 500;
+      font-size: 15px; line-height: 1.2; color: var(--ink); margin-bottom: 3px;
+    }
+    .resource-card-info .by {
+      font-family: var(--sans); font-size: 12px; color: var(--ink-mute);
+    }
+    .resource-card-arrow {
+      font-family: var(--mono); color: var(--ink-mute);
+      transition: color .2s var(--ease), transform .2s var(--ease);
+    }
+    .resource-card:hover .resource-card-arrow { color: var(--accent); transform: translateX(2px); }
 
     /* ============ FOOTER ============ */
     footer {
@@ -1467,14 +1481,14 @@
 
             <article class="agent-card">
               <div class="agent-status-row">
-                <span class="dot shipped"></span><span>Shipped</span>
-                <span class="sep">·</span><span>CGI</span>
-                <span class="sep">·</span><span>2024</span>
+                <span class="dot live"></span><span>Live</span>
+                <span class="sep">·</span><span>Personal</span>
+                <span class="sep">·</span><span>2025–present</span>
               </div>
-              <h3>CGI AI Adoption Accelerator</h3>
-              <p>Designed the workflow + UI for a structured AI adoption framework used by CGI consultants across 4 industry verticals to bring AI into client engagements.</p>
+              <h3>Job Hunt Master</h3>
+              <p>An automated job-hunting agent that runs on a schedule. Pulls from job boards, scores fits, emails me curated matches each morning, and keeps a running tracker of where I've applied.</p>
               <div class="agent-meta">
-                <span>Lead Designer</span><span class="sep">·</span><span>Workflow + UI</span>
+                <span>Claude</span><span class="sep">·</span><span>Scheduled tasks</span>
               </div>
             </article>
 
@@ -1494,6 +1508,19 @@
             <article class="agent-card">
               <div class="agent-status-row">
                 <span class="dot live"></span><span>Live</span>
+                <span class="sep">·</span><span>SubjectToClimate</span>
+                <span class="sep">·</span><span>2025–present</span>
+              </div>
+              <h3>Synthetic Persona Generator</h3>
+              <p>Generates research-grade synthetic personas so the team can stress-test product concepts before going to real teachers and students. Built in my Agentic User Researcher role at SubjectToClimate.</p>
+              <div class="agent-meta">
+                <span>Claude</span><span class="sep">·</span><span>Custom prompts</span>
+              </div>
+            </article>
+
+            <article class="agent-card">
+              <div class="agent-status-row">
+                <span class="dot live"></span><span>Live</span>
                 <span class="sep">·</span><span>Personal</span>
                 <span class="sep">·</span><span>2025</span>
               </div>
@@ -1501,19 +1528,6 @@
               <p>Reviews my Figma flows against heuristics and accessibility guidelines. I describe the screen, it pushes back with the questions a senior would ask.</p>
               <div class="agent-meta">
                 <span>Custom GPT</span><span class="sep">·</span><span>Heuristics</span>
-              </div>
-            </article>
-
-            <article class="agent-card">
-              <div class="agent-status-row">
-                <span class="dot wip"></span><span>In progress</span>
-                <span class="sep">·</span><span>MMM project</span>
-                <span class="sep">·</span><span>2026</span>
-              </div>
-              <h3>Strategy Sparring Partner</h3>
-              <p>Stress-tests early product concepts by playing skeptical exec, busy user, and new joiner, three perspectives in one chat. Iterating on prompts.</p>
-              <div class="agent-meta">
-                <span>Claude</span><span class="sep">·</span><span>Multi-persona</span>
               </div>
             </article>
 
@@ -1544,11 +1558,7 @@
 
             <div class="stack-item">
               <div class="stack-logo">
-                <!-- Claude, Anthropic burst mark -->
-                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                  <path d="M16 2 L17.6 12.4 L26 14 L17.6 15.6 L16 26 L14.4 15.6 L6 14 L14.4 12.4 Z" fill="#cc785c"/>
-                  <path d="M22 22 L22.6 25 L25.6 25.6 L22.6 26.2 L22 29 L21.4 26.2 L18.4 25.6 L21.4 25 Z" fill="#cc785c"/>
-                </svg>
+                <img src="https://claude.ai/favicon.ico" alt="Claude" style="width:32px;height:32px;object-fit:contain;" />
               </div>
               <div class="stack-info">
                 <strong>Claude</strong>
@@ -1558,10 +1568,17 @@
 
             <div class="stack-item">
               <div class="stack-logo">
-                <!-- Cursor, pointer arrow -->
-                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                  <path d="M8 6 L8 26 L13.4 21 L17.2 28.6 L20 27.2 L16.4 19.6 L23 19.6 Z" fill="#0a0a0a"/>
-                </svg>
+                <img src="https://www.figma.com/favicon.ico" alt="Figma Make" style="width:32px;height:32px;object-fit:contain;" />
+              </div>
+              <div class="stack-info">
+                <strong>Figma Make</strong>
+                <span>AI-assisted design exploration</span>
+              </div>
+            </div>
+
+            <div class="stack-item">
+              <div class="stack-logo">
+                <img src="https://cursor.sh/favicon.ico" alt="Cursor" style="width:32px;height:32px;object-fit:contain;" />
               </div>
               <div class="stack-info">
                 <strong>Cursor</strong>
@@ -1571,12 +1588,7 @@
 
             <div class="stack-item">
               <div class="stack-logo">
-                <!-- Perplexity, concentric circles -->
-                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                  <circle cx="16" cy="16" r="12" fill="#1fb8a1"/>
-                  <circle cx="16" cy="16" r="6" fill="#0d8c6c"/>
-                  <rect x="14" y="6" width="4" height="20" fill="#fff"/>
-                </svg>
+                <img src="https://www.perplexity.ai/favicon.ico" alt="Perplexity" style="width:32px;height:32px;object-fit:contain;" />
               </div>
               <div class="stack-info">
                 <strong>Perplexity</strong>
@@ -1586,44 +1598,27 @@
 
             <div class="stack-item">
               <div class="stack-logo">
-                <!-- Figma, 4 colored circles -->
-                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                  <circle cx="11" cy="9.5" r="4.5" fill="#f24e1e"/>
-                  <circle cx="20.5" cy="9.5" r="4.5" fill="#a259ff"/>
-                  <circle cx="11" cy="18" r="4.5" fill="#1abcfe"/>
-                  <circle cx="20.5" cy="18" r="4.5" fill="#0acf83"/>
-                  <circle cx="11" cy="26.5" r="4.5" fill="#ff7262"/>
-                </svg>
+                <img src="https://openai.com/favicon.ico" alt="ChatGPT" style="width:32px;height:32px;object-fit:contain;" />
               </div>
               <div class="stack-info">
-                <strong>Figma AI</strong>
-                <span>Layout exploration</span>
+                <strong>ChatGPT</strong>
+                <span>Quick inference, voice mode</span>
               </div>
             </div>
 
             <div class="stack-item">
               <div class="stack-logo">
-                <!-- v0 / Vercel, black triangle -->
-                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                  <polygon points="16,5 28,27 4,27" fill="#0a0a0a"/>
-                </svg>
+                <img src="https://www.gstatic.com/lamda/images/gemini_sparkle_v002_d4735304ff6292a690345.svg" alt="Gemini" style="width:32px;height:32px;object-fit:contain;" />
               </div>
               <div class="stack-info">
-                <strong>v0</strong>
-                <span>Sketch to clickable, fast</span>
+                <strong>Gemini</strong>
+                <span>Long-context analysis</span>
               </div>
             </div>
 
             <div class="stack-item">
               <div class="stack-logo">
-                <!-- NotebookLM, book + spark -->
-                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                  <rect x="7" y="6" width="14" height="22" rx="2" fill="#4285f4"/>
-                  <rect x="9" y="9" width="10" height="1.6" fill="#fff" opacity=".7"/>
-                  <rect x="9" y="13" width="8" height="1.6" fill="#fff" opacity=".7"/>
-                  <rect x="9" y="17" width="9" height="1.6" fill="#fff" opacity=".7"/>
-                  <path d="M24 9 L25.2 12.2 L28.4 13.4 L25.2 14.6 L24 17.8 L22.8 14.6 L19.6 13.4 L22.8 12.2 Z" fill="#fbbc04"/>
-                </svg>
+                <img src="https://notebooklm.google.com/favicon.ico" alt="NotebookLM" style="width:32px;height:32px;object-fit:contain;" />
               </div>
               <div class="stack-info">
                 <strong>NotebookLM</strong>
@@ -1751,35 +1746,67 @@
             <h2>What I read &amp; listen to</h2>
             <span class="count">staying current</span>
           </div>
-          <div class="resources-grid">
-
-            <div class="resource-col">
-              <h3>Newsletters</h3>
-              <ul>
-                <li><a href="https://www.oneusefulthing.org/" target="_blank" rel="noopener">One Useful Thing</a><span class="by">Ethan Mollick</span></li>
-                <li><a href="https://www.latent.space/" target="_blank" rel="noopener">Latent Space</a><span class="by">swyx + Alessio</span></li>
-                <li><a href="https://www.anthropic.com/news" target="_blank" rel="noopener">Anthropic releases</a><span class="by">model + product news</span></li>
-              </ul>
+          <div class="resources-section">
+            <h3>Newsletters</h3>
+            <div class="resource-cards">
+              <a class="resource-card" href="https://www.oneusefulthing.org/" target="_blank" rel="noopener">
+                <div class="resource-card-cover"><img src="https://substackcdn.com/image/fetch/w_120,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2Fa54a3ee2-baeb-422b-9d5b-c9a3f9d88fb7_500x500.png" alt="One Useful Thing" /></div>
+                <div class="resource-card-info"><strong>One Useful Thing</strong><span class="by">Ethan Mollick</span></div>
+                <span class="resource-card-arrow">,</span>
+              </a>
+              <a class="resource-card" href="https://www.latent.space/" target="_blank" rel="noopener">
+                <div class="resource-card-cover"><img src="https://www.latent.space/favicon.ico" alt="Latent Space" /></div>
+                <div class="resource-card-info"><strong>Latent Space</strong><span class="by">swyx + Alessio</span></div>
+                <span class="resource-card-arrow">,</span>
+              </a>
+              <a class="resource-card" href="https://www.anthropic.com/news" target="_blank" rel="noopener">
+                <div class="resource-card-cover"><img src="https://www.anthropic.com/favicon.ico" alt="Anthropic" /></div>
+                <div class="resource-card-info"><strong>Anthropic releases</strong><span class="by">model + product news</span></div>
+                <span class="resource-card-arrow">,</span>
+              </a>
             </div>
+          </div>
 
-            <div class="resource-col">
-              <h3>Books</h3>
-              <ul>
-                <li><a href="#" target="_blank" rel="noopener">Co-Intelligence</a><span class="by">Ethan Mollick</span></li>
-                <li><a href="#" target="_blank" rel="noopener">The Coming Wave</a><span class="by">Mustafa Suleyman</span></li>
-                <li><a href="#" target="_blank" rel="noopener">The Alignment Problem</a><span class="by">Brian Christian</span></li>
-              </ul>
+          <div class="resources-section">
+            <h3>Books</h3>
+            <div class="resource-cards">
+              <a class="resource-card" href="https://www.goodreads.com/book/show/199798176-co-intelligence" target="_blank" rel="noopener">
+                <div class="resource-card-cover tall"><img src="https://covers.openlibrary.org/b/isbn/9780593716717-L.jpg" alt="Co-Intelligence" /></div>
+                <div class="resource-card-info"><strong>Co-Intelligence</strong><span class="by">Ethan Mollick</span></div>
+                <span class="resource-card-arrow">,</span>
+              </a>
+              <a class="resource-card" href="https://www.goodreads.com/book/show/123043624-the-coming-wave" target="_blank" rel="noopener">
+                <div class="resource-card-cover tall"><img src="https://covers.openlibrary.org/b/isbn/9780593593950-L.jpg" alt="The Coming Wave" /></div>
+                <div class="resource-card-info"><strong>The Coming Wave</strong><span class="by">Mustafa Suleyman</span></div>
+                <span class="resource-card-arrow">,</span>
+              </a>
+              <a class="resource-card" href="https://www.goodreads.com/book/show/50489104-the-alignment-problem" target="_blank" rel="noopener">
+                <div class="resource-card-cover tall"><img src="https://covers.openlibrary.org/b/isbn/9780393635829-L.jpg" alt="The Alignment Problem" /></div>
+                <div class="resource-card-info"><strong>The Alignment Problem</strong><span class="by">Brian Christian</span></div>
+                <span class="resource-card-arrow">,</span>
+              </a>
             </div>
+          </div>
 
-            <div class="resource-col">
-              <h3>Podcasts</h3>
-              <ul>
-                <li><a href="#" target="_blank" rel="noopener">Hard Fork</a><span class="by">Casey Newton + Kevin Roose</span></li>
-                <li><a href="#" target="_blank" rel="noopener">Practical AI</a><span class="by">Daniel Whitenack</span></li>
-                <li><a href="#" target="_blank" rel="noopener">Lenny's Podcast</a><span class="by">Lenny Rachitsky</span></li>
-              </ul>
+          <div class="resources-section">
+            <h3>Podcasts</h3>
+            <div class="resource-cards">
+              <a class="resource-card" href="https://www.nytimes.com/column/hard-fork" target="_blank" rel="noopener">
+                <div class="resource-card-cover"><img src="https://static01.nyt.com/images/2022/09/30/podcasts/hardfork-itunes-art/hardfork-itunes-art-square640.jpg" alt="Hard Fork" /></div>
+                <div class="resource-card-info"><strong>Hard Fork</strong><span class="by">Casey Newton + Kevin Roose</span></div>
+                <span class="resource-card-arrow">,</span>
+              </a>
+              <a class="resource-card" href="https://changelog.com/practicalai" target="_blank" rel="noopener">
+                <div class="resource-card-cover"><img src="https://changelog.com/practicalai.png" alt="Practical AI" /></div>
+                <div class="resource-card-info"><strong>Practical AI</strong><span class="by">Daniel Whitenack</span></div>
+                <span class="resource-card-arrow">,</span>
+              </a>
+              <a class="resource-card" href="https://www.lennysnewsletter.com/podcast" target="_blank" rel="noopener">
+                <div class="resource-card-cover"><img src="https://substackcdn.com/image/fetch/h_240,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2F7f5df8e5-8a6d-4321-a586-46cb9c33e389_500x500.png" alt="Lenny's Podcast" /></div>
+                <div class="resource-card-info"><strong>Lenny's Podcast</strong><span class="by">Lenny Rachitsky</span></div>
+                <span class="resource-card-arrow">,</span>
+              </a>
             </div>
-
           </div>
         </div>
 
