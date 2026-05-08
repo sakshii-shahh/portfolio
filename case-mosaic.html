@@ -864,6 +864,202 @@
     }
     .case-brand-mark.img-missing { display: none; }
 
+
+    /* ============ MOSAIC LAYOUT ADDITIONS ============ */
+    /* 0 → 1 tag chip */
+    .case-tag.zero-one {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+      color: var(--accent-deep);
+      font-weight: 500;
+    }
+
+    /* Fragmented systems 5-card grid */
+    .fragmented-systems {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      margin: 24px 0 28px;
+    }
+    @media (max-width: 980px) { .fragmented-systems { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 540px) { .fragmented-systems { grid-template-columns: 1fr; } }
+    .frag-card {
+      background: var(--bg-elev);
+      border: 1px dashed var(--rule-strong);
+      border-radius: var(--r-md);
+      padding: 16px 14px;
+      text-align: center;
+      transition: transform .25s var(--ease), border-color .25s var(--ease);
+    }
+    .frag-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--ink-soft);
+      border-style: solid;
+    }
+    .frag-icon { font-size: 32px; margin-bottom: 10px; }
+    .frag-card strong {
+      display: block;
+      font-family: var(--display); font-weight: 500;
+      font-size: 14px; color: var(--ink); margin-bottom: 4px;
+    }
+    .frag-card span {
+      font-size: 12px; color: var(--ink-soft); line-height: 1.4;
+    }
+
+    /* Big-stat callout */
+    .big-stat {
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-lg);
+      padding: 40px 36px;
+      margin: 24px 0 28px;
+      text-align: center;
+    }
+    .big-stat-num {
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: clamp(72px, 9vw, 120px);
+      line-height: 1;
+      color: var(--accent);
+      letter-spacing: -0.04em;
+      margin-bottom: 12px;
+    }
+    .big-stat-num .big-stat-in {
+      font-family: "Fraunces", Georgia, serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 0.4em;
+      color: var(--ink-mute);
+      margin: 0 8px;
+      vertical-align: 0.2em;
+    }
+    .big-stat-label {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin: 0 0 18px;
+    }
+    .big-stat-sub {
+      font-size: 16px; color: var(--ink-soft); line-height: 1.5;
+      max-width: 560px; margin: 0 auto 14px;
+    }
+    .big-stat-sub strong { color: var(--ink); font-weight: 500; }
+    .big-stat-source {
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--ink-mute); margin: 0;
+    }
+
+    /* Insights 3-up grid */
+    .insights-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin: 24px 0 28px;
+    }
+    @media (max-width: 980px) { .insights-grid { grid-template-columns: 1fr; } }
+    .insight-card {
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-lg);
+      padding: 24px 22px;
+      display: flex; flex-direction: column;
+      transition: transform .25s var(--ease), border-color .25s var(--ease), box-shadow .25s var(--ease);
+    }
+    .insight-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+      box-shadow: 0 18px 40px -22px rgba(20,18,12,0.22);
+    }
+    .insight-num {
+      font-family: var(--mono);
+      font-size: 13px;
+      letter-spacing: .14em;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 14px;
+    }
+    .insight-card h4 {
+      font-family: var(--display); font-weight: 500;
+      font-size: 18px; line-height: 1.25;
+      color: var(--ink); margin: 0 0 12px;
+      letter-spacing: -0.012em;
+    }
+    .insight-card > p {
+      font-size: 14px; color: var(--ink-soft);
+      line-height: 1.55; margin: 0 0 16px;
+      flex: 1;
+    }
+    .insight-card-quote {
+      margin: auto 0 0;
+      padding: 12px 14px;
+      background: var(--bg-card);
+      border-radius: var(--r-md);
+      border-left: 3px solid var(--ink-mute);
+    }
+    .insight-card-quote p {
+      font-family: "Fraunces", Georgia, serif;
+      font-style: italic;
+      font-size: 14px;
+      color: var(--ink-soft);
+      margin: 0 0 6px;
+      line-height: 1.45;
+    }
+    .insight-card-quote cite {
+      font-family: var(--mono); font-size: 10.5px;
+      letter-spacing: .12em; color: var(--ink-mute); font-style: normal;
+    }
+
+    /* Affinity map 9-cluster grid */
+    .affinity-map { margin: 24px 0 28px; }
+    .affinity-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      padding: 18px;
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-lg);
+    }
+    @media (max-width: 600px) { .affinity-grid { grid-template-columns: repeat(2, 1fr); } }
+    .affinity-cluster {
+      padding: 14px 12px;
+      border-radius: var(--r-md);
+      text-align: center;
+      transition: transform .2s var(--ease), filter .2s var(--ease);
+      cursor: default;
+    }
+    .affinity-cluster:hover {
+      transform: scale(1.04);
+      filter: brightness(1.05);
+    }
+    .affinity-cluster strong {
+      display: block;
+      font-family: var(--display); font-weight: 500;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+    .affinity-cluster span {
+      font-family: var(--mono); font-size: 10.5px;
+      letter-spacing: .12em; opacity: 0.7;
+    }
+    .affinity-cluster.c1 { background: #f7d4dc; color: #7a2c3e; }
+    .affinity-cluster.c2 { background: #d4dfb8; color: #4a5d2a; }
+    .affinity-cluster.c3 { background: #fee2c5; color: #7a4a1a; }
+    .affinity-cluster.c4 { background: #cee1ff; color: #2a4a7a; }
+    .affinity-cluster.c5 { background: #f0d4ff; color: #5a2a7a; }
+    .affinity-cluster.c6 { background: #d4edcc; color: #2a5a3a; }
+    .affinity-cluster.c7 { background: #ffe9b3; color: #6a4a1a; }
+    .affinity-cluster.c8 { background: #c8d4ff; color: #2a3a7a; }
+    .affinity-cluster.c9 { background: #ffd4d4; color: #7a2a2a; }
+    .affinity-caption {
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--ink-mute); margin: 14px 0 0; text-align: center;
+    }
+
   </style>
 </head>
 <body>
@@ -912,18 +1108,13 @@
       <div class="case-tags reveal d1">
         <span class="case-tag">Care Tech</span>
         <span class="case-tag concept">Concept</span>
+        <span class="case-tag zero-one">0 → 1</span>
       </div>
 
       <!-- Title -->
       <h1 class="case-title reveal d1">
         <span>Mosaic</span>
       </h1>
-
-      <!-- Pull-quote -->
-      <blockquote class="case-pullquote reveal d2">
-        <p>"If I'm not there, it's gone."</p>
-        <cite>Marcus Webb · primary caregiver (research participant)</cite>
-      </blockquote>
 
       <!-- Lede -->
       <p class="case-lede reveal d2">
@@ -935,8 +1126,9 @@
         <div>
           <p class="pb-col-label">Role</p>
           <div class="pb-col-val">
-            <span>Product Manager</span>
             <span>Designer</span>
+            <span>Researcher</span>
+            <span>Strategist</span>
           </div>
         </div>
         <div>
@@ -946,18 +1138,19 @@
         <div>
           <p class="pb-col-label">Timeline</p>
           <div class="pb-col-val">
-            <span>Jan – May 2026</span>
+            <span>May – Jun 2026</span>
             <span class="softer">Northwestern MPD&amp;D</span>
           </div>
         </div>
         <div>
           <p class="pb-col-label">Skills</p>
           <div class="pb-col-val">
+            <span>Ideation</span>
             <span>Product Strategy</span>
-            <span>Primary Research</span>
-            <span>Voice / AI Interface</span>
-            <span>Mobile UI</span>
-            <span>MRD &amp; Unit Economics</span>
+            <span>UX</span>
+            <span>Market Research</span>
+            <span>MRD</span>
+            <span>PRD</span>
           </div>
         </div>
       </div>
@@ -970,23 +1163,47 @@
         <p>This started from a close personal relationship with someone on the spectrum, and watching the people around them coordinate care across four, sometimes five different caregivers: a parent, an aide, a paraprofessional at school, an ABA therapist, occasionally a substitute teacher. Each person knew something true about the teen. Nobody saw the whole picture. The parent became the translator between five incompatible systems, WhatsApp, Google Docs, a paper binder, sticky notes, and carried the cost of that in their nervous system. I wanted to know if a tool could externalize that operating manual without making the act of contributing feel like a documentation project.</p>
 
         <h3>What's broken today</h3>
-        <figure class="case-figure">
-          <div class="case-figure-frame" data-placeholder="Before: five fragmented systems, parent at the center as translator">
-            <img src="assets/mosaic/02_chaos_diagram.png" alt="Before: five fragmented systems, parent as translator" />
+
+        <div class="fragmented-systems">
+          <div class="frag-card">
+            <div class="frag-icon">💬</div>
+            <strong>Group texts</strong>
+            <span>Urgent updates lost in scroll within hours.</span>
           </div>
-          <figcaption>Before: five fragmented systems, parent at the center as translator</figcaption>
-        </figure>
-        <p>Caregiving teams currently coordinate through a patchwork: group texts for urgent updates, shared Google Docs that go stale within weeks, paper binders that don't travel, clinical ABA tools designed for therapists not families. None of these were built for cross-caregiver behavioral knowledge transfer. The result is information loss at every handoff: a new aide spends four to five months learning through trial and error what proper onboarding could compress to days. Substitute teachers walk in cold. Therapists hear a verbal summary instead of pattern data.</p>
+          <div class="frag-card">
+            <div class="frag-icon">📄</div>
+            <strong>Google Docs</strong>
+            <span>Goes stale within weeks, no one updates it.</span>
+          </div>
+          <div class="frag-card">
+            <div class="frag-icon">📔</div>
+            <strong>Paper binders</strong>
+            <span>Don't travel with the teen between caregivers.</span>
+          </div>
+          <div class="frag-card">
+            <div class="frag-icon">🗒️</div>
+            <strong>Sticky notes</strong>
+            <span>Disappear, get reordered, lose context.</span>
+          </div>
+          <div class="frag-card">
+            <div class="frag-icon">🏥</div>
+            <strong>Clinical ABA tools</strong>
+            <span>Built for therapists, not families.</span>
+          </div>
+        </div>
+
+        <p>None of these were built for cross-caregiver behavioral knowledge transfer. The result is information loss at every handoff: a new aide spends four to five months learning through trial and error what proper onboarding could compress to days. Substitute teachers walk in cold. Therapists hear a verbal summary instead of pattern data.</p>
+
         <p>The deeper failure is that the parent becomes a single point of failure. They're the only person who holds the full picture, and they know it. One participant described sitting by their kid's bed thinking <em>"what happens if I can't come home next time?"</em> That's the existential cost of fragmented coordination.</p>
 
         <h3>Why now</h3>
-        <figure class="case-figure">
-          <div class="case-figure-frame" data-placeholder="U.S. autism prevalence 2000 to 2023, more than doubled in two decades">
-            <img src="assets/mosaic/03_prevalence.png" alt="U.S. autism prevalence chart" />
-          </div>
-          <figcaption>U.S. autism prevalence 2000 to 2023, more than doubled in two decades</figcaption>
-        </figure>
-        <p>CDC reports 1 in 36 children with autism, up from 1 in 150 in 2000. The caregiver population is growing faster than the tools serving them.</p>
+
+        <div class="big-stat">
+          <div class="big-stat-num">1 <span class="big-stat-in">in</span> 36</div>
+          <p class="big-stat-label">U.S. children with autism, 2024</p>
+          <p class="big-stat-sub">Up from <strong>1 in 150</strong> in 2000. The caregiver population is growing faster than the tools serving them.</p>
+          <p class="big-stat-source">Source: CDC ADDM Network</p>
+        </div>
       </section>
 
       <!-- ============ 02. RESEARCH ============ -->
@@ -1000,35 +1217,54 @@
         <p><strong>Phase 2: Synthetic interviews.</strong> Three carefully constructed participant profiles to stress-test hypotheses and refine the discussion guide before fieldwork.</p>
         <p><strong>Phase 3: Primary interviews</strong> with three real caregivers using validated discussion guides. Two parents (one early-adopter, tech-comfortable; one resource-constrained, institution-routed) and one in-home aide. Small sample, but n=3+ was enough to validate or partially validate every primary hypothesis with meaningful nuance.</p>
 
-        <figure class="case-figure">
-          <div class="case-figure-frame" data-placeholder="Affinity map: 9 themed clusters across 64 stickies, color-coded by participant">
-            <img src="assets/mosaic/04_affinity_map.png" alt="Affinity map" />
+        <div class="affinity-map">
+          <div class="affinity-grid">
+            <div class="affinity-cluster c1"><strong>Time scarcity</strong><span>14 stickies</span></div>
+            <div class="affinity-cluster c2"><strong>Knowledge silos</strong><span>11 stickies</span></div>
+            <div class="affinity-cluster c3"><strong>Tool fatigue</strong><span>9 stickies</span></div>
+            <div class="affinity-cluster c4"><strong>Power dynamics</strong><span>8 stickies</span></div>
+            <div class="affinity-cluster c5"><strong>Behavioral patterns</strong><span>7 stickies</span></div>
+            <div class="affinity-cluster c6"><strong>Handoff failures</strong><span>6 stickies</span></div>
+            <div class="affinity-cluster c7"><strong>Mortality anxiety</strong><span>4 stickies</span></div>
+            <div class="affinity-cluster c8"><strong>Trust + safety</strong><span>3 stickies</span></div>
+            <div class="affinity-cluster c9"><strong>Identity + role</strong><span>2 stickies</span></div>
           </div>
-          <figcaption>Affinity map: 9 themed clusters across 64 stickies, color-coded by participant</figcaption>
-        </figure>
+          <p class="affinity-caption">9 themed clusters across 64 stickies, color-coded by participant</p>
+        </div>
 
         <h3>Three insights that shaped the concept</h3>
 
-        <blockquote class="case-insight-quote">
-          <p>"It's not a knowledge problem, it's an architecture problem."</p>
-          <cite>Marcus Chen · primary caregiver</cite>
-        </blockquote>
+        <div class="insights-grid">
+          <article class="insight-card">
+            <div class="insight-num">01</div>
+            <h4>The 30-second contribution barrier is real and non-negotiable.</h4>
+            <p>Aides won't engage with any tool that takes longer than thirty seconds at the end of a shift. Voice memo, not typing. This single constraint reshaped the entire input architecture.</p>
+            <blockquote class="insight-card-quote">
+              <p>"If it takes more than 30 seconds, I'm not doing it."</p>
+              <cite>Keisha Williams · in-home aide</cite>
+            </blockquote>
+          </article>
 
-        <p><strong>1. The thirty-second contribution barrier is real and non-negotiable.</strong> Aides won't engage with any tool that takes longer than thirty seconds at the end of a shift. Voice memo, not typing. This single constraint reshaped the entire input architecture: every interaction below the cap, AI does the structuring after capture, no forms. Exceed thirty seconds and the secondary caregiver disengages. The whole network effect collapses.</p>
+          <article class="insight-card">
+            <div class="insight-num">02</div>
+            <h4>The deepest driver isn't efficiency, it's mortality fear.</h4>
+            <p>I went into research expecting parents to ask for productivity. They asked for portability. The real product job isn't saving thirty minutes a day. It's making the parent's knowledge transferable in case something happens to them.</p>
+            <blockquote class="insight-card-quote">
+              <p>"If I'm not there, it's gone."</p>
+              <cite>Marcus Webb · primary caregiver</cite>
+            </blockquote>
+          </article>
 
-        <blockquote class="case-insight-quote">
-          <p>"If it takes more than 30 seconds, I'm not doing it."</p>
-          <cite>Keisha Williams · in-home aide</cite>
-        </blockquote>
-
-        <p><strong>2. The deepest driver isn't efficiency, it's mortality fear.</strong> I went into research expecting parents to ask for productivity. They asked for portability. The phrase that came up over and over was <em>"if I'm not there, it's gone."</em> The real product job isn't saving thirty minutes a day. It's making the parent's knowledge transferable in case something happens to them. That reframed Mosaic from a coordination tool into a succession-planning tool, and changed the v1 hierarchy of features.</p>
-
-        <p><strong>3. Power asymmetry silences observations that should travel upward.</strong> Aides notice patterns no one else can. They're the only person there during certain hours, in certain environments. But they often don't share what they see, because they fear being read as critical or unprepared. <em>"The day was fine"</em> becomes a default response when something more nuanced was true. Any tool that solves coordination but ignores this dynamic will fail at the multi-caregiver level. The design has to reframe contribution as helpful expertise, not surveillance.</p>
-
-        <blockquote class="case-insight-quote">
-          <p>"I notice patterns. I see things. But I don't always know how to share them, or if I should."</p>
-          <cite>Keisha Williams · in-home aide</cite>
-        </blockquote>
+          <article class="insight-card">
+            <div class="insight-num">03</div>
+            <h4>Power asymmetry silences observations that should travel upward.</h4>
+            <p>Aides notice patterns no one else can. But they often don't share what they see, fearing being read as critical or unprepared. Any tool that ignores this dynamic will fail at the multi-caregiver level.</p>
+            <blockquote class="insight-card-quote">
+              <p>"I notice patterns. I see things. But I don't always know how to share them, or if I should."</p>
+              <cite>Keisha Williams · in-home aide</cite>
+            </blockquote>
+          </article>
+        </div>
       </section>
 
       <!-- ============ 03. SOLUTION ============ -->
