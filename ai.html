@@ -215,14 +215,19 @@
     .bio:last-of-type { margin-bottom: 26px; }
     .bio strong { color: var(--ink); font-weight: 500; }
     .bio .at {
-      color: var(--ink); font-weight: 500;
+      color: var(--ink);
+      font-weight: 500;
       text-decoration: underline;
-      text-decoration-color: var(--rule);
-      text-decoration-thickness: 1px;
+      text-decoration-color: var(--accent);
+      text-decoration-thickness: 1.5px;
       text-underline-offset: 3px;
-      transition: color .2s var(--ease), text-decoration-color .2s var(--ease);
+      cursor: pointer;
+      transition: color .2s var(--ease), text-decoration-thickness .2s var(--ease);
     }
-    .bio .at:hover { color: var(--accent); text-decoration-color: var(--accent); }
+    .bio .at:hover {
+      color: var(--accent);
+      text-decoration-thickness: 2.5px;
+    }
 
     .explore-wrap { margin-bottom: 16px; position: relative; }
     .explore {
@@ -1352,20 +1357,6 @@
       </div>
     </div>
 
-    <div class="preview" data-for="garden">
-      <div class="preview-card">
-        <div class="preview-title">Visitor's Lawn</div>
-        <div class="preview-sub">leave a seed, take a name</div>
-        <div class="preview-garden">
-          <svg viewBox="0 0 56 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M28 64 L28 28" stroke="#3d6b2c" stroke-width="2" fill="none" stroke-linecap="round"/>
-            <path d="M28 38 Q 12 32 12 18 Q 24 22 28 32" fill="#4ea862"/>
-            <path d="M28 32 Q 44 28 44 14 Q 32 18 28 28" fill="#5fbe75"/>
-            <ellipse cx="28" cy="64" rx="10" ry="2" fill="#1a1812" opacity=".15"/>
-          </svg>
-        </div>
-      </div>
-    </div>
   </div>
 
   <div class="shell">
@@ -1423,11 +1414,6 @@
               <span class="hover-label">tools in the shed</span>
               <span class="arrow">→</span>
             </a>
-            <a class="explore-item" href="lawn.html" data-preview="garden">
-              <span class="default-label"><span class="num">05.</span><span class="label-text">Visitor's Lawn</span></span>
-              <span class="hover-label">the whole lawn</span>
-              <span class="arrow">→</span>
-            </a>
           </nav>
         </div>
       </div>
@@ -1439,19 +1425,6 @@
         <a href="https://drive.google.com/file/d/1afD_cw5tKiNqtMyKyFIy7jgnxFl-OphD/view?usp=sharing" target="_blank" rel="noopener">Resume</a>
       </div>
 
-      <a class="lawn-pill reveal d5" href="lawn.html" aria-label="my plant">
-        <span class="plant-ico" aria-hidden="true">
-          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-            <path d="M8 12 L8 6.5" stroke="#3d6b2c" stroke-width="1.4" stroke-linecap="round" fill="none"/>
-            <path d="M8 8.4 Q 4.4 7 4.4 4.6 Q 7 5.4 8 7.6" fill="#5fbe75"/>
-            <path d="M8 7.6 Q 11.6 6.6 11.6 4 Q 9 4.8 8 7" fill="#79d18a"/>
-            <ellipse cx="8" cy="3.6" rx="1.6" ry="1.4" fill="#ec6478"/>
-            <rect x="5.6" y="11.2" width="4.8" height="3" rx=".6" fill="#c98a64"/>
-            <rect x="5.2" y="10.8" width="5.6" height="1.2" rx=".4" fill="#a86b48"/>
-          </svg>
-        </span>
-        <span>my plant →</span>
-      </a>
 
       <div class="sidebar-bottom">
         <span class="clock" id="clock">, </span>
@@ -1840,7 +1813,6 @@
           <li><a href="home.html">Home</a></li>
           <li><a href="about.html">About Me</a></li>
           <li><a href="ai.html">AI Practices</a></li>
-          <li><a href="lawn.html">Visitor's Lawn</a></li>
           <li class="divider"></li>
           <li class="back"><a href="index.html" class="back-to-top">Back to garden</a></li>
         </ul>

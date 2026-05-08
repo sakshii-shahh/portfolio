@@ -415,7 +415,6 @@
   <footer class="bottom">
     <div class="cta-row reveal r4">
       <button class="cta" id="enter">step inside</button>
-      <button class="skip" id="skip">skip intro</button>
     </div>
   </footer>
 
@@ -446,8 +445,7 @@
   // "Step inside" transition, 4-phase coordinated scene exit + cream-wash bloom from click point
   (function(){
     var enter=document.getElementById('enter');
-    var skip=document.getElementById('skip');
-    var welcome=document.getElementById('welcome');
+        var welcome=document.getElementById('welcome');
     var wash=document.getElementById('creamWash');
     var prefersReduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     function go(e){
@@ -459,16 +457,10 @@
       welcome.classList.add('exiting');
       wash.classList.add('blooming');
       // Navigate after total animation duration (250ms when reduced-motion is on)
-      setTimeout(function(){ window.location.href='plant.html'; }, prefersReduced?250:1500);
-    }
-    function fast(){
-      // Skip planting; go straight to the portfolio home
-      try{localStorage.setItem('skipWelcome','1')}catch(e){}
-      window.location.href='home.html';
+      setTimeout(function(){ window.location.href='home.html'; }, prefersReduced?250:1500);
     }
     enter.addEventListener('click', go);
-    skip.addEventListener('click', fast);
-  })();
+      })();
 </script>
 
 </body>
