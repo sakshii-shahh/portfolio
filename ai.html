@@ -1171,65 +1171,52 @@
       margin-top: 4px;
     }
 
-    /* Resources, card-based with covers */
-    .resources-section { margin-bottom: 40px; }
-    .resources-section:last-child { margin-bottom: 0; }
-    .resources-section h3 {
-      font-family: var(--mono); font-size: 11px; font-weight: 500;
-      letter-spacing: .15em; text-transform: uppercase;
-      color: var(--ink-mute); margin: 0 0 18px;
+    /* Resources, single 9-item mixed grid */
+    .resources-grid-9 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
     }
-    .resource-cards {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
+    @media (max-width: 760px) { .resources-grid-9 { grid-template-columns: 1fr; } }
+
+    .resource-mini {
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-md);
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      transition: transform .25s var(--ease), border-color .25s var(--ease), box-shadow .25s var(--ease);
     }
-    @media (max-width: 760px) { .resource-cards { grid-template-columns: 1fr; } }
-    .resource-card {
-      background: var(--bg-elev); border: 1px solid var(--rule);
-      border-radius: var(--r-lg); padding: 16px;
-      display: flex; gap: 14px; align-items: center;
-      transition: transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease);
-    }
-    .resource-card:hover {
-      transform: translateY(-2px);
+    .resource-mini:hover {
+      transform: translateY(-1px);
       border-color: var(--rule-strong);
-      box-shadow: 0 14px 30px -16px rgba(20,18,12,0.18);
+      box-shadow: 0 8px 18px -10px rgba(20,18,12,0.12);
     }
-    .resource-card-cover {
-      width: 56px; height: 56px; flex-shrink: 0;
-      border-radius: 8px; overflow: hidden;
-      background: var(--bg-card);
-      display: grid; place-items: center;
+    .rm-stack { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+    .rm-tag {
+      font-family: var(--mono); font-size: 9.5px; font-weight: 500;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--ink-mute);
     }
-    .resource-card-cover img { width: 100%; height: 100%; object-fit: cover; }
-    .resource-card-cover.tall { width: 48px; height: 70px; border-radius: 4px; }
-    /* Placeholder covers, used when external image URLs aren't reliable */
-    .resource-card-cover {
-      font-family: var(--display); font-weight: 600;
-      font-size: 22px; color: #fff;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.18);
+    .rm-tag.newsletter { color: var(--accent-deep); }
+    .rm-tag.book { color: var(--leaf); }
+    .rm-tag.podcast { color: var(--ink-soft); }
+    .rm-title {
+      font-family: var(--display); font-weight: 500; font-size: 15px;
+      line-height: 1.2; color: var(--ink);
     }
-    .resource-card-cover.c-mollick   { background: linear-gradient(135deg, #ec6478, #b13e58); }
-    .resource-card-cover.c-latent    { background: linear-gradient(135deg, #6f95dc, #1f4cff); }
-    .resource-card-cover.c-anthropic { background: linear-gradient(135deg, #cc785c, #8a4a2c); }
-    .resource-card-cover.c-co-intel  { background: linear-gradient(135deg, #f4a85a, #d96a1a); }
-    .resource-card-cover.c-coming    { background: linear-gradient(135deg, #87c97a, #4ea862); }
-    .resource-card-cover.c-alignment { background: linear-gradient(135deg, #b794f4, #6b3fa0); }
-    .resource-card-cover.c-hardfork  { background: linear-gradient(135deg, #1c1a13, #4a4030); }
-    .resource-card-cover.c-practical { background: linear-gradient(135deg, #4ea862, #2c4a36); }
-    .resource-card-cover.c-lenny     { background: linear-gradient(135deg, #ec6478, #f7a8b5); }
-    .resource-card-info { flex: 1; min-width: 0; }
-    .resource-card-info strong {
-      display: block; font-family: var(--display); font-weight: 500;
-      font-size: 15px; line-height: 1.2; color: var(--ink); margin-bottom: 3px;
+    .rm-by {
+      font-family: var(--sans); font-size: 12.5px; color: var(--ink-mute);
     }
-    .resource-card-info .by {
-      font-family: var(--sans); font-size: 12px; color: var(--ink-mute);
-    }
-    .resource-card-arrow {
-      font-family: var(--mono); color: var(--ink-mute);
+    .rm-arrow {
+      font-family: var(--mono); font-size: 14px; color: var(--ink-mute);
       transition: color .2s var(--ease), transform .2s var(--ease);
+      flex-shrink: 0;
     }
-    .resource-card:hover .resource-card-arrow { color: var(--accent); transform: translateX(2px); }
+    .resource-mini:hover .rm-arrow { color: var(--accent); transform: translateX(2px); }
 
     /* ============ FOOTER ============ */
     footer {
@@ -1763,67 +1750,89 @@
             <h2>What I read &amp; listen to</h2>
             <span class="count">staying current</span>
           </div>
-          <div class="resources-section">
-            <h3>Newsletters</h3>
-            <div class="resource-cards">
-              <a class="resource-card" href="https://www.oneusefulthing.org/" target="_blank" rel="noopener">
-                <div class="resource-card-cover c-mollick">📬</div>
-                <div class="resource-card-info"><strong>One Useful Thing</strong><span class="by">Ethan Mollick</span></div>
-                <span class="resource-card-arrow">→</span>
-              </a>
-              <a class="resource-card" href="https://www.latent.space/" target="_blank" rel="noopener">
-                <div class="resource-card-cover c-latent">🛰</div>
-                <div class="resource-card-info"><strong>Latent Space</strong><span class="by">swyx + Alessio</span></div>
-                <span class="resource-card-arrow">→</span>
-              </a>
-              <a class="resource-card" href="https://www.anthropic.com/news" target="_blank" rel="noopener">
-                <div class="resource-card-cover c-anthropic">A</div>
-                <div class="resource-card-info"><strong>Anthropic releases</strong><span class="by">model + product news</span></div>
-                <span class="resource-card-arrow">→</span>
-              </a>
-            </div>
-          </div>
+          <div class="resources-grid-9">
 
-          <div class="resources-section">
-            <h3>Books</h3>
-            <div class="resource-cards">
-              <a class="resource-card" href="https://www.goodreads.com/book/show/199798176-co-intelligence" target="_blank" rel="noopener">
-                <div class="resource-card-cover tall c-co-intel">CI</div>
-                <div class="resource-card-info"><strong>Co-Intelligence</strong><span class="by">Ethan Mollick</span></div>
-                <span class="resource-card-arrow">→</span>
-              </a>
-              <a class="resource-card" href="https://www.goodreads.com/book/show/123043624-the-coming-wave" target="_blank" rel="noopener">
-                <div class="resource-card-cover tall c-coming">CW</div>
-                <div class="resource-card-info"><strong>The Coming Wave</strong><span class="by">Mustafa Suleyman</span></div>
-                <span class="resource-card-arrow">→</span>
-              </a>
-              <a class="resource-card" href="https://www.goodreads.com/book/show/50489104-the-alignment-problem" target="_blank" rel="noopener">
-                <div class="resource-card-cover tall c-alignment">AP</div>
-                <div class="resource-card-info"><strong>The Alignment Problem</strong><span class="by">Brian Christian</span></div>
-                <span class="resource-card-arrow">→</span>
-              </a>
-            </div>
-          </div>
+            <a class="resource-mini" href="https://www.oneusefulthing.org/" target="_blank" rel="noopener">
+              <div class="rm-stack">
+                <span class="rm-tag newsletter">Newsletter</span>
+                <strong class="rm-title">One Useful Thing</strong>
+                <span class="rm-by">Ethan Mollick</span>
+              </div>
+              <span class="rm-arrow">→</span>
+            </a>
 
-          <div class="resources-section">
-            <h3>Podcasts</h3>
-            <div class="resource-cards">
-              <a class="resource-card" href="https://www.nytimes.com/column/hard-fork" target="_blank" rel="noopener">
-                <div class="resource-card-cover c-hardfork">🎙</div>
-                <div class="resource-card-info"><strong>Hard Fork</strong><span class="by">Casey Newton + Kevin Roose</span></div>
-                <span class="resource-card-arrow">→</span>
-              </a>
-              <a class="resource-card" href="https://changelog.com/practicalai" target="_blank" rel="noopener">
-                <div class="resource-card-cover c-practical">🤖</div>
-                <div class="resource-card-info"><strong>Practical AI</strong><span class="by">Daniel Whitenack</span></div>
-                <span class="resource-card-arrow">→</span>
-              </a>
-              <a class="resource-card" href="https://www.lennysnewsletter.com/podcast" target="_blank" rel="noopener">
-                <div class="resource-card-cover c-lenny">L</div>
-                <div class="resource-card-info"><strong>Lenny's Podcast</strong><span class="by">Lenny Rachitsky</span></div>
-                <span class="resource-card-arrow">→</span>
-              </a>
-            </div>
+            <a class="resource-mini" href="https://www.goodreads.com/book/show/199798176-co-intelligence" target="_blank" rel="noopener">
+              <div class="rm-stack">
+                <span class="rm-tag book">Book</span>
+                <strong class="rm-title">Co-Intelligence</strong>
+                <span class="rm-by">Ethan Mollick</span>
+              </div>
+              <span class="rm-arrow">→</span>
+            </a>
+
+            <a class="resource-mini" href="https://www.nytimes.com/column/hard-fork" target="_blank" rel="noopener">
+              <div class="rm-stack">
+                <span class="rm-tag podcast">Podcast</span>
+                <strong class="rm-title">Hard Fork</strong>
+                <span class="rm-by">Casey Newton + Kevin Roose</span>
+              </div>
+              <span class="rm-arrow">→</span>
+            </a>
+
+            <a class="resource-mini" href="https://www.latent.space/" target="_blank" rel="noopener">
+              <div class="rm-stack">
+                <span class="rm-tag newsletter">Newsletter</span>
+                <strong class="rm-title">Latent Space</strong>
+                <span class="rm-by">swyx + Alessio</span>
+              </div>
+              <span class="rm-arrow">→</span>
+            </a>
+
+            <a class="resource-mini" href="https://www.goodreads.com/book/show/123043624-the-coming-wave" target="_blank" rel="noopener">
+              <div class="rm-stack">
+                <span class="rm-tag book">Book</span>
+                <strong class="rm-title">The Coming Wave</strong>
+                <span class="rm-by">Mustafa Suleyman</span>
+              </div>
+              <span class="rm-arrow">→</span>
+            </a>
+
+            <a class="resource-mini" href="https://changelog.com/practicalai" target="_blank" rel="noopener">
+              <div class="rm-stack">
+                <span class="rm-tag podcast">Podcast</span>
+                <strong class="rm-title">Practical AI</strong>
+                <span class="rm-by">Daniel Whitenack</span>
+              </div>
+              <span class="rm-arrow">→</span>
+            </a>
+
+            <a class="resource-mini" href="https://www.anthropic.com/news" target="_blank" rel="noopener">
+              <div class="rm-stack">
+                <span class="rm-tag newsletter">Newsletter</span>
+                <strong class="rm-title">Anthropic releases</strong>
+                <span class="rm-by">model + product news</span>
+              </div>
+              <span class="rm-arrow">→</span>
+            </a>
+
+            <a class="resource-mini" href="https://www.goodreads.com/book/show/50489104-the-alignment-problem" target="_blank" rel="noopener">
+              <div class="rm-stack">
+                <span class="rm-tag book">Book</span>
+                <strong class="rm-title">The Alignment Problem</strong>
+                <span class="rm-by">Brian Christian</span>
+              </div>
+              <span class="rm-arrow">→</span>
+            </a>
+
+            <a class="resource-mini" href="https://www.lennysnewsletter.com/podcast" target="_blank" rel="noopener">
+              <div class="rm-stack">
+                <span class="rm-tag podcast">Podcast</span>
+                <strong class="rm-title">Lenny's Podcast</strong>
+                <span class="rm-by">Lenny Rachitsky</span>
+              </div>
+              <span class="rm-arrow">→</span>
+            </a>
+
           </div>
         </div>
 
@@ -1853,12 +1862,13 @@
       </div>
 
       <div class="footer-col">
+        <p class="footer-col-label">Wander</p>
         <ul>
-          <li><a href="home.html">Home</a></li>
+          <li><a href="home.html">Work</a></li>
           <li><a href="about.html">About Me</a></li>
           <li><a href="ai.html">AI Practices</a></li>
           <li class="divider"></li>
-          <li class="back"><a href="index.html" class="back-to-top">Back to garden</a></li>
+          <li class="back"><a href="#" class="back-to-top">Back to top</a></li>
         </ul>
       </div>
     </div>
