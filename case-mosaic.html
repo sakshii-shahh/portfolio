@@ -1099,6 +1099,104 @@
       line-height: 1.4;
     }
 
+    /* Market map: 2x2 quadrant chart */
+    .market-map {
+      margin: 24px 0 28px;
+    }
+    .market-y-label,
+    .market-x-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+      margin: 0 0 8px;
+    }
+    .market-x-label {
+      margin: 8px 0 0;
+      text-align: right;
+    }
+    .market-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border: 1px solid var(--rule);
+      border-radius: var(--r-md);
+      overflow: hidden;
+      background: var(--bg-elev);
+    }
+    .market-cell {
+      padding: 26px 24px;
+      background: var(--bg-elev);
+      border-right: 1px dashed var(--rule);
+      border-bottom: 1px dashed var(--rule);
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+      transition: background .25s var(--ease);
+    }
+    .market-cell.tr,
+    .market-cell.br { border-right: none; }
+    .market-cell.bl,
+    .market-cell.br { border-bottom: none; }
+    .market-cell.highlight {
+      background: color-mix(in srgb, var(--accent) 10%, var(--bg-elev));
+    }
+    .market-cell.muted {
+      background: color-mix(in srgb, var(--ink-mute) 5%, var(--bg-elev));
+    }
+    .market-cell-tag {
+      display: inline-block;
+      align-self: flex-start;
+      font-family: var(--mono); font-size: 10.5px;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--ink-soft);
+      padding: 5px 11px;
+      background: var(--bg);
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      margin-bottom: 14px;
+    }
+    .market-cell-tag.mosaic-tag {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+      font-weight: 500;
+    }
+    .market-cell-tag.muted-tag {
+      color: var(--ink-mute);
+      background: transparent;
+      border-style: dashed;
+    }
+    .market-cell ul {
+      list-style: none; padding: 0; margin: 0;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .market-cell ul li {
+      font-family: var(--display);
+      font-weight: 500;
+      font-size: 16px;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+    .market-cell.highlight p {
+      margin: 0;
+      font-family: "Fraunces", Georgia, serif;
+      font-style: italic;
+      font-size: 15px;
+      color: var(--ink);
+      line-height: 1.4;
+    }
+    @media (max-width: 760px) {
+      .market-grid { grid-template-columns: 1fr; }
+      .market-cell {
+        border-right: none;
+        border-bottom: 1px dashed var(--rule);
+        min-height: auto;
+      }
+      .market-cell.br { border-bottom: none; }
+    }
+
 
     /* Research phases visual map */
     .research-phases {
@@ -1403,13 +1501,38 @@
         <p>Other caregivers do the same. The aide records hers at the end of her shift, the school para drops a note at lunch. Over time, the timeline becomes pattern-rich enough that the AI surfaces cross-environment correlations the parent or aide couldn't have spotted alone: <em>"rough mornings correlate with poor sleep AND new bus driver."</em> The parent validates the pattern, then generates a one-page summary scoped specifically for the substitute teacher coming in Thursday: sensory needs included, mental health notes excluded. Send. Done. The substitute opens it on their phone, no install required.</p>
 
         <h3>Where it lives in the market</h3>
-        <figure class="case-figure">
-          <div class="case-figure-frame" data-placeholder="Competitive landscape: Mosaic targets the underserved upper-right quadrant">
-            <img src="assets/mosaic/06_competitive_landscape.png" alt="Competitive landscape" />
+
+        <div class="market-map">
+          <p class="market-y-label">↑ Behavioral intelligence</p>
+
+          <div class="market-grid">
+            <div class="market-cell tl">
+              <span class="market-cell-tag">Clinical ABA tools</span>
+              <ul>
+                <li>CentralReach</li>
+                <li>Catalyst</li>
+              </ul>
+            </div>
+            <div class="market-cell tr highlight">
+              <span class="market-cell-tag mosaic-tag">Mosaic</span>
+              <p>Built for behavioral + family. Empty quadrant.</p>
+            </div>
+            <div class="market-cell bl muted">
+              <span class="market-cell-tag muted-tag">unserved</span>
+            </div>
+            <div class="market-cell br">
+              <span class="market-cell-tag">Family care apps</span>
+              <ul>
+                <li>Cozi</li>
+                <li>CareZone</li>
+              </ul>
+            </div>
           </div>
-          <figcaption>Competitive landscape: Mosaic targets the underserved upper-right quadrant</figcaption>
-        </figure>
-        <p>Clinical ABA tools (CentralReach, Catalyst) sit upper-left: high behavioral intelligence, low family-friendliness. General care apps (Cozi, CareZone) sit lower-right: family-friendly but not behavioral. The upper-right corner, high behavioral intelligence + high family-friendliness, is empty. That's the seat Mosaic is built for.</p>
+
+          <p class="market-x-label">Family friendliness →</p>
+        </div>
+
+        <p>Clinical ABA tools sit upper-left: high behavioral intelligence, low family-friendliness. General care apps sit lower-right: family-friendly but not behavioral. The upper-right corner, high behavioral intelligence and high family-friendliness, is empty. That's the seat Mosaic is built for.</p>
 
         <h3>The design decisions</h3>
         <div class="design-decisions">
