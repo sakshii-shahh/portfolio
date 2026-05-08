@@ -1,0 +1,1300 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mosaic · Sakshi Shah</title>
+  <meta name="description" content="Case study: Mosaic, a behavioral memory app for caregiving teams supporting teens with autism. By product designer Sakshi Shah." />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://portfolio-sakshi-shah.vercel.app/case-mosaic.html" />
+  <meta property="og:title" content="Mosaic · Sakshi Shah" />
+  <meta property="og:description" content="Case study: Mosaic, a behavioral memory app for caregiving teams supporting teens with autism. By product designer Sakshi Shah." />
+  <meta property="og:image" content="https://framerusercontent.com/images/yWcAmam0HfUbCIUDWf7Pm80qu8I.jpeg?width=1200" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Mosaic · Sakshi Shah" />
+  <meta name="twitter:description" content="Case study: Mosaic, a behavioral memory app for caregiving teams supporting teens with autism. By product designer Sakshi Shah." />
+  <meta name="twitter:image" content="https://framerusercontent.com/images/yWcAmam0HfUbCIUDWf7Pm80qu8I.jpeg?width=1200" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Fraunces:ital,wght@0,400..600;1,400..600&family=Geist:wght@400;500&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="assets/page-transition.js" defer></script>
+  <style>
+    :root {
+      --bg: #f0e8d2;
+      --bg-elev: #f6efdb;
+      --bg-card: #e8e0c5;
+      --ink: #3a2818;
+      --ink-soft: #5a4632;
+      --ink-mute: #8a7a5e;
+      --rule: #cdc0a0;
+      --rule-strong: #b8a988;
+      --accent: #ec6478;
+      --accent-soft: #f7d4dc;
+      --accent-deep: #b13e58;
+      --secondary: #5e8a4f;
+      --secondary-soft: #d4dfb8;
+      --leaf: #4ea862;
+      --leaf-deep: #3d6b2c;
+      --black-card: #1c1a13;
+      --footer-bg: #2c4a36;
+
+      --display: "Bricolage Grotesque", system-ui, sans-serif;
+      --serif: "Fraunces", Georgia, serif;
+      --sans: "Geist", "Inter", system-ui, -apple-system, sans-serif;
+      --mono: "Geist Mono", ui-monospace, monospace;
+
+      --r-md: 12px;
+      --r-lg: 18px;
+      --r-xl: 22px;
+      --ease: cubic-bezier(.22,.61,.36,1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; }
+    html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+
+    body::before {
+      content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 1;
+      opacity: .35;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='2' seed='4'/><feColorMatrix values='0 0 0 0 0.55  0 0 0 0 0.42  0 0 0 0 0.22  0 0 0 0.07 0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>");
+      mix-blend-mode: multiply;
+    }
+
+    body {
+      background: var(--bg); color: var(--ink);
+      font-family: var(--sans); font-size: 16px; line-height: 1.65;
+      min-height: 100vh;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    button { font-family: inherit; cursor: pointer; }
+
+    @media (hover: hover) and (pointer: fine) {
+      body, body * { cursor: none !important; }
+    }
+    .cursor-dot {
+      position: fixed; top: 0; left: 0; pointer-events: none; z-index: 999;
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--accent);
+      transform: translate(-50%, -50%);
+      transition: width .25s var(--ease), height .25s var(--ease), opacity .25s var(--ease);
+    }
+    body.cursor-grow .cursor-dot { width: 30px; height: 30px; opacity: .85; }
+    @media (hover: none) { .cursor-dot { display: none; } }
+
+    /* ============ LAYOUT, full width ============ */
+    .shell {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      width: 100%;
+      margin: 0;
+      min-height: 100vh;
+      position: relative;
+    }
+    .sidebar {
+      padding: 36px 28px 28px;
+      position: sticky; top: 0;
+      height: 100vh;
+      display: flex; flex-direction: column;
+      border-right: 1px solid var(--rule);
+      background: var(--bg);
+    }
+    .main {
+      padding: 48px 96px 60px;
+      min-width: 0;
+    }
+    /* Readable column, paragraphs comfortable up to ~80ch, headlines wider.
+       Visuals/hero/banner remain full bleed. */
+    .main > .case-tags,
+    .main > .case-lede,
+    .main > .visit-btn,
+    .main > .section > .section-eyebrow,
+    .main > .section > p,
+    .main > .section > ol {
+      max-width: 1080px;
+    }
+    .main > .case-title,
+    .main > .section > .section-title,
+    .main > .next {
+      max-width: 1280px;
+    }
+    .main > .section > .pull-quote {
+      max-width: 36ch;
+    }
+    @media (max-width: 980px) {
+      .shell { grid-template-columns: 1fr; }
+      .sidebar {
+        position: static; height: auto;
+        border-right: 0; border-bottom: 1px solid var(--rule);
+        padding: 24px 24px 18px;
+      }
+      .main { padding: 32px 24px 48px; }
+    }
+
+    /* ============ SIDEBAR, TOC ============ */
+    .back-home {
+      font-family: var(--mono); font-size: 11.5px; font-weight: 500;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: var(--ink-soft);
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-bottom: 36px;
+      transition: color .2s var(--ease);
+    }
+    .back-home:hover { color: var(--accent); }
+
+    .toc {
+      background: var(--bg-card);
+      border-radius: var(--r-lg);
+      padding: 18px 14px 14px;
+      border: 1px solid var(--rule);
+    }
+    .toc-label {
+      font-family: var(--mono); font-size: 10.5px; font-weight: 500;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: var(--ink-mute);
+      padding: 0 8px 12px;
+      margin: 0;
+    }
+    .toc ol {
+      list-style: none; padding: 0; margin: 0;
+      display: flex; flex-direction: column; gap: 2px;
+    }
+    .toc a {
+      display: block;
+      padding: 9px 12px;
+      border-radius: 8px;
+      font-size: 14.5px;
+      color: var(--ink);
+      transition: background .2s var(--ease), color .2s var(--ease);
+      letter-spacing: -.005em;
+    }
+    .toc a:hover { background: var(--bg-elev); }
+    .toc a.active {
+      background: var(--bg-elev);
+      font-weight: 500;
+    }
+    .toc a .num {
+      font-family: var(--mono); font-size: 12.5px;
+      color: var(--ink-mute); margin-right: 8px;
+      font-feature-settings: "tnum";
+    }
+    .toc a.active .num { color: var(--accent); }
+
+    .sidebar-foot {
+      margin-top: auto; padding-top: 24px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .back-top {
+      font-family: var(--mono); font-size: 11px; font-weight: 500;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: var(--ink-soft);
+      display: inline-flex; align-items: center; gap: 6px;
+      transition: color .2s var(--ease);
+    }
+    .back-top:hover { color: var(--accent); }
+    .mascot {
+      width: 28px; height: 36px;
+      background: var(--ink); border-radius: 6px;
+      position: relative;
+    }
+    .mascot::before, .mascot::after {
+      content: ""; position: absolute; top: 11px;
+      width: 5px; height: 5px; background: var(--bg);
+      border-radius: 50%;
+    }
+    .mascot::before { left: 6px; }
+    .mascot::after { right: 6px; }
+
+    /* ============ HERO ============ */
+    .hero {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      background: #d9e6f7;
+      margin-bottom: 32px;
+      box-shadow: 0 8px 28px -16px rgba(20, 18, 12, 0.18);
+      position: relative;
+    }
+    .hero img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* ============ HEAD BLOCK ============ */
+    .case-tags {
+      display: flex; gap: 8px; margin-bottom: 18px;
+    }
+    .case-tag {
+      font-family: var(--mono); font-size: 10.5px; font-weight: 500;
+      letter-spacing: .14em; text-transform: uppercase;
+      padding: 6px 12px;
+      background: color-mix(in srgb, var(--ink-soft) 5%, transparent);
+      border: 1px solid color-mix(in srgb, var(--ink-soft) 22%, transparent);
+      border-radius: 999px;
+      color: var(--ink-soft);
+    }
+    .case-tag.research {
+      background: color-mix(in srgb, var(--secondary) 14%, transparent);
+      border-color: color-mix(in srgb, var(--secondary) 38%, transparent);
+      color: color-mix(in srgb, var(--secondary) 90%, var(--ink));
+    }
+    .case-tag.shipped {
+      background: color-mix(in srgb, var(--leaf) 14%, transparent);
+      border-color: color-mix(in srgb, var(--leaf) 38%, transparent);
+      color: color-mix(in srgb, var(--leaf-deep) 80%, var(--ink));
+    }
+
+    .case-title {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: clamp(40px, 5.4vw, 64px);
+      line-height: 1.04;
+      letter-spacing: -.015em;
+      margin: 0 0 20px;
+      color: var(--ink);
+      display: flex; align-items: baseline; gap: 16px;
+    }
+    .case-title .star {
+      color: var(--accent);
+      font-family: var(--display);
+      font-weight: 400;
+      font-size: .7em;
+      flex-shrink: 0;
+    }
+
+    .case-lede {
+      font-size: 17px;
+      color: var(--ink-soft);
+      line-height: 1.65;
+      margin: 0 0 28px;
+      max-width: 70ch;
+    }
+    .case-lede strong { color: var(--ink); font-weight: 500; }
+    .case-lede a {
+      color: var(--ink); font-weight: 500;
+      text-decoration: underline;
+      text-decoration-color: var(--rule);
+      text-underline-offset: 3px;
+    }
+    .case-lede a:hover { text-decoration-color: var(--accent); color: var(--accent); }
+
+    .visit-btn {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 14px 24px;
+      width: 100%; max-width: 100%;
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      background: transparent;
+      font-family: var(--display); font-size: 14.5px; font-weight: 500;
+      color: var(--ink);
+      letter-spacing: -.005em;
+      transition: background .2s var(--ease), border-color .2s var(--ease), transform .2s var(--ease);
+      margin-bottom: 32px;
+      text-align: center;
+    }
+    .visit-btn:hover {
+      background: var(--bg-elev); border-color: var(--rule-strong);
+      transform: translateY(-2px);
+    }
+    .visit-btn .arrow { transition: transform .25s var(--ease); }
+    .visit-btn:hover .arrow { transform: translateX(3px); }
+
+    /* ============ PROJECT BANNER ============ */
+    .project-banner {
+      background: var(--accent);
+      color: #fbf6e5;
+      border-radius: var(--r-xl);
+      padding: 28px 36px;
+      margin-bottom: 80px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 36px;
+    }
+    @media (max-width: 760px) {
+      .project-banner { grid-template-columns: repeat(2, 1fr); gap: 28px; padding: 24px 28px; }
+    }
+    .pb-col-label {
+      font-family: var(--mono); font-size: 11px; font-weight: 500;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: rgba(251, 246, 229, 0.72);
+      margin: 0 0 10px;
+    }
+    .pb-col-val {
+      font-family: var(--display); font-size: 15px; font-weight: 500;
+      line-height: 1.5;
+      color: #fbf6e5;
+    }
+    .pb-col-val span { display: block; }
+    .pb-col-val .softer { color: rgba(251, 246, 229, 0.78); }
+
+    /* ============ SECTIONS ============ */
+    .section { margin-bottom: 80px; scroll-margin-top: 32px; }
+    .section-eyebrow {
+      font-family: var(--mono); font-size: 11px; font-weight: 500;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: var(--ink-mute);
+      margin: 0 0 14px;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: clamp(28px, 3.8vw, 42px);
+      line-height: 1.1; letter-spacing: -.01em;
+      margin: 0 0 20px;
+      color: var(--ink);
+    }
+    .section p {
+      font-size: 16px; color: var(--ink-soft);
+      line-height: 1.7; margin: 0 0 18px;
+      max-width: 70ch;
+    }
+    .section p strong { color: var(--ink); font-weight: 500; }
+    .section ol {
+      counter-reset: item;
+      padding: 0; margin: 0 0 18px; list-style: none;
+      max-width: 70ch;
+    }
+    .section ol li {
+      counter-increment: item;
+      padding-left: 28px; position: relative;
+      margin-bottom: 10px;
+      color: var(--ink-soft);
+      line-height: 1.7;
+    }
+    .section ol li::before {
+      content: counter(item) ".";
+      position: absolute; left: 0; top: 0;
+      font-family: var(--mono); color: var(--ink-mute);
+      font-size: 14px;
+    }
+
+    /* ============ FEATURE LIST + INTERACTIVE MOCKUP ============ */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
+      gap: 40px;
+      align-items: start;
+      margin-top: 28px;
+    }
+    @media (max-width: 760px) { .feature-grid { grid-template-columns: 1fr; gap: 24px; } }
+
+    .feature-list {
+      display: flex; flex-direction: column;
+      gap: 12px;
+    }
+    .feature-item {
+      background: var(--bg-card);
+      border: 1.5px solid var(--rule);
+      border-radius: var(--r-lg);
+      padding: 18px 22px;
+      cursor: pointer;
+      transition: border-color .25s var(--ease), background .25s var(--ease), transform .25s var(--ease);
+    }
+    .feature-item:hover, .feature-item.is-active {
+      border-color: var(--accent);
+      background: var(--bg-elev);
+      transform: translateX(2px);
+    }
+    .feature-item h4 {
+      font-family: var(--display); font-size: 17px; font-weight: 600;
+      letter-spacing: -.005em;
+      margin: 0 0 6px;
+      color: var(--ink);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .feature-item h4 .num {
+      font-family: var(--mono); font-size: 11px; font-weight: 500;
+      color: var(--ink-mute); letter-spacing: .14em;
+    }
+    .feature-item.is-active h4 .num { color: var(--accent); }
+    .feature-item p {
+      font-size: 14.5px; color: var(--ink-soft);
+      line-height: 1.55; margin: 0;
+    }
+
+    /* Phone-frame mockup container with stacked screens */
+    .feature-mockup {
+      position: sticky; top: 36px;
+      aspect-ratio: 9 / 16;
+      max-width: 360px;
+      margin: 0 auto;
+      width: 100%;
+      background: linear-gradient(160deg, #1c1a13 0%, #2a2618 100%);
+      border-radius: 36px;
+      padding: 14px;
+      box-shadow: 0 24px 60px -24px rgba(20,18,12,.4),
+                  0 4px 12px -4px rgba(20,18,12,.18);
+      overflow: hidden;
+      position: relative;
+    }
+    .feature-mockup::before {
+      /* notch */
+      content: ""; position: absolute; top: 14px; left: 50%;
+      transform: translateX(-50%);
+      width: 90px; height: 22px;
+      background: #0f0e0a;
+      border-radius: 14px;
+      z-index: 5;
+    }
+    .feature-mockup .screen {
+      position: absolute; inset: 14px;
+      border-radius: 26px;
+      background: #fbf6e5;
+      overflow: hidden;
+      opacity: 0;
+      transform: scale(.96);
+      transition: opacity .4s var(--ease), transform .4s var(--ease);
+      padding: 38px 18px 18px;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .feature-mockup .screen.is-active { opacity: 1; transform: scale(1); }
+
+    .ms-statusbar {
+      display: flex; justify-content: space-between; align-items: center;
+      font-family: var(--mono); font-size: 9px; color: var(--ink-soft);
+      letter-spacing: .1em; padding: 0 4px;
+    }
+    .ms-h {
+      font-family: var(--display); font-weight: 600;
+      font-size: 19px; line-height: 1.15; letter-spacing: -.01em;
+      color: var(--ink); margin: 6px 0 2px;
+    }
+    .ms-sub {
+      font-family: var(--mono); font-size: 9.5px;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--ink-mute); margin-bottom: 6px;
+    }
+    .ms-card {
+      background: var(--bg); border: 1px solid var(--rule);
+      border-radius: 12px; padding: 10px 12px;
+      font-size: 11.5px; color: var(--ink-soft);
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .ms-card.coral { background: var(--accent-soft); border-color: color-mix(in srgb, var(--accent) 35%, transparent); }
+    .ms-card.sage  { background: var(--secondary-soft); border-color: color-mix(in srgb, var(--secondary) 35%, transparent); }
+    .ms-card .row { display: flex; justify-content: space-between; align-items: center; }
+    .ms-card .row strong { color: var(--ink); font-weight: 600; font-size: 12px; }
+    .ms-pill {
+      display: inline-block; padding: 2px 8px;
+      font-family: var(--mono); font-size: 8.5px; letter-spacing: .1em;
+      text-transform: uppercase; border-radius: 999px;
+      background: var(--bg-card); color: var(--ink-soft);
+    }
+    .ms-pill.green { background: color-mix(in srgb, var(--leaf) 18%, transparent); color: var(--leaf-deep); }
+    .ms-pill.amber { background: #f6e4a8; color: #8a6418; }
+    .ms-bar {
+      height: 6px; border-radius: 3px;
+      background: var(--bg-card);
+      position: relative; overflow: hidden;
+    }
+    .ms-bar > span { position: absolute; left: 0; top: 0; bottom: 0; background: var(--accent); border-radius: 3px; }
+
+    .ms-step {
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 6px 0; font-size: 11px; color: var(--ink-soft);
+      position: relative;
+    }
+    .ms-step .dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      flex-shrink: 0; margin-top: 3px;
+      background: var(--bg-card); border: 2px solid var(--rule);
+    }
+    .ms-step.done .dot { background: var(--leaf); border-color: var(--leaf); }
+    .ms-step.now .dot { background: var(--accent); border-color: var(--accent); box-shadow: 0 0 0 4px rgba(236,100,120,.18); }
+    .ms-step strong { color: var(--ink); display: block; font-size: 12px; font-weight: 600; }
+    .ms-step + .ms-step::before {
+      content: ""; position: absolute; left: 4px; top: -8px;
+      width: 2px; height: 16px; background: var(--rule);
+    }
+
+    .ms-field {
+      display: flex; flex-direction: column; gap: 2px;
+      padding: 8px 10px; border: 1px solid var(--rule);
+      border-radius: 8px; background: var(--bg);
+    }
+    .ms-field .lbl {
+      font-family: var(--mono); font-size: 8.5px;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--ink-mute);
+    }
+    .ms-field .val { font-size: 11.5px; color: var(--ink); font-weight: 500; }
+    .ms-field.dim { background: var(--bg-card); }
+    .ms-field.dim .val { color: var(--ink-mute); }
+
+    /* ============ DUO IMAGE ROW ============ */
+    .duo {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin: 28px 0;
+    }
+    @media (max-width: 760px) { .duo { grid-template-columns: 1fr; } }
+    .duo-tile {
+      background: var(--bg-card);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-lg);
+      aspect-ratio: 16 / 11;
+      display: grid; place-items: center;
+      color: var(--ink-mute);
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: .14em; text-transform: uppercase;
+      overflow: hidden;
+    }
+    .duo-tile img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* ============ PULL QUOTE ============ */
+    .pull-quote {
+      font-family: var(--serif); font-style: italic;
+      font-size: clamp(22px, 2.6vw, 30px);
+      line-height: 1.35; letter-spacing: -.005em;
+      color: var(--ink);
+      padding: 36px 0;
+      margin: 36px 0;
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+      max-width: 26ch;
+    }
+
+    /* ============ IMPACT, big stat blocks ============ */
+    .nda-callout {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 14px 18px;
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-left: 3px solid var(--accent);
+      border-radius: var(--r-md);
+      margin: 18px 0 22px;
+      max-width: 720px;
+    }
+    .nda-icon {
+      font-size: 15px;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .nda-callout p {
+      margin: 0;
+      font-size: 13.5px;
+      font-style: italic;
+      color: var(--ink-soft);
+      line-height: 1.5;
+    }
+
+    .features-list {
+      list-style: none; padding: 0; margin: 28px 0 0;
+      display: flex; flex-direction: column; gap: 14px;
+    }
+    .features-list li {
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-md);
+      padding: 22px 26px;
+      font-size: 15.5px; line-height: 1.55;
+      color: var(--ink-soft);
+      list-style: none;
+    }
+    .features-list strong { color: var(--ink); font-weight: 500; }
+
+    .impact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin: 36px 0 24px;
+    }
+    @media (max-width: 760px) { .impact-grid { grid-template-columns: 1fr; } }
+    .impact-card {
+      background: var(--bg-card);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-xl);
+      padding: 28px 26px;
+      display: flex; flex-direction: column;
+      min-height: 220px;
+      transition: border-color .2s var(--ease), transform .2s var(--ease);
+    }
+    .impact-card:hover { border-color: var(--rule-strong); transform: translateY(-3px); }
+    .impact-card.coral { background: var(--accent); color: #fbf6e5; border-color: transparent; }
+    .impact-card.coral .impact-num { color: #fbf6e5; }
+    .impact-card.coral .impact-lbl { color: rgba(251,246,229,.78); }
+    .impact-card.coral .impact-desc { color: rgba(251,246,229,.85); }
+    .impact-card.sage { background: color-mix(in srgb, var(--secondary) 22%, var(--bg-elev)); border-color: color-mix(in srgb, var(--secondary) 35%, transparent); }
+    .impact-num {
+      font-family: var(--serif); font-weight: 500;
+      font-size: clamp(48px, 6vw, 76px);
+      line-height: .95; letter-spacing: -.025em;
+      color: var(--accent);
+      margin: 0 0 12px;
+    }
+    .impact-card.sage .impact-num { color: var(--leaf-deep); }
+    .impact-lbl {
+      font-family: var(--mono); font-size: 10.5px;
+      letter-spacing: .16em; text-transform: uppercase;
+      color: var(--ink-mute);
+      margin-bottom: 8px;
+    }
+    .impact-desc {
+      font-size: 14px; color: var(--ink-soft);
+      line-height: 1.55; margin: 0; margin-top: auto;
+    }
+    .impact-quote {
+      font-family: var(--serif); font-style: italic;
+      font-size: 19px; line-height: 1.5;
+      color: var(--ink); max-width: 56ch;
+      padding-left: 18px; border-left: 2px solid var(--accent);
+      margin: 0;
+    }
+    .impact-quote-by {
+      display: block; margin-top: 8px;
+      font-family: var(--mono); font-size: 11px; font-style: normal;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--ink-mute);
+    }
+
+    /* ============ TESTIMONIALS ============ */
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-top: 28px;
+    }
+    @media (max-width: 760px) { .testimonial-grid { grid-template-columns: 1fr; } }
+    .testimonial {
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-xl);
+      padding: 26px 28px;
+      display: flex; flex-direction: column; gap: 18px;
+      transition: border-color .2s var(--ease), transform .2s var(--ease);
+    }
+    .testimonial:hover { border-color: var(--rule-strong); transform: translateY(-2px); }
+    .testimonial-quote {
+      font-family: var(--serif); font-style: italic;
+      font-size: 18px; line-height: 1.5;
+      color: var(--ink); margin: 0;
+    }
+    .testimonial-quote::before { content: "“"; color: var(--accent); font-size: 28px; line-height: 0; vertical-align: -.18em; margin-right: 4px; }
+    .testimonial-author {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .testimonial-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--accent-soft);
+      display: grid; place-items: center;
+      color: var(--accent-deep);
+      font-family: var(--display); font-weight: 600; font-size: 15px;
+      flex-shrink: 0;
+    }
+    .testimonial-meta {
+      display: flex; flex-direction: column; gap: 2px;
+    }
+    .testimonial-name {
+      font-family: var(--display); font-weight: 600; font-size: 14.5px;
+      color: var(--ink);
+    }
+    .testimonial-role {
+      font-family: var(--mono); font-size: 10.5px;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--ink-mute);
+    }
+
+    /* ============ NEXT ============ */
+    .next {
+      margin-top: 100px;
+      padding-top: 48px;
+      border-top: 1px solid var(--rule);
+    }
+    .next-label {
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: var(--ink-mute);
+      margin-bottom: 10px;
+    }
+    .next-link {
+      display: inline-flex; align-items: baseline; gap: 16px;
+      font-family: var(--serif); font-weight: 500;
+      font-size: clamp(28px, 3.6vw, 42px);
+      line-height: 1.1; letter-spacing: -.01em;
+      color: var(--ink);
+      transition: color .2s var(--ease);
+    }
+    .next-link:hover { color: var(--accent); }
+    .next-link .arr { font-family: var(--display); font-size: .55em; color: var(--accent); }
+
+    /* ============ FOOTER ============ */
+    footer {
+      grid-column: 1 / -1;
+      background: var(--footer-bg);
+      color: rgba(240, 232, 210, 0.85);
+      border-radius: 28px 28px 0 0;
+      padding: 96px 64px 64px;
+      position: relative; overflow: hidden;
+      margin-top: 32px;
+    }
+    @media (max-width: 980px) { footer { padding: 64px 32px 48px; border-radius: 24px 24px 0 0; } }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      column-gap: 56px;
+      position: relative; z-index: 2;
+      align-items: start;
+      max-width: 1480px; margin: 0 auto;
+    }
+    .footer-grid .footer-col { min-width: 160px; }
+    @media (max-width: 980px) { .footer-grid { grid-template-columns: 1fr 1fr; column-gap: 32px; } }
+    @media (max-width: 600px) { .footer-grid { grid-template-columns: 1fr; column-gap: 0; row-gap: 32px; } }
+    .footer-quote {
+      font-family: var(--serif); font-weight: 400;
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: 1.18; letter-spacing: -.012em;
+      color: #f4ecd0; margin: 0 0 18px; max-width: 20ch;
+    }
+    .footer-quote .em { font-style: italic; color: #f4ecd0; }
+    .footer-attr {
+      font-family: var(--mono); font-size: 10.5px; letter-spacing: .18em;
+      text-transform: uppercase; color: rgba(240, 232, 210, 0.5);
+    }
+    .footer-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+    .footer-col a {
+      color: rgba(240, 232, 210, 0.55);
+      font-family: var(--mono); font-size: 11.5px; font-weight: 500;
+      letter-spacing: .2em; text-transform: uppercase;
+      transition: color .2s var(--ease);
+    }
+    .footer-col a:hover { color: #f4ecd0; }
+    .footer-col li.divider { height: 14px; }
+    .footer-col li.back a {
+      color: rgba(240, 232, 210, 0.78);
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .footer-col li.back a::before { content: "+ "; color: rgba(240, 232, 210, 0.5); }
+    .footer-col li.back a:hover { color: var(--accent-soft); }
+
+    /* ============ ENTRANCE ============ */
+    .reveal { opacity: 0; transform: translateY(10px); animation: rise .7s var(--ease) forwards; }
+    .reveal.d1 { animation-delay: .05s; } .reveal.d2 { animation-delay: .12s; }
+    .reveal.d3 { animation-delay: .18s; } .reveal.d4 { animation-delay: .24s; }
+    @keyframes rise { to { opacity: 1; transform: none; } }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+
+    /* ============ MOSAIC CASE-STUDY ADDITIONS ============ */
+    /* Case study figure with graceful missing-image fallback */
+    .case-figure { margin: 28px 0; }
+    .case-figure-frame {
+      position: relative; width: 100%; aspect-ratio: 16/10;
+      border-radius: var(--r-md); overflow: hidden;
+      background: var(--bg-elev); border: 1px solid var(--rule);
+    }
+    .case-figure-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .case-figure-frame.img-missing { border: 1px dashed var(--rule-strong); display: grid; place-items: center; }
+    .case-figure-frame.img-missing img { display: none; }
+    .case-figure-frame.img-missing::after {
+      content: attr(data-placeholder);
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--ink-mute); text-align: center;
+      padding: 0 24px; line-height: 1.5;
+    }
+    .case-figure figcaption {
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--ink-mute); margin-top: 12px; text-align: center;
+    }
+
+    /* Moodboard figure variant, square instead of 16:10 */
+    .case-figure-frame.moodboard { aspect-ratio: 4/3; }
+
+    /* Hero pull-quote */
+    .case-pullquote {
+      margin: 32px 0 28px; padding: 0 0 0 26px;
+      border-left: 3px solid var(--accent);
+    }
+    .case-pullquote p {
+      font-family: "Fraunces", Georgia, serif; font-style: italic;
+      font-size: clamp(28px, 3vw, 40px); line-height: 1.2;
+      color: var(--ink); margin: 0 0 12px;
+      letter-spacing: -0.018em;
+    }
+    .case-pullquote cite {
+      font-family: var(--mono); font-size: 12px;
+      letter-spacing: .14em; color: var(--ink-mute); font-style: normal;
+    }
+
+    /* Inline insight quote */
+    .case-insight-quote {
+      margin: 24px 0 16px; padding: 12px 18px;
+      background: var(--bg-elev); border-radius: var(--r-md);
+      border-left: 3px solid var(--ink-mute);
+    }
+    .case-insight-quote p {
+      font-family: "Fraunces", Georgia, serif; font-style: italic;
+      font-size: 16px; color: var(--ink-soft);
+      margin: 0 0 6px; line-height: 1.5;
+    }
+    .case-insight-quote cite {
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: .12em; color: var(--ink-mute); font-style: normal;
+    }
+
+    /* Sub-headings inside case sections */
+    .section h3 {
+      font-family: var(--display); font-weight: 500;
+      font-size: 20px; line-height: 1.25; color: var(--ink);
+      margin: 28px 0 12px; letter-spacing: -0.012em;
+    }
+
+    /* Design-decisions callout */
+    .design-decisions {
+      background: var(--bg-elev); border: 1px solid var(--rule);
+      border-radius: var(--r-md); padding: 22px 26px; margin: 24px 0;
+    }
+    .design-decisions p { margin: 0 0 14px; }
+    .design-decisions p:last-child { margin-bottom: 0; }
+    .design-decisions strong {
+      color: var(--ink); font-weight: 500;
+      display: block; margin-bottom: 4px;
+    }
+
+    /* Mosaic logo lockup above title */
+    .case-brand-mark { margin: 0 0 16px; }
+    .case-brand-mark img {
+      height: 32px; width: auto; display: block;
+    }
+    .case-brand-mark.img-missing { display: none; }
+
+  </style>
+</head>
+<body>
+
+  <div class="cursor-dot" aria-hidden="true"></div>
+
+  <div class="shell">
+
+    <!-- ============ SIDEBAR ============ -->
+    <aside class="sidebar">
+      <a class="back-home" href="home.html">← Home</a>
+
+      <div class="toc">
+        <p class="toc-label">Table of Contents</p>
+        <ul>
+          <li><a href="#context" class="toc-link active"><span class="num">01.</span>Context</a></li>
+          <li><a href="#research" class="toc-link"><span class="num">02.</span>Research</a></li>
+          <li><a href="#solution" class="toc-link"><span class="num">03.</span>Solution</a></li>
+          <li><a href="#features" class="toc-link"><span class="num">04.</span>Features</a></li>
+          <li><a href="#state" class="toc-link"><span class="num">05.</span>State</a></li>
+          <li><a href="#reflection" class="toc-link"><span class="num">06.</span>Reflection</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-foot">
+        <a class="back-top" href="#top">↑ Back to top</a>
+      </div>
+    </aside>
+
+    <!-- ============ MAIN ============ -->
+    <main class="main" id="top">
+
+      <!-- HERO -->
+      <div class="hero reveal">
+        <div class="case-figure-frame" data-placeholder="Mosaic: hero mockup, hand holding iPhone with Home Parent screen, on cream background">
+          <img src="assets/mosaic/01_hero.png" alt="Mosaic hero, hand holding iPhone with Home Parent screen" />
+        </div>
+      </div>
+
+      <!-- Mosaic logo lockup -->
+      <div class="case-brand-mark reveal d1">
+        <img src="assets/mosaic/logo.png" alt="Mosaic" />
+      </div>
+
+      <!-- Tags -->
+      <div class="case-tags reveal d1">
+        <span class="case-tag">Care Tech</span>
+        <span class="case-tag concept">Concept</span>
+      </div>
+
+      <!-- Title -->
+      <h1 class="case-title reveal d1">
+        <span>Mosaic</span>
+      </h1>
+
+      <!-- Pull-quote -->
+      <blockquote class="case-pullquote reveal d2">
+        <p>"If I'm not there, it's gone."</p>
+        <cite>Marcus Webb · primary caregiver (research participant)</cite>
+      </blockquote>
+
+      <!-- Lede -->
+      <p class="case-lede reveal d2">
+        <strong>Mosaic</strong> is a behavioral memory app for parents and aides supporting teens with autism. Voice notes from every caregiver build a shared, living record, so the next person who steps in already knows what works.
+      </p>
+
+      <!-- PROJECT BANNER -->
+      <div class="project-banner reveal d3">
+        <div>
+          <p class="pb-col-label">Role</p>
+          <div class="pb-col-val">
+            <span>Product Manager</span>
+            <span>Designer</span>
+          </div>
+        </div>
+        <div>
+          <p class="pb-col-label">Team</p>
+          <div class="pb-col-val"><span>Solo</span></div>
+        </div>
+        <div>
+          <p class="pb-col-label">Timeline</p>
+          <div class="pb-col-val">
+            <span>Jan – May 2026</span>
+            <span class="softer">Northwestern MPD&amp;D</span>
+          </div>
+        </div>
+        <div>
+          <p class="pb-col-label">Skills</p>
+          <div class="pb-col-val">
+            <span>Product Strategy</span>
+            <span>Primary Research</span>
+            <span>Voice / AI Interface</span>
+            <span>Mobile UI</span>
+            <span>MRD &amp; Unit Economics</span>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ============ 01. CONTEXT ============ -->
+      <section class="section" id="context">
+        <p class="section-eyebrow">Context</p>
+        <h2 class="section-title">Why caregiving teams for teens with autism</h2>
+        <p>This started from a close personal relationship with someone on the spectrum, and watching the people around them coordinate care across four, sometimes five different caregivers: a parent, an aide, a paraprofessional at school, an ABA therapist, occasionally a substitute teacher. Each person knew something true about the teen. Nobody saw the whole picture. The parent became the translator between five incompatible systems, WhatsApp, Google Docs, a paper binder, sticky notes, and carried the cost of that in their nervous system. I wanted to know if a tool could externalize that operating manual without making the act of contributing feel like a documentation project.</p>
+
+        <h3>What's broken today</h3>
+        <figure class="case-figure">
+          <div class="case-figure-frame" data-placeholder="Before: five fragmented systems, parent at the center as translator">
+            <img src="assets/mosaic/02_chaos_diagram.png" alt="Before: five fragmented systems, parent as translator" />
+          </div>
+          <figcaption>Before: five fragmented systems, parent at the center as translator</figcaption>
+        </figure>
+        <p>Caregiving teams currently coordinate through a patchwork: group texts for urgent updates, shared Google Docs that go stale within weeks, paper binders that don't travel, clinical ABA tools designed for therapists not families. None of these were built for cross-caregiver behavioral knowledge transfer. The result is information loss at every handoff: a new aide spends four to five months learning through trial and error what proper onboarding could compress to days. Substitute teachers walk in cold. Therapists hear a verbal summary instead of pattern data.</p>
+        <p>The deeper failure is that the parent becomes a single point of failure. They're the only person who holds the full picture, and they know it. One participant described sitting by their kid's bed thinking <em>"what happens if I can't come home next time?"</em> That's the existential cost of fragmented coordination.</p>
+
+        <h3>Why now</h3>
+        <figure class="case-figure">
+          <div class="case-figure-frame" data-placeholder="U.S. autism prevalence 2000 to 2023, more than doubled in two decades">
+            <img src="assets/mosaic/03_prevalence.png" alt="U.S. autism prevalence chart" />
+          </div>
+          <figcaption>U.S. autism prevalence 2000 to 2023, more than doubled in two decades</figcaption>
+        </figure>
+        <p>CDC reports 1 in 36 children with autism, up from 1 in 150 in 2000. The caregiver population is growing faster than the tools serving them.</p>
+      </section>
+
+      <!-- ============ 02. RESEARCH ============ -->
+      <section class="section" id="research">
+        <p class="section-eyebrow">Research</p>
+        <h2 class="section-title">Where the friction actually lived</h2>
+
+        <h3>Who I talked to</h3>
+        <p>Three phases.</p>
+        <p><strong>Phase 1: Secondary research.</strong> CDC autism prevalence data, caregiver-burnout literature, competitive landscape analysis of every tool autism parent communities have tried and abandoned (Cozi, Goally, CentralReach, group texts, Notion).</p>
+        <p><strong>Phase 2: Synthetic interviews.</strong> Three carefully constructed participant profiles to stress-test hypotheses and refine the discussion guide before fieldwork.</p>
+        <p><strong>Phase 3: Primary interviews</strong> with three real caregivers using validated discussion guides. Two parents (one early-adopter, tech-comfortable; one resource-constrained, institution-routed) and one in-home aide. Small sample, but n=3+ was enough to validate or partially validate every primary hypothesis with meaningful nuance.</p>
+
+        <figure class="case-figure">
+          <div class="case-figure-frame" data-placeholder="Affinity map: 9 themed clusters across 64 stickies, color-coded by participant">
+            <img src="assets/mosaic/04_affinity_map.png" alt="Affinity map" />
+          </div>
+          <figcaption>Affinity map: 9 themed clusters across 64 stickies, color-coded by participant</figcaption>
+        </figure>
+
+        <h3>Three insights that shaped the concept</h3>
+
+        <blockquote class="case-insight-quote">
+          <p>"It's not a knowledge problem, it's an architecture problem."</p>
+          <cite>Marcus Chen · primary caregiver</cite>
+        </blockquote>
+
+        <p><strong>1. The thirty-second contribution barrier is real and non-negotiable.</strong> Aides won't engage with any tool that takes longer than thirty seconds at the end of a shift. Voice memo, not typing. This single constraint reshaped the entire input architecture: every interaction below the cap, AI does the structuring after capture, no forms. Exceed thirty seconds and the secondary caregiver disengages. The whole network effect collapses.</p>
+
+        <blockquote class="case-insight-quote">
+          <p>"If it takes more than 30 seconds, I'm not doing it."</p>
+          <cite>Keisha Williams · in-home aide</cite>
+        </blockquote>
+
+        <p><strong>2. The deepest driver isn't efficiency, it's mortality fear.</strong> I went into research expecting parents to ask for productivity. They asked for portability. The phrase that came up over and over was <em>"if I'm not there, it's gone."</em> The real product job isn't saving thirty minutes a day. It's making the parent's knowledge transferable in case something happens to them. That reframed Mosaic from a coordination tool into a succession-planning tool, and changed the v1 hierarchy of features.</p>
+
+        <p><strong>3. Power asymmetry silences observations that should travel upward.</strong> Aides notice patterns no one else can. They're the only person there during certain hours, in certain environments. But they often don't share what they see, because they fear being read as critical or unprepared. <em>"The day was fine"</em> becomes a default response when something more nuanced was true. Any tool that solves coordination but ignores this dynamic will fail at the multi-caregiver level. The design has to reframe contribution as helpful expertise, not surveillance.</p>
+
+        <blockquote class="case-insight-quote">
+          <p>"I notice patterns. I see things. But I don't always know how to share them, or if I should."</p>
+          <cite>Keisha Williams · in-home aide</cite>
+        </blockquote>
+      </section>
+
+      <!-- ============ 03. SOLUTION ============ -->
+      <section class="section" id="solution">
+        <p class="section-eyebrow">Solution</p>
+        <h2 class="section-title">What it is, day-to-day</h2>
+
+        <figure class="case-figure">
+          <div class="case-figure-frame" data-placeholder="Mosaic core product loop: Log → Share → Learn → Act">
+            <img src="assets/mosaic/05_core_loop.png" alt="Mosaic core loop" />
+          </div>
+          <figcaption>Mosaic's core product loop: Log → Share → Learn → Act</figcaption>
+        </figure>
+
+        <p>Open the app. Tap a voice button. Talk into it for fifteen, twenty seconds: <em>"Arjun woke at 5:30 again, refused breakfast, third Tuesday in a row."</em> That's it. AI transcribes the memo, infers the environment, mood, and topic tags, and lands the observation in a shared timeline visible to every caregiver on the team.</p>
+        <p>Other caregivers do the same. The aide records hers at the end of her shift, the school para drops a note at lunch. Over time, the timeline becomes pattern-rich enough that the AI surfaces cross-environment correlations the parent or aide couldn't have spotted alone: <em>"rough mornings correlate with poor sleep AND new bus driver."</em> The parent validates the pattern, then generates a one-page summary scoped specifically for the substitute teacher coming in Thursday: sensory needs included, mental health notes excluded. Send. Done. The substitute opens it on their phone, no install required.</p>
+
+        <h3>Where it lives in the market</h3>
+        <figure class="case-figure">
+          <div class="case-figure-frame" data-placeholder="Competitive landscape: Mosaic targets the underserved upper-right quadrant">
+            <img src="assets/mosaic/06_competitive_landscape.png" alt="Competitive landscape" />
+          </div>
+          <figcaption>Competitive landscape: Mosaic targets the underserved upper-right quadrant</figcaption>
+        </figure>
+        <p>Clinical ABA tools (CentralReach, Catalyst) sit upper-left: high behavioral intelligence, low family-friendliness. General care apps (Cozi, CareZone) sit lower-right: family-friendly but not behavioral. The upper-right corner, high behavioral intelligence + high family-friendliness, is empty. That's the seat Mosaic is built for.</p>
+
+        <h3>The design decisions</h3>
+        <div class="design-decisions">
+          <p><strong>Why voice-first?</strong>Research showed a thirty-second contribution ceiling for aides. Only voice fits.</p>
+          <p><strong>Why "behavioral memory" as a category?</strong>No existing tool frames the problem as knowledge transfer between caregivers. Clinical tools collect data for therapists. Family apps manage calendars. The most valuable artifact in autism caregiving today isn't a schedule, it's the lived behavioral knowledge that exists only in one person's head.</p>
+          <p><strong>Why dual-interface?</strong>Same data, two needs. Parents want depth. Aides need friction-free contribution. The asymmetry is the design: same shared content layer, two interfaces that respect the different ways each caregiver shows up.</p>
+        </div>
+
+        <h3>Brand and visual language</h3>
+        <figure class="case-figure">
+          <div class="case-figure-frame moodboard" data-placeholder="Mosaic moodboard: visual language, brand direction, type and color">
+            <img src="assets/mosaic/16_moodboard.png" alt="Mosaic moodboard" />
+          </div>
+          <figcaption>Mosaic moodboard: visual language and brand direction</figcaption>
+        </figure>
+        <p>Mosaic's visual language is built around warmth, calm, and care, in deliberate contrast to the clinical aesthetic of ABA tools. Soft tones, breathing layouts, and conversational type signal that this is a tool built for families, not for therapists.</p>
+
+        <h3>Same data, two interfaces</h3>
+        <figure class="case-figure">
+          <div class="case-figure-frame" data-placeholder="Dual-interface: Aide Today (left) and Home Parent (right) drawing from the same content layer">
+            <img src="assets/mosaic/07_dual_interface.png" alt="Dual interface composite" />
+          </div>
+          <figcaption>Dual-interface: Aide Today (left) and Home Parent (right) drawing from the same content layer</figcaption>
+        </figure>
+        <p>The aide gets two tabs and a thirty-second voice button. The parent gets five tabs and full authority over the behavioral profile. Both surfaces read from and write to the same shared content model.</p>
+      </section>
+
+      <!-- ============ 04. FEATURES ============ -->
+      <section class="section" id="features">
+        <p class="section-eyebrow">Features</p>
+        <h2 class="section-title">Five core features</h2>
+
+        <h3>30-second voice log</h3>
+        <figure class="case-figure">
+          <div class="case-figure-frame" data-placeholder="Voice log: FAB sheet with mic capture and one-tap mood">
+            <img src="assets/mosaic/08_voice_log.png" alt="Voice log FAB" />
+          </div>
+        </figure>
+        <p>Voice-first capture from anywhere in the app. AI handles transcription, environment inference, mood tagging, and topic categorization after capture. Zero structured data entry required at the point of logging. This is the enabler for everything else.</p>
+
+        <h3>Shared 24-hour timeline</h3>
+        <figure class="case-figure">
+          <div class="case-figure-frame" data-placeholder="Home (parent): today's observations from the full team">
+            <img src="assets/mosaic/09_home_parent.png" alt="Home Parent timeline" />
+          </div>
+        </figure>
+        <p>Chronological feed of observations from every caregiver, with attribution, environment chips, and mood signals. Replaces the five fragmented systems with one source of truth. Filterable, searchable, and exportable for therapy or IEP prep.</p>
+
+        <h3>AI pattern detection</h3>
+        <figure class="case-figure">
+          <div class="case-figure-frame" data-placeholder="Pattern detection: cross-environment correlation with confidence scoring and validate/dismiss workflow">
+            <img src="assets/mosaic/10_pattern_detection.png" alt="Pattern detection screen" />
+          </div>
+        </figure>
+        <p>Cross-environment correlation across observations, with confidence scoring (low / medium / high). Patterns surface only above a confidence threshold. Research showed false positives kill trust faster than any feature gap. Validate / dismiss workflow lives on the same card as the pattern itself, no detail-view jump required.</p>
+
+        <h3>One-page summary with per-recipient privacy</h3>
+        <figure class="case-figure">
+          <div class="case-figure-frame" data-placeholder="One-page summary: auto-assembled, scoped per recipient, shareable link">
+            <img src="assets/mosaic/11_one_page_summary.png" alt="One-page summary" />
+          </div>
+        </figure>
+        <p>Auto-assembled handoff document scoped specifically for the recipient. Substitute teacher gets sensory needs and behavioral triggers, omits mental-health notes. Therapist gets the full picture. Shareable link, no install required for the recipient. The substitute teacher use case dies the moment you ask them to download an app.</p>
+
+        <h3>Dual-interface design</h3>
+        <figure class="case-figure">
+          <div class="case-figure-frame" data-placeholder="Aide Today: start-of-shift context, quick-reference triggers, last 24h read-only">
+            <img src="assets/mosaic/12_aide_today.png" alt="Aide Today screen" />
+          </div>
+        </figure>
+        <p>Parent app is five tabs (Home, Teen, Team, Insights, Share) with rich profile management. Aide app is two tabs (Today, read-only Profile) with a persistent voice-log FAB. Same shared content layer underneath. The asymmetry is the design: aides log observations and suggest triggers and strategies upward, but parents hold authority over the Behavioral Profile.</p>
+      </section>
+
+      <!-- ============ 05. STATE ============ -->
+      <section class="section" id="state">
+        <p class="section-eyebrow">State</p>
+        <h2 class="section-title">Where it is right now</h2>
+
+        <figure class="case-figure">
+          <div class="case-figure-frame" data-placeholder="Catalog: MRD, IA, feature map, user flows, wireframes, scrum board, brand">
+            <img src="assets/mosaic/13_artifact_catalog.png" alt="Artifact catalog" />
+          </div>
+          <figcaption>Artifacts produced this semester</figcaption>
+        </figure>
+
+        <p>Concept stage, pre-build. The artifacts produced this semester:</p>
+        <ul style="line-height: 1.7; padding-left: 22px; margin: 12px 0 24px;">
+          <li><strong>Market Requirements Document.</strong> Personas, hypothesis-and-validation, market sizing, unit economics, ten-stage customer journey from crisis awareness through advocacy.</li>
+          <li><strong>Information architecture.</strong> Every destination across both apps mapped to a shared ten-entity content layer.</li>
+          <li><strong>Feature map.</strong> Five user-job stages × two persona swim-lanes, with v1 / v2 / v3 release sequencing.</li>
+          <li><strong>Two end-to-end user flows.</strong> The parent's log → pattern → share loop, and the aide's start-of-shift quick-reference plus thirty-second contribution.</li>
+          <li><strong>Eight lo-fi wireframes</strong> + <strong>three hi-fi mockups</strong> of the highest-value screens.</li>
+          <li><strong>12-week sprint plan</strong> for v1 build.</li>
+          <li><strong>MVC technical one-pager</strong> defending the native-for-caregivers + mobile-web-for-recipients architecture.</li>
+          <li><strong>Affinity map and content model</strong> in FigJam from research synthesis.</li>
+        </ul>
+
+        <figure class="case-figure">
+          <div class="case-figure-frame" data-placeholder="Customer journey: 10 stages from crisis awareness through advocacy">
+            <img src="assets/mosaic/14_customer_journey.png" alt="Customer journey" />
+          </div>
+          <figcaption>Customer journey: 10 stages from crisis awareness through advocacy</figcaption>
+        </figure>
+
+        <h3>Unit economics</h3>
+        <figure class="case-figure">
+          <div class="case-figure-frame" data-placeholder="Unit economics summary: early adopter vs late adopter segment">
+            <img src="assets/mosaic/15_unit_economics.png" alt="Unit economics summary" />
+          </div>
+        </figure>
+        <p>Early-adopter segment carries an LTV:CAC of ~7.5×, payback in 4 to 5 months, with 25 to 30% free-to-paid conversion gated structurally on the third caregiver invite. Late-adopter segment has materially different economics that depend on institutional partnerships, sequenced for v2.</p>
+
+        <h3>Validation</h3>
+        <p>Three real caregiver interviews validated all three primary hypotheses. One partially (knowledge transfer is real but reframed as a systems-architecture problem, not a documentation problem), two fully (pattern blindness across environments, and the existential succession anxiety that drives adoption). The thirty-second contribution barrier and the power-asymmetry dynamic both emerged from this round and shaped the dual-interface design. The wireframes haven't been usability-tested with caregivers yet. That's the next step before any build commitment.</p>
+      </section>
+
+      <!-- ============ 06. REFLECTION ============ -->
+      <section class="section" id="reflection">
+        <p class="section-eyebrow">Reflection</p>
+        <h2 class="section-title">What I'd test first</h2>
+
+        <p><strong>1.</strong> Get the wireframes in front of the same caregivers who shaped the research, particularly Keisha (aide) and Marcus Webb (resource-constrained parent), because v1 lives or dies on whether the thirty-second contribution barrier actually clears in practice.</p>
+        <p><strong>2.</strong> Build a clickable Figma prototype of the log → pattern → share flow specifically. That's the moment Mosaic earns the right to charge, and it's the highest-leverage piece to test before any code gets written.</p>
+        <p><strong>3.</strong> Open a partnership conversation with an autism organization or pediatric ABA clinic. The late-adopter segment can't be reached through consumer marketing. Adoption goes through institutional endorsement, and the v2 go-to-market depends on having one of those relationships in motion before the v1 launch.</p>
+
+        <h3>Open questions I'm sitting with</h3>
+        <ul style="line-height: 1.7; padding-left: 22px; margin: 12px 0 24px;">
+          <li>Is AI pattern detection actually accurate enough at low data volumes to surface useful patterns in the first ninety days? Without that early "we noticed" moment, the habit doesn't form. Without the habit, the network effects don't kick in.</li>
+          <li>Does the dual-interface design actually change aide engagement in real homes? That's the bet the whole product rests on.</li>
+          <li>Will institutional endorsement (therapist or school recommending the tool) materialize organically through the early-adopter cohort, or does it need to be engineered?</li>
+        </ul>
+
+        <blockquote class="case-insight-quote" style="margin-top: 32px;">
+          <p>"I notice patterns. I see things. But I don't always know how to share them, or if I should."</p>
+          <cite>Keisha Williams · in-home aide</cite>
+        </blockquote>
+
+        <p style="margin-top: 18px; font-family: 'Fraunces', Georgia, serif; font-style: italic; font-size: 18px; color: var(--ink); line-height: 1.5;">
+          The product I want to build is the one that earns the right to hear that observation, every shift, from every aide.
+        </p>
+      </section>
+
+      <!-- ============ NEXT ============ -->
+      <div class="next">
+        <p class="next-label">Next</p>
+        <a class="next-link" href="home.html#work">
+          <span>Money20: Live 20 years in 20 minutes</span>
+          <span class="arr">→</span>
+        </a>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ============ FOOTER ============ -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <h2 class="footer-quote">
+          Stories worth growing.<br/>
+          <span class="em">Why not yours?</span>
+        </h2>
+        <span class="footer-attr">,  a thing I believe</span>
+      </div>
+      <div class="footer-col">
+        <ul>
+          <li><a href="mailto:sakshishah@u.northwestern.edu">Email</a></li>
+          <li><a href="https://www.linkedin.com/in/sakshiishahh/" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://github.com/" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://read.cv/" target="_blank" rel="noopener">Read.cv</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <ul>
+          <li><a href="home.html">Work</a></li>
+          <li><a href="about.html">About Me</a></li>
+          <li><a href="ai.html">AI Practices</a></li>
+          <li class="divider"></li>
+          <li class="back"><a href="#" class="back-to-top">Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mockup swap on feature hover
+    (function(){
+      const items = document.querySelectorAll('#featureList .feature-item');
+      const screens = document.querySelectorAll('.feature-mockup .screen');
+      function show(id){
+        items.forEach(it => it.classList.toggle('is-active', it.dataset.screen === id));
+        screens.forEach(s => s.classList.toggle('is-active', s.dataset.id === id));
+      }
+      items.forEach(it => {
+        it.addEventListener('mouseenter', () => show(it.dataset.screen));
+        it.addEventListener('focus', () => show(it.dataset.screen));
+      });
+    })();
+
+    // Active section in TOC
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const sections = Array.from(tocLinks).map(a => document.querySelector(a.getAttribute('href')));
+    const linkBySection = new Map(sections.map((s, i) => [s, tocLinks[i]]));
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(a => a.classList.remove('active'));
+          const link = linkBySection.get(entry.target);
+          if (link) link.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-30% 0px -50% 0px', threshold: 0 });
+    sections.forEach(s => s && observer.observe(s));
+
+    // Cursor
+    const dotEl = document.querySelector('.cursor-dot');
+    let mx = innerWidth/2, my = innerHeight/2;
+    let visible = false;
+    document.addEventListener('mousemove', (e) => {
+      mx = e.clientX; my = e.clientY;
+      if (!visible) { dotEl.style.opacity = '1'; visible = true; }
+    });
+    document.addEventListener('mouseleave', () => { dotEl.style.opacity = '0'; visible = false; });
+    dotEl.style.opacity = '0';
+    function tick() {
+      dotEl.style.transform = `translate(${mx}px, ${my}px) translate(-50%,-50%)`;
+      requestAnimationFrame(tick);
+    }
+    tick();
+    document.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => document.body.classList.add('cursor-grow'));
+      el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-grow'));
+    });
+
+    // Mark missing-image figures so the placeholder shows
+    document.querySelectorAll('.case-figure-frame img, .case-brand-mark img').forEach(img => {
+      const markMissing = () => img.parentElement.classList.add('img-missing');
+      img.addEventListener('error', markMissing);
+      if (img.complete && img.naturalWidth === 0) markMissing();
+    });
+  </script>
+
+</body>
+</html>
