@@ -244,6 +244,11 @@
       border-color: color-mix(in srgb, var(--leaf) 38%, transparent);
       color: color-mix(in srgb, var(--leaf-deep) 80%, var(--ink));
     }
+    .case-tag.concept {
+      background: var(--accent-soft);
+      border-color: var(--accent-soft);
+      color: var(--accent-deep);
+    }
 
     .case-title {
       font-family: var(--serif);
@@ -868,9 +873,9 @@
     /* ============ MOSAIC LAYOUT ADDITIONS ============ */
     /* 0 → 1 tag chip */
     .case-tag.zero-one {
-      background: var(--accent-soft);
-      border-color: var(--accent);
-      color: var(--accent-deep);
+      background: #cee1ff;
+      border-color: #b5cdf5;
+      color: #2a4a7a;
       font-weight: 500;
     }
 
@@ -908,12 +913,24 @@
 
     /* Big-stat callout */
     .big-stat {
+      position: relative;
       background: var(--bg-elev);
       border: 1px solid var(--rule);
       border-radius: var(--r-lg);
-      padding: 40px 36px;
+      padding: 48px 36px 36px;
       margin: 24px 0 28px;
       text-align: center;
+    }
+    .big-stat-source-pill {
+      position: absolute;
+      top: 18px; right: 18px;
+      font-family: var(--mono); font-size: 10px;
+      letter-spacing: .12em; text-transform: uppercase;
+      padding: 6px 12px;
+      background: color-mix(in srgb, var(--leaf) 14%, transparent);
+      border: 1px solid color-mix(in srgb, var(--leaf) 28%, transparent);
+      color: color-mix(in srgb, var(--leaf) 70%, var(--ink));
+      border-radius: 999px;
     }
     .big-stat-num {
       font-family: var(--display);
@@ -943,14 +960,9 @@
     }
     .big-stat-sub {
       font-size: 16px; color: var(--ink-soft); line-height: 1.5;
-      max-width: 560px; margin: 0 auto 14px;
+      max-width: 560px; margin: 0 auto;
     }
     .big-stat-sub strong { color: var(--ink); font-weight: 500; }
-    .big-stat-source {
-      font-family: var(--mono); font-size: 11px;
-      letter-spacing: .12em; text-transform: uppercase;
-      color: var(--ink-mute); margin: 0;
-    }
 
     /* Insights 3-up grid */
     .insights-grid {
@@ -1032,7 +1044,6 @@
       cursor: default;
     }
     .affinity-cluster:hover {
-      transform: scale(1.04);
       filter: brightness(1.05);
     }
     .affinity-cluster strong {
@@ -1055,9 +1066,70 @@
     .affinity-cluster.c8 { background: #c8d4ff; color: #2a3a7a; }
     .affinity-cluster.c9 { background: #ffd4d4; color: #7a2a2a; }
     .affinity-caption {
-      font-family: var(--mono); font-size: 11px;
+      font-family: var(--mono); font-size: 9.5px;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--ink-mute);
+      margin: 18px 0 0;
+      text-align: center;
+      line-height: 1.4;
+      max-width: 480px;
+      margin-left: auto; margin-right: auto;
+    }
+
+
+    /* Research phases visual map */
+    .research-phases {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      gap: 16px;
+      align-items: stretch;
+      margin: 24px 0 28px;
+    }
+    @media (max-width: 980px) {
+      .research-phases { grid-template-columns: 1fr; }
+      .phase-arrow { display: none; }
+    }
+    .phase-card {
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-lg);
+      padding: 22px 20px;
+      display: flex; flex-direction: column;
+      transition: transform .25s var(--ease), border-color .25s var(--ease);
+    }
+    .phase-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+    }
+    .phase-num {
+      font-family: var(--mono); font-size: 12px;
+      letter-spacing: .14em; color: var(--accent);
+      font-weight: 500; margin-bottom: 10px;
+    }
+    .phase-card h4 {
+      font-family: var(--display); font-weight: 500;
+      font-size: 17px; margin: 0 0 10px;
+      color: var(--ink); letter-spacing: -0.012em;
+    }
+    .phase-card > p {
+      font-size: 14px; color: var(--ink-soft);
+      line-height: 1.5; margin: 0 0 14px;
+      flex: 1;
+    }
+    .phase-tag {
+      display: inline-block; align-self: flex-start;
+      font-family: var(--mono); font-size: 10.5px;
       letter-spacing: .12em; text-transform: uppercase;
-      color: var(--ink-mute); margin: 14px 0 0; text-align: center;
+      padding: 5px 10px;
+      background: var(--bg-card);
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      color: var(--ink-soft);
+    }
+    .phase-arrow {
+      font-family: var(--mono); font-size: 28px;
+      color: var(--ink-mute);
+      display: grid; place-items: center;
     }
 
   </style>
@@ -1139,18 +1211,15 @@
           <p class="pb-col-label">Timeline</p>
           <div class="pb-col-val">
             <span>May – Jun 2026</span>
-            <span class="softer">Northwestern MPD&amp;D</span>
           </div>
         </div>
         <div>
           <p class="pb-col-label">Skills</p>
           <div class="pb-col-val">
-            <span>Ideation</span>
-            <span>Product Strategy</span>
-            <span>UX</span>
+            <span>Product Positioning</span>
+            <span>Strategy &amp; UX</span>
             <span>Market Research</span>
-            <span>MRD</span>
-            <span>PRD</span>
+            <span>MRD &amp; PRD</span>
           </div>
         </div>
       </div>
@@ -1199,10 +1268,10 @@
         <h3>Why now</h3>
 
         <div class="big-stat">
+          <span class="big-stat-source-pill">CDC ADDM Network · 2024</span>
           <div class="big-stat-num">1 <span class="big-stat-in">in</span> 36</div>
-          <p class="big-stat-label">U.S. children with autism, 2024</p>
+          <p class="big-stat-label">U.S. children with autism</p>
           <p class="big-stat-sub">Up from <strong>1 in 150</strong> in 2000. The caregiver population is growing faster than the tools serving them.</p>
-          <p class="big-stat-source">Source: CDC ADDM Network</p>
         </div>
       </section>
 
@@ -1212,10 +1281,34 @@
         <h2 class="section-title">Where the friction actually lived</h2>
 
         <h3>Who I talked to</h3>
-        <p>Three phases.</p>
-        <p><strong>Phase 1: Secondary research.</strong> CDC autism prevalence data, caregiver-burnout literature, competitive landscape analysis of every tool autism parent communities have tried and abandoned (Cozi, Goally, CentralReach, group texts, Notion).</p>
-        <p><strong>Phase 2: Synthetic interviews.</strong> Three carefully constructed participant profiles to stress-test hypotheses and refine the discussion guide before fieldwork.</p>
-        <p><strong>Phase 3: Primary interviews</strong> with three real caregivers using validated discussion guides. Two parents (one early-adopter, tech-comfortable; one resource-constrained, institution-routed) and one in-home aide. Small sample, but n=3+ was enough to validate or partially validate every primary hypothesis with meaningful nuance.</p>
+        <p>Three phases of research, building toward primary interviews.</p>
+
+        <div class="research-phases">
+          <article class="phase-card">
+            <div class="phase-num">01</div>
+            <h4>Secondary research</h4>
+            <p>CDC autism prevalence data, caregiver-burnout literature, and a competitive landscape teardown of every tool autism parent communities have tried and abandoned: Cozi, Goally, CentralReach, group texts, Notion.</p>
+            <span class="phase-tag">Desk research</span>
+          </article>
+
+          <div class="phase-arrow" aria-hidden="true">→</div>
+
+          <article class="phase-card">
+            <div class="phase-num">02</div>
+            <h4>Synthetic interviews</h4>
+            <p>Three carefully constructed participant profiles to stress-test hypotheses and refine the discussion guide before going into fieldwork.</p>
+            <span class="phase-tag">3 profiles</span>
+          </article>
+
+          <div class="phase-arrow" aria-hidden="true">→</div>
+
+          <article class="phase-card">
+            <div class="phase-num">03</div>
+            <h4>Primary interviews</h4>
+            <p>Three real caregivers using validated discussion guides. Two parents (one early-adopter, tech-comfortable; one resource-constrained, institution-routed) and one in-home aide. n=3+ was enough to validate or partially validate every primary hypothesis with meaningful nuance.</p>
+            <span class="phase-tag">3 caregivers</span>
+          </article>
+        </div>
 
         <div class="affinity-map">
           <div class="affinity-grid">
@@ -1531,6 +1624,49 @@
       img.addEventListener('error', markMissing);
       if (img.complete && img.naturalWidth === 0) markMissing();
     });
+
+    // Affinity stickies are draggable for fun
+    (function makeAffinityDraggable() {
+      const stickies = document.querySelectorAll('.affinity-cluster');
+      stickies.forEach((sticky, idx) => {
+        let isDragging = false;
+        let startX = 0, startY = 0;
+        let currentX = 0, currentY = 0;
+        const baseRotation = (Math.random() * 4 - 2);
+
+        sticky.style.transform = `rotate(${baseRotation}deg)`;
+        sticky.style.cursor = 'grab';
+        sticky.style.userSelect = 'none';
+        sticky.style.touchAction = 'none';
+
+        const onPointerDown = (e) => {
+          isDragging = true;
+          sticky.style.cursor = 'grabbing';
+          sticky.style.zIndex = '20';
+          sticky.style.transition = 'none';
+          startX = e.clientX - currentX;
+          startY = e.clientY - currentY;
+          e.preventDefault();
+        };
+        const onPointerMove = (e) => {
+          if (!isDragging) return;
+          currentX = e.clientX - startX;
+          currentY = e.clientY - startY;
+          const wobble = baseRotation + (Math.random() * 1 - 0.5);
+          sticky.style.transform = `translate(${currentX}px, ${currentY}px) rotate(${wobble}deg) scale(1.04)`;
+        };
+        const onPointerUp = () => {
+          if (!isDragging) return;
+          isDragging = false;
+          sticky.style.cursor = 'grab';
+          sticky.style.transition = 'transform .25s var(--ease)';
+          sticky.style.transform = `translate(${currentX}px, ${currentY}px) rotate(${baseRotation}deg)`;
+        };
+        sticky.addEventListener('pointerdown', onPointerDown);
+        window.addEventListener('pointermove', onPointerMove);
+        window.addEventListener('pointerup', onPointerUp);
+      });
+    })();
   </script>
 
 </body>
