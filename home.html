@@ -540,6 +540,8 @@
       position: relative;
     }
     .card-cover img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--ease); }
+    .card-cover img:not([src]),
+    .card-cover img[src=""] { display: none; }
     .card:hover .card-cover img { transform: scale(1.02); }
     .card-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 8px; }
     .card-title {
@@ -1186,7 +1188,7 @@
             <div class="card-row">
               <h3 class="card-title">Mosaic Care Coordination</h3>
               <span class="card-tags">
-                <span class="tag">Social Impact</span>
+                <span class="tag">Care Tech</span>
                 <span class="tag concept">Concept</span>
               </span>
             </div>
