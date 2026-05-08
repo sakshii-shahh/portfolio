@@ -911,35 +911,35 @@
       font-size: 12px; color: var(--ink-soft); line-height: 1.4;
     }
 
-    /* Big-stat callout */
+    /* Big-stat callout, side-by-side layout */
     .big-stat {
-      position: relative;
       background: var(--bg-elev);
       border: 1px solid var(--rule);
       border-radius: var(--r-lg);
-      padding: 56px 36px 44px;
+      padding: 32px 36px;
       margin: 24px 0 28px;
-      text-align: center;
     }
-    .big-stat-source-pill {
-      position: absolute;
-      top: 18px; right: 18px;
-      font-family: var(--mono); font-size: 10px;
-      letter-spacing: .12em; text-transform: uppercase;
-      padding: 6px 12px;
-      background: color-mix(in srgb, var(--leaf) 14%, transparent);
-      border: 1px solid color-mix(in srgb, var(--leaf) 28%, transparent);
-      color: color-mix(in srgb, var(--leaf) 70%, var(--ink));
-      border-radius: 999px;
+    .big-stat-grid {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    @media (max-width: 760px) {
+      .big-stat-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        text-align: left;
+      }
     }
     .big-stat-num {
       font-family: var(--display);
       font-weight: 600;
-      font-size: clamp(72px, 9vw, 120px);
-      line-height: 1;
+      font-size: clamp(64px, 8vw, 100px);
+      line-height: 0.95;
       color: var(--accent);
       letter-spacing: -0.04em;
-      margin-bottom: 18px;
+      white-space: nowrap;
     }
     .big-stat-num .big-stat-in {
       font-family: "Fraunces", Georgia, serif;
@@ -947,28 +947,44 @@
       font-weight: 400;
       font-size: 0.42em;
       color: var(--ink-mute);
-      margin: 0 10px;
+      margin: 0 8px;
       vertical-align: 0.15em;
+    }
+    .big-stat-context {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
     }
     .big-stat-label {
       font-family: "Fraunces", Georgia, serif;
       font-style: italic;
-      font-size: 18px;
-      color: var(--ink-soft);
-      letter-spacing: 0;
-      text-transform: none;
-      margin: 0 0 20px;
-      line-height: 1.3;
+      font-size: clamp(20px, 2.2vw, 24px);
+      color: var(--ink);
+      margin: 0;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
     }
     .big-stat-sub {
       font-family: var(--sans);
-      font-size: 15px;
+      font-size: 14.5px;
       color: var(--ink-soft);
       line-height: 1.55;
-      max-width: 520px;
-      margin: 0 auto;
+      margin: 0;
     }
     .big-stat-sub strong { color: var(--ink); font-weight: 500; }
+    .big-stat-source-pill {
+      display: inline-flex;
+      align-self: flex-start;
+      font-family: var(--mono); font-size: 10px;
+      letter-spacing: .12em; text-transform: uppercase;
+      padding: 6px 12px;
+      background: color-mix(in srgb, var(--leaf) 14%, transparent);
+      border: 1px solid color-mix(in srgb, var(--leaf) 28%, transparent);
+      color: color-mix(in srgb, var(--leaf) 70%, var(--ink));
+      border-radius: 999px;
+      margin-top: 4px;
+    }
 
     /* Insights 3-up grid */
     .insights-grid {
@@ -1275,10 +1291,14 @@
         <h3>Why now</h3>
 
         <div class="big-stat">
-          <span class="big-stat-source-pill">CDC ADDM Network · 2024</span>
-          <div class="big-stat-num">1 <span class="big-stat-in">in</span> 36</div>
-          <p class="big-stat-label">U.S. children with autism</p>
-          <p class="big-stat-sub">Up from <strong>1 in 150</strong> in 2000. The caregiver population is growing faster than the tools serving them.</p>
+          <div class="big-stat-grid">
+            <div class="big-stat-num">1 <span class="big-stat-in">in</span> 36</div>
+            <div class="big-stat-context">
+              <p class="big-stat-label">U.S. children with autism today.</p>
+              <p class="big-stat-sub">Up from <strong>1 in 150</strong> in 2000. The caregiver population is growing faster than the tools serving them.</p>
+              <span class="big-stat-source-pill">CDC ADDM Network · 2024</span>
+            </div>
+          </div>
         </div>
       </section>
 
