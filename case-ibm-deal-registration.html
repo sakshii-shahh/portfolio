@@ -557,9 +557,33 @@
     }
 
     /* ============ IMPACT, big stat blocks ============ */
+    .features-list {
+      list-style: none; padding: 0; margin: 28px 0 0;
+      display: flex; flex-direction: column; gap: 14px;
+      counter-reset: feat;
+    }
+    .features-list li {
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-md);
+      padding: 18px 22px 18px 64px;
+      font-size: 15.5px; line-height: 1.55;
+      color: var(--ink-soft);
+      counter-increment: feat;
+      position: relative;
+    }
+    .features-list li::before {
+      content: "0" counter(feat);
+      position: absolute;
+      left: 22px; top: 18px;
+      font-family: var(--mono); font-size: 11px; font-weight: 500;
+      letter-spacing: .14em; color: var(--accent);
+    }
+    .features-list strong { color: var(--ink); font-weight: 500; }
+
     .impact-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 18px;
       margin: 36px 0 24px;
     }
@@ -756,9 +780,10 @@
           <li><a href="#context" class="toc-link active"><span class="num">01.</span>Context</a></li>
           <li><a href="#research" class="toc-link"><span class="num">02.</span>Research</a></li>
           <li><a href="#solution" class="toc-link"><span class="num">03.</span>The solution</a></li>
-          <li><a href="#flows" class="toc-link"><span class="num">04.</span>Key flows</a></li>
-          <li><a href="#impact" class="toc-link"><span class="num">05.</span>Impact</a></li>
-          <li><a href="#reflection" class="toc-link"><span class="num">06.</span>Reflection</a></li>
+          <li><a href="#features" class="toc-link"><span class="num">04.</span>Features</a></li>
+          <li><a href="#carbon" class="toc-link"><span class="num">05.</span>Carbon components</a></li>
+          <li><a href="#impact" class="toc-link"><span class="num">06.</span>Impact</a></li>
+          <li><a href="#reflection" class="toc-link"><span class="num">07.</span>Reflection</a></li>
         </ol>
       </div>
 
@@ -777,7 +802,7 @@
 
       <!-- TAGS + TITLE + LEDE -->
       <div class="case-tags reveal d1">
-        <span class="case-tag research">UX Research</span>
+        <span class="case-tag">SaaS Product</span>
         <span class="case-tag shipped">Shipped</span>
       </div>
 
@@ -787,9 +812,7 @@
 
       <p class="case-lede reveal d2">
         I led the redesign of IBM's <strong>partner deal registration</strong> flow on the
-        <a href="https://www.ibm.com/partnerplus" target="_blank" rel="noopener">Partner Plus</a> platform , 
-        moving sellers from intent to closed deal <strong>30% faster</strong> across 200+ enterprise accounts.
-        I owned end-to-end research, design, and rollout, partnering closely with the Partner Cloud engineering team.
+        <a href="https://www.ibm.com/partnerplus" target="_blank" rel="noopener">Partner Plus</a> platform, moving sellers from intent to closed deal <strong>30% faster</strong> across 200+ enterprise accounts. I owned research, design, and rollout end-to-end, working closely with engineering, product, and legal teams across IBM.
       </p>
 
       <a class="visit-btn reveal d2" href="https://www.ibm.com/partnerplus" target="_blank" rel="noopener">
@@ -802,30 +825,31 @@
         <div>
           <p class="pb-col-label">Role</p>
           <div class="pb-col-val">
-            <span>UX Researcher</span>
             <span>Product Designer</span>
+            <span>UX Researcher</span>
           </div>
         </div>
         <div>
           <p class="pb-col-label">Team</p>
           <div class="pb-col-val">
-            <span class="softer">with</span>
-            <span>IBM Partner Cloud</span>
+            <span>CIO · 1 PM</span>
+            <span>2 Researchers</span>
+            <span>3 Developers · 1 BA</span>
           </div>
         </div>
         <div>
           <p class="pb-col-label">Timeline</p>
           <div class="pb-col-val">
-            <span>Jan – Aug 2025</span>
+            <span>Jan – Aug 2024</span>
             <span class="softer">8 months</span>
           </div>
         </div>
         <div>
           <p class="pb-col-label">Skills</p>
           <div class="pb-col-val">
-            <span>UX Research</span>
-            <span>Service Design</span>
             <span>Product Design</span>
+            <span>UX Research</span>
+            <span>Cross-functional Collaboration</span>
           </div>
         </div>
       </div>
@@ -834,16 +858,12 @@
       <!-- ============ 01. CONTEXT ============ -->
       <section class="section" id="context">
         <p class="section-eyebrow">Context</p>
-        <h2 class="section-title">Partners were the biggest revenue lever, and the biggest churn risk.</h2>
+        <h2 class="section-title">Partners were facing friction registering deals, and the NPS data was telling us about it.</h2>
         <p>
-          IBM's partner ecosystem drives a meaningful share of enterprise revenue. But the existing deal
-          registration tool, the system partners use to claim a sales opportunity, had grown organically over
-          a decade. By 2024, partners were quietly going around it: emailing reps, working in spreadsheets, or
-          simply not registering deals at all.
+          IBM's partner ecosystem drives a meaningful share of enterprise revenue. But the legacy registration tool, what partners use to claim a sales opportunity, had become a daily friction point. Drop-off was high. NPS feedback skewed negative. Quietly, partners were routing around the system: emailing reps, working in spreadsheets, or skipping registration entirely.
         </p>
         <p>
-          Internally, this looked like <strong>missing pipeline visibility</strong>. From the partner side, it
-          looked like a bureaucratic gate that didn't pay them back. Both sides were losing.
+          From IBM's side, this looked like <strong>missing pipeline visibility</strong>. From the partner side, it looked like a bureaucratic gate that didn't pay them back. Both sides were losing.
         </p>
       </section>
 
@@ -851,18 +871,18 @@
       <section class="section" id="research">
         <p class="section-eyebrow">Research</p>
         <h2 class="section-title">Where the friction actually lived</h2>
+        <p>I led a mixed-method discovery program across three workstreams.</p>
         <p>
-          I ran a six-week discovery sprint with 18 partner reps across SI, ISV, and reseller archetypes, pairing
-          interview transcripts with backend telemetry from the existing tool. Three patterns showed up over
-          and over:
+          <strong>Stakeholder interviews</strong> with Engineering, Sales, and Legal to understand technical constraints, regulatory requirements, and the mental models inside IBM.
         </p>
-        <ol>
-          <li>Partners abandoned mid-flow when fields they didn't have data for were marked required.</li>
-          <li>Approval status was opaque, reps would re-submit the same deal three times to "wake it up."</li>
-          <li>The form treated every deal like a net-new enterprise opportunity, even for $5k SaaS renewals.</li>
-        </ol>
         <p>
-          The synthesis became a tight problem statement: <strong>the form didn't match the shape of the work.</strong>
+          <strong>Contextual inquiry</strong> shadowing 12 globally distributed partners as they ran live registrations, surfacing cognitive load and navigation dependencies that weren't visible in any analytics dashboard.
+        </p>
+        <p>
+          <strong>Platform-data analysis</strong> of telemetry from existing platform logs. The "Add Products" section was the sharpest fall-off point, with 49% drop-off at that step alone.
+        </p>
+        <p>
+          The synthesis became a tight problem statement: <strong>the form didn't match the shape of the work</strong>. After a prioritization matrix with the Product Owner, we agreed to tackle the high-impact "Add Products" flow first.
         </p>
       </section>
 
@@ -872,110 +892,60 @@
         <p class="section-eyebrow">The solution</p>
         <h2 class="section-title">A flow that adapts to the deal, not the other way around.</h2>
         <p>
-          The redesign reorganized the flow around <strong>three deal archetypes</strong> partners actually run:
-          renewal, expansion, and net-new. Each archetype unlocked a different field set, with smart defaults
-          pulled from CRM. Status moved from a single hidden flag to a visible timeline, so reps always knew
-          what was happening and what they could do about it.
+          The redesign reorganized the registration experience around the <strong>Carbon Design System</strong>, with three intertwined moves.
         </p>
-        <div class="duo">
-          <div class="duo-tile">Before, flat form</div>
-          <div class="duo-tile">After, archetype-led flow</div>
-        </div>
         <p>
-          We also stripped the registration form down to its essentials. <strong>Required fields dropped from 24 to 9</strong> on the
-          most common path. Everything else became conditional, postponed, or pre-filled.
+          <strong>Embedded Search.</strong> Replaced the manual product code lookup that was driving the 49% drop-off. Wireframes were validated with partners before we touched high-fi.
+        </p>
+        <p>
+          <strong>Real-time validation.</strong> High-fidelity Carbon prototypes demonstrated inline error feedback, preventing bad data from entering the pipeline at all. The downstream effect was less Sales rework and fewer duplicate records.
+        </p>
+        <p>
+          <strong>Compliance simplification.</strong> A round of empathy mapping with the engineering squad surfaced how many compliance fields were performative. After a Legal sync, we negotiated a meaningful reduction in mandatory questions, without losing regulatory coverage.
         </p>
       </section>
 
-      <!-- ============ 04. KEY FLOWS / FEATURES ============ -->
-      <section class="section" id="flows">
-        <p class="section-eyebrow">Key flows</p>
-        <h2 class="section-title">Designed around the moments partners actually had time for.</h2>
+      <!-- ============ 04. FEATURES ============ -->
+      <section class="section" id="features">
+        <p class="section-eyebrow">Features</p>
+        <h2 class="section-title">What partners actually saw differently</h2>
+        <p>Three things landed on partners' screens that hadn't been there before.</p>
+
+        <ol class="features-list">
+          <li>
+            <strong>Embedded Search.</strong> Search-as-you-type pulled directly from IBM's product catalog. No more leaving the workflow to find a product code, no more pasting from spreadsheets.
+          </li>
+          <li>
+            <strong>Inline validation.</strong> Carbon's form components flagged errors before submit, not after. Partners knew if a field was wrong while they were still in it.
+          </li>
+          <li>
+            <strong>Pre-filled smart defaults.</strong> Account-level data populated automatically from the CRM record. Partners only filled in what was deal-specific.
+          </li>
+        </ol>
+      </section>
+
+      <!-- ============ 05. CARBON COMPONENTS ============ -->
+      <section class="section" id="carbon">
+        <p class="section-eyebrow">Carbon components</p>
+        <h2 class="section-title">Building back into the system</h2>
         <p>
-          Three flows did the heaviest lifting. Each was tested with reps in low-fi mocks before any pixel
-          went into the design system.
+          While shipping the new flow, we identified an interaction pattern the standard Carbon library didn't cover. Rather than build it as a one-off, I designed and documented it as a new global component.
         </p>
-
-        <div class="feature-grid">
-          <div class="feature-list" id="featureList">
-            <div class="feature-item is-active" data-screen="renewal">
-              <h4><span class="num">01</span> Quick-register a renewal</h4>
-              <p>Pre-fills 80% of fields from the existing customer record. A rep can register and submit in under 60 seconds.</p>
-            </div>
-            <div class="feature-item" data-screen="timeline">
-              <h4><span class="num">02</span> Status timeline</h4>
-              <p>Replaces the legacy approved/pending/rejected dropdown with a live timeline showing exactly what's happened and what's next.</p>
-            </div>
-            <div class="feature-item" data-screen="handoff">
-              <h4><span class="num">03</span> Save, share, hand off</h4>
-              <p>Reps can save mid-form drafts and share them with a co-rep, fixing the #1 complaint about the legacy flow.</p>
-            </div>
-            <div class="feature-item" data-screen="conditional">
-              <h4><span class="num">04</span> Conditional fields</h4>
-              <p>The form asks for what's relevant, when it's relevant. Fields appear only after the deal type clarifies what's needed.</p>
-            </div>
-          </div>
-
-          <div class="feature-mockup" aria-label="Interactive mockup">
-            <!-- Screen 1: Quick renewal, pre-filled form -->
-            <div class="screen is-active" data-id="renewal">
-              <div class="ms-statusbar"><span>9:41</span><span>●●●</span></div>
-              <p class="ms-sub">Register · Renewal</p>
-              <p class="ms-h">Acme Corp renewal</p>
-              <div class="ms-card"><div class="row"><strong>$48,200</strong><span class="ms-pill green">Pre-filled</span></div><span>From CRM record · 12mo</span></div>
-              <div class="ms-field dim"><span class="lbl">Account</span><span class="val">Acme Corp · Tier 2</span></div>
-              <div class="ms-field dim"><span class="lbl">Region</span><span class="val">North America</span></div>
-              <div class="ms-field"><span class="lbl">Close date</span><span class="val">Mar 14, 2025</span></div>
-              <div class="ms-card coral" style="margin-top:auto"><div class="row"><strong>Submit registration</strong><span>→</span></div></div>
-            </div>
-
-            <!-- Screen 2: Status timeline -->
-            <div class="screen" data-id="timeline">
-              <div class="ms-statusbar"><span>9:41</span><span>●●●</span></div>
-              <p class="ms-sub">Deal · #DR-7821</p>
-              <p class="ms-h">Status timeline</p>
-              <div class="ms-step done"><span class="dot"></span><span><strong>Submitted</strong>Mon · 9:14 AM</span></div>
-              <div class="ms-step done"><span class="dot"></span><span><strong>Auto-validated</strong>Mon · 9:14 AM</span></div>
-              <div class="ms-step now"><span class="dot"></span><span><strong>In review</strong>IBM partner ops · 1 day</span></div>
-              <div class="ms-step"><span class="dot"></span><span><strong>Approved</strong>Estimated by Wed</span></div>
-              <div class="ms-step"><span class="dot"></span><span><strong>Locked</strong>, </span></div>
-            </div>
-
-            <!-- Screen 3: Save / hand off -->
-            <div class="screen" data-id="handoff">
-              <div class="ms-statusbar"><span>9:41</span><span>●●●</span></div>
-              <p class="ms-sub">Drafts · 3 active</p>
-              <p class="ms-h">Hand to a co-rep</p>
-              <div class="ms-card"><div class="row"><strong>Globex expansion</strong><span class="ms-pill amber">Draft</span></div><span>Last edit · you · 2h ago</span></div>
-              <div class="ms-card sage"><div class="row"><strong>Initech net-new</strong><span class="ms-pill green">Shared</span></div><span>With · D. Patel · 1d ago</span></div>
-              <div class="ms-card"><div class="row"><strong>Soylent renewal</strong><span class="ms-pill">Draft</span></div><span>Last edit · K. Lee · 3d ago</span></div>
-              <div class="ms-card coral" style="margin-top:auto"><div class="row"><strong>Share with co-rep</strong><span>→</span></div></div>
-            </div>
-
-            <!-- Screen 4: Conditional fields -->
-            <div class="screen" data-id="conditional">
-              <div class="ms-statusbar"><span>9:41</span><span>●●●</span></div>
-              <p class="ms-sub">Register · Step 2 of 3</p>
-              <p class="ms-h">Tell us about the deal</p>
-              <div class="ms-card"><div class="row"><strong>Deal type</strong><span class="ms-pill green">Renewal</span></div><span>Selected · 9 fields shown</span></div>
-              <div class="ms-bar"><span style="width:62%"></span></div>
-              <p class="ms-sub" style="margin-bottom:0">Required for this path</p>
-              <div class="ms-field"><span class="lbl">Renewal value</span><span class="val">$ 48,200</span></div>
-              <div class="ms-field"><span class="lbl">Term length</span><span class="val">12 months</span></div>
-              <div class="ms-field dim"><span class="lbl">Net-new fields · hidden</span><span class="val">,  (not relevant)</span></div>
-            </div>
-          </div>
-        </div>
+        <p>
+          <strong>Modal Pop-up Asset.</strong> A reusable modal pattern designed for the Deal Registration flow, then contributed back to the Carbon Design System. It's now used across other IBM partner-facing products beyond Partner Plus.
+        </p>
+        <p>
+          Working at the system level meant our 8 months of design effort became a multi-year asset for IBM's broader UX organization. The component still ships in production today.
+        </p>
       </section>
 
 
-      <!-- ============ 05. IMPACT ============ -->
+      <!-- ============ 06. IMPACT ============ -->
       <section class="section" id="impact">
         <p class="section-eyebrow">Impact</p>
-        <h2 class="section-title">What changed when partners stopped routing around us.</h2>
+        <h2 class="section-title">What changed when the form started working with partners.</h2>
         <p>
-          The redesign rolled out to a 12-account pilot, then expanded to 200+ accounts over Q3. Three months
-          post-launch, the numbers told the story:
+          The redesign rolled out from a 12-account pilot to 200+ enterprise accounts over Q3. The numbers told the story.
         </p>
 
         <div class="impact-grid">
@@ -985,38 +955,32 @@
             <p class="impact-desc">From first registration to closed-won, measured across 200+ accounts.</p>
           </div>
           <div class="impact-card sage">
-            <p class="impact-num">62%</p>
+            <p class="impact-num">65%</p>
             <p class="impact-lbl">less form abandonment</p>
-            <p class="impact-desc">Required-field reduction (24 → 9) was the biggest single lever.</p>
+            <p class="impact-desc">At the "Add Products" section, the original sharpest pain point.</p>
           </div>
           <div class="impact-card">
-            <p class="impact-num">200+</p>
-            <p class="impact-lbl">enterprise accounts</p>
-            <p class="impact-desc">Rolled out from a 12-account pilot to the full Partner Plus footprint.</p>
+            <p class="impact-num">75%</p>
+            <p class="impact-lbl">fewer duplicate records</p>
+            <p class="impact-desc">Real-time validation prevented bad data from entering downstream Sales workflows.</p>
+          </div>
+          <div class="impact-card coral">
+            <p class="impact-num">40%</p>
+            <p class="impact-lbl">higher satisfaction</p>
+            <p class="impact-desc">User satisfaction scores measured pre and post launch.</p>
           </div>
         </div>
-
-        <!-- One supporting quote, keep it light, not dominant -->
-        <p class="impact-quote" style="margin-top: 36px;">
-          "The timeline alone saved me three follow-up emails this week. I can finally see what's actually happening with my deal."
-          <span class="impact-quote-by">,  D. Patel · Partner Rep, mid-market SI</span>
-        </p>
       </section>
 
-      <!-- ============ 06. REFLECTION ============ -->
+      <!-- ============ 07. REFLECTION ============ -->
       <section class="section" id="reflection">
         <p class="section-eyebrow">Reflection</p>
-        <h2 class="section-title">What I'd do differently next time</h2>
+        <h2 class="section-title">What this taught me</h2>
         <p>
-          The biggest unlock wasn't the form redesign, it was the <strong>archetype framing</strong>. Once we stopped
-          treating "a deal" as one shape and started designing around the three real shapes, every other
-          decision got easier. I'd push to find that framing earlier next time, even at the cost of slower
-          discovery.
+          Treating Deal Registration as a product rather than just a form transformed a critical business process. Rigorous user research paired with cross-functional leadership didn't just make the experience smoother, it directly impacted the bottom line.
         </p>
         <p>
-          The thing I'd revisit: we deferred the admin-side dashboard to a later phase. With more time I'd have
-          designed both sides in parallel, the partner experience can only be as fast as the IBM-side review,
-          and that loop is still the rate-limiter.
+          The most important lesson: in enterprise UX, the answer to a UX problem often lives outside the UI. The Legal sync. The CRM integration. The component contributed back to Carbon. None of those were screens, but every one of them moved the metric.
         </p>
       </section>
 
