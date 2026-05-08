@@ -540,6 +540,8 @@
       position: relative;
     }
     .card-cover img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--ease); }
+    .card-cover img:not([src]),
+    .card-cover img[src=""] { display: none; }
     .card:hover .card-cover img { transform: scale(1.02); }
     .card-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 8px; }
     .card-title {
@@ -1180,11 +1182,13 @@
           <!-- Mosaic, live, links to case-mosaic.html -->
           <a class="card reveal d3" href="case-mosaic.html">
             <span class="punch"></span>
-            <div class="card-cover" style="background:linear-gradient(135deg,#e8e0c5 0%,#cdc0a0 100%);"></div>
+            <div class="card-cover">
+              <img src="assets/mosaic/01_hero.png" alt="Mosaic, hand holding iPhone with the Mosaic logo on a navy background" loading="lazy" />
+            </div>
             <div class="card-row">
               <h3 class="card-title">Mosaic Care Coordination</h3>
               <span class="card-tags">
-                <span class="tag">Social Impact</span>
+                <span class="tag">Care Tech</span>
                 <span class="tag concept">Concept</span>
               </span>
             </div>
@@ -1448,22 +1452,21 @@
     <div class="footer-grid">
       <div>
         <h2 class="footer-quote">
-          Stories worth growing.<br/>
+          Growing and blooming products.<br/>
           <span class="em">Why not yours?</span>
         </h2>
-        <span class="footer-attr">,  a thing I believe</span>
+        <span class="footer-attr">— a thing I believe</span>
       </div>
-
       <div class="footer-col">
+        <p class="footer-col-label">Find me</p>
         <ul>
           <li><a href="mailto:sakshishah@u.northwestern.edu">Email</a></li>
           <li><a href="https://www.linkedin.com/in/sakshiishahh/" target="_blank" rel="noopener">LinkedIn</a></li>
-          <li><a href="https://github.com/" target="_blank" rel="noopener">GitHub</a></li>
-          <li><a href="https://read.cv/" target="_blank" rel="noopener">Read.cv</a></li>
+          <li><a href="https://drive.google.com/file/d/1afD_cw5tKiNqtMyKyFIy7jgnxFl-OphD/view?usp=sharing" target="_blank" rel="noopener">Resume</a></li>
         </ul>
       </div>
-
       <div class="footer-col">
+        <p class="footer-col-label">Wander</p>
         <ul>
           <li><a href="home.html">Work</a></li>
           <li><a href="about.html">About Me</a></li>
