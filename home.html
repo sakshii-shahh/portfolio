@@ -225,18 +225,19 @@
     .bio:last-of-type { margin-bottom: 18px; }
     .bio strong { color: var(--ink); font-weight: 500; }
     .bio .at {
-      color: var(--accent);
+      color: var(--ink);
       font-weight: 500;
       text-decoration: underline;
-      text-decoration-color: var(--accent);
-      text-decoration-thickness: 1.5px;
+      text-decoration-color: var(--rule-strong);
+      text-decoration-thickness: 1px;
       text-underline-offset: 3px;
       cursor: pointer;
-      transition: text-decoration-thickness .2s var(--ease), opacity .2s var(--ease);
+      transition: color .2s var(--ease), text-decoration-color .2s var(--ease), text-decoration-thickness .2s var(--ease);
     }
     .bio .at:hover {
-      text-decoration-thickness: 2.5px;
-      opacity: 0.85;
+      color: var(--accent);
+      text-decoration-color: var(--accent);
+      text-decoration-thickness: 2px;
     }
 
     .explore-wrap { margin-bottom: 16px; position: relative; }
