@@ -141,18 +141,18 @@
     .bio:last-of-type { margin-bottom: 18px; }
     .bio strong { color: var(--ink); font-weight: 500; }
     .bio .at {
-      color: var(--ink);
+      color: var(--accent);
       font-weight: 500;
       text-decoration: underline;
       text-decoration-color: var(--accent);
       text-decoration-thickness: 1.5px;
       text-underline-offset: 3px;
       cursor: pointer;
-      transition: color .2s var(--ease), text-decoration-thickness .2s var(--ease);
+      transition: text-decoration-thickness .2s var(--ease), opacity .2s var(--ease);
     }
     .bio .at:hover {
-      color: var(--accent);
       text-decoration-thickness: 2.5px;
+      opacity: 0.85;
     }
 
     /* explore pill */

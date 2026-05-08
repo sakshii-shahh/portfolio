@@ -215,18 +215,18 @@
     .bio:last-of-type { margin-bottom: 26px; }
     .bio strong { color: var(--ink); font-weight: 500; }
     .bio .at {
-      color: var(--ink);
+      color: var(--accent);
       font-weight: 500;
       text-decoration: underline;
       text-decoration-color: var(--accent);
       text-decoration-thickness: 1.5px;
       text-underline-offset: 3px;
       cursor: pointer;
-      transition: color .2s var(--ease), text-decoration-thickness .2s var(--ease);
+      transition: text-decoration-thickness .2s var(--ease), opacity .2s var(--ease);
     }
     .bio .at:hover {
-      color: var(--accent);
       text-decoration-thickness: 2.5px;
+      opacity: 0.85;
     }
 
     .explore-wrap { margin-bottom: 16px; position: relative; }
@@ -865,6 +865,8 @@
       font-size: clamp(40px, 5.5vw, 72px);
       line-height: 1; letter-spacing: -.025em;
       margin: 0 0 24px;
+      max-width: none;
+      width: 100%;
     }
     .ai-title em {
       font-style: italic; font-weight: 400; color: var(--accent);
@@ -874,7 +876,9 @@
       font-family: var(--display); font-weight: 400;
       font-size: clamp(22px, 2.4vw, 28px);
       line-height: 1.4; color: var(--ink);
-      margin: 0; max-width: 36ch;
+      margin: 0;
+      max-width: 720px;
+      width: 100%;
     }
     .ai-stance strong { font-weight: 600; }
 
@@ -1454,7 +1458,6 @@
 
         <!-- HERO -->
         <header class="ai-hero reveal">
-          <span class="ai-eyebrow">04 · AI Practices</span>
           <h1 class="ai-title">How I work <em>with AI</em>.</h1>
           <p class="ai-stance">I use AI to <strong>explore quickly</strong>, then slow down to <strong>decide carefully</strong>. It compresses the parts of design where I'd otherwise spin, but the framing, the empathy, and the final call stay mine.</p>
         </header>
