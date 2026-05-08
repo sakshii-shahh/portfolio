@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-<title>Welcome — Sakshi's Garden</title>
-<meta name="description" content="Welcome to Sakshi Shah's portfolio — a watercolor garden entrance into product design work, case studies, and a visitor's lawn to plant a flower." />
+<title>Welcome, Sakshi's Garden</title>
+<meta name="description" content="Welcome to Sakshi Shah's portfolio, a watercolor garden entrance into product design work, case studies, and a visitor's lawn to plant a flower." />
 
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://portfolio-sakshi-shah.vercel.app/" />
-<meta property="og:title" content="Welcome — Sakshi's Garden" />
-<meta property="og:description" content="Welcome to Sakshi Shah's portfolio — a watercolor garden entrance into product design work, case studies, and a visitor's lawn to plant a flower." />
+<meta property="og:title" content="Welcome, Sakshi's Garden" />
+<meta property="og:description" content="Welcome to Sakshi Shah's portfolio, a watercolor garden entrance into product design work, case studies, and a visitor's lawn to plant a flower." />
 <meta property="og:image" content="https://framerusercontent.com/images/yWcAmam0HfUbCIUDWf7Pm80qu8I.jpeg?width=1200" />
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Welcome — Sakshi's Garden" />
-<meta name="twitter:description" content="Welcome to Sakshi Shah's portfolio — a watercolor garden entrance into product design work, case studies, and a visitor's lawn to plant a flower." />
+<meta name="twitter:title" content="Welcome, Sakshi's Garden" />
+<meta name="twitter:description" content="Welcome to Sakshi Shah's portfolio, a watercolor garden entrance into product design work, case studies, and a visitor's lawn to plant a flower." />
 <meta name="twitter:image" content="https://framerusercontent.com/images/yWcAmam0HfUbCIUDWf7Pm80qu8I.jpeg?width=1200" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -47,7 +47,7 @@
     position:relative;
   }
 
-  /* FULL-BLEED illustration BG — sits inside .welcome wrapper, so absolute (not fixed) */
+  /* FULL-BLEED illustration BG, sits inside .welcome wrapper, so absolute (not fixed) */
   .scene-bg{
     position:absolute; inset:0;
     width:100%; height:100%;
@@ -68,14 +68,14 @@
     mix-blend-mode:multiply; opacity:.22;
   }
 
-  /* WELCOME — wraps SVG + page so the entire scene transforms as one unit during exit */
+  /* WELCOME, wraps SVG + page so the entire scene transforms as one unit during exit */
   .welcome{
     position:relative;
     width:100vw; height:100vh;
     overflow:hidden;
   }
 
-  /* "STEPPING INTO THE GARDEN" exit — 4 phases over 1.5s
+  /* "STEPPING INTO THE GARDEN" exit, 4 phases over 1.5s
      Phase 1 (0–200ms / 0–13.3%):    anticipation breath-in to scale .98
      Phase 2 (200–1200ms / 13.3–80%): dolly forward to scale 1.18, opacity 0, blur 6px
      Phase 3 (700–1500ms / 46.7–100%): cream wash blooms from click point (separate keyframes)
@@ -90,7 +90,7 @@
     80%   { transform:scale(1.18); opacity:0; filter:blur(6px); }
     100%  { transform:scale(1.18); opacity:0; filter:blur(6px); }
   }
-  /* Subtle button dim during Phase 1 — signals click was registered */
+  /* Subtle button dim during Phase 1, signals click was registered */
   .welcome.exiting .cta{
     opacity:.65;
     transition:opacity 200ms cubic-bezier(.4,0,.2,1);
@@ -106,7 +106,7 @@
     display:flex; flex-direction:column;
   }
 
-  /* CREAM WASH — radial-gradient overlay that blooms from the click point, overlapping Phase 2 */
+  /* CREAM WASH, radial-gradient overlay that blooms from the click point, overlapping Phase 2 */
   .cream-wash{
     position:fixed; top:0; left:0;
     width:100vw; height:100vh;
@@ -126,7 +126,7 @@
     100%      { transform:scale(2.5); opacity:1; }
   }
 
-  /* WORDMARK — naked, just dot + name; no pill, no underline */
+  /* WORDMARK, naked, just dot + name; no pill, no underline */
   .wordmark{
     position:fixed; top:30px; left:34px; z-index:7;
     display:inline-flex; align-items:center; gap:10px;
@@ -145,7 +145,7 @@
     flex-shrink:0;
   }
 
-  /* SKY ZONE — eyebrow + title + tagline, anchored to the bottom of the sky (hugs the horizon) */
+  /* SKY ZONE, eyebrow + title + tagline, anchored to the bottom of the sky (hugs the horizon) */
   .top{
     flex:0 0 60vh;
     display:flex; flex-direction:column; align-items:center; justify-content:flex-end;
@@ -180,7 +180,7 @@
     color:var(--accent);
   }
 
-  /* GRASS ZONE — CTA + skip; anchored just below the horizon, in conversation with the tagline above */
+  /* GRASS ZONE, CTA + skip; anchored just below the horizon, in conversation with the tagline above */
   .bottom{
     flex:1;
     display:flex; flex-direction:column; align-items:center;
@@ -249,7 +249,7 @@
     text-decoration-color:var(--cream);
   }
 
-  /* Butterflies — closed-loop figure-eight wander, no teleport */
+  /* Butterflies, closed-loop figure-eight wander, no teleport */
   .b{
     position:fixed; z-index:6; pointer-events:none;
     will-change:transform; opacity:.92;
@@ -276,7 +276,7 @@
     0%,100%{transform:scaleY(1)}
     50%{transform:scaleY(.55)}
   }
-  /* closed loop: returns to 0,0 — gentle figure-eight wander */
+  /* closed loop: returns to 0,0, gentle figure-eight wander */
   @keyframes wander-b1{
     0%   { transform: translate3d(0vw, 0vh, 0); }
     15%  { transform: translate3d(6vw, -2vh, 0); }
@@ -347,7 +347,7 @@
   @media (prefers-reduced-motion: reduce){
     *,*::before,*::after{animation:none !important;transition:none !important}
     .reveal{opacity:1;transform:none}
-    /* Exit fallback — simple 250ms cross-fade instead of the multi-phase scene */
+    /* Exit fallback, simple 250ms cross-fade instead of the multi-phase scene */
     .welcome.exiting{ opacity:0 !important; transition:opacity 250ms ease-out !important; }
     .cream-wash.blooming{ opacity:1 !important; transform:scale(3) !important; transition:opacity 250ms ease-out !important; }
   }
@@ -357,10 +357,10 @@
 
 <div class="cursor-dot" aria-hidden="true"></div>
 
-<!-- Cream wash — radial-gradient bloom anchored at the click point during exit -->
+<!-- Cream wash, radial-gradient bloom anchored at the click point during exit -->
 <div class="cream-wash" id="creamWash" aria-hidden="true"></div>
 
-<!-- Welcome scene wrapper — SVG + page transform together as one unit -->
+<!-- Welcome scene wrapper, SVG + page transform together as one unit -->
 <section class="welcome" id="welcome">
 <img id="sceneBg" class="scene-bg" alt="Watercolor garden scene" src="assets/garden-mb-v2.svg"/>
 
@@ -402,7 +402,7 @@
     <span>sakshi shah</span>
   </a>
 
-  <!-- SKY ZONE — eyebrow + title + tagline, vertically centered in the sky -->
+  <!-- SKY ZONE, eyebrow + title + tagline, vertically centered in the sky -->
   <header class="top">
     <p class="eyebrow reveal r1">welcome to</p>
     <h1 class="title reveal r2">
@@ -411,7 +411,7 @@
     <p class="sub reveal r3">come on in to a small place where i build, design &amp; water ideas worth growing.</p>
   </header>
 
-  <!-- GRASS ZONE — CTA + skip on the lawn -->
+  <!-- GRASS ZONE, CTA + skip on the lawn -->
   <footer class="bottom">
     <div class="cta-row reveal r4">
       <button class="cta" id="enter">step inside</button>
@@ -443,7 +443,7 @@
     });
   })();
 
-  // "Step inside" transition — 4-phase coordinated scene exit + cream-wash bloom from click point
+  // "Step inside" transition, 4-phase coordinated scene exit + cream-wash bloom from click point
   (function(){
     var enter=document.getElementById('enter');
     var skip=document.getElementById('skip');
@@ -455,7 +455,7 @@
       var x=(e&&e.clientX!==undefined)?e.clientX:innerWidth/2;
       var y=(e&&e.clientY!==undefined)?e.clientY:innerHeight*0.78;
       wash.style.transformOrigin=x+'px '+y+'px';
-      // Trigger the unified scene exit + wash bloom — CSS keyframes do all the timing
+      // Trigger the unified scene exit + wash bloom, CSS keyframes do all the timing
       welcome.classList.add('exiting');
       wash.classList.add('blooming');
       // Navigate after total animation duration (250ms when reduced-motion is on)

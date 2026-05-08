@@ -3,17 +3,17 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Visitor's Lawn — Sakshi Shah</title>
+  <title>Visitor's Lawn, Sakshi Shah</title>
   <meta name="description" content="A watercolor lawn of every visitor who has planted a flower at Sakshi Shah's portfolio garden. Hover any pot for the visitor's note; click to see their card." />
 
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://portfolio-sakshi-shah.vercel.app/lawn.html" />
-  <meta property="og:title" content="Visitor's Lawn — Sakshi Shah" />
+  <meta property="og:title" content="Visitor's Lawn, Sakshi Shah" />
   <meta property="og:description" content="A watercolor lawn of every visitor who has planted a flower at Sakshi Shah's portfolio garden." />
   <meta property="og:image" content="https://framerusercontent.com/images/yWcAmam0HfUbCIUDWf7Pm80qu8I.jpeg?width=1200" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Visitor's Lawn — Sakshi Shah" />
+  <meta name="twitter:title" content="Visitor's Lawn, Sakshi Shah" />
   <meta name="twitter:description" content="A watercolor lawn of every visitor who has planted a flower at Sakshi Shah's portfolio garden." />
   <meta name="twitter:image" content="https://framerusercontent.com/images/yWcAmam0HfUbCIUDWf7Pm80qu8I.jpeg?width=1200" />
 
@@ -209,7 +209,7 @@
     }
     .clock { color: var(--ink-soft); font-feature-settings: "tnum"; }
 
-    /* ============ HEADER (no counter, no top CTAs — quiet title only) ============ */
+    /* ============ HEADER (no counter, no top CTAs, quiet title only) ============ */
     .lawn-header {
       padding: 56px 56px 14px;
     }
@@ -232,7 +232,7 @@
       max-width: 50ch;
     }
 
-    /* ============ STATS — first thing under the title, collapsed ============ */
+    /* ============ STATS, first thing under the title, collapsed ============ */
     .stats {
       margin: 18px 56px 28px;
       border: 1px solid var(--rule);
@@ -379,7 +379,7 @@
       to { opacity: 0; }
     }
 
-    /* ============ HOVER QUOTE — sticky-note paper pill ============ */
+    /* ============ HOVER QUOTE, sticky-note paper pill ============ */
     .pot-quote {
       position: absolute;
       bottom: calc(100% - 4px); left: 50%;
@@ -514,7 +514,7 @@
     }
     .card-close:hover { background: rgba(255,255,255,.85); }
 
-    /* card tints — color matches pot color */
+    /* card tints, color matches pot color */
     .card[data-tint="terracotta"] { background: #f9e6d8; color: #6a3416; }
     .card[data-tint="cobalt"]     { background: #dde7fa; color: #1a3a8a; }
     .card[data-tint="cream"]      { background: #fbf6e5; color: #5a4632; }
@@ -552,7 +552,7 @@
         I'm a product designer with a <strong>research and strategy backbone</strong>. I use <strong>empathy</strong> to find the right problem, and <strong>analytical thinking</strong> to shape the answer.
       </p>
       <p class="bio reveal d2">
-        Currently <a class="at" href="https://www.kellogg.northwestern.edu/programs/mmm-program/" target="_blank" rel="noopener">@Northwestern</a>, <a class="at" href="https://www.cgi.com/" target="_blank" rel="noopener">@CGI</a><br>
+        Currently <a class="at" href="https://www.mccormick.northwestern.edu/product-design-development/" target="_blank" rel="noopener">@Northwestern</a>, <a class="at" href="https://www.cgi.com/" target="_blank" rel="noopener">@CGI</a><br>
         Previously <a class="at" href="https://www.ibm.com/" target="_blank" rel="noopener">@IBM</a>
       </p>
 
@@ -591,7 +591,7 @@
       </a>
 
       <div class="sidebar-bottom">
-        <span class="clock" id="clock">—</span>
+        <span class="clock" id="clock">, </span>
         <span>© 2026 Sakshi Shah</span>
       </div>
     </aside>
@@ -629,15 +629,15 @@
       </div>
       <div class="card-body">
         <p class="card-label">Visitor</p>
-        <h2 class="card-name" id="cardName">—</h2>
+        <h2 class="card-name" id="cardName">, </h2>
         <div class="card-row">
           <div>
             <p class="card-label">Issued on</p>
-            <p class="card-meta" id="cardDate">—</p>
+            <p class="card-meta" id="cardDate">, </p>
           </div>
           <div>
             <p class="card-label">No.</p>
-            <p class="card-meta" id="cardNumber">—</p>
+            <p class="card-meta" id="cardNumber">, </p>
           </div>
         </div>
       </div>
@@ -655,7 +655,7 @@
     //  CONSTANTS + SEED DATA
     // ============================================================
     var STORAGE_KEY = 'sakshi_lawn';
-    var STORAGE_VERSION = 2; // bumped — schema changed (flower/pot/quote)
+    var STORAGE_VERSION = 2; // bumped, schema changed (flower/pot/quote)
     var FIRST_CARD_NUMBER = 3275;
 
     // Seeds use plant.html flower ids + pot ids (shared via LAWN_LIB)
@@ -669,7 +669,7 @@
       { name:'PORCELAIN TRINKET', dayOffset:16, flower:'peony',     pot:'cream',      quote:'a small offering' },
       { name:'GISELE',            dayOffset:14, flower:'tulip',     pot:'cobalt',     quote:'paris on a slow tuesday' },
       { name:'DAPPLED ORCHID',    dayOffset:12, flower:'hibiscus',  pot:'terracotta', quote:'stayed five minutes too long' },
-      { name:'NIKHIL',            dayOffset:11, flower:'lavender',  pot:'cobalt',     quote:'studying for finals — break time' },
+      { name:'NIKHIL',            dayOffset:11, flower:'lavender',  pot:'cobalt',     quote:'studying for finals, break time' },
       { name:'MOSSY LANTERN',     dayOffset: 9, flower:'lavender',  pot:'matte',      quote:'quietly impressed' },
       { name:'VELVET COMPASS',    dayOffset: 8, flower:'peony',     pot:'cobalt',     quote:'taking the long way home' },
       { name:'MARGAUX',           dayOffset: 6, flower:'peony',     pot:'cream',      quote:'thanks for the slow scroll' },
@@ -709,7 +709,7 @@
     }
 
     // ============================================================
-    //  STORAGE — load + seed (with v2 migration)
+    //  STORAGE, load + seed (with v2 migration)
     // ============================================================
     function buildSeededState() {
       var today = new Date();
@@ -788,7 +788,7 @@
     }
 
     // ============================================================
-    //  POSITIONING — featured anchored center, others scatter around
+    //  POSITIONING, featured anchored center, others scatter around
     // ============================================================
     function assignPositions() {
       var placed = [];
@@ -855,8 +855,8 @@
       var total = (STATE.visitorCount || STATE.plants.length).toLocaleString();
       body.innerHTML =
         '<div class="stat-cell"><p class="stat-label">Total visitors</p><p class="stat-val">' + total + '</p></div>' +
-        '<div class="stat-cell"><p class="stat-label">Most-planted flower</p><p class="stat-val">' + escapeHtml(mostFlower ? mostFlower[0] : '—') + '</p></div>' +
-        '<div class="stat-cell"><p class="stat-label">Most-popular planter</p><p class="stat-val">' + escapeHtml(mostName ? mostName[0] : '—') + '</p></div>' +
+        '<div class="stat-cell"><p class="stat-label">Most-planted flower</p><p class="stat-val">' + escapeHtml(mostFlower ? mostFlower[0] : ', ') + '</p></div>' +
+        '<div class="stat-cell"><p class="stat-label">Most-popular planter</p><p class="stat-val">' + escapeHtml(mostName ? mostName[0] : ', ') + '</p></div>' +
         '<div class="stat-cell"><p class="stat-label">Lawn started</p><p class="stat-val">' + startedDate + '</p></div>';
     }
 
@@ -900,7 +900,7 @@
     });
 
     // ============================================================
-    //  FEATURED — center, glow, scroll-into-view, auto-open
+    //  FEATURED, center, glow, scroll-into-view, auto-open
     // ============================================================
     function highlightFeatured() {
       if (!FEATURED_ID) return;

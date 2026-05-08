@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Plant — Sakshi's Garden</title>
-  <meta name="description" content="Visitor's Lawn — leave a flower in Sakshi Shah's garden. A small, kind interaction for anyone passing through." />
+  <title>Plant, Sakshi's Garden</title>
+  <meta name="description" content="Visitor's Lawn, leave a flower in Sakshi Shah's garden. A small, kind interaction for anyone passing through." />
 
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://portfolio-sakshi-shah.vercel.app/plant.html" />
-  <meta property="og:title" content="Plant — Sakshi's Garden" />
-  <meta property="og:description" content="Visitor's Lawn — leave a flower in Sakshi Shah's garden. A small, kind interaction for anyone passing through." />
+  <meta property="og:title" content="Plant, Sakshi's Garden" />
+  <meta property="og:description" content="Visitor's Lawn, leave a flower in Sakshi Shah's garden. A small, kind interaction for anyone passing through." />
   <meta property="og:image" content="https://framerusercontent.com/images/yWcAmam0HfUbCIUDWf7Pm80qu8I.jpeg?width=1200" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Plant — Sakshi's Garden" />
-  <meta name="twitter:description" content="Visitor's Lawn — leave a flower in Sakshi Shah's garden. A small, kind interaction for anyone passing through." />
+  <meta name="twitter:title" content="Plant, Sakshi's Garden" />
+  <meta name="twitter:description" content="Visitor's Lawn, leave a flower in Sakshi Shah's garden. A small, kind interaction for anyone passing through." />
   <meta name="twitter:image" content="https://framerusercontent.com/images/yWcAmam0HfUbCIUDWf7Pm80qu8I.jpeg?width=1200" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -54,7 +54,7 @@
     html, body { margin: 0; }
     html { -webkit-font-smoothing: antialiased; }
 
-    /* Paper-grain texture — bridges the watercolor welcome to the rest of the site */
+    /* Paper-grain texture, bridges the watercolor welcome to the rest of the site */
     body::before {
       content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 1;
       opacity: .35;
@@ -113,7 +113,7 @@
     }
     .top-back:hover { color: var(--ink); }
 
-    /* PLANT PAGE LAYOUT — single viewport */
+    /* PLANT PAGE LAYOUT, single viewport */
     .plant-page {
       max-width: 1240px; margin: 0 auto;
       padding: 0 32px 24px;
@@ -160,7 +160,7 @@
       min-width: 0;
     }
 
-    /* STEP — typography matches site (italic saffron display number) */
+    /* STEP, typography matches site (italic saffron display number) */
     .step { }
     .step-label {
       display: flex; align-items: baseline; gap: 14px;
@@ -177,7 +177,7 @@
       font-size: 22px;
       line-height: 1;
     }
-    /* When a step is "done" — just a quiet color shift, no tick, no emoji */
+    /* When a step is "done", just a quiet color shift, no tick, no emoji */
     .step.done .step-label .num {
       color: var(--leaf-dark);
     }
@@ -298,7 +298,7 @@
     }
     .preview-caption.ready { color: var(--leaf-dark); }
 
-    /* Composite plant render — flower + pot stacked, names on pot.
+    /* Composite plant render, flower + pot stacked, names on pot.
        This is the SAME render used in preview, success, and lawn.
        Width is set by --plant-w (default 180px), everything else scales. */
     .plant-render {
@@ -369,11 +369,11 @@
       height: 1px; background: currentColor; opacity: .35;
     }
 
-    /* SUCCESS — watercolor sky + lawn, painterly clouds, layered grass */
+    /* SUCCESS, watercolor sky + lawn, painterly clouds, layered grass */
     .success {
       position: fixed; inset: 0; z-index: 100;
       background:
-        /* layered greens — painterly lawn */
+        /* layered greens, painterly lawn */
         linear-gradient(180deg, transparent 0%, transparent 52%, #cce4b8 54%, #b8d59a 70%, #9cc88e 100%),
         /* soft sky */
         linear-gradient(180deg, #d4e8ec 0%, #c8e0e4 50%, #b8d2cc 56%, transparent 56%);
@@ -386,7 +386,7 @@
     }
     .success.show { opacity: 1; pointer-events: auto; }
 
-    /* watercolor wash texture — bleeds + edges */
+    /* watercolor wash texture, bleeds + edges */
     .success::before {
       content: ""; position: absolute; inset: 0; pointer-events: none;
       background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='280' height='280'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='3' seed='7'/><feColorMatrix values='0 0 0 0 0.35  0 0 0 0 0.5  0 0 0 0 0.3  0 0 0 0.08 0'/></filter><rect width='280' height='280' filter='url(%23n)'/></svg>");
@@ -430,7 +430,7 @@
     }
     .success-head .success-mono .softer { color: rgba(31,64,48,.62); }
 
-    /* user's plant — DROPS down into the lawn (planting moment) */
+    /* user's plant, DROPS down into the lawn (planting moment) */
     .success-center {
       display: flex; align-items: flex-end; justify-content: center;
       flex: 1;
@@ -466,7 +466,7 @@
       100% { opacity: 0; transform: scale(1) rotate(120deg); }
     }
 
-    /* lawn ribbon — other plants nestled in the grass */
+    /* lawn ribbon, other plants nestled in the grass */
     .lawn-ribbon {
       display: flex; align-items: flex-end; justify-content: center;
       gap: 18px; flex-wrap: nowrap;
@@ -589,14 +589,14 @@
         </div>
         <div class="actions">
           <button class="plant-btn" id="plantBtn" disabled>Plant it</button>
-          <a class="skip-link" href="home.html">SKIP — TAKE ME STRAIGHT TO THE WORK</a>
+          <a class="skip-link" href="home.html">SKIP, TAKE ME STRAIGHT TO THE WORK</a>
         </div>
       </div>
 
     </div>
   </main>
 
-  <!-- SUCCESS — sky + lawn scene, plant drops into the grass, ribbon below -->
+  <!-- SUCCESS, sky + lawn scene, plant drops into the grass, ribbon below -->
   <div class="success" id="success" aria-hidden="true">
 
     <!-- grass blades silhouette -->
@@ -664,7 +664,7 @@
     const potSvg  = LAWN_LIB.potSvg;
 
     /* ======================================================
-       STATE — pre-select a default flower + pot so empty state
+       STATE, pre-select a default flower + pot so empty state
        is never lonely. User can change or just click plant.
        ====================================================== */
     const state = { flower: 'cosmos', pot: 'cream', name: '', quote: '' };
@@ -726,7 +726,7 @@
     });
 
     /* ======================================================
-       COMPOSITE PLANT RENDER — single source of truth.
+       COMPOSITE PLANT RENDER, single source of truth.
        Used by: live preview, success center, lawn ribbon.
        ====================================================== */
     function renderPlantHTML(plant) {
@@ -743,10 +743,10 @@
         flower: state.flower, pot: state.pot, name: state.name,
       });
 
-      // EVERYTHING is optional — plant button always enabled, no required fields
+      // EVERYTHING is optional, plant button always enabled, no required fields
       plantBtn.disabled = false;
       previewCaption.classList.add('ready');
-      previewCaption.textContent = 'READY TO PLANT — OR PICK YOUR OWN';
+      previewCaption.textContent = 'READY TO PLANT, OR PICK YOUR OWN';
     }
 
     // sync default selection into the UI on load
@@ -765,7 +765,7 @@
     updatePreview();
 
     /* ======================================================
-       SEEDED PLANTS — feel inhabited from day one
+       SEEDED PLANTS, feel inhabited from day one
        ====================================================== */
     const SEED_PLANTS = [
       { flower: 'lavender',  pot: 'cobalt',     name: 'megan' },
@@ -777,7 +777,7 @@
     ];
 
     /* ======================================================
-       PLANT IT — save to sakshi_lawn (new format), redirect to lawn.html#<id>
+       PLANT IT, save to sakshi_lawn (new format), redirect to lawn.html#<id>
        ====================================================== */
     plantBtn.addEventListener('click', () => {
       // Legacy write (kept so the existing success scene's logic doesn't change)
@@ -827,7 +827,7 @@
     });
 
     /* ======================================================
-       saveToLawn — append the visitor record to sakshi_lawn.
+       saveToLawn, append the visitor record to sakshi_lawn.
        Schema mirrors lawn.html; we write version:1 so lawn.html's
        v2 migration kicks in and seeds the gallery around our record.
        ====================================================== */
