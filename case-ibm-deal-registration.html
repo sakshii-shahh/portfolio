@@ -557,6 +557,31 @@
     }
 
     /* ============ IMPACT, big stat blocks ============ */
+    .nda-callout {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 14px 18px;
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-left: 3px solid var(--accent);
+      border-radius: var(--r-md);
+      margin: 18px 0 22px;
+      max-width: 720px;
+    }
+    .nda-icon {
+      font-size: 15px;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .nda-callout p {
+      margin: 0;
+      font-size: 13.5px;
+      font-style: italic;
+      color: var(--ink-soft);
+      line-height: 1.5;
+    }
+
     .features-list {
       list-style: none; padding: 0; margin: 28px 0 0;
       display: flex; flex-direction: column; gap: 14px;
@@ -773,8 +798,9 @@
           <li><a href="#solution" class="toc-link"><span class="num">03.</span>The solution</a></li>
           <li><a href="#features" class="toc-link"><span class="num">04.</span>Features</a></li>
           <li><a href="#carbon" class="toc-link"><span class="num">05.</span>Carbon components</a></li>
-          <li><a href="#impact" class="toc-link"><span class="num">06.</span>Impact</a></li>
-          <li><a href="#reflection" class="toc-link"><span class="num">07.</span>Reflection</a></li>
+          <li><a href="#handoff" class="toc-link"><span class="num">06.</span>Handoff &amp; documentation</a></li>
+          <li><a href="#impact" class="toc-link"><span class="num">07.</span>Impact</a></li>
+          <li><a href="#reflection" class="toc-link"><span class="num">08.</span>Reflection</a></li>
         </ol>
       </div>
 
@@ -805,6 +831,11 @@
         I led the redesign of IBM's <strong>partner deal registration</strong> flow on the
         <a href="https://www.ibm.com/partnerplus" target="_blank" rel="noopener">Partner Plus</a> platform, moving sellers from intent to closed deal <strong>30% faster</strong> across 200+ enterprise accounts. I owned research, design, and rollout end-to-end, working closely with engineering, product, and legal teams across IBM.
       </p>
+
+      <div class="nda-callout reveal d2">
+        <span class="nda-icon" aria-hidden="true">🔒</span>
+        <p>Due to NDAs, some specific product details, exact metrics, and internal process names have been generalized or omitted.</p>
+      </div>
 
       <a class="visit-btn reveal d2" href="https://www.ibm.com/partnerplus" target="_blank" rel="noopener">
         <span>Visit IBM Partner Plus</span>
