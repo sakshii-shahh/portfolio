@@ -1197,6 +1197,380 @@
       .market-cell.br { border-bottom: none; }
     }
 
+    /* Behavioral memory loop: 5-step horizontal flow */
+    .loop-flow {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      align-items: stretch;
+      margin: 24px 0 28px;
+    }
+    @media (max-width: 980px) {
+      .loop-flow { grid-template-columns: 1fr; gap: 12px; }
+      .loop-arrow { display: none; }
+    }
+    .loop-step {
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-md);
+      padding: 16px 14px;
+      display: flex; flex-direction: column;
+      transition: transform .25s var(--ease), border-color .25s var(--ease);
+    }
+    .loop-step:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+    }
+    .loop-step.highlight {
+      background: color-mix(in srgb, var(--accent) 10%, var(--bg-elev));
+      border-color: var(--accent);
+    }
+    .loop-num {
+      font-family: var(--mono); font-size: 10.5px;
+      letter-spacing: .14em; color: var(--accent);
+      font-weight: 500; margin-bottom: 8px;
+    }
+    .loop-step h5 {
+      font-family: var(--display); font-weight: 500;
+      font-size: 15px; margin: 0 0 6px;
+      color: var(--ink); letter-spacing: -0.01em;
+    }
+    .loop-step p {
+      font-size: 12.5px; color: var(--ink-soft);
+      line-height: 1.45; margin: 0;
+    }
+    .loop-step em {
+      font-family: "Fraunces", Georgia, serif;
+      font-style: italic;
+      color: var(--ink);
+    }
+    .loop-arrow {
+      font-family: var(--mono); font-size: 18px;
+      color: var(--ink-mute);
+      display: grid; place-items: center;
+    }
+
+    /* Dual-interface comparison */
+    .dual-compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 24px 0 20px;
+    }
+    @media (max-width: 760px) { .dual-compare { grid-template-columns: 1fr; } }
+    .dual-side {
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-lg);
+      padding: 24px 22px;
+    }
+    .dual-side.parent {
+      background: color-mix(in srgb, var(--accent) 8%, var(--bg-elev));
+      border-color: var(--accent);
+    }
+    .dual-side-tag {
+      display: inline-block;
+      font-family: var(--mono); font-size: 10.5px;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--ink-soft);
+      padding: 5px 11px;
+      background: var(--bg);
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      margin-bottom: 14px;
+    }
+    .dual-side.parent .dual-side-tag {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+    .dual-side h4 {
+      font-family: var(--display); font-weight: 500;
+      font-size: 18px; margin: 0 0 14px;
+      color: var(--ink); letter-spacing: -0.012em;
+    }
+    .dual-side ul {
+      list-style: none; padding: 0; margin: 0;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .dual-side ul li {
+      font-size: 14px; color: var(--ink-soft); line-height: 1.5;
+      padding-left: 16px; position: relative;
+    }
+    .dual-side ul li::before {
+      content: ""; position: absolute; left: 0; top: 9px;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--ink-mute);
+    }
+    .dual-side.parent ul li::before { background: var(--accent); }
+    .dual-side ul li strong { color: var(--ink); font-weight: 500; }
+
+    /* Feature spec format */
+    .feature-summary {
+      font-family: "Fraunces", Georgia, serif;
+      font-style: italic;
+      font-size: 17px;
+      color: var(--ink);
+      line-height: 1.4;
+      margin: 14px 0 16px;
+    }
+    .feature-spec {
+      list-style: none; padding: 0; margin: 0 0 28px;
+      display: flex; flex-direction: column; gap: 10px;
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-md);
+      padding: 18px 22px;
+    }
+    .feature-spec li {
+      font-size: 14px; color: var(--ink-soft); line-height: 1.5;
+    }
+    .feature-spec li strong {
+      color: var(--ink); font-weight: 500;
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: .12em; text-transform: uppercase;
+      display: inline-block; margin-right: 6px;
+    }
+
+    /* Market sizing tiers */
+    .market-sizing {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin: 20px 0 28px;
+    }
+    @media (max-width: 760px) { .market-sizing { grid-template-columns: 1fr; } }
+    .market-tier {
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-md);
+      padding: 22px 20px;
+      transition: transform .25s var(--ease);
+    }
+    .market-tier:hover { transform: translateY(-2px); }
+    .market-tier.tam { border-left: 3px solid var(--accent); }
+    .market-tier.sam { border-left: 3px solid var(--leaf); }
+    .market-tier.som { border-left: 3px solid var(--ink-soft); }
+    .market-tier-label {
+      display: inline-block;
+      font-family: var(--mono); font-size: 10px;
+      letter-spacing: .18em; font-weight: 500;
+      color: var(--ink-mute);
+      margin-bottom: 8px;
+    }
+    .market-tier-num {
+      font-family: var(--display); font-weight: 600;
+      font-size: 36px; line-height: 1;
+      color: var(--ink);
+      letter-spacing: -0.025em;
+      margin-bottom: 12px;
+    }
+    .market-tier p {
+      font-size: 13px; color: var(--ink-soft); line-height: 1.5; margin: 0;
+    }
+
+    /* ICP callout */
+    .icp-callout {
+      background: color-mix(in srgb, var(--accent) 6%, var(--bg-elev));
+      border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--rule));
+      border-radius: var(--r-md);
+      padding: 22px 24px;
+      margin: 0 0 32px;
+    }
+    .icp-eyebrow {
+      display: inline-block;
+      font-family: var(--mono); font-size: 10px;
+      letter-spacing: .16em; text-transform: uppercase;
+      color: var(--accent-deep);
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+    .icp-callout p {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 16px;
+      color: var(--ink);
+      line-height: 1.5;
+      margin: 0;
+    }
+    .icp-callout p strong { font-weight: 600; }
+
+    /* Artifact gallery */
+    .artifact-gallery {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin: 20px 0 32px;
+    }
+    @media (max-width: 980px) { .artifact-gallery { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 540px) { .artifact-gallery { grid-template-columns: 1fr; } }
+    .artifact-card {
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-md);
+      padding: 18px 16px;
+      transition: transform .25s var(--ease), border-color .25s var(--ease);
+    }
+    .artifact-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+    }
+    .artifact-icon { font-size: 22px; margin-bottom: 10px; }
+    .artifact-card strong {
+      display: block;
+      font-family: var(--display); font-weight: 500;
+      font-size: 14px; color: var(--ink); margin-bottom: 4px;
+      letter-spacing: -0.005em;
+    }
+    .artifact-card span {
+      font-size: 12.5px; color: var(--ink-soft); line-height: 1.45;
+    }
+
+    /* Unit economics banner */
+    .unit-econ-banner {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-lg);
+      margin: 20px 0 16px;
+      overflow: hidden;
+    }
+    @media (max-width: 760px) { .unit-econ-banner { grid-template-columns: 1fr; } }
+    .econ-stat {
+      padding: 28px 26px;
+      border-right: 1px solid var(--rule);
+    }
+    .econ-stat:last-child { border-right: none; }
+    @media (max-width: 760px) {
+      .econ-stat { border-right: none; border-bottom: 1px solid var(--rule); }
+      .econ-stat:last-child { border-bottom: none; }
+    }
+    .econ-num {
+      font-family: var(--display); font-weight: 600;
+      font-size: 44px; line-height: 1;
+      color: var(--accent);
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+    }
+    .econ-num span {
+      font-size: 0.45em;
+      font-weight: 400;
+      color: var(--ink-mute);
+      margin-left: 4px;
+    }
+    .econ-label {
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--ink-soft);
+      margin: 0 0 4px;
+    }
+    .econ-sub {
+      font-size: 12.5px; color: var(--ink-mute);
+      line-height: 1.45; margin: 0;
+    }
+
+    /* Reflection cards */
+    .reflect-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 20px 0 32px;
+    }
+    @media (max-width: 980px) { .reflect-grid { grid-template-columns: 1fr; } }
+    .reflect-card {
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-lg);
+      padding: 22px 20px;
+      display: flex; flex-direction: column;
+      transition: transform .25s var(--ease), border-color .25s var(--ease);
+    }
+    .reflect-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+    }
+    .reflect-num {
+      font-family: var(--mono); font-size: 12px;
+      letter-spacing: .14em; color: var(--accent);
+      font-weight: 500; margin-bottom: 12px;
+    }
+    .reflect-card h4 {
+      font-family: var(--display); font-weight: 500;
+      font-size: 17px; line-height: 1.25;
+      color: var(--ink); margin: 0 0 10px;
+      letter-spacing: -0.012em;
+    }
+    .reflect-card > p {
+      font-size: 13.5px; color: var(--ink-soft);
+      line-height: 1.5; margin: 0 0 14px;
+      flex: 1;
+    }
+    .reflect-tag {
+      display: inline-block; align-self: flex-start;
+      font-family: var(--mono); font-size: 10px;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--accent-deep);
+      padding: 5px 10px;
+      background: var(--accent-soft);
+      border-radius: 999px;
+    }
+
+    /* Open questions callout */
+    .open-questions {
+      background: color-mix(in srgb, var(--ink) 4%, var(--bg-elev));
+      border: 1px solid var(--rule);
+      border-radius: var(--r-lg);
+      padding: 28px 30px;
+      margin: 0 0 28px;
+    }
+    .open-questions-eyebrow {
+      display: inline-block;
+      font-family: var(--mono); font-size: 10.5px;
+      letter-spacing: .16em; text-transform: uppercase;
+      color: var(--ink-mute);
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+    .open-questions h3 {
+      margin: 0 0 16px;
+      font-family: var(--display); font-weight: 500;
+      font-size: 22px; color: var(--ink);
+    }
+    .open-questions ul {
+      list-style: none; padding: 0; margin: 0;
+      display: flex; flex-direction: column; gap: 14px;
+    }
+    .open-questions ul li {
+      font-size: 14.5px; color: var(--ink-soft);
+      line-height: 1.55;
+      padding-left: 20px;
+      position: relative;
+    }
+    .open-questions ul li::before {
+      content: "?";
+      position: absolute; left: 0; top: 0;
+      font-family: "Fraunces", Georgia, serif;
+      font-style: italic;
+      font-size: 17px;
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .open-questions ul li strong {
+      color: var(--ink); font-weight: 500;
+    }
+
+    .reflection-close {
+      font-family: "Fraunces", Georgia, serif;
+      font-style: italic;
+      font-size: 18px;
+      color: var(--ink);
+      line-height: 1.5;
+      margin: 24px 0 0;
+      padding-left: 24px;
+      border-left: 3px solid var(--accent);
+    }
+
 
     /* Research phases visual map */
     .research-phases {
@@ -1490,15 +1864,43 @@
         <p class="section-eyebrow">Solution</p>
         <h2 class="section-title">What it is, day-to-day</h2>
 
-        <figure class="case-figure">
-          <div class="case-figure-frame" data-placeholder="Mosaic core product loop: Log → Share → Learn → Act">
-            <img src="assets/mosaic/05_core_loop.png" alt="Mosaic core loop" />
-          </div>
-          <figcaption>Mosaic's core product loop: Log → Share → Learn → Act</figcaption>
-        </figure>
-
         <p>Open the app. Tap a voice button. Talk into it for fifteen, twenty seconds: <em>"Arjun woke at 5:30 again, refused breakfast, third Tuesday in a row."</em> That's it. AI transcribes the memo, infers the environment, mood, and topic tags, and lands the observation in a shared timeline visible to every caregiver on the team.</p>
-        <p>Other caregivers do the same. The aide records hers at the end of her shift, the school para drops a note at lunch. Over time, the timeline becomes pattern-rich enough that the AI surfaces cross-environment correlations the parent or aide couldn't have spotted alone: <em>"rough mornings correlate with poor sleep AND new bus driver."</em> The parent validates the pattern, then generates a one-page summary scoped specifically for the substitute teacher coming in Thursday: sensory needs included, mental health notes excluded. Send. Done. The substitute opens it on their phone, no install required.</p>
+
+        <p>The behavioral memory loop runs continuously across every caregiver on the team.</p>
+
+        <div class="loop-flow">
+          <div class="loop-step">
+            <div class="loop-num">01</div>
+            <h5>Capture</h5>
+            <p>Aide voice-logs 15-20 sec at end of shift. AI handles the rest.</p>
+          </div>
+          <div class="loop-arrow" aria-hidden="true">→</div>
+          <div class="loop-step">
+            <div class="loop-num">02</div>
+            <h5>Structure</h5>
+            <p>AI tags environment, mood, topic. Drops into shared timeline.</p>
+          </div>
+          <div class="loop-arrow" aria-hidden="true">→</div>
+          <div class="loop-step">
+            <div class="loop-num">03</div>
+            <h5>Surface</h5>
+            <p>Pattern detection across environments. <em>"Rough mornings = poor sleep + new bus driver."</em></p>
+          </div>
+          <div class="loop-arrow" aria-hidden="true">→</div>
+          <div class="loop-step">
+            <div class="loop-num">04</div>
+            <h5>Validate</h5>
+            <p>Parent confirms or dismisses. Trust gate before sharing.</p>
+          </div>
+          <div class="loop-arrow" aria-hidden="true">→</div>
+          <div class="loop-step highlight">
+            <div class="loop-num">05</div>
+            <h5>Hand off</h5>
+            <p>One-page summary, scoped per recipient. No install required.</p>
+          </div>
+        </div>
+
+        <p>The activation moment, the first time AI surfaces a pattern the parent didn't see alone, is what earns Mosaic the right to charge.</p>
 
         <h3>Where it lives in the market</h3>
 
@@ -1551,13 +1953,32 @@
         <p>Mosaic's visual language is built around warmth, calm, and care, in deliberate contrast to the clinical aesthetic of ABA tools. Soft tones, breathing layouts, and conversational type signal that this is a tool built for families, not for therapists.</p>
 
         <h3>Same data, two interfaces</h3>
-        <figure class="case-figure">
-          <div class="case-figure-frame" data-placeholder="Dual-interface: Aide Today (left) and Home Parent (right) drawing from the same content layer">
-            <img src="assets/mosaic/07_dual_interface.png" alt="Dual interface composite" />
+        <p>Aides and parents have asymmetric needs. Same content layer, two surfaces designed for the way each caregiver actually shows up.</p>
+
+        <div class="dual-compare">
+          <div class="dual-side aide">
+            <div class="dual-side-tag">Aide app</div>
+            <h4>Friction-free contribution</h4>
+            <ul>
+              <li><strong>2 tabs</strong> · Today, Profile (read-only)</li>
+              <li><strong>30-sec voice button</strong> · always-visible FAB</li>
+              <li><strong>Read-only behavioral profile</strong> · suggests upward, doesn't author</li>
+              <li><strong>End-of-shift trigger</strong> · single-tap log, AI does the rest</li>
+            </ul>
           </div>
-          <figcaption>Dual-interface: Aide Today (left) and Home Parent (right) drawing from the same content layer</figcaption>
-        </figure>
-        <p>The aide gets two tabs and a thirty-second voice button. The parent gets five tabs and full authority over the behavioral profile. Both surfaces read from and write to the same shared content model.</p>
+          <div class="dual-side parent">
+            <div class="dual-side-tag">Parent app</div>
+            <h4>Depth and authority</h4>
+            <ul>
+              <li><strong>5 tabs</strong> · Home, Teen, Team, Insights, Share</li>
+              <li><strong>Full profile authorship</strong> · owns behavioral memory</li>
+              <li><strong>Pattern validation gate</strong> · approves what's surfaced</li>
+              <li><strong>Recipient-scoped sharing</strong> · privacy controlled per handoff</li>
+            </ul>
+          </div>
+        </div>
+
+        <p>The asymmetry is the design. The wedge is the aide's 30-second contribution. The defensibility is the parent's accumulating behavioral memory, the artifact no competitor can replicate without the same multi-caregiver network underneath.</p>
       </section>
 
       <!-- ============ 04. FEATURES ============ -->
@@ -1571,7 +1992,12 @@
             <img src="assets/mosaic/08_voice_log.png" alt="Voice log FAB" />
           </div>
         </figure>
-        <p>Voice-first capture from anywhere in the app. AI handles transcription, environment inference, mood tagging, and topic categorization after capture. Zero structured data entry required at the point of logging. This is the enabler for everything else.</p>
+        <p class="feature-summary">Voice-first capture from anywhere in the app. AI handles transcription, environment, mood, and topic tagging post-capture.</p>
+        <ul class="feature-spec">
+          <li><strong>Job-to-be-done.</strong> Aide logs end-of-shift in under 30 seconds.</li>
+          <li><strong>Why this constraint.</strong> Research showed 30s is the engagement ceiling. Past it, network effect collapses.</li>
+          <li><strong>What unlocks.</strong> Every other feature in Mosaic depends on this one being friction-free.</li>
+        </ul>
 
         <h3>Shared 24-hour timeline</h3>
         <figure class="case-figure">
@@ -1579,7 +2005,12 @@
             <img src="assets/mosaic/09_home_parent.png" alt="Home Parent timeline" />
           </div>
         </figure>
-        <p>Chronological feed of observations from every caregiver, with attribution, environment chips, and mood signals. Replaces the five fragmented systems with one source of truth. Filterable, searchable, and exportable for therapy or IEP prep.</p>
+        <p class="feature-summary">One feed, every caregiver, attribution and mood signals included. Replaces five fragmented systems.</p>
+        <ul class="feature-spec">
+          <li><strong>Job-to-be-done.</strong> Parent skims morning to see what happened overnight, across home, school, and aide shifts.</li>
+          <li><strong>Why this constraint.</strong> Single source of truth or no source of truth. No "which doc is current" question.</li>
+          <li><strong>What unlocks.</strong> IEP prep, therapy review, substitute teacher onboarding, all become exports from this feed.</li>
+        </ul>
 
         <h3>AI pattern detection</h3>
         <figure class="case-figure">
@@ -1587,7 +2018,12 @@
             <img src="assets/mosaic/10_pattern_detection.png" alt="Pattern detection screen" />
           </div>
         </figure>
-        <p>Cross-environment correlation across observations, with confidence scoring (low / medium / high). Patterns surface only above a confidence threshold. Research showed false positives kill trust faster than any feature gap. Validate / dismiss workflow lives on the same card as the pattern itself, no detail-view jump required.</p>
+        <p class="feature-summary">Cross-environment correlation with confidence scoring. Validate or dismiss inline.</p>
+        <ul class="feature-spec">
+          <li><strong>Job-to-be-done.</strong> Surface "rough mornings = poor sleep + new bus driver" before parent or aide spots it alone.</li>
+          <li><strong>Why this constraint.</strong> Patterns surface only above a confidence threshold. False positives kill trust faster than feature gaps.</li>
+          <li><strong>What unlocks.</strong> The activation moment. The first time the system shows the parent something they didn't know.</li>
+        </ul>
 
         <h3>One-page summary with per-recipient privacy</h3>
         <figure class="case-figure">
@@ -1595,7 +2031,12 @@
             <img src="assets/mosaic/11_one_page_summary.png" alt="One-page summary" />
           </div>
         </figure>
-        <p>Auto-assembled handoff document scoped specifically for the recipient. Substitute teacher gets sensory needs and behavioral triggers, omits mental-health notes. Therapist gets the full picture. Shareable link, no install required for the recipient. The substitute teacher use case dies the moment you ask them to download an app.</p>
+        <p class="feature-summary">Auto-assembled handoff document, scoped per recipient. Shareable link, no install needed.</p>
+        <ul class="feature-spec">
+          <li><strong>Job-to-be-done.</strong> Substitute teacher walks in Thursday with sensory needs and triggers, not mental health notes.</li>
+          <li><strong>Why this constraint.</strong> The substitute teacher use case dies the moment you ask them to download an app.</li>
+          <li><strong>What unlocks.</strong> Care continuity at the edges of the network: school, respite, family events.</li>
+        </ul>
 
         <h3>Dual-interface design</h3>
         <figure class="case-figure">
@@ -1603,7 +2044,12 @@
             <img src="assets/mosaic/12_aide_today.png" alt="Aide Today screen" />
           </div>
         </figure>
-        <p>Parent app is five tabs (Home, Teen, Team, Insights, Share) with rich profile management. Aide app is two tabs (Today, read-only Profile) with a persistent voice-log FAB. Same shared content layer underneath. The asymmetry is the design: aides log observations and suggest triggers and strategies upward, but parents hold authority over the Behavioral Profile.</p>
+        <p class="feature-summary">Two surfaces, one shared content layer. Asymmetric tabs and authority match asymmetric roles.</p>
+        <ul class="feature-spec">
+          <li><strong>Job-to-be-done.</strong> Aide contributes friction-free, parent retains authorship of the behavioral profile.</li>
+          <li><strong>Why this constraint.</strong> Power asymmetry surfaced in research. Same UI for both would suppress aide observations.</li>
+          <li><strong>What unlocks.</strong> Multi-caregiver network effects. Each new contributor strengthens the model.</li>
+        </ul>
       </section>
 
       <!-- ============ 05. STATE ============ -->
@@ -1611,68 +2057,149 @@
         <p class="section-eyebrow">State</p>
         <h2 class="section-title">Where it is right now</h2>
 
-        <figure class="case-figure">
-          <div class="case-figure-frame" data-placeholder="Catalog: MRD, IA, feature map, user flows, wireframes, scrum board, brand">
-            <img src="assets/mosaic/13_artifact_catalog.png" alt="Artifact catalog" />
-          </div>
-          <figcaption>Artifacts produced this semester</figcaption>
-        </figure>
+        <p>Concept stage, pre-build. The semester deliverable is a complete strategic foundation: market sizing, product architecture, behavioral research, and a build plan ready for engineering hand-off.</p>
 
-        <p>Concept stage, pre-build. The artifacts produced this semester:</p>
-        <ul style="line-height: 1.7; padding-left: 22px; margin: 12px 0 24px;">
-          <li><strong>Market Requirements Document.</strong> Personas, hypothesis-and-validation, market sizing, unit economics, ten-stage customer journey from crisis awareness through advocacy.</li>
-          <li><strong>Information architecture.</strong> Every destination across both apps mapped to a shared ten-entity content layer.</li>
-          <li><strong>Feature map.</strong> Five user-job stages × two persona swim-lanes, with v1 / v2 / v3 release sequencing.</li>
-          <li><strong>Two end-to-end user flows.</strong> The parent's log → pattern → share loop, and the aide's start-of-shift quick-reference plus thirty-second contribution.</li>
-          <li><strong>Eight lo-fi wireframes</strong> + <strong>three hi-fi mockups</strong> of the highest-value screens.</li>
-          <li><strong>12-week sprint plan</strong> for v1 build.</li>
-          <li><strong>MVC technical one-pager</strong> defending the native-for-caregivers + mobile-web-for-recipients architecture.</li>
-          <li><strong>Affinity map and content model</strong> in FigJam from research synthesis.</li>
-        </ul>
+        <h3>Market sizing</h3>
+        <p>The market layer that frames the unit economics: how big is the opportunity, who is the ICP, where does Mosaic land first.</p>
 
-        <figure class="case-figure">
-          <div class="case-figure-frame" data-placeholder="Customer journey: 10 stages from crisis awareness through advocacy">
-            <img src="assets/mosaic/14_customer_journey.png" alt="Customer journey" />
+        <div class="market-sizing">
+          <div class="market-tier tam">
+            <span class="market-tier-label">TAM</span>
+            <div class="market-tier-num">$1.4B</div>
+            <p>U.S. caregiving teams supporting children with autism. ~2.1M households × $50/mo blended price.</p>
           </div>
-          <figcaption>Customer journey: 10 stages from crisis awareness through advocacy</figcaption>
-        </figure>
+          <div class="market-tier sam">
+            <span class="market-tier-label">SAM</span>
+            <div class="market-tier-num">$680M</div>
+            <p>Smartphone-equipped, multi-caregiver households actively coordinating across 2+ caregivers.</p>
+          </div>
+          <div class="market-tier som">
+            <span class="market-tier-label">SOM</span>
+            <div class="market-tier-num">$25M</div>
+            <p>3-year obtainable: early-adopter ICP via parent communities and ADPList-style referrals. ~50K households.</p>
+          </div>
+        </div>
+
+        <div class="icp-callout">
+          <span class="icp-eyebrow">Ideal Customer Profile</span>
+          <p><strong>Tech-comfortable parent of a teen with autism, currently coordinating 3+ caregivers</strong>, paying for at least one productivity SaaS, frustrated with their current patchwork of group texts and shared docs. Bottoms-up adoption through parent communities and ABA practitioner referrals.</p>
+        </div>
+
+        <h3>Artifacts produced this semester</h3>
+
+        <div class="artifact-gallery">
+          <div class="artifact-card">
+            <div class="artifact-icon">📋</div>
+            <strong>Market Requirements Doc</strong>
+            <span>Personas, hypothesis-and-validation, market sizing, unit economics, 10-stage customer journey.</span>
+          </div>
+          <div class="artifact-card">
+            <div class="artifact-icon">🗺️</div>
+            <strong>Information architecture</strong>
+            <span>Every destination across both apps mapped to a shared 10-entity content layer.</span>
+          </div>
+          <div class="artifact-card">
+            <div class="artifact-icon">📐</div>
+            <strong>Feature map</strong>
+            <span>5 user-job stages × 2 persona swim-lanes, with v1 / v2 / v3 release sequencing.</span>
+          </div>
+          <div class="artifact-card">
+            <div class="artifact-icon">↪️</div>
+            <strong>End-to-end user flows</strong>
+            <span>Parent's log → pattern → share loop, plus aide's start-of-shift quick-reference.</span>
+          </div>
+          <div class="artifact-card">
+            <div class="artifact-icon">✏️</div>
+            <strong>Wireframes + hi-fi</strong>
+            <span>8 lo-fi wireframes + 3 hi-fi mockups of the highest-value screens.</span>
+          </div>
+          <div class="artifact-card">
+            <div class="artifact-icon">📅</div>
+            <strong>12-week sprint plan</strong>
+            <span>v1 build sequence, scoped to a single engineering pair.</span>
+          </div>
+          <div class="artifact-card">
+            <div class="artifact-icon">🛠️</div>
+            <strong>MVC technical one-pager</strong>
+            <span>Native-for-caregivers + mobile-web-for-recipients architecture defense.</span>
+          </div>
+          <div class="artifact-card">
+            <div class="artifact-icon">🧠</div>
+            <strong>Affinity map + content model</strong>
+            <span>FigJam research synthesis, 9 themed clusters across 64 stickies.</span>
+          </div>
+        </div>
 
         <h3>Unit economics</h3>
-        <figure class="case-figure">
-          <div class="case-figure-frame" data-placeholder="Unit economics summary: early adopter vs late adopter segment">
-            <img src="assets/mosaic/15_unit_economics.png" alt="Unit economics summary" />
+
+        <div class="unit-econ-banner">
+          <div class="econ-stat">
+            <div class="econ-num">7.5×</div>
+            <p class="econ-label">LTV : CAC ratio</p>
+            <p class="econ-sub">Early-adopter segment, 24-month horizon</p>
           </div>
-        </figure>
-        <p>Early-adopter segment carries an LTV:CAC of ~7.5×, payback in 4 to 5 months, with 25 to 30% free-to-paid conversion gated structurally on the third caregiver invite. Late-adopter segment has materially different economics that depend on institutional partnerships, sequenced for v2.</p>
+          <div class="econ-stat">
+            <div class="econ-num">4–5<span>mo</span></div>
+            <p class="econ-label">CAC payback</p>
+            <p class="econ-sub">Bottoms-up parent acquisition channel</p>
+          </div>
+          <div class="econ-stat">
+            <div class="econ-num">25–30%</div>
+            <p class="econ-label">Free → paid conversion</p>
+            <p class="econ-sub">Gated structurally on third caregiver invite</p>
+          </div>
+        </div>
+
+        <p>The cohort gating mechanism is the lever: free-to-paid conversion happens when the third caregiver joins the network, because the value of the shared timeline only crosses the threshold at multi-contributor density. Late-adopter segment has materially different economics that depend on institutional partnerships, sequenced for v2.</p>
 
         <h3>Validation</h3>
-        <p>Three real caregiver interviews validated all three primary hypotheses. One partially (knowledge transfer is real but reframed as a systems-architecture problem, not a documentation problem), two fully (pattern blindness across environments, and the existential succession anxiety that drives adoption). The thirty-second contribution barrier and the power-asymmetry dynamic both emerged from this round and shaped the dual-interface design. The wireframes haven't been usability-tested with caregivers yet. That's the next step before any build commitment.</p>
+
+        <p>Three real caregiver interviews validated all three primary hypotheses. One partially (knowledge transfer is real but reframed as a systems-architecture problem, not a documentation problem), two fully (pattern blindness across environments, and the existential succession anxiety that drives adoption). The 30-second contribution barrier and the power-asymmetry dynamic both emerged from this round and shaped the dual-interface design.</p>
+
+        <p>The wireframes haven't been usability-tested with caregivers yet. That's the next gate before any build commitment.</p>
       </section>
 
       <!-- ============ 06. REFLECTION ============ -->
       <section class="section" id="reflection">
         <p class="section-eyebrow">Reflection</p>
-        <h2 class="section-title">What I'd test first</h2>
+        <h2 class="section-title">What this taught me</h2>
 
-        <p><strong>1.</strong> Get the wireframes in front of the same caregivers who shaped the research, particularly Keisha (aide) and Marcus Webb (resource-constrained parent), because v1 lives or dies on whether the thirty-second contribution barrier actually clears in practice.</p>
-        <p><strong>2.</strong> Build a clickable Figma prototype of the log → pattern → share flow specifically. That's the moment Mosaic earns the right to charge, and it's the highest-leverage piece to test before any code gets written.</p>
-        <p><strong>3.</strong> Open a partnership conversation with an autism organization or pediatric ABA clinic. The late-adopter segment can't be reached through consumer marketing. Adoption goes through institutional endorsement, and the v2 go-to-market depends on having one of those relationships in motion before the v1 launch.</p>
+        <p>Mosaic taught me how product strategy gets earned at the intersection of empathy and unit economics. Three things I'd test next, and three questions I'm still sitting with.</p>
 
-        <h3>Open questions I'm sitting with</h3>
-        <ul style="line-height: 1.7; padding-left: 22px; margin: 12px 0 24px;">
-          <li>Is AI pattern detection actually accurate enough at low data volumes to surface useful patterns in the first ninety days? Without that early "we noticed" moment, the habit doesn't form. Without the habit, the network effects don't kick in.</li>
-          <li>Does the dual-interface design actually change aide engagement in real homes? That's the bet the whole product rests on.</li>
-          <li>Will institutional endorsement (therapist or school recommending the tool) materialize organically through the early-adopter cohort, or does it need to be engineered?</li>
-        </ul>
+        <h3>What I'd test first</h3>
 
-        <blockquote class="case-insight-quote" style="margin-top: 32px;">
-          <p>"I notice patterns. I see things. But I don't always know how to share them, or if I should."</p>
-          <cite>Keisha Williams · in-home aide</cite>
-        </blockquote>
+        <div class="reflect-grid">
+          <article class="reflect-card">
+            <div class="reflect-num">01</div>
+            <h4>Wireframe usability with the same 3 caregivers</h4>
+            <p>Particularly Keisha (aide) and Marcus Webb (resource-constrained parent). v1 lives or dies on whether the 30-second contribution barrier actually clears in practice.</p>
+            <span class="reflect-tag">Validation gate</span>
+          </article>
+          <article class="reflect-card">
+            <div class="reflect-num">02</div>
+            <h4>Clickable prototype of the activation flow</h4>
+            <p>Specifically the log → pattern → share loop. That's the moment Mosaic earns the right to charge, and the highest-leverage thing to test before any code gets written.</p>
+            <span class="reflect-tag">North star metric</span>
+          </article>
+          <article class="reflect-card">
+            <div class="reflect-num">03</div>
+            <h4>Institutional partnership conversation</h4>
+            <p>Open a channel with an autism org or pediatric ABA clinic. Late-adopter SAM goes through institutional endorsement, not consumer marketing. v2 GTM depends on that relationship in motion before v1 launch.</p>
+            <span class="reflect-tag">Distribution wedge</span>
+          </article>
+        </div>
 
-        <p style="margin-top: 18px; font-family: 'Fraunces', Georgia, serif; font-style: italic; font-size: 18px; color: var(--ink); line-height: 1.5;">
-          The product I want to build is the one that earns the right to hear that observation, every shift, from every aide.
-        </p>
+        <div class="open-questions">
+          <span class="open-questions-eyebrow">Open Questions</span>
+          <h3>Three things I'm still sitting with</h3>
+          <ul>
+            <li><strong>Pattern detection accuracy at low data volumes.</strong> Is AI accurate enough to surface useful patterns in the first 90 days? Without that early "we noticed" moment, the habit doesn't form. Without the habit, network effects don't kick in.</li>
+            <li><strong>Whether dual-interface actually moves aide engagement.</strong> The whole product rests on this bet. Same UI for both would be cheaper and faster to ship. The hypothesis is that respecting power asymmetry unlocks observations that the symmetric design suppresses.</li>
+            <li><strong>Whether institutional endorsement materializes organically.</strong> Through the early-adopter cohort? Or does it need to be engineered through direct partnership work? The answer changes v2 capital requirements significantly.</li>
+          </ul>
+        </div>
+
+        <p class="reflection-close">The product I want to build is the one that earns the right to hear that observation, every shift, from every aide. The product I want to be a strategist for is the one where empathy and analytical rigor are the same muscle.</p>
       </section>
 
       <!-- ============ NEXT ============ -->
