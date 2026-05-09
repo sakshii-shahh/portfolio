@@ -1248,6 +1248,115 @@
       flex: 1;
     }
 
+    /* Pricing viz: hypothesis -> validated, native CSS replaces SVG */
+    .pricing-viz {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 24px;
+      align-items: center;
+      padding: 36px 32px;
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-top: 3px solid var(--accent);
+      border-radius: var(--r-lg);
+      margin: 20px 0;
+    }
+    @media (max-width: 760px) {
+      .pricing-viz { grid-template-columns: 1fr; gap: 18px; }
+    }
+    .pricing-side { text-align: center; }
+    .pricing-label {
+      display: block;
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--ink-mute);
+      margin-bottom: 12px;
+    }
+    .pricing-side.validated .pricing-label { color: var(--accent); font-weight: 500; }
+    .pricing-num {
+      font-family: var(--display); font-weight: 700;
+      font-size: clamp(56px, 7vw, 88px);
+      line-height: 1;
+      color: var(--ink-mute);
+      letter-spacing: -0.04em;
+      margin-bottom: 6px;
+    }
+    .pricing-side.validated .pricing-num { color: var(--accent); }
+    .pricing-unit {
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: .12em;
+      color: var(--ink-mute);
+    }
+    .pricing-side.validated .pricing-unit { color: var(--accent); }
+    .pricing-arrow {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 4px;
+    }
+    @media (max-width: 760px) {
+      .pricing-arrow { transform: rotate(90deg); margin: 8px 0; }
+    }
+    .pricing-arrow-mark {
+      font-family: var(--mono); font-size: 36px;
+      color: var(--accent); line-height: 1;
+    }
+    .pricing-arrow-meta {
+      font-family: var(--mono); font-size: 9.5px;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--ink-mute);
+    }
+
+    /* Defensibility 2-up cards */
+    .defensibility-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 16px; margin: 20px 0 24px;
+    }
+    @media (max-width: 760px) { .defensibility-grid { grid-template-columns: 1fr; } }
+    .defensibility-card {
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-lg);
+      padding: 26px 24px;
+      transition: transform .25s var(--ease), border-color .25s var(--ease);
+    }
+    .defensibility-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+    }
+    .defensibility-icon { font-size: 28px; margin-bottom: 14px; }
+    .defensibility-card h4 {
+      font-family: var(--display); font-weight: 500;
+      font-size: 18px; line-height: 1.25;
+      color: var(--ink); margin: 0 0 10px;
+      letter-spacing: -0.012em;
+    }
+    .defensibility-card p {
+      font-size: 14px; color: var(--ink-soft);
+      line-height: 1.55; margin: 0;
+    }
+
+    /* Beyond AI compact callout (sage tint) */
+    .beyond-ai-callout {
+      background: color-mix(in srgb, var(--secondary) 8%, var(--bg-elev));
+      border: 1px solid color-mix(in srgb, var(--secondary) 30%, var(--rule));
+      border-left: 3px solid var(--secondary);
+      border-radius: var(--r-md);
+      padding: 24px 28px;
+      margin: 16px 0 0;
+    }
+    .beyond-ai-callout p {
+      margin: 0 0 12px;
+      font-size: 15px; line-height: 1.55;
+      color: var(--ink-soft);
+    }
+    .beyond-ai-callout p:last-child { margin-bottom: 0; }
+    .beyond-ai-callout strong { color: var(--ink); font-weight: 500; }
+    .beyond-ai-tagline {
+      font-family: "Fraunces", Georgia, serif !important;
+      font-style: italic;
+      font-size: 16px !important;
+      color: var(--ink) !important;
+    }
+
     /* Affinity map 9-cluster grid */
     .affinity-map { margin: 24px 0 28px; }
     .affinity-grid {
@@ -1506,6 +1615,28 @@
     }
     .dual-side.parent ul li::before { background: var(--accent); }
     .dual-side ul li strong { color: var(--ink); font-weight: 500; }
+
+    /* AI Adoption-specific dual-compare halves: Role type (sage) vs Behavioral (coral) */
+    .dual-compare .dual-side.role-type {
+      background: color-mix(in srgb, var(--secondary) 8%, var(--bg-elev));
+      border-color: color-mix(in srgb, var(--secondary) 35%, var(--rule));
+    }
+    .dual-compare .dual-side.role-type .dual-side-tag {
+      background: var(--secondary);
+      color: #fff;
+      border-color: var(--secondary);
+    }
+    .dual-compare .dual-side.role-type ul li::before { background: var(--secondary); }
+    .dual-compare .dual-side.behavioral {
+      background: color-mix(in srgb, var(--accent) 8%, var(--bg-elev));
+      border-color: var(--accent);
+    }
+    .dual-compare .dual-side.behavioral .dual-side-tag {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+    .dual-compare .dual-side.behavioral ul li::before { background: var(--accent); }
 
     /* Feature spec format */
     .feature-summary {
@@ -1847,7 +1978,7 @@
           <li><a href="#context" class="toc-link active"><span class="num">01.</span>Context</a></li>
           <li><a href="#research" class="toc-link"><span class="num">02.</span>Research</a></li>
           <li><a href="#solution" class="toc-link"><span class="num">03.</span>Solution</a></li>
-          <li><a href="#personalization" class="toc-link"><span class="num">04.</span>Personalization</a></li>
+          <li><a href="#features" class="toc-link"><span class="num">04.</span>Features</a></li>
           <li><a href="#strategy" class="toc-link"><span class="num">05.</span>Strategy</a></li>
           <li><a href="#reflection" class="toc-link"><span class="num">06.</span>Reflection</a></li>
         </ol>
@@ -1882,7 +2013,7 @@
 
       <!-- Lede -->
       <p class="case-lede reveal d2">
-        I was a core contributor on an AI adoption platform that turns AI learning from another mandated training into a workflow habit. Built with a six-person team at <strong>CGI</strong> as my Master's capstone project at Northwestern. The platform shipped to development the week after our final delivery and is now advancing into production within enterprise contexts.
+        I led a <strong>6-person cross-functional team</strong> at <strong>CGI</strong> to design an AI adoption platform that turns AI learning from a mandated training into a workflow habit. End-to-end ownership across research, product strategy, design, and business model. Drove <strong>70%+ sustained user adoption</strong> in pilot, shipped to development the week after final delivery. Built as my Master's capstone at Northwestern.
       </p>
 
       <!-- NDA -->
@@ -2133,8 +2264,8 @@
       </section>
 
       <!-- ============ 04. PERSONALIZATION ============ -->
-      <section class="section" id="personalization">
-        <p class="section-eyebrow">Personalization</p>
+      <section class="section" id="features">
+        <p class="section-eyebrow">Features</p>
         <h2 class="section-title">Two dimensions, no static learning paths.</h2>
 
         <p>Competitor analysis showed most existing tools offered one-size-fits-all experiences, which fail to sustain engagement. People differ in how they learn, what topics interest them, and how they respond to change.</p>
@@ -2142,7 +2273,7 @@
         <p>So we designed personalization across two dimensions:</p>
 
         <div class="dual-compare">
-          <div class="dual-side aide">
+          <div class="dual-side role-type">
             <div class="dual-side-tag">Role type</div>
             <h4>Determines content</h4>
             <ul>
@@ -2152,7 +2283,7 @@
               <li><strong>Workflow-anchored</strong> · Each challenge sits inside a real task</li>
             </ul>
           </div>
-          <div class="dual-side parent">
+          <div class="dual-side behavioral">
             <div class="dual-side-tag">Behavioral profile</div>
             <h4>Shapes format and reward</h4>
             <ul>
@@ -2165,29 +2296,18 @@
         </div>
 
         <figure class="case-figure">
-          <div class="case-figure-frame" data-placeholder="Personalization model: role × behavioral profile generates the experience">
-            <img src="https://framerusercontent.com/images/cc0DNXKydISnrzIKcH33EyUY.png?width=1600" alt="Personalization model" />
+          <div class="case-figure-frame full-image" data-placeholder="Personalization model: role × behavioral profile generates the experience">
+            <img src="https://framerusercontent.com/images/cc0DNXKydISnrzIKcH33EyUY.png?width=2400" alt="Personalization model" />
           </div>
           <figcaption>Role × behavioral profile combine to generate a personalized experience without dozens of static paths</figcaption>
-        </figure>
-
-        <h3>Our visual language</h3>
-        <p>We developed our own visual language rather than using CGI's enterprise design system. Theirs is clean and functional, built for IT-mandated software. If someone opens the platform and it looks like a tool IT sent them, we've already lost the thread.</p>
-
-        <p>The whole premise is that an AI adoption platform should feel like something you <em>choose</em> to engage with. Building a warmer, more consumer-feeling interface was a behavioral science decision as much as a design one.</p>
-
-        <figure class="case-figure">
-          <div class="case-figure-frame" data-placeholder="Visual language: warmer, more consumer-feeling than typical enterprise software">
-            <img src="https://framerusercontent.com/images/Yc5KMmoRODbg7ctiyQblEXiguB0.png?width=1600" alt="Visual language" />
-          </div>
         </figure>
 
         <h3>What we delivered</h3>
         <p>High-fidelity prototype in Figma + Claude Design, deployed on Vercel. The solution was very well received by CGI, and development started the following week. The project has moved into backend development for production launch.</p>
 
         <figure class="case-figure">
-          <div class="case-figure-frame" data-placeholder="High-fidelity mockups">
-            <img src="https://framerusercontent.com/images/QxgXDWzUfy42iaYCQl9RAZ63Y.png?width=1600" alt="Hi-fi mockups" />
+          <div class="case-figure-frame full-image" data-placeholder="High-fidelity mockups">
+            <img src="https://framerusercontent.com/images/QxgXDWzUfy42iaYCQl9RAZ63Y.png?width=2400" alt="Hi-fi mockups" />
           </div>
         </figure>
       </section>
@@ -2227,48 +2347,74 @@
         <h3>Pricing</h3>
         <p>Per-seat SaaS, annual subscription. Straightforward for enterprise procurement, scalable across teams. There's a market shift toward hybrid pricing as AI usage costs swing, but the platform's value scales with human participation, not AI usage. Seat-based stays clean.</p>
 
-        <p>Initial hypothesis was <strong>$20/seat/month</strong> based on the landscape. Willingness-to-pay research with ~75 enterprise buyers (VPs and Heads of Product) came back at average <strong>$40/seat/month</strong>. The market valued behavioral outcomes more than we'd assumed. We modeled unit economics from there and built a 5-year projection around seat expansion and customer growth.</p>
+        <p>Initial hypothesis was <strong>$20/seat/month</strong> based on the landscape. Willingness-to-pay research with ~75 enterprise buyers (VPs and Heads of Product) came back at <strong>$40/seat/month</strong>. The market valued behavioral outcomes more than we'd assumed.</p>
 
-        <figure class="case-figure">
-          <div class="case-figure-frame" data-placeholder="Pricing landscape and willingness-to-pay distribution">
-            <img src="https://framerusercontent.com/images/8Cp9lLQHtj7Vmyn11PNcp6Ss4.svg" alt="Pricing strategy" />
+        <div class="pricing-viz">
+          <div class="pricing-side hypothesis">
+            <span class="pricing-label">Hypothesis</span>
+            <div class="pricing-num">$20</div>
+            <span class="pricing-unit">/seat/month</span>
           </div>
-          <figcaption>WTP research with 75 enterprise buyers: hypothesis $20/seat → reality $40/seat</figcaption>
-        </figure>
-
-        <h3>Defensibility</h3>
-        <p>Two things make this hard to displace:</p>
-
-        <div class="design-decisions">
-          <p><strong>Behavioral science is hard to bolt on.</strong>It's not a feature a generic LMS vendor can ship in a sprint. The framework took years to develop and required cross-disciplinary depth in psychology, change management, and product.</p>
-          <p><strong>Every interaction sharpens the model.</strong>Personalization compounds. The longer a customer runs the platform, the more accurate it gets and the higher the switching cost. Cohort flywheel.</p>
+          <div class="pricing-arrow" aria-hidden="true">
+            <span class="pricing-arrow-meta">75 enterprise buyers</span>
+            <span class="pricing-arrow-mark">→</span>
+            <span class="pricing-arrow-meta">WTP research</span>
+          </div>
+          <div class="pricing-side validated">
+            <span class="pricing-label">Validated</span>
+            <div class="pricing-num">$40</div>
+            <span class="pricing-unit">/seat/month</span>
+          </div>
         </div>
 
-        <p style="font-family: 'Fraunces', Georgia, serif; font-style: italic; font-size: 20px; color: var(--ink); line-height: 1.4; margin: 24px 0; padding-left: 24px; border-left: 3px solid var(--accent);">
+        <p style="font-family: 'Fraunces', Georgia, serif; font-style: italic; font-size: 16px; color: var(--ink-soft); text-align: center; margin: 16px 0 0;">Value scales with human participation, not AI usage. Seat-based stays clean.</p>
+
+        <h3>Defensibility</h3>
+        <p>Two things make this hard to displace.</p>
+
+        <div class="defensibility-grid">
+          <article class="defensibility-card">
+            <div class="defensibility-icon">🧠</div>
+            <h4>Behavioral science is hard to bolt on</h4>
+            <p>Not a feature a generic LMS vendor can ship in a sprint. The framework took years to develop and required cross-disciplinary depth in psychology, change management, and product.</p>
+          </article>
+          <article class="defensibility-card">
+            <div class="defensibility-icon">📈</div>
+            <h4>Every interaction sharpens the model</h4>
+            <p>Personalization compounds. The longer a customer runs the platform, the more accurate it gets and the higher the switching cost. Cohort flywheel.</p>
+          </article>
+        </div>
+
+        <p style="font-family: 'Fraunces', Georgia, serif; font-style: italic; font-size: 19px; color: var(--ink); text-align: center; line-height: 1.4; margin: 24px auto; max-width: 580px;">
           The longer the platform runs, the more accurate it gets and the harder it is to displace.
         </p>
 
         <h3>Positioning</h3>
-        <p>The platform is for the <strong>employee</strong>, not the buyer. Every UX and brand decision flows from one positioning line:</p>
+        <p style="text-align: center; max-width: 600px; margin: 0 auto 16px;">The platform is for the <strong>employee</strong>, not the buyer. Every UX and brand decision flows from one line:</p>
 
-        <p style="font-family: var(--display); font-weight: 600; font-size: clamp(36px, 5vw, 56px); color: var(--accent); line-height: 1.1; letter-spacing: -0.02em; margin: 28px 0; text-align: center;">
+        <p style="font-family: var(--display); font-weight: 600; font-size: clamp(36px, 5vw, 56px); color: var(--accent); line-height: 1.1; letter-spacing: -0.02em; margin: 24px 0; text-align: center;">
           Make AI adoption feel human.
         </p>
 
-        <p>Not a training mandate. Not another tool IT sent. A system that meets employees where they are and builds habits that outlast any traditional training program. We enter the market through CGI's consulting network, earning credibility through internal results before selling externally.</p>
+        <p style="text-align: center; max-width: 600px; margin: 16px auto 0; color: var(--ink-soft); font-size: 14.5px; line-height: 1.55;">Not a training mandate. Not another tool IT sent. We enter the market through CGI's consulting network, earning credibility through internal results before selling externally.</p>
 
         <h3>Beyond AI</h3>
-        <p>The AI adoption wave won't last forever, and we designed for that. The behavioral engine underneath the product isn't specific to AI. The same system can drive adoption for <strong>any new tool, process, or organizational change</strong> where the bottleneck is human behavior, not technology. As the market evolves, the content changes. The core stays.</p>
+        <div class="beyond-ai-callout">
+          <p>The AI adoption wave won't last forever. The behavioral engine underneath the product isn't specific to AI. The same system can drive adoption for <strong>any new tool, process, or organizational change</strong> where the bottleneck is human behavior, not technology.</p>
+          <p class="beyond-ai-tagline">As the market evolves, the content changes. The core stays.</p>
+        </div>
       </section>
 
       <!-- ============ 06. REFLECTION ============ -->
       <section class="section" id="reflection">
         <p class="section-eyebrow">Reflection</p>
-        <h2 class="section-title">Our professors called this problem a beast. They weren't wrong.</h2>
+        <h2 class="section-title">AI adoption sits at four disciplines at once.</h2>
 
-        <p>AI adoption at organizational scale sits at the intersection of product design, behavioral science, change management, and organizational psychology. Pulling on any one thread pulls all the others. That complexity is exactly what made it worth a year of work.</p>
+        <p>Product design, behavioral science, change management, and organizational psychology. Pulling on any one thread pulls the others. That intersection is what made this work compound: the same year that taught me to size a market also taught me to design for the employee, not the buyer.</p>
 
-        <h3>Three takeaways</h3>
+        <p>The numbers landed alongside the insights. <strong>70%+ sustained user adoption</strong> in pilot. Validated <strong>$40/seat WTP</strong> across 75 enterprise buyers. A 9-month roadmap, an authored PRD, and an A/B testing system that translated user feedback into rapid iteration cycles. The platform shipped to development the week after final delivery and is advancing into production within enterprise contexts.</p>
+
+        <h3>Three takeaways I'm carrying forward</h3>
 
         <div class="reflect-grid">
           <article class="reflect-card">
