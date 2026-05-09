@@ -3,19 +3,19 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>AI Accelerator · Sakshi Shah</title>
-  <meta name="description" content="Case study: CGI AI Accelerator, product design work by Sakshi Shah. (In progress.)" />
+  <title>AI Adoption Accelerator — Sakshi Shah</title>
+  <meta name="description" content="Case study: AI Adoption Accelerator, an enterprise behavioral platform that turns AI learning into a workflow habit. Built with CGI as a Northwestern capstone." />
 
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://portfolio-sakshi-shah.vercel.app/case-ai-accelerator.html" />
-  <meta property="og:title" content="AI Accelerator · Sakshi Shah" />
-  <meta property="og:description" content="Case study: CGI AI Accelerator, product design work by Sakshi Shah. (In progress.)" />
-  <meta property="og:image" content="https://framerusercontent.com/images/yWcAmam0HfUbCIUDWf7Pm80qu8I.jpeg?width=1200" />
+  <meta property="og:title" content="AI Adoption Accelerator — Sakshi Shah" />
+  <meta property="og:description" content="Case study: AI Adoption Accelerator, an enterprise behavioral platform that turns AI learning into a workflow habit. Built with CGI as a Northwestern capstone." />
+  <meta property="og:image" content="https://framerusercontent.com/images/Zub00cnJhtGuWPWwmzodRWTjhlw.png?width=1200" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="AI Accelerator · Sakshi Shah" />
-  <meta name="twitter:description" content="Case study: CGI AI Accelerator, product design work by Sakshi Shah. (In progress.)" />
-  <meta name="twitter:image" content="https://framerusercontent.com/images/yWcAmam0HfUbCIUDWf7Pm80qu8I.jpeg?width=1200" />
+  <meta name="twitter:title" content="AI Adoption Accelerator — Sakshi Shah" />
+  <meta name="twitter:description" content="Case study: AI Adoption Accelerator, an enterprise behavioral platform that turns AI learning into a workflow habit. Built with CGI as a Northwestern capstone." />
+  <meta name="twitter:image" content="https://framerusercontent.com/images/Zub00cnJhtGuWPWwmzodRWTjhlw.png?width=1200" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -243,6 +243,11 @@
       background: color-mix(in srgb, var(--leaf) 14%, transparent);
       border-color: color-mix(in srgb, var(--leaf) 38%, transparent);
       color: color-mix(in srgb, var(--leaf-deep) 80%, var(--ink));
+    }
+    .case-tag.concept {
+      background: var(--accent-soft);
+      border-color: var(--accent-soft);
+      color: var(--accent-deep);
     }
 
     .case-title {
@@ -557,9 +562,49 @@
     }
 
     /* ============ IMPACT, big stat blocks ============ */
+    .nda-callout {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 14px 18px;
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-left: 3px solid var(--accent);
+      border-radius: var(--r-md);
+      margin: 18px 0 22px;
+      max-width: 720px;
+    }
+    .nda-icon {
+      font-size: 15px;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .nda-callout p {
+      margin: 0;
+      font-size: 13.5px;
+      font-style: italic;
+      color: var(--ink-soft);
+      line-height: 1.5;
+    }
+
+    .features-list {
+      list-style: none; padding: 0; margin: 28px 0 0;
+      display: flex; flex-direction: column; gap: 14px;
+    }
+    .features-list li {
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-md);
+      padding: 22px 26px;
+      font-size: 15.5px; line-height: 1.55;
+      color: var(--ink-soft);
+      list-style: none;
+    }
+    .features-list strong { color: var(--ink); font-weight: 500; }
+
     .impact-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 18px;
       margin: 36px 0 24px;
     }
@@ -596,6 +641,19 @@
     .impact-desc {
       font-size: 14px; color: var(--ink-soft);
       line-height: 1.55; margin: 0; margin-top: auto;
+    }
+    .impact-quote {
+      font-family: var(--serif); font-style: italic;
+      font-size: 19px; line-height: 1.5;
+      color: var(--ink); max-width: 56ch;
+      padding-left: 18px; border-left: 2px solid var(--accent);
+      margin: 0;
+    }
+    .impact-quote-by {
+      display: block; margin-top: 8px;
+      font-family: var(--mono); font-size: 11px; font-style: normal;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--ink-mute);
     }
 
     /* ============ TESTIMONIALS ============ */
@@ -725,6 +783,850 @@
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
     }
+
+    /* ============ MOSAIC CASE-STUDY ADDITIONS ============ */
+    /* Case study figure with graceful missing-image fallback */
+    .case-figure { margin: 28px 0; }
+    .case-figure-frame {
+      position: relative; width: 100%; aspect-ratio: 16/10;
+      border-radius: var(--r-md); overflow: hidden;
+      background: var(--bg-elev); border: 1px solid var(--rule);
+    }
+    .case-figure-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .case-figure-frame.img-missing { border: 1px dashed var(--rule-strong); display: grid; place-items: center; }
+    .case-figure-frame.img-missing img { display: none; }
+    .case-figure-frame.img-missing::after {
+      content: attr(data-placeholder);
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--ink-mute); text-align: center;
+      padding: 0 24px; line-height: 1.5;
+    }
+    .case-figure figcaption {
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--ink-mute); margin-top: 12px; text-align: center;
+    }
+
+    /* Moodboard figure variant, square instead of 16:10 */
+    .case-figure-frame.moodboard { aspect-ratio: 4/3; }
+
+    /* Hero pull-quote */
+    .case-pullquote {
+      margin: 32px 0 28px; padding: 0 0 0 26px;
+      border-left: 3px solid var(--accent);
+    }
+    .case-pullquote p {
+      font-family: "Fraunces", Georgia, serif; font-style: italic;
+      font-size: clamp(28px, 3vw, 40px); line-height: 1.2;
+      color: var(--ink); margin: 0 0 12px;
+      letter-spacing: -0.018em;
+    }
+    .case-pullquote cite {
+      font-family: var(--mono); font-size: 12px;
+      letter-spacing: .14em; color: var(--ink-mute); font-style: normal;
+    }
+
+    /* Inline insight quote */
+    .case-insight-quote {
+      margin: 24px 0 16px; padding: 12px 18px;
+      background: var(--bg-elev); border-radius: var(--r-md);
+      border-left: 3px solid var(--ink-mute);
+    }
+    .case-insight-quote p {
+      font-family: "Fraunces", Georgia, serif; font-style: italic;
+      font-size: 16px; color: var(--ink-soft);
+      margin: 0 0 6px; line-height: 1.5;
+    }
+    .case-insight-quote cite {
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: .12em; color: var(--ink-mute); font-style: normal;
+    }
+
+    /* Sub-headings inside case sections */
+    .section h3 {
+      font-family: var(--display); font-weight: 500;
+      font-size: 20px; line-height: 1.25; color: var(--ink);
+      margin: 28px 0 12px; letter-spacing: -0.012em;
+    }
+
+    /* Design-decisions callout */
+    .design-decisions {
+      background: var(--bg-elev); border: 1px solid var(--rule);
+      border-radius: var(--r-md); padding: 22px 26px; margin: 24px 0;
+    }
+    .design-decisions p { margin: 0 0 14px; }
+    .design-decisions p:last-child { margin-bottom: 0; }
+    .design-decisions strong {
+      color: var(--ink); font-weight: 500;
+      display: block; margin-bottom: 4px;
+    }
+
+    /* Mosaic logo lockup above title */
+    .case-brand-mark { margin: 0 0 16px; }
+    .case-brand-mark img {
+      height: 32px; width: auto; display: block;
+    }
+    .case-brand-mark.img-missing { display: none; }
+
+
+    /* ============ MOSAIC LAYOUT ADDITIONS ============ */
+    /* 0 → 1 tag chip */
+    .case-tag.zero-one {
+      background: #cee1ff;
+      border-color: #b5cdf5;
+      color: #2a4a7a;
+      font-weight: 500;
+    }
+
+    /* Fragmented systems 5-card grid */
+    .fragmented-systems {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      margin: 24px 0 28px;
+    }
+    @media (max-width: 980px) { .fragmented-systems { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 540px) { .fragmented-systems { grid-template-columns: 1fr; } }
+    .frag-card {
+      background: var(--bg-elev);
+      border: 1px dashed var(--rule-strong);
+      border-radius: var(--r-md);
+      padding: 16px 14px;
+      text-align: center;
+      transition: transform .25s var(--ease), border-color .25s var(--ease);
+    }
+    .frag-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--ink-soft);
+      border-style: solid;
+    }
+    .frag-icon { font-size: 32px; margin-bottom: 10px; }
+    .frag-card strong {
+      display: block;
+      font-family: var(--display); font-weight: 500;
+      font-size: 14px; color: var(--ink); margin-bottom: 4px;
+    }
+    .frag-card span {
+      font-size: 12px; color: var(--ink-soft); line-height: 1.4;
+    }
+
+    /* Big-stat callout, side-by-side layout */
+    .big-stat {
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-lg);
+      padding: 32px 36px;
+      margin: 24px 0 28px;
+    }
+    .big-stat-grid {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    @media (max-width: 760px) {
+      .big-stat-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        text-align: left;
+      }
+    }
+    .big-stat-num {
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: clamp(64px, 8vw, 100px);
+      line-height: 0.95;
+      color: var(--accent);
+      letter-spacing: -0.04em;
+      white-space: nowrap;
+    }
+    .big-stat-num .big-stat-in {
+      font-family: "Fraunces", Georgia, serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 0.42em;
+      color: var(--ink-mute);
+      margin: 0 8px;
+      vertical-align: 0.15em;
+    }
+    .big-stat-context {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .big-stat-label {
+      font-family: "Fraunces", Georgia, serif;
+      font-style: italic;
+      font-size: clamp(20px, 2.2vw, 24px);
+      color: var(--ink);
+      margin: 0;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+    }
+    .big-stat-sub {
+      font-family: var(--sans);
+      font-size: 14.5px;
+      color: var(--ink-soft);
+      line-height: 1.55;
+      margin: 0;
+    }
+    .big-stat-sub strong { color: var(--ink); font-weight: 500; }
+    .big-stat-source-pill {
+      display: inline-flex;
+      align-self: flex-start;
+      font-family: var(--mono); font-size: 10px;
+      letter-spacing: .12em; text-transform: uppercase;
+      padding: 6px 12px;
+      background: color-mix(in srgb, var(--leaf) 14%, transparent);
+      border: 1px solid color-mix(in srgb, var(--leaf) 28%, transparent);
+      color: color-mix(in srgb, var(--leaf) 70%, var(--ink));
+      border-radius: 999px;
+      margin-top: 4px;
+    }
+
+    /* Insights 3-up grid */
+    .insights-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin: 24px 0 28px;
+    }
+    @media (max-width: 980px) { .insights-grid { grid-template-columns: 1fr; } }
+    .insight-card {
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-lg);
+      padding: 24px 22px;
+      display: flex; flex-direction: column;
+      transition: transform .25s var(--ease), border-color .25s var(--ease), box-shadow .25s var(--ease);
+    }
+    .insight-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+      box-shadow: 0 18px 40px -22px rgba(20,18,12,0.22);
+    }
+    .insight-num {
+      font-family: var(--mono);
+      font-size: 13px;
+      letter-spacing: .14em;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 14px;
+    }
+    .insight-card h4 {
+      font-family: var(--display); font-weight: 500;
+      font-size: 18px; line-height: 1.25;
+      color: var(--ink); margin: 0 0 12px;
+      letter-spacing: -0.012em;
+    }
+    .insight-card > p {
+      font-size: 14px; color: var(--ink-soft);
+      line-height: 1.55; margin: 0 0 16px;
+      flex: 1;
+    }
+    .insight-card-quote {
+      margin: auto 0 0;
+      padding: 12px 14px;
+      background: var(--bg-card);
+      border-radius: var(--r-md);
+      border-left: 3px solid var(--ink-mute);
+    }
+    .insight-card-quote p {
+      font-family: "Fraunces", Georgia, serif;
+      font-style: italic;
+      font-size: 14px;
+      color: var(--ink-soft);
+      margin: 0 0 6px;
+      line-height: 1.45;
+    }
+    .insight-card-quote cite {
+      font-family: var(--mono); font-size: 10.5px;
+      letter-spacing: .12em; color: var(--ink-mute); font-style: normal;
+    }
+
+    /* Affinity map 9-cluster grid */
+    .affinity-map { margin: 24px 0 28px; }
+    .affinity-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      padding: 18px;
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-lg);
+    }
+    @media (max-width: 600px) { .affinity-grid { grid-template-columns: repeat(2, 1fr); } }
+    .affinity-cluster {
+      padding: 14px 12px;
+      border-radius: var(--r-md);
+      text-align: center;
+      transition: transform .2s var(--ease), filter .2s var(--ease);
+      cursor: default;
+    }
+    .affinity-cluster:hover {
+      filter: brightness(1.05);
+    }
+    .affinity-cluster strong {
+      display: block;
+      font-family: var(--display); font-weight: 500;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+    .affinity-cluster span {
+      font-family: var(--mono); font-size: 10.5px;
+      letter-spacing: .12em; opacity: 0.7;
+    }
+    .affinity-cluster.c1 { background: #f7d4dc; color: #7a2c3e; }
+    .affinity-cluster.c2 { background: #d4dfb8; color: #4a5d2a; }
+    .affinity-cluster.c3 { background: #fee2c5; color: #7a4a1a; }
+    .affinity-cluster.c4 { background: #cee1ff; color: #2a4a7a; }
+    .affinity-cluster.c5 { background: #f0d4ff; color: #5a2a7a; }
+    .affinity-cluster.c6 { background: #d4edcc; color: #2a5a3a; }
+    .affinity-cluster.c7 { background: #ffe9b3; color: #6a4a1a; }
+    .affinity-cluster.c8 { background: #c8d4ff; color: #2a3a7a; }
+    .affinity-cluster.c9 { background: #ffd4d4; color: #7a2a2a; }
+    .affinity-caption {
+      font-family: "Fraunces", Georgia, serif;
+      font-style: italic;
+      font-size: 14px;
+      color: var(--ink-mute);
+      letter-spacing: 0;
+      text-transform: none;
+      margin: 18px 0 0;
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    /* Market map: 2x2 quadrant chart */
+    .market-map {
+      margin: 24px 0 28px;
+    }
+    .market-y-label,
+    .market-x-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+      margin: 0 0 8px;
+    }
+    .market-x-label {
+      margin: 8px 0 0;
+      text-align: right;
+    }
+    .market-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border: 1px solid var(--rule);
+      border-radius: var(--r-md);
+      overflow: hidden;
+      background: var(--bg-elev);
+    }
+    .market-cell {
+      padding: 26px 24px;
+      background: var(--bg-elev);
+      border-right: 1px dashed var(--rule);
+      border-bottom: 1px dashed var(--rule);
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+      transition: background .25s var(--ease);
+    }
+    .market-cell.tr,
+    .market-cell.br { border-right: none; }
+    .market-cell.bl,
+    .market-cell.br { border-bottom: none; }
+    .market-cell.highlight {
+      background: color-mix(in srgb, var(--accent) 10%, var(--bg-elev));
+    }
+    .market-cell.muted {
+      background: color-mix(in srgb, var(--ink-mute) 5%, var(--bg-elev));
+    }
+    .market-cell-tag {
+      display: inline-block;
+      align-self: flex-start;
+      font-family: var(--mono); font-size: 10.5px;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--ink-soft);
+      padding: 5px 11px;
+      background: var(--bg);
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      margin-bottom: 14px;
+    }
+    .market-cell-tag.mosaic-tag {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+      font-weight: 500;
+    }
+    .market-cell-tag.muted-tag {
+      color: var(--ink-mute);
+      background: transparent;
+      border-style: dashed;
+    }
+    .market-cell ul {
+      list-style: none; padding: 0; margin: 0;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .market-cell ul li {
+      font-family: var(--display);
+      font-weight: 500;
+      font-size: 16px;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+    .market-cell.highlight p {
+      margin: 0;
+      font-family: "Fraunces", Georgia, serif;
+      font-style: italic;
+      font-size: 15px;
+      color: var(--ink);
+      line-height: 1.4;
+    }
+    @media (max-width: 760px) {
+      .market-grid { grid-template-columns: 1fr; }
+      .market-cell {
+        border-right: none;
+        border-bottom: 1px dashed var(--rule);
+        min-height: auto;
+      }
+      .market-cell.br { border-bottom: none; }
+    }
+
+    /* Behavioral memory loop: 5-step horizontal flow */
+    .loop-flow {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      align-items: stretch;
+      margin: 24px 0 28px;
+    }
+    @media (max-width: 980px) {
+      .loop-flow { grid-template-columns: 1fr; gap: 12px; }
+      .loop-arrow { display: none; }
+    }
+    .loop-step {
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-md);
+      padding: 16px 14px;
+      display: flex; flex-direction: column;
+      transition: transform .25s var(--ease), border-color .25s var(--ease);
+    }
+    .loop-step:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+    }
+    .loop-step.highlight {
+      background: color-mix(in srgb, var(--accent) 10%, var(--bg-elev));
+      border-color: var(--accent);
+    }
+    .loop-num {
+      font-family: var(--mono); font-size: 10.5px;
+      letter-spacing: .14em; color: var(--accent);
+      font-weight: 500; margin-bottom: 8px;
+    }
+    .loop-step h5 {
+      font-family: var(--display); font-weight: 500;
+      font-size: 15px; margin: 0 0 6px;
+      color: var(--ink); letter-spacing: -0.01em;
+    }
+    .loop-step p {
+      font-size: 12.5px; color: var(--ink-soft);
+      line-height: 1.45; margin: 0;
+    }
+    .loop-step em {
+      font-family: "Fraunces", Georgia, serif;
+      font-style: italic;
+      color: var(--ink);
+    }
+    .loop-arrow {
+      font-family: var(--mono); font-size: 18px;
+      color: var(--ink-mute);
+      display: grid; place-items: center;
+    }
+
+    /* Dual-interface comparison */
+    .dual-compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 24px 0 20px;
+    }
+    @media (max-width: 760px) { .dual-compare { grid-template-columns: 1fr; } }
+    .dual-side {
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-lg);
+      padding: 24px 22px;
+    }
+    .dual-side.parent {
+      background: color-mix(in srgb, var(--accent) 8%, var(--bg-elev));
+      border-color: var(--accent);
+    }
+    .dual-side-tag {
+      display: inline-block;
+      font-family: var(--mono); font-size: 10.5px;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--ink-soft);
+      padding: 5px 11px;
+      background: var(--bg);
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      margin-bottom: 14px;
+    }
+    .dual-side.parent .dual-side-tag {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+    .dual-side h4 {
+      font-family: var(--display); font-weight: 500;
+      font-size: 18px; margin: 0 0 14px;
+      color: var(--ink); letter-spacing: -0.012em;
+    }
+    .dual-side ul {
+      list-style: none; padding: 0; margin: 0;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .dual-side ul li {
+      font-size: 14px; color: var(--ink-soft); line-height: 1.5;
+      padding-left: 16px; position: relative;
+    }
+    .dual-side ul li::before {
+      content: ""; position: absolute; left: 0; top: 9px;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--ink-mute);
+    }
+    .dual-side.parent ul li::before { background: var(--accent); }
+    .dual-side ul li strong { color: var(--ink); font-weight: 500; }
+
+    /* Feature spec format */
+    .feature-summary {
+      font-family: "Fraunces", Georgia, serif;
+      font-style: italic;
+      font-size: 17px;
+      color: var(--ink);
+      line-height: 1.4;
+      margin: 14px 0 16px;
+    }
+    .feature-spec {
+      list-style: none; padding: 0; margin: 0 0 28px;
+      display: flex; flex-direction: column; gap: 10px;
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-md);
+      padding: 18px 22px;
+    }
+    .feature-spec li {
+      font-size: 14px; color: var(--ink-soft); line-height: 1.5;
+    }
+    .feature-spec li strong {
+      color: var(--ink); font-weight: 500;
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: .12em; text-transform: uppercase;
+      display: inline-block; margin-right: 6px;
+    }
+
+    /* Market sizing tiers */
+    .market-sizing {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin: 20px 0 28px;
+    }
+    @media (max-width: 760px) { .market-sizing { grid-template-columns: 1fr; } }
+    .market-tier {
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-md);
+      padding: 22px 20px;
+      transition: transform .25s var(--ease);
+    }
+    .market-tier:hover { transform: translateY(-2px); }
+    .market-tier.tam { border-left: 3px solid var(--accent); }
+    .market-tier.sam { border-left: 3px solid var(--leaf); }
+    .market-tier.som { border-left: 3px solid var(--ink-soft); }
+    .market-tier-label {
+      display: inline-block;
+      font-family: var(--mono); font-size: 10px;
+      letter-spacing: .18em; font-weight: 500;
+      color: var(--ink-mute);
+      margin-bottom: 8px;
+    }
+    .market-tier-num {
+      font-family: var(--display); font-weight: 600;
+      font-size: 36px; line-height: 1;
+      color: var(--ink);
+      letter-spacing: -0.025em;
+      margin-bottom: 12px;
+    }
+    .market-tier p {
+      font-size: 13px; color: var(--ink-soft); line-height: 1.5; margin: 0;
+    }
+
+    /* ICP callout */
+    .icp-callout {
+      background: color-mix(in srgb, var(--accent) 6%, var(--bg-elev));
+      border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--rule));
+      border-radius: var(--r-md);
+      padding: 22px 24px;
+      margin: 0 0 32px;
+    }
+    .icp-eyebrow {
+      display: inline-block;
+      font-family: var(--mono); font-size: 10px;
+      letter-spacing: .16em; text-transform: uppercase;
+      color: var(--accent-deep);
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+    .icp-callout p {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 16px;
+      color: var(--ink);
+      line-height: 1.5;
+      margin: 0;
+    }
+    .icp-callout p strong { font-weight: 600; }
+
+    /* Artifact gallery */
+    .artifact-gallery {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin: 20px 0 32px;
+    }
+    @media (max-width: 980px) { .artifact-gallery { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 540px) { .artifact-gallery { grid-template-columns: 1fr; } }
+    .artifact-card {
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-md);
+      padding: 18px 16px;
+      transition: transform .25s var(--ease), border-color .25s var(--ease);
+    }
+    .artifact-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+    }
+    .artifact-icon { font-size: 22px; margin-bottom: 10px; }
+    .artifact-card strong {
+      display: block;
+      font-family: var(--display); font-weight: 500;
+      font-size: 14px; color: var(--ink); margin-bottom: 4px;
+      letter-spacing: -0.005em;
+    }
+    .artifact-card span {
+      font-size: 12.5px; color: var(--ink-soft); line-height: 1.45;
+    }
+
+    /* Unit economics banner */
+    .unit-econ-banner {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-lg);
+      margin: 20px 0 16px;
+      overflow: hidden;
+    }
+    @media (max-width: 760px) { .unit-econ-banner { grid-template-columns: 1fr; } }
+    .econ-stat {
+      padding: 28px 26px;
+      border-right: 1px solid var(--rule);
+    }
+    .econ-stat:last-child { border-right: none; }
+    @media (max-width: 760px) {
+      .econ-stat { border-right: none; border-bottom: 1px solid var(--rule); }
+      .econ-stat:last-child { border-bottom: none; }
+    }
+    .econ-num {
+      font-family: var(--display); font-weight: 600;
+      font-size: 44px; line-height: 1;
+      color: var(--accent);
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+    }
+    .econ-num span {
+      font-size: 0.45em;
+      font-weight: 400;
+      color: var(--ink-mute);
+      margin-left: 4px;
+    }
+    .econ-label {
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--ink-soft);
+      margin: 0 0 4px;
+    }
+    .econ-sub {
+      font-size: 12.5px; color: var(--ink-mute);
+      line-height: 1.45; margin: 0;
+    }
+
+    /* Reflection cards */
+    .reflect-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 20px 0 32px;
+    }
+    @media (max-width: 980px) { .reflect-grid { grid-template-columns: 1fr; } }
+    .reflect-card {
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-lg);
+      padding: 22px 20px;
+      display: flex; flex-direction: column;
+      transition: transform .25s var(--ease), border-color .25s var(--ease);
+    }
+    .reflect-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+    }
+    .reflect-num {
+      font-family: var(--mono); font-size: 12px;
+      letter-spacing: .14em; color: var(--accent);
+      font-weight: 500; margin-bottom: 12px;
+    }
+    .reflect-card h4 {
+      font-family: var(--display); font-weight: 500;
+      font-size: 17px; line-height: 1.25;
+      color: var(--ink); margin: 0 0 10px;
+      letter-spacing: -0.012em;
+    }
+    .reflect-card > p {
+      font-size: 13.5px; color: var(--ink-soft);
+      line-height: 1.5; margin: 0 0 14px;
+      flex: 1;
+    }
+    .reflect-tag {
+      display: inline-block; align-self: flex-start;
+      font-family: var(--mono); font-size: 10px;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--accent-deep);
+      padding: 5px 10px;
+      background: var(--accent-soft);
+      border-radius: 999px;
+    }
+
+    /* Open questions callout */
+    .open-questions {
+      background: color-mix(in srgb, var(--ink) 4%, var(--bg-elev));
+      border: 1px solid var(--rule);
+      border-radius: var(--r-lg);
+      padding: 28px 30px;
+      margin: 0 0 28px;
+    }
+    .open-questions-eyebrow {
+      display: inline-block;
+      font-family: var(--mono); font-size: 10.5px;
+      letter-spacing: .16em; text-transform: uppercase;
+      color: var(--ink-mute);
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+    .open-questions h3 {
+      margin: 0 0 16px;
+      font-family: var(--display); font-weight: 500;
+      font-size: 22px; color: var(--ink);
+    }
+    .open-questions ul {
+      list-style: none; padding: 0; margin: 0;
+      display: flex; flex-direction: column; gap: 14px;
+    }
+    .open-questions ul li {
+      font-size: 14.5px; color: var(--ink-soft);
+      line-height: 1.55;
+      padding-left: 20px;
+      position: relative;
+    }
+    .open-questions ul li::before {
+      content: "?";
+      position: absolute; left: 0; top: 0;
+      font-family: "Fraunces", Georgia, serif;
+      font-style: italic;
+      font-size: 17px;
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .open-questions ul li strong {
+      color: var(--ink); font-weight: 500;
+    }
+
+    .reflection-close {
+      font-family: "Fraunces", Georgia, serif;
+      font-style: italic;
+      font-size: 18px;
+      color: var(--ink);
+      line-height: 1.5;
+      margin: 24px 0 0;
+      padding-left: 24px;
+      border-left: 3px solid var(--accent);
+    }
+
+
+    /* Research phases visual map */
+    .research-phases {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      gap: 16px;
+      align-items: stretch;
+      margin: 24px 0 28px;
+    }
+    @media (max-width: 980px) {
+      .research-phases { grid-template-columns: 1fr; }
+      .phase-arrow { display: none; }
+    }
+    .phase-card {
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-lg);
+      padding: 22px 20px;
+      display: flex; flex-direction: column;
+      transition: transform .25s var(--ease), border-color .25s var(--ease);
+    }
+    .phase-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+    }
+    .phase-num {
+      font-family: var(--mono); font-size: 12px;
+      letter-spacing: .14em; color: var(--accent);
+      font-weight: 500; margin-bottom: 10px;
+    }
+    .phase-card h4 {
+      font-family: var(--display); font-weight: 500;
+      font-size: 17px; margin: 0 0 10px;
+      color: var(--ink); letter-spacing: -0.012em;
+    }
+    .phase-card > p {
+      font-size: 14px; color: var(--ink-soft);
+      line-height: 1.5; margin: 0 0 14px;
+      flex: 1;
+    }
+    .phase-tag {
+      display: inline-block; align-self: flex-start;
+      font-family: var(--mono); font-size: 10.5px;
+      letter-spacing: .12em; text-transform: uppercase;
+      padding: 5px 10px;
+      background: var(--bg-card);
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      color: var(--ink-soft);
+    }
+    .phase-arrow {
+      font-family: var(--mono); font-size: 28px;
+      color: var(--ink-mute);
+      display: grid; place-items: center;
+    }
+
   </style>
 </head>
 <body>
@@ -742,9 +1644,9 @@
         <ol>
           <li><a href="#context" class="toc-link active"><span class="num">01.</span>Context</a></li>
           <li><a href="#research" class="toc-link"><span class="num">02.</span>Research</a></li>
-          <li><a href="#solution" class="toc-link"><span class="num">03.</span>The solution</a></li>
-          <li><a href="#flows" class="toc-link"><span class="num">04.</span>Key flows</a></li>
-          <li><a href="#impact" class="toc-link"><span class="num">05.</span>Impact</a></li>
+          <li><a href="#solution" class="toc-link"><span class="num">03.</span>Solution</a></li>
+          <li><a href="#personalization" class="toc-link"><span class="num">04.</span>Personalization</a></li>
+          <li><a href="#strategy" class="toc-link"><span class="num">05.</span>Strategy</a></li>
           <li><a href="#reflection" class="toc-link"><span class="num">06.</span>Reflection</a></li>
         </ol>
       </div>
@@ -759,52 +1661,66 @@
 
       <!-- HERO -->
       <div class="hero reveal">
-        <img src="https://framerusercontent.com/images/N7w1YubiD84GL7EiMPkmWlm8O6Q.png?width=1600" alt="IBM Deal Registration interface" />
+        <div class="case-figure-frame" data-placeholder="AI Adoption Accelerator dashboard, the platform we built with CGI">
+          <img src="https://framerusercontent.com/images/Zub00cnJhtGuWPWwmzodRWTjhlw.png?width=1600" alt="AI Adoption Accelerator hero" />
+        </div>
       </div>
 
-      <!-- TAGS + TITLE + LEDE -->
+      <!-- Tags -->
       <div class="case-tags reveal d1">
-        <span class="case-tag">AI Tooling</span>
+        <span class="case-tag">Enterprise SaaS</span>
         <span class="case-tag shipped">Shipped</span>
+        <span class="case-tag zero-one">0 → 1</span>
       </div>
 
+      <!-- Title -->
       <h1 class="case-title reveal d1">
-        <span>CGI AI Adoption Accelerator</span>
+        <span>AI Adoption Accelerator</span>
       </h1>
 
+      <!-- Lede -->
       <p class="case-lede reveal d2">
-        I led design of CGI's <strong>AI Adoption Accelerator</strong>, a structured, low-risk path for consultants to bring AI into client engagements. <strong>Adopted across 4 industry verticals</strong> in 6 months.
+        I was a core contributor on an AI adoption platform that turns AI learning from another mandated training into a workflow habit. Built with a six-person team at <strong>CGI</strong> as my Master's capstone project at Northwestern. The platform shipped to development the week after our final delivery and is now advancing into production within enterprise contexts.
       </p>
 
-      <a class="visit-btn reveal d2" href="#">
-        <span>Visit CGI</span>
-        <span class="arrow">→</span>
-      </a>
+      <!-- NDA -->
+      <div class="nda-callout reveal d2">
+        <span class="nda-icon" aria-hidden="true">🔒</span>
+        <p>Due to NDAs with CGI, some specific product details, exact metrics, and internal process names have been generalized or omitted.</p>
+      </div>
 
       <!-- PROJECT BANNER -->
       <div class="project-banner reveal d3">
         <div>
           <p class="pb-col-label">Role</p>
           <div class="pb-col-val">
-            <span>Lead Designer</span>
+            <span>Product Designer</span>
+            <span>Associate Manager</span>
           </div>
         </div>
         <div>
           <p class="pb-col-label">Team</p>
           <div class="pb-col-val">
-            <span class="softer">with</span><span>CGI consulting practice</span>
+            <span>2 Designers</span>
+            <span>2 Researchers</span>
+            <span>1 Developer</span>
+            <span>1 VP</span>
           </div>
         </div>
         <div>
           <p class="pb-col-label">Timeline</p>
           <div class="pb-col-val">
-            <span>Mar – Sep 2024</span><span class="softer">6 months</span>
+            <span>Oct 2025 – May 2026</span>
+            <span class="softer">Northwestern capstone</span>
           </div>
         </div>
         <div>
           <p class="pb-col-label">Skills</p>
           <div class="pb-col-val">
-            <span>Service Design</span><span>AI UX</span><span>Strategy</span>
+            <span>Product Strategy</span>
+            <span>UX</span>
+            <span>Market Research</span>
+            <span>Business Model</span>
           </div>
         </div>
       </div>
@@ -813,227 +1729,331 @@
       <!-- ============ 01. CONTEXT ============ -->
       <section class="section" id="context">
         <p class="section-eyebrow">Context</p>
-        <h2 class="section-title">Consultants wanted to use AI, but not on client work.</h2>
-        <p>
-          Inside CGI, consultants saw the AI wave coming. But the gap between "playing with ChatGPT" and "building something a Fortune 500 client signs off on" was huge, and full of risk.
-        </p>
-        <p>
-          Internally, this looked like <strong>missing pipeline visibility</strong>. From the partner side, it
-          looked like a bureaucratic gate that didn't pay them back. Both sides were losing.
-        </p>
+        <h2 class="section-title">AI investment is up. Adoption isn't.</h2>
+
+        <p>Despite widespread investment in AI tools across enterprises, adoption stays low. The signals show up everywhere once you look:</p>
+
+        <div class="fragmented-systems" style="grid-template-columns: repeat(3, 1fr);">
+          <div class="frag-card">
+            <div class="frag-icon">↩️</div>
+            <strong>Login then leave</strong>
+            <span>Employees try AI tools, don't return after the first session.</span>
+          </div>
+          <div class="frag-card">
+            <div class="frag-icon">📚</div>
+            <strong>Training off-workflow</strong>
+            <span>Programs exist but live disconnected from where work actually happens.</span>
+          </div>
+          <div class="frag-card">
+            <div class="frag-icon">📉</div>
+            <strong>No ROI signal</strong>
+            <span>Leaders can't tie investment to measurable behavior change.</span>
+          </div>
+        </div>
+
+        <p>The core gap isn't access to AI tools. It's <strong>sustained, effective adoption</strong>. Most existing solutions treated this as a training problem. We saw it as a behavioral one.</p>
       </section>
 
       <!-- ============ 02. RESEARCH ============ -->
       <section class="section" id="research">
         <p class="section-eyebrow">Research</p>
-        <h2 class="section-title">The risk wasn't the model, it was the path to it.</h2>
-        <p>
-          Through 24 internal interviews, I mapped the actual blockers: unclear approval, no shared examples, no way to estimate effort. Every consultant was reinventing the same five steps in private.
-        </p>
-        <ol>
-          <li>Partners abandoned mid-flow when fields they didn't have data for were marked required.</li>
-          <li>Approval status was opaque, reps would re-submit the same deal three times to "wake it up."</li>
-          <li>The form treated every deal like a net-new enterprise opportunity, even for $5k SaaS renewals.</li>
-        </ol>
-        <p>
-          The synthesis became a tight problem statement: <strong>the form didn't match the shape of the work.</strong>
+        <h2 class="section-title">What we thought was the problem wasn't the problem.</h2>
+
+        <h3>Three phases of discovery</h3>
+        <p>We started where the assumptions lived: industry articles, adoption-trend reports, and a stakeholder session with the CGI consultant developing the underlying framework. That grounded our hypotheses before we talked to anyone.</p>
+
+        <div class="research-phases">
+          <article class="phase-card">
+            <div class="phase-num">01</div>
+            <h4>Secondary research</h4>
+            <p>Industry adoption reports, AI training literature, and a stakeholder session with the CGI consultant who'd developed the foundational behavioral framework.</p>
+            <span class="phase-tag">Desk + sponsor</span>
+          </article>
+          <div class="phase-arrow" aria-hidden="true">→</div>
+          <article class="phase-card">
+            <div class="phase-num">02</div>
+            <h4>Round 1 interviews</h4>
+            <p>Five working professionals across industries via DScout. Goal: understand the real barriers to AI adoption, not the assumed ones.</p>
+            <span class="phase-tag">5 generalists</span>
+          </article>
+          <div class="phase-arrow" aria-hidden="true">→</div>
+          <article class="phase-card">
+            <div class="phase-num">03</div>
+            <h4>Round 2 interviews</h4>
+            <p>Six professionals piloting a manual, fragmented version of a similar solution. Split evenly between high and low-engagement users.</p>
+            <span class="phase-tag">6 pilot users</span>
+          </article>
+        </div>
+
+        <h3>The reframe</h3>
+        <p>Going in, we assumed the barrier was resistance to AI. Research showed something different. Users were curious and willing, but time-constrained. The tools didn't give them a reason to return after first use because they weren't embedded in day-to-day work.</p>
+
+        <div class="insights-grid">
+          <article class="insight-card">
+            <div class="insight-num">01</div>
+            <h4>Day zero drop-off</h4>
+            <p>Getting users to start at all was the first failure point. Whatever came before "try the tool" was already losing them.</p>
+            <blockquote class="insight-card-quote">
+              <p>"I keep meaning to log in. I just never get to it during the workday."</p>
+              <cite>R1 Participant · Marketing</cite>
+            </blockquote>
+          </article>
+          <article class="insight-card">
+            <div class="insight-num">02</div>
+            <h4>Weeks 3-6 fade</h4>
+            <p>Initial novelty faded fast. AI learning became another competing task, not part of the workflow.</p>
+            <blockquote class="insight-card-quote">
+              <p>"It started feeling like another mandatory training. I dropped off."</p>
+              <cite>R2 Participant · Engineering</cite>
+            </blockquote>
+          </article>
+          <article class="insight-card">
+            <div class="insight-num">03</div>
+            <h4>Utility beats incentive</h4>
+            <p>Users who stuck around were driven by practical utility and social validation, not incentives or mandates.</p>
+            <blockquote class="insight-card-quote">
+              <p>"I kept using it because it actually helped with the report I was writing."</p>
+              <cite>R2 High-engagement user</cite>
+            </blockquote>
+          </article>
+        </div>
+
+        <p style="font-family: 'Fraunces', Georgia, serif; font-style: italic; font-size: 18px; color: var(--ink); line-height: 1.5; margin: 24px 0; padding-left: 24px; border-left: 3px solid var(--accent);">
+          Most existing solutions treated this as a training problem. We saw it as a behavioral one.
         </p>
       </section>
 
-
-      <!-- ============ 03. THE SOLUTION ============ -->
+      <!-- ============ 03. SOLUTION ============ -->
       <section class="section" id="solution">
-        <p class="section-eyebrow">The solution</p>
-        <h2 class="section-title">A guided path from idea to pilot in 30 days.</h2>
-        <p>
-          The Accelerator turned the implicit knowledge into a structured program, templates, approval gates, and a shared library of pilot patterns. Consultants got from idea to client-ready POC in three steps instead of three months.
-        </p>
-        <div class="duo">
-          <div class="duo-tile">Before, flat form</div>
-          <div class="duo-tile">After, archetype-led flow</div>
+        <p class="section-eyebrow">Solution</p>
+        <h2 class="section-title">Behavioral science, not training.</h2>
+
+        <p>The platform sits on CGI's <strong>AI Adoption Framework</strong>, which fuses habit psychology, behavioral science, and gamification. The framework lets us meet employees where they are, instead of forcing another mandated training on them.</p>
+
+        <figure class="case-figure">
+          <div class="case-figure-frame" data-placeholder="Behavioral science framework: habit psychology + behavioral science + gamification">
+            <img src="https://framerusercontent.com/images/4nTAeZgMJcpn6DDeDNHmZ4nLAQ.svg" alt="Behavioral science framework" />
+          </div>
+          <figcaption>Where habit psychology, behavioral science, and gamification overlap</figcaption>
+        </figure>
+
+        <h3>The design challenge</h3>
+        <p>How do we translate this behavioral framework into a product employees would <em>genuinely want to open</em>, inside their daily workflow, rather than another mandated training tool?</p>
+
+        <h3>Four layers, one product</h3>
+        <p>The platform is a centralized, role-specific dashboard integrating learning journeys, tool access, social validation, and performance tracking, all informed by behavioral science.</p>
+
+        <div class="loop-flow" style="grid-template-columns: repeat(4, 1fr);">
+          <div class="loop-step">
+            <div class="loop-num">01</div>
+            <h5>Behavioral assessment</h5>
+            <p>Profile each user across 6 psychological dimensions before they start.</p>
+          </div>
+          <div class="loop-arrow" aria-hidden="true">→</div>
+          <div class="loop-step">
+            <div class="loop-num">02</div>
+            <h5>Seamless onboarding</h5>
+            <p>Role-specific. No generic AI 101 detour for someone who already uses Copilot.</p>
+          </div>
+          <div class="loop-arrow" aria-hidden="true">→</div>
+          <div class="loop-step">
+            <div class="loop-num">03</div>
+            <h5>Gamified challenges</h5>
+            <p>Daily, role-tailored AI tasks that fit inside actual work, not on top of it.</p>
+          </div>
+          <div class="loop-arrow" aria-hidden="true">→</div>
+          <div class="loop-step highlight">
+            <div class="loop-num">04</div>
+            <h5>Social system</h5>
+            <p>Peer validation and visibility. The retention engine.</p>
+          </div>
         </div>
-        <p>
-          We also stripped the registration form down to its essentials. <strong>Required fields dropped from 24 to 9</strong> on the
-          most common path. Everything else became conditional, postponed, or pre-filled.
-        </p>
+
+        <h3>Where we focused the MVP</h3>
+        <p>Drop-off happened on day zero <em>and</em> weeks three through six. We prioritized the <strong>onboarding and challenge loop</strong> as MVP focus, going deep on the one thing users interact with every single day rather than spreading effort across all four layers. Retention beats completeness when the system fails to sustain engagement past the first month.</p>
+
+        <h3>How users actually think about it</h3>
+        <p>We ran a card-sorting exercise with 5 engineers and designers from CGI's pilot program before making any IA decisions. Users consistently grouped the experience around two things: a <strong>command center</strong> for getting things done, and a <strong>social layer</strong> for learning from peers.</p>
+
+        <figure class="case-figure">
+          <div class="case-figure-frame" data-placeholder="Card sorting + IA: Home as command center, Profile as launchpad">
+            <img src="https://framerusercontent.com/images/iRZEynwfxl2oTqVAiMIxuAGu0s.png?width=1600" alt="Card sorting and IA" />
+          </div>
+          <figcaption>Card sorting with 5 pilot users informed the IA: Home for progress + training, Profile for AI-tool access</figcaption>
+        </figure>
+
+        <p>That mental model shaped MVP structure directly: <strong>Home</strong> for high-level progress and training, <strong>Profile</strong> as the launchpad to every licensed AI tool. We built the structure users already had in their heads.</p>
       </section>
 
-      <!-- ============ 04. KEY FLOWS / FEATURES ============ -->
-      <section class="section" id="flows">
-        <p class="section-eyebrow">Key flows</p>
-        <h2 class="section-title">The three things that unlocked adoption.</h2>
-        <p>
-          Three components got the most use in the first quarter.
-        </p>
+      <!-- ============ 04. PERSONALIZATION ============ -->
+      <section class="section" id="personalization">
+        <p class="section-eyebrow">Personalization</p>
+        <h2 class="section-title">Two dimensions, no static learning paths.</h2>
 
-        <div class="feature-grid">
-          <div class="feature-list" id="featureList">
-            <div class="feature-item is-active" data-screen="renewal">
-              <h4><span class="num">01</span> Quick-register a renewal</h4>
-              <p>Pre-fills 80% of fields from the existing customer record. A rep can register and submit in under 60 seconds.</p>
-            </div>
-            <div class="feature-item" data-screen="timeline">
-              <h4><span class="num">02</span> Status timeline</h4>
-              <p>Replaces the legacy approved/pending/rejected dropdown with a live timeline showing exactly what's happened and what's next.</p>
-            </div>
-            <div class="feature-item" data-screen="handoff">
-              <h4><span class="num">03</span> Save, share, hand off</h4>
-              <p>Reps can save mid-form drafts and share them with a co-rep, fixing the #1 complaint about the legacy flow.</p>
-            </div>
-            <div class="feature-item" data-screen="conditional">
-              <h4><span class="num">04</span> Conditional fields</h4>
-              <p>The form asks for what's relevant, when it's relevant. Fields appear only after the deal type clarifies what's needed.</p>
-            </div>
+        <p>Competitor analysis showed most existing tools offered one-size-fits-all experiences, which fail to sustain engagement. People differ in how they learn, what topics interest them, and how they respond to change.</p>
+
+        <p>So we designed personalization across two dimensions:</p>
+
+        <div class="dual-compare">
+          <div class="dual-side aide">
+            <div class="dual-side-tag">Role type</div>
+            <h4>Determines content</h4>
+            <ul>
+              <li><strong>Functional roles</strong> · Marketing, HR, Finance challenges</li>
+              <li><strong>Technical roles</strong> · Engineering, data, ML challenges</li>
+              <li><strong>Hybrid roles</strong> · PM, design, strategy challenges</li>
+              <li><strong>Workflow-anchored</strong> · Each challenge sits inside a real task</li>
+            </ul>
           </div>
-
-          <div class="feature-mockup" aria-label="Interactive mockup">
-            <!-- Screen 1: Quick renewal, pre-filled form -->
-            <div class="screen is-active" data-id="renewal">
-              <div class="ms-statusbar"><span>9:41</span><span>●●●</span></div>
-              <p class="ms-sub">Register · Renewal</p>
-              <p class="ms-h">Acme Corp renewal</p>
-              <div class="ms-card"><div class="row"><strong>$48,200</strong><span class="ms-pill green">Pre-filled</span></div><span>From CRM record · 12mo</span></div>
-              <div class="ms-field dim"><span class="lbl">Account</span><span class="val">Acme Corp · Tier 2</span></div>
-              <div class="ms-field dim"><span class="lbl">Region</span><span class="val">North America</span></div>
-              <div class="ms-field"><span class="lbl">Close date</span><span class="val">Mar 14, 2025</span></div>
-              <div class="ms-card coral" style="margin-top:auto"><div class="row"><strong>Submit registration</strong><span>→</span></div></div>
-            </div>
-
-            <!-- Screen 2: Status timeline -->
-            <div class="screen" data-id="timeline">
-              <div class="ms-statusbar"><span>9:41</span><span>●●●</span></div>
-              <p class="ms-sub">Deal · #DR-7821</p>
-              <p class="ms-h">Status timeline</p>
-              <div class="ms-step done"><span class="dot"></span><span><strong>Submitted</strong>Mon · 9:14 AM</span></div>
-              <div class="ms-step done"><span class="dot"></span><span><strong>Auto-validated</strong>Mon · 9:14 AM</span></div>
-              <div class="ms-step now"><span class="dot"></span><span><strong>In review</strong>IBM partner ops · 1 day</span></div>
-              <div class="ms-step"><span class="dot"></span><span><strong>Approved</strong>Estimated by Wed</span></div>
-              <div class="ms-step"><span class="dot"></span><span><strong>Locked</strong>, </span></div>
-            </div>
-
-            <!-- Screen 3: Save / hand off -->
-            <div class="screen" data-id="handoff">
-              <div class="ms-statusbar"><span>9:41</span><span>●●●</span></div>
-              <p class="ms-sub">Drafts · 3 active</p>
-              <p class="ms-h">Hand to a co-rep</p>
-              <div class="ms-card"><div class="row"><strong>Globex expansion</strong><span class="ms-pill amber">Draft</span></div><span>Last edit · you · 2h ago</span></div>
-              <div class="ms-card sage"><div class="row"><strong>Initech net-new</strong><span class="ms-pill green">Shared</span></div><span>With · D. Patel · 1d ago</span></div>
-              <div class="ms-card"><div class="row"><strong>Soylent renewal</strong><span class="ms-pill">Draft</span></div><span>Last edit · K. Lee · 3d ago</span></div>
-              <div class="ms-card coral" style="margin-top:auto"><div class="row"><strong>Share with co-rep</strong><span>→</span></div></div>
-            </div>
-
-            <!-- Screen 4: Conditional fields -->
-            <div class="screen" data-id="conditional">
-              <div class="ms-statusbar"><span>9:41</span><span>●●●</span></div>
-              <p class="ms-sub">Register · Step 2 of 3</p>
-              <p class="ms-h">Tell us about the deal</p>
-              <div class="ms-card"><div class="row"><strong>Deal type</strong><span class="ms-pill green">Renewal</span></div><span>Selected · 9 fields shown</span></div>
-              <div class="ms-bar"><span style="width:62%"></span></div>
-              <p class="ms-sub" style="margin-bottom:0">Required for this path</p>
-              <div class="ms-field"><span class="lbl">Renewal value</span><span class="val">$ 48,200</span></div>
-              <div class="ms-field"><span class="lbl">Term length</span><span class="val">12 months</span></div>
-              <div class="ms-field dim"><span class="lbl">Net-new fields · hidden</span><span class="val">,  (not relevant)</span></div>
-            </div>
+          <div class="dual-side parent">
+            <div class="dual-side-tag">Behavioral profile</div>
+            <h4>Shapes format and reward</h4>
+            <ul>
+              <li><strong>Self-Determination Theory</strong> · autonomy, competence, relatedness</li>
+              <li><strong>HEXAD</strong> · 6 player-type motivators</li>
+              <li><strong>Lewin's Change Theory</strong> · readiness for change framing</li>
+              <li><strong>Combinatorial</strong> · personalization without N×M static paths</li>
+            </ul>
           </div>
         </div>
+
+        <figure class="case-figure">
+          <div class="case-figure-frame" data-placeholder="Personalization model: role × behavioral profile generates the experience">
+            <img src="https://framerusercontent.com/images/cc0DNXKydISnrzIKcH33EyUY.png?width=1600" alt="Personalization model" />
+          </div>
+          <figcaption>Role × behavioral profile combine to generate a personalized experience without dozens of static paths</figcaption>
+        </figure>
+
+        <h3>Our visual language</h3>
+        <p>We developed our own visual language rather than using CGI's enterprise design system. Theirs is clean and functional, built for IT-mandated software. If someone opens the platform and it looks like a tool IT sent them, we've already lost the thread.</p>
+
+        <p>The whole premise is that an AI adoption platform should feel like something you <em>choose</em> to engage with. Building a warmer, more consumer-feeling interface was a behavioral science decision as much as a design one.</p>
+
+        <figure class="case-figure">
+          <div class="case-figure-frame" data-placeholder="Visual language: warmer, more consumer-feeling than typical enterprise software">
+            <img src="https://framerusercontent.com/images/Yc5KMmoRODbg7ctiyQblEXiguB0.png?width=1600" alt="Visual language" />
+          </div>
+        </figure>
+
+        <h3>What we delivered</h3>
+        <p>High-fidelity prototype in Figma + Claude Design, deployed on Vercel. The solution was very well received by CGI, and development started the following week. The project has moved into backend development for production launch.</p>
+
+        <figure class="case-figure">
+          <div class="case-figure-frame" data-placeholder="High-fidelity mockups">
+            <img src="https://framerusercontent.com/images/QxgXDWzUfy42iaYCQl9RAZ63Y.png?width=1600" alt="Hi-fi mockups" />
+          </div>
+        </figure>
       </section>
 
+      <!-- ============ 05. STRATEGY ============ -->
+      <section class="section" id="strategy">
+        <p class="section-eyebrow">Strategy</p>
+        <h2 class="section-title">A behavioral product needs a strategic frame.</h2>
 
-      <!-- ============ 05. IMPACT ============ -->
-      <section class="section" id="impact">
-        <p class="section-eyebrow">Impact</p>
-        <h2 class="section-title">What changed when partners stopped routing around us.</h2>
-        <p>
-          The redesign rolled out to a 12-account pilot, then expanded to 200+ accounts over Q3. Three months
-          post-launch, the numbers told the story:
+        <p>We sized the opportunity, modeled willingness-to-pay, and structured a defensibility argument. The strategic layer wasn't a separate workstream. Every product decision had a business question attached.</p>
+
+        <h3>Market sizing</h3>
+
+        <div class="market-sizing">
+          <div class="market-tier tam">
+            <span class="market-tier-label">TAM</span>
+            <div class="market-tier-num">$5.2B</div>
+            <p>Global enterprise AI adoption + behavioral training market.</p>
+          </div>
+          <div class="market-tier sam">
+            <span class="market-tier-label">SAM</span>
+            <div class="market-tier-num">$290M</div>
+            <p>U.S. + Canada companies, 500+ employees, in Tech, Finance, Retail, and Healthcare actively struggling with AI adoption.</p>
+          </div>
+          <div class="market-tier som">
+            <span class="market-tier-label">SOM</span>
+            <div class="market-tier-num">$5.5M/yr</div>
+            <p>Year-2 target: 20 customers via CGI's distribution channel into enterprise clients.</p>
+          </div>
+        </div>
+
+        <div class="icp-callout">
+          <span class="icp-eyebrow">Distribution Strategy</span>
+          <p>Deploy first <strong>inside CGI</strong>, let CGI consultants experience the product, then use that as a credibility-earning distribution channel into CGI's enterprise clients. Internal results become external proof.</p>
+        </div>
+
+        <h3>Pricing</h3>
+        <p>Per-seat SaaS, annual subscription. Straightforward for enterprise procurement, scalable across teams. There's a market shift toward hybrid pricing as AI usage costs swing, but the platform's value scales with human participation, not AI usage. Seat-based stays clean.</p>
+
+        <p>Initial hypothesis was <strong>$20/seat/month</strong> based on the landscape. Willingness-to-pay research with ~75 enterprise buyers (VPs and Heads of Product) came back at average <strong>$40/seat/month</strong>. The market valued behavioral outcomes more than we'd assumed. We modeled unit economics from there and built a 5-year projection around seat expansion and customer growth.</p>
+
+        <figure class="case-figure">
+          <div class="case-figure-frame" data-placeholder="Pricing landscape and willingness-to-pay distribution">
+            <img src="https://framerusercontent.com/images/8Cp9lLQHtj7Vmyn11PNcp6Ss4.svg" alt="Pricing strategy" />
+          </div>
+          <figcaption>WTP research with 75 enterprise buyers: hypothesis $20/seat → reality $40/seat</figcaption>
+        </figure>
+
+        <h3>Defensibility</h3>
+        <p>Two things make this hard to displace:</p>
+
+        <div class="design-decisions">
+          <p><strong>Behavioral science is hard to bolt on.</strong>It's not a feature a generic LMS vendor can ship in a sprint. The framework took years to develop and required cross-disciplinary depth in psychology, change management, and product.</p>
+          <p><strong>Every interaction sharpens the model.</strong>Personalization compounds. The longer a customer runs the platform, the more accurate it gets and the higher the switching cost. Cohort flywheel.</p>
+        </div>
+
+        <p style="font-family: 'Fraunces', Georgia, serif; font-style: italic; font-size: 20px; color: var(--ink); line-height: 1.4; margin: 24px 0; padding-left: 24px; border-left: 3px solid var(--accent);">
+          The longer the platform runs, the more accurate it gets and the harder it is to displace.
         </p>
 
-        <div class="impact-grid">
-          <div class="impact-card coral">
-            <p class="impact-num">30%</p>
-            <p class="impact-lbl">faster cycle time</p>
-            <p class="impact-desc">From first registration to closed-won, measured across 200+ accounts.</p>
-          </div>
-          <div class="impact-card sage">
-            <p class="impact-num">62%</p>
-            <p class="impact-lbl">less form abandonment</p>
-            <p class="impact-desc">Required-field reduction (24 → 9) was the biggest single lever.</p>
-          </div>
-          <div class="impact-card">
-            <p class="impact-num">200+</p>
-            <p class="impact-lbl">enterprise accounts</p>
-            <p class="impact-desc">Rolled out from a 12-account pilot to the full Partner Plus footprint.</p>
-          </div>
-        </div>
+        <h3>Positioning</h3>
+        <p>The platform is for the <strong>employee</strong>, not the buyer. Every UX and brand decision flows from one positioning line:</p>
 
-        <!-- Testimonials -->
-        <p class="section-eyebrow" style="margin-top:48px;">What partners said</p>
-        <div class="testimonial-grid">
-          <div class="testimonial">
-            <p class="testimonial-quote">Honestly, the timeline alone saved me three follow-up emails this week. I can finally see what's actually happening with my deal.</p>
-            <div class="testimonial-author">
-              <span class="testimonial-avatar">DP</span>
-              <div class="testimonial-meta">
-                <span class="testimonial-name">D. Patel</span>
-                <span class="testimonial-role">Partner Rep · Mid-market SI</span>
-              </div>
-            </div>
-          </div>
-          <div class="testimonial">
-            <p class="testimonial-quote">The renewal flow used to take 15 minutes and now takes under one. That's the difference between registering a deal and not bothering.</p>
-            <div class="testimonial-author">
-              <span class="testimonial-avatar">MR</span>
-              <div class="testimonial-meta">
-                <span class="testimonial-name">M. Rodriguez</span>
-                <span class="testimonial-role">Channel Account Manager · Reseller</span>
-              </div>
-            </div>
-          </div>
-          <div class="testimonial">
-            <p class="testimonial-quote">Sakshi pushed for the archetype framing early. It changed the shape of the entire program, not just the form. We're shipping faster as a team because of it.</p>
-            <div class="testimonial-author">
-              <span class="testimonial-avatar">JC</span>
-              <div class="testimonial-meta">
-                <span class="testimonial-name">J. Chen</span>
-                <span class="testimonial-role">Eng Lead · IBM Partner Cloud</span>
-              </div>
-            </div>
-          </div>
-          <div class="testimonial">
-            <p class="testimonial-quote">She brought research, design, and our partner-side reality into one room. The numbers are the proof, but the way she got there is what I'd hire her for again.</p>
-            <div class="testimonial-author">
-              <span class="testimonial-avatar">AT</span>
-              <div class="testimonial-meta">
-                <span class="testimonial-name">A. Thompson</span>
-                <span class="testimonial-role">Director of Product · IBM Partner Plus</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        <p style="font-family: var(--display); font-weight: 600; font-size: clamp(36px, 5vw, 56px); color: var(--accent); line-height: 1.1; letter-spacing: -0.02em; margin: 28px 0; text-align: center;">
+          Make AI adoption feel human.
+        </p>
+
+        <p>Not a training mandate. Not another tool IT sent. A system that meets employees where they are and builds habits that outlast any traditional training program. We enter the market through CGI's consulting network, earning credibility through internal results before selling externally.</p>
+
+        <h3>Beyond AI</h3>
+        <p>The AI adoption wave won't last forever, and we designed for that. The behavioral engine underneath the product isn't specific to AI. The same system can drive adoption for <strong>any new tool, process, or organizational change</strong> where the bottleneck is human behavior, not technology. As the market evolves, the content changes. The core stays.</p>
       </section>
 
       <!-- ============ 06. REFLECTION ============ -->
       <section class="section" id="reflection">
         <p class="section-eyebrow">Reflection</p>
-        <h2 class="section-title">What I'd do differently next time</h2>
-        <p>
-          The biggest unlock wasn't the form redesign, it was the <strong>archetype framing</strong>. Once we stopped
-          treating "a deal" as one shape and started designing around the three real shapes, every other
-          decision got easier. I'd push to find that framing earlier next time, even at the cost of slower
-          discovery.
-        </p>
-        <p>
-          The thing I'd revisit: we deferred the admin-side dashboard to a later phase. With more time I'd have
-          designed both sides in parallel, the partner experience can only be as fast as the IBM-side review,
-          and that loop is still the rate-limiter.
+        <h2 class="section-title">Our professors called this problem a beast. They weren't wrong.</h2>
+
+        <p>AI adoption at organizational scale sits at the intersection of product design, behavioral science, change management, and organizational psychology. Pulling on any one thread pulls all the others. That complexity is exactly what made it worth a year of work.</p>
+
+        <h3>Three takeaways</h3>
+
+        <div class="reflect-grid">
+          <article class="reflect-card">
+            <div class="reflect-num">01</div>
+            <h4>The reframe was the unlock</h4>
+            <p>The moment we saw users were curious but time-constrained, every design decision got easier. Reframing this as behavioral, not training, was the most leveraged move of the project.</p>
+            <span class="reflect-tag">Problem framing</span>
+          </article>
+          <article class="reflect-card">
+            <div class="reflect-num">02</div>
+            <h4>Strategy is a designer's tool</h4>
+            <p>Pricing, market sizing, positioning all shaped what went into the product. The strategic layer wasn't a separate workstream. Every UX decision had a business question attached.</p>
+            <span class="reflect-tag">Cross-functional</span>
+          </article>
+          <article class="reflect-card">
+            <div class="reflect-num">03</div>
+            <h4>The hardest calls were about scope</h4>
+            <p>Not visual or interaction-level. The hardest decisions were sequencing, scope, and what to leave out to keep the system focused on the moment of activation.</p>
+            <span class="reflect-tag">Discipline</span>
+          </article>
+        </div>
+
+        <p style="margin-top: 24px; font-family: 'Fraunces', Georgia, serif; font-style: italic; font-size: 18px; color: var(--ink); line-height: 1.5;">
+          The product I want to be a strategist for is the one where empathy and analytical rigor are the same muscle.
         </p>
       </section>
 
       <!-- ============ NEXT ============ -->
       <div class="next">
         <p class="next-label">Next</p>
-        <a class="next-link" href="home.html#work">
-          <span>Money20, financial-literacy for teens</span>
+        <a class="next-link" href="case-mosaic.html">
+          <span>Mosaic — A behavioral memory app for caregiving teams</span>
           <span class="arr">→</span>
         </a>
       </div>
@@ -1121,6 +2141,56 @@
       el.addEventListener('mouseenter', () => document.body.classList.add('cursor-grow'));
       el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-grow'));
     });
+
+    // Mark missing-image figures so the placeholder shows
+    document.querySelectorAll('.case-figure-frame img, .case-brand-mark img').forEach(img => {
+      const markMissing = () => img.parentElement.classList.add('img-missing');
+      img.addEventListener('error', markMissing);
+      if (img.complete && img.naturalWidth === 0) markMissing();
+    });
+
+    // Affinity stickies are draggable for fun
+    (function makeAffinityDraggable() {
+      const stickies = document.querySelectorAll('.affinity-cluster');
+      stickies.forEach((sticky, idx) => {
+        let isDragging = false;
+        let startX = 0, startY = 0;
+        let currentX = 0, currentY = 0;
+        const baseRotation = (Math.random() * 4 - 2);
+
+        sticky.style.transform = `rotate(${baseRotation}deg)`;
+        sticky.style.cursor = 'grab';
+        sticky.style.userSelect = 'none';
+        sticky.style.touchAction = 'none';
+
+        const onPointerDown = (e) => {
+          isDragging = true;
+          sticky.style.cursor = 'grabbing';
+          sticky.style.zIndex = '20';
+          sticky.style.transition = 'none';
+          startX = e.clientX - currentX;
+          startY = e.clientY - currentY;
+          e.preventDefault();
+        };
+        const onPointerMove = (e) => {
+          if (!isDragging) return;
+          currentX = e.clientX - startX;
+          currentY = e.clientY - startY;
+          const wobble = baseRotation + (Math.random() * 1 - 0.5);
+          sticky.style.transform = `translate(${currentX}px, ${currentY}px) rotate(${wobble}deg) scale(1.04)`;
+        };
+        const onPointerUp = () => {
+          if (!isDragging) return;
+          isDragging = false;
+          sticky.style.cursor = 'grab';
+          sticky.style.transition = 'transform .25s var(--ease)';
+          sticky.style.transform = `translate(${currentX}px, ${currentY}px) rotate(${baseRotation}deg)`;
+        };
+        sticky.addEventListener('pointerdown', onPointerDown);
+        window.addEventListener('pointermove', onPointerMove);
+        window.addEventListener('pointerup', onPointerUp);
+      });
+    })();
   </script>
 
 </body>
