@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="icon" type="image/png" href="assets/avatar.png" />
   <title>Sakshi Shah, Product Designer</title>
   <meta name="description" content="Selected product design work by Sakshi Shah, case studies, testimonials, and recent projects across enterprise software, fintech, and AI." />
 
@@ -194,14 +195,18 @@
 
     /* ============ AVATAR / ILLUSTRATION ============ */
     .avatar {
-      width: 88px; height: 88px; border-radius: 22px; overflow: hidden;
+      width: 64px; height: 64px; border-radius: 16px; overflow: hidden;
       border: 1px solid var(--rule);
       background: var(--accent-soft);
       margin-bottom: 22px; position: relative;
       transition: transform .35s var(--ease);
     }
     .avatar:hover { transform: rotate(-2deg) scale(1.02); }
-    .avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .avatar img {
+      width: 100%; height: 100%; object-fit: cover;
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+    }
     .avatar .badge {
       position: absolute; bottom: -6px; right: -6px;
       width: 26px; height: 26px; border-radius: 50%;
@@ -1028,7 +1033,7 @@
     <div class="preview" data-for="about">
       <div class="preview-card">
         <div class="preview-about-row">
-          <img src="https://framerusercontent.com/images/yWcAmam0HfUbCIUDWf7Pm80qu8I.jpeg?width=200" alt="Sakshi" />
+          <img src="assets/avatar.png" alt="Sakshi" />
           <div>
             <div class="greet">Hi, I'm Sakshi 👋</div>
             <div class="preview-sub" style="margin:0;">My story, communities, what I read</div>
@@ -1081,7 +1086,7 @@
 
       <!-- AVATAR, replace src with an illustrated portrait when ready -->
       <div class="avatar reveal">
-        <img src="https://framerusercontent.com/images/yWcAmam0HfUbCIUDWf7Pm80qu8I.jpeg?width=400" alt="Sakshi Shah" />
+        <img src="assets/avatar.png" alt="Sakshi Shah" />
         <span class="badge" aria-hidden="true">
           <svg viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
             <g class="star">
