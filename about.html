@@ -847,6 +847,8 @@
     }
     .fun-fact:hover .fun-fact-thumb { transform: rotate(-1deg) scale(1.02); }
     .fun-fact-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    /* Half-marathon photo: anchor the crop higher so the face stays in frame */
+    .fun-fact-thumb img[src*="half-marathon"] { object-position: center 25%; }
     .fun-fact-thumb.placeholder {
       display: grid; place-items: center;
       font-size: 64px;
