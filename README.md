@@ -1,168 +1,78 @@
-# Sakshi Shah — Portfolio Site
+# Sakshi Shah — Portfolio
 
-Static HTML/CSS/JS portfolio. No build step. No dependencies. Opens directly in any browser.
+A static portfolio site for [Sakshi Shah](https://www.linkedin.com/in/sakshiishahh/), product designer at Northwestern McCormick.
+
+🌐 **Live:** [portfolio-sakshi-shah.vercel.app](https://portfolio-sakshi-shah.vercel.app)
 
 ---
 
-## What's here
+## Stack
+
+- **Vanilla HTML / CSS / JavaScript** — no framework, no build step
+- **Vercel** for static hosting (`vercel.json` for asset headers + clean URLs)
+- **Google Fonts**: Bricolage Grotesque (display), Fraunces (serif italic), Geist (sans), Geist Mono
+- Decorative SVGs hand-extracted from a single Adobe Illustrator master
+
+To run locally: just open `index.html` in a browser. No `npm install`, no dev server required.
+
+---
+
+## Structure
 
 ```
-Portfolio/
-├── index.html                       Welcome — full-bleed watercolor garden, zoom-fade transition
-├── home.html                        Main work page (sidebar + projects + testimonials + footer)
-├── about.html                       About me
-├── ai.html                          AI Practices
+portfolio/
+├── index.html                       Splash / welcome page (watercolor hero)
+├── home.html                        Main work page — sidebar nav, projects, testimonials, footer
+├── about.html                       About me — bio, communities, fun facts
+├── ai.html                          AI Practices — agents, stack, process
+├── playground.html                  Personal playground / experiments
 ├── plant.html                       Visitor's Lawn — pick a flower & plant it
-├── playground.html                  Coming-soon twilight scene
-├── case-ibm-deal-registration.html  Case study (full template — TOC, hero, banner, sections,
-│                                    interactive mockup, impact stats, light testimonial, next link)
-├── case-money20.html                Same template, different content
-├── case-ai-accelerator.html         Same template (CGI — homepage card shows "Coming soon" on hover)
-├── case-dp-house.html               Same template
-├── case-khaana-daan.html            Same template
+├── lawn.html                        Garden game canvas (full-screen)
+├── 404.html                         Custom 404 page
 │
-├── assets/                          Watercolor SVGs (used by index.html via base64 embed)
-│   ├── garden-mb.svg                The active welcome SVG (13 MB)
-│   └── garden-mb.b64                Base64-encoded version embedded into index.html
+├── case-ibm-deal-registration.html  Case study: IBM Deal Registration
+├── case-ai-accelerator.html         Case study: CGI AI Adoption Accelerator
+├── case-mosaic.html                 Case study: Mosaic (concept, care tech)
+├── case-money20.html                Case study: Money20 (coming soon)
+├── case-khaana-daan.html            Case study: Khaana Daan (coming soon)
+├── case-dp-house.html               Case study: DP House of Media (coming soon)
 │
-├── Sakshi-Site-Copy.docx            Site-wide copy doc (every line of text on the site)
-└── Sakshi-Site-Copy.md              Markdown twin of the docx
+├── assets/
+│   ├── avatar.png                   Pixel-art logo (favicon + sidebar)
+│   ├── floral-elements.svg          Master watercolor flower set
+│   ├── garden-mb-v2.svg             Watercolor hero used on the splash page
+│   ├── flowers.js                   Flower data for the garden game
+│   ├── page-transition.js           Cross-fade between pages
+│   ├── tulips/                      6 tulips + 3 leaves, extracted with tight viewBoxes
+│   ├── about/                       Photos for the About page (communities + fun facts)
+│   ├── mosaic/                      Mosaic case-study assets
+│   └── ai-accelerator/              CGI case-study assets
+│
+├── docs/                            Source copy + handoff docs (not deployed)
+│   ├── Sakshi-Site-Copy.md          Markdown of every line of copy on the site
+│   ├── Sakshi-Site-Copy.docx        Same in docx form
+│   └── HANDOFF.md                   Original site handoff notes
+│
+├── vercel.json                      SVG content-type headers + clean URLs
+└── .gitignore
 ```
 
-A live Google Doc copy of the same content lives at:
-https://docs.google.com/document/d/1dNGaNrpSeKSBtlcIyvYlwA60nY4ZjVceCyEP0G8vbUM/edit
+---
+
+## Notable details
+
+- **Pixel-art avatar** (`assets/avatar.png`) is the favicon and the sidebar logo across all pages. CSS uses `image-rendering: pixelated` so it stays crisp at any device pixel ratio. The avatar wobbles gently (`-3°` ↔ `+3°` over 4s, paused on hover), with a `prefers-reduced-motion` exception.
+- **Tulip + leaf decoration band** sits above the footer on home, about, ai, playground, and all 6 case studies. 19 elements (15 tulips + 4 leaves) with `:nth-child` height variation, gentle tilts, and responsive hide-every-other below 600px.
+- **Custom dot cursor** on hover-capable devices, auto-disabled on touch via `@media (hover: hover)`.
+- **Tablet + mobile breakpoints**: shell collapses single-column at 980px, custom case-study grids fall to 1-col at 760px, footer + main padding step down further at 600px / 480px. `body { overflow-x: clip }` defends against horizontal scroll.
 
 ---
 
-## Design system (single source of truth)
+## Open follow-ups
 
-These CSS variables live at the top of every HTML file. Change them in one place per file (or extract to a shared stylesheet — see "Things to clean up" below).
-
-```css
-:root {
-  --bg:         #f0e8d2;   /* paper cream */
-  --bg-elev:    #f6efdb;
-  --bg-card:    #e8e0c5;
-  --ink:        #3a2818;   /* warm chocolate, not black */
-  --ink-soft:   #5a4632;
-  --ink-mute:   #8a7a5e;
-  --rule:       #cdc0a0;
-  --rule-strong:#b8a988;
-  --accent:     #ec6478;   /* coral pink — primary brand */
-  --accent-soft:#f7d4dc;
-  --accent-deep:#b13e58;
-  --secondary:  #5e8a4f;   /* sage */
-  --leaf:       #4ea862;
-  --leaf-deep:  #3d6b2c;
-  --footer-bg:  #2c4a36;   /* deep mossy green */
-
-  --display: "Bricolage Grotesque", system-ui, sans-serif;  /* big titles, names */
-  --serif:   "Fraunces", Georgia, serif;                    /* italics, case study titles, footer quote */
-  --sans:    "Geist", "Inter", system-ui, sans-serif;       /* body */
-  --mono:    "Geist Mono", ui-monospace, monospace;         /* labels, eyebrows, nav */
-
-  --r-md: 12px;
-  --r-lg: 18px;
-  --r-xl: 22px;
-  --ease: cubic-bezier(.22,.61,.36,1);
-}
-```
-
-Fonts loaded from Google Fonts in every `<head>`.
+- Some photos are large (16 MB FOP Mumbai, 12 MB baking, 7.8 MB experience). Re-exporting at ~1600 px wide JPEG would cut load times significantly on mobile without visible quality loss.
+- 3 placeholder case studies (Money20, Khaana Daan, DP House) and 1 placeholder community (none — all 3 now have photos) and 0 placeholder fun facts — all four have photos.
 
 ---
 
-## Run locally
-
-```bash
-cd ~/Desktop/Portfolio
-open index.html              # macOS — opens in default browser
-# OR
-python3 -m http.server 8000  # then visit http://localhost:8000
-```
-
-The Python server avoids any `file://` permission quirks (some macOS versions block local file access for image assets).
-
----
-
-## Push to GitHub + deploy
-
-### Quick path — Vercel drag-and-drop (no Git needed)
-
-1. Go to https://vercel.com/new
-2. Drag the entire `Portfolio` folder onto the page
-3. Live URL in 30 seconds
-
-### Git path
-
-```bash
-cd ~/Desktop/Portfolio
-git init
-git add .
-git commit -m "Initial portfolio commit"
-
-# Create empty repo on GitHub first, then:
-git remote add origin https://github.com/sakshiishahh/portfolio.git
-git branch -M main
-git push -u origin main
-```
-
-Then on Vercel/Netlify: connect the repo, deploy. Both auto-detect static sites.
-
----
-
-## Open in Claude Code
-
-```bash
-cd ~/Desktop/Portfolio
-claude
-```
-
-Then ask Claude to do anything — it'll have full context on every file.
-
-**Useful first prompts to give Claude Code:**
-
-- *"Read README.md and home.html and tell me how the design system is structured."*
-- *"Extract all `:root` CSS variables into a shared `assets/styles.css` and link it from every HTML file."*
-- *"Replace the embedded base64 SVG in index.html with an `<img src="assets/garden-mb.svg">` reference and slim the file down to under 50 KB."*
-- *"Apply the copy from Sakshi-Site-Copy.md section [N] back into [filename].html."*
-- *"Build a sixth case study page using the same template as case-ibm-deal-registration.html for [project name]."*
-
----
-
-## Things to clean up before final ship
-
-These are quality-of-life fixes for a professional public deploy:
-
-1. ~~Slim down index.html.~~ ✅ Done — was 17 MB, now 16 KB. Welcome SVG is now external at `assets/garden-mb.svg`.
-
-2. **Extract shared CSS into `assets/styles.css`.** Every HTML file repeats the design-system variables, font links, sidebar styles, footer styles. Pull common rules into one stylesheet and link from each page. ~40% smaller per-file. **(Recommended first task in Claude Code.)**
-
-3. **Wire up real "Coming soon" / Plant flow data.** Plant flow currently just stores to `localStorage`. If you want the visitor's lawn to feel inhabited from day one, populate `SEED_PLANTS` in plant.html with names you'd actually want to show up.
-
-4. **Replace placeholder copy.** Search the codebase for `[TODO`, `[Refine`, or `[Community` to find the brackets where copy still needs your voice. The Google Doc has the same markers in matching positions.
-
-5. **Add a 404 page** if you're deploying to a subpath.
-
-6. **Add a `<meta name="description">`** + Open Graph tags on each page for social previews.
-
-7. **Verify external SVG loads on production host.** `index.html` now references `assets/garden-mb.svg`. Test on Vercel/Netlify after deploying — if the welcome scene shows blank, the host may need an explicit MIME type for SVG.
-
----
-
-## Known interaction notes (so a fresh dev doesn't break them)
-
-- **Welcome → plant.html transition.** Click "step inside" triggers `body.exiting-wash` + `.page.exiting`, the page scales forward to 2.5× while a cream wash fades over, then nav fires after 1.5s. Don't add `e.preventDefault()` to skip the wait. Background SVG is `assets/garden-mb-v2.svg` (the no-house v2 — title is centered in the empty mid-upper sky).
-- **Project hover scope.** `.grid-col-left` and `.grid-col-right` are independent flex columns. Hovering a card grows that column only — the other column doesn't shift.
-- **CGI card cursor.** `.card.coming-soon` triggers `body.cursor-soon` (neutral dark "Coming soon") instead of the default coral "View case study" pill. JS in home.html handles this via a class check.
-- **Visitor's Lawn nav item.** The hover-vocab swap uses `:has(.hover-label)`, so items without a `.hover-label` span (only Visitor's Lawn) keep their text on hover.
-- **Case study mockup.** Hovering each feature card on a case study sets `.is-active` on a sibling `.screen` — phone-frame UI swaps. Pure CSS+JS, no library.
-
----
-
-## Who to ask for what
-
-- Real copy refinement → edit the Google Doc (link above) and tell me which sections to apply
-- Add a new project → use `case-ibm-deal-registration.html` as the template and tell me the content
-- New page entirely → describe it, I'll scaffold from existing patterns
-- Visual tweaks → name the page + section, I'll dial it in
+Built between May 2026 and now, iteratively, with [Claude Code](https://claude.com/code).
