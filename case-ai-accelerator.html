@@ -812,6 +812,20 @@
     /* Moodboard figure variant, square instead of 16:10 */
     .case-figure-frame.moodboard { aspect-ratio: 4/3; }
 
+    /* Full-image variant: drop the 16/10 crop, show the whole image */
+    .case-figure-frame.full-image {
+      aspect-ratio: auto;
+      height: auto;
+      padding: 24px;
+      background: var(--bg-elev);
+    }
+    .case-figure-frame.full-image img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      border-radius: var(--r-md);
+    }
+
     /* Hero pull-quote */
     .case-pullquote {
       margin: 32px 0 28px; padding: 0 0 0 26px;
@@ -1047,49 +1061,112 @@
       letter-spacing: .12em; color: var(--ink-mute); font-style: normal;
     }
 
-    /* Reframe vertical stack, distinct from research-phases */
-    .reframe-stack {
-      display: flex; flex-direction: column;
-      gap: 18px;
-      margin: 24px 0 28px;
-    }
-    .reframe-item {
+    /* Reframe interactive: tabs left, swappable detail panel right */
+    .reframe-interactive {
       display: grid;
-      grid-template-columns: auto 1fr;
+      grid-template-columns: minmax(260px, 1fr) 1.4fr;
       gap: 24px;
+      margin: 24px 0 28px;
       align-items: start;
-      padding: 22px 26px;
+    }
+    @media (max-width: 760px) {
+      .reframe-interactive { grid-template-columns: 1fr; gap: 12px; }
+    }
+    .reframe-tabs {
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .reframe-tab {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 14px;
+      padding: 18px 20px;
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: var(--r-md);
+      text-align: left;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all .25s var(--ease);
+    }
+    .reframe-tab:hover {
+      background: var(--bg-elev);
+    }
+    .reframe-tab.is-active {
+      background: var(--bg-elev);
+      border-color: var(--accent);
+    }
+    .reframe-tab-num {
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: .14em; color: var(--ink-mute);
+      font-weight: 500;
+      transition: color .25s var(--ease);
+    }
+    .reframe-tab.is-active .reframe-tab-num { color: var(--accent); }
+    .reframe-tab-title {
+      font-family: var(--display); font-weight: 500;
+      font-size: 18px; color: var(--ink);
+      letter-spacing: -0.012em;
+      line-height: 1.2;
+    }
+    .reframe-tab-arrow {
+      font-family: var(--mono); font-size: 14px;
+      color: var(--ink-mute);
+      opacity: 0;
+      transform: translateX(-4px);
+      transition: opacity .25s var(--ease), transform .25s var(--ease), color .25s var(--ease);
+    }
+    .reframe-tab:hover .reframe-tab-arrow,
+    .reframe-tab.is-active .reframe-tab-arrow {
+      opacity: 1;
+      transform: translateX(0);
+      color: var(--accent);
+    }
+
+    .reframe-detail {
+      position: relative;
       background: var(--bg-elev);
       border: 1px solid var(--rule);
       border-radius: var(--r-lg);
-      transition: transform .25s var(--ease), border-color .25s var(--ease);
+      padding: 32px 32px;
+      min-height: 280px;
     }
-    .reframe-item:hover {
-      transform: translateX(2px);
-      border-color: var(--accent);
+    .reframe-panel {
+      display: none;
+      animation: reframeFade .35s var(--ease);
     }
-    .reframe-num {
-      font-family: var(--display); font-weight: 600;
-      font-size: 36px; line-height: 1;
-      color: var(--accent);
-      letter-spacing: -0.03em;
-      min-width: 50px;
+    .reframe-panel.is-active { display: block; }
+    @keyframes reframeFade {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-    .reframe-body h4 {
-      font-family: var(--display); font-weight: 500;
-      font-size: 19px; line-height: 1.25;
-      color: var(--ink); margin: 0 0 8px;
-      letter-spacing: -0.012em;
+    .reframe-panel-summary {
+      font-family: "Fraunces", Georgia, serif;
+      font-style: italic;
+      font-size: clamp(20px, 2vw, 24px);
+      line-height: 1.35;
+      color: var(--ink);
+      margin: 0 0 22px;
+      letter-spacing: -0.01em;
     }
-    .reframe-body > p {
-      font-size: 14.5px; color: var(--ink-soft);
-      line-height: 1.55; margin: 0 0 14px;
-    }
-    .reframe-body .case-insight-quote {
+    .reframe-panel-quote {
       margin: 0;
+      padding: 18px 22px;
+      background: var(--bg-card);
+      border-radius: var(--r-md);
+      border-left: 3px solid var(--accent);
     }
-    @media (max-width: 760px) {
-      .reframe-item { grid-template-columns: 1fr; gap: 8px; }
+    .reframe-panel-quote p {
+      font-family: var(--sans);
+      font-size: 15px;
+      color: var(--ink-soft);
+      margin: 0 0 10px;
+      line-height: 1.5;
+    }
+    .reframe-panel-quote cite {
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: .12em; color: var(--ink-mute);
+      font-style: normal;
     }
 
     /* Native Venn diagram with breathing motion */
@@ -1921,40 +1998,48 @@
 
         <p>Going in, we assumed the barrier was resistance to AI. Research showed something different. Users were curious and willing, but time-constrained. The tools didn't give them a reason to return after first use because they weren't embedded in day-to-day work.</p>
 
-        <div class="reframe-stack">
-          <article class="reframe-item">
-            <div class="reframe-num">01</div>
-            <div class="reframe-body">
-              <h4>Day zero drop-off</h4>
-              <p>Getting users to start at all was the first failure point. Whatever came before "try the tool" was already losing them.</p>
-              <blockquote class="case-insight-quote">
+        <div class="reframe-interactive">
+          <div class="reframe-tabs">
+            <button class="reframe-tab is-active" data-target="r1" type="button">
+              <span class="reframe-tab-num">01</span>
+              <span class="reframe-tab-title">Day zero drop-off</span>
+              <span class="reframe-tab-arrow">→</span>
+            </button>
+            <button class="reframe-tab" data-target="r2" type="button">
+              <span class="reframe-tab-num">02</span>
+              <span class="reframe-tab-title">Weeks 3-6 fade</span>
+              <span class="reframe-tab-arrow">→</span>
+            </button>
+            <button class="reframe-tab" data-target="r3" type="button">
+              <span class="reframe-tab-num">03</span>
+              <span class="reframe-tab-title">Utility beats incentive</span>
+              <span class="reframe-tab-arrow">→</span>
+            </button>
+          </div>
+
+          <div class="reframe-detail">
+            <div class="reframe-panel is-active" data-id="r1">
+              <p class="reframe-panel-summary">Getting users to start at all was the first failure point. Whatever came before "try the tool" was already losing them.</p>
+              <blockquote class="reframe-panel-quote">
                 <p>"I keep meaning to log in. I just never get to it during the workday."</p>
                 <cite>R1 Participant · Marketing</cite>
               </blockquote>
             </div>
-          </article>
-          <article class="reframe-item">
-            <div class="reframe-num">02</div>
-            <div class="reframe-body">
-              <h4>Weeks 3-6 fade</h4>
-              <p>Initial novelty faded fast. AI learning became another competing task, not part of the workflow.</p>
-              <blockquote class="case-insight-quote">
+            <div class="reframe-panel" data-id="r2">
+              <p class="reframe-panel-summary">Initial novelty faded fast. AI learning became another competing task, not part of the workflow.</p>
+              <blockquote class="reframe-panel-quote">
                 <p>"It started feeling like another mandatory training. I dropped off."</p>
                 <cite>R2 Participant · Engineering</cite>
               </blockquote>
             </div>
-          </article>
-          <article class="reframe-item">
-            <div class="reframe-num">03</div>
-            <div class="reframe-body">
-              <h4>Utility beats incentive</h4>
-              <p>Users who stuck around were driven by practical utility and social validation, not incentives or mandates.</p>
-              <blockquote class="case-insight-quote">
+            <div class="reframe-panel" data-id="r3">
+              <p class="reframe-panel-summary">Users who stuck around were driven by practical utility and social validation, not incentives or mandates.</p>
+              <blockquote class="reframe-panel-quote">
                 <p>"I kept using it because it actually helped with the report I was writing."</p>
                 <cite>R2 High-engagement user</cite>
               </blockquote>
             </div>
-          </article>
+          </div>
         </div>
 
         <p style="font-family: 'Fraunces', Georgia, serif; font-style: italic; font-size: 18px; color: var(--ink); line-height: 1.5; margin: 24px 0; padding-left: 24px; border-left: 3px solid var(--accent);">
@@ -1973,25 +2058,31 @@
           <svg class="venn-svg" viewBox="0 0 400 360" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <defs>
               <radialGradient id="venn-coral" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stop-color="#ec6478" stop-opacity="0.35"/>
-                <stop offset="100%" stop-color="#ec6478" stop-opacity="0.18"/>
+                <stop offset="0%" stop-color="#ec6478" stop-opacity="0.32"/>
+                <stop offset="100%" stop-color="#ec6478" stop-opacity="0.16"/>
               </radialGradient>
               <radialGradient id="venn-sage" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stop-color="#5e8a4f" stop-opacity="0.32"/>
-                <stop offset="100%" stop-color="#5e8a4f" stop-opacity="0.16"/>
+                <stop offset="0%" stop-color="#5e8a4f" stop-opacity="0.30"/>
+                <stop offset="100%" stop-color="#5e8a4f" stop-opacity="0.14"/>
               </radialGradient>
               <radialGradient id="venn-leaf" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stop-color="#4ea862" stop-opacity="0.32"/>
-                <stop offset="100%" stop-color="#4ea862" stop-opacity="0.16"/>
+                <stop offset="0%" stop-color="#4ea862" stop-opacity="0.30"/>
+                <stop offset="100%" stop-color="#4ea862" stop-opacity="0.14"/>
               </radialGradient>
             </defs>
             <circle class="venn-circle vc-1" cx="200" cy="130" r="110" fill="url(#venn-coral)" stroke="#ec6478" stroke-opacity="0.5" stroke-width="1.5"/>
             <circle class="venn-circle vc-2" cx="135" cy="230" r="110" fill="url(#venn-sage)" stroke="#5e8a4f" stroke-opacity="0.5" stroke-width="1.5"/>
             <circle class="venn-circle vc-3" cx="265" cy="230" r="110" fill="url(#venn-leaf)" stroke="#4ea862" stroke-opacity="0.5" stroke-width="1.5"/>
-            <text x="200" y="80" text-anchor="middle" font-family="Bricolage Grotesque, system-ui, sans-serif" font-weight="600" font-size="14" fill="#3a2818">Habit psychology</text>
-            <text x="80" y="285" text-anchor="middle" font-family="Bricolage Grotesque, system-ui, sans-serif" font-weight="600" font-size="14" fill="#3a2818">Behavioral science</text>
-            <text x="320" y="285" text-anchor="middle" font-family="Bricolage Grotesque, system-ui, sans-serif" font-weight="600" font-size="14" fill="#3a2818">Gamification</text>
-            <text x="200" y="195" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-style="italic" font-size="13" fill="#5a4632">the framework</text>
+
+            <ellipse cx="200" cy="200" rx="62" ry="40" fill="#ec6478" fill-opacity="0.22"/>
+            <ellipse cx="200" cy="200" rx="58" ry="36" fill="#f0e8d2" fill-opacity="0.85"/>
+
+            <text x="200" y="80" text-anchor="middle" font-family="Bricolage Grotesque, system-ui, sans-serif" font-weight="600" font-size="15" fill="#3a2818">Habit psychology</text>
+            <text x="80" y="290" text-anchor="middle" font-family="Bricolage Grotesque, system-ui, sans-serif" font-weight="600" font-size="15" fill="#3a2818">Behavioral science</text>
+            <text x="320" y="290" text-anchor="middle" font-family="Bricolage Grotesque, system-ui, sans-serif" font-weight="600" font-size="15" fill="#3a2818">Gamification</text>
+
+            <text x="200" y="196" text-anchor="middle" font-family="Bricolage Grotesque, system-ui, sans-serif" font-weight="600" font-size="13" fill="#b13e58" letter-spacing="-0.01em">The framework</text>
+            <text x="200" y="214" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-style="italic" font-size="11" fill="#5a4632">our foundation</text>
           </svg>
           <p class="venn-caption">Where habit psychology, behavioral science, and gamification overlap</p>
         </div>
@@ -2032,8 +2123,8 @@
         <p>We ran a card-sorting exercise with 5 engineers and designers from CGI's pilot program before making any IA decisions. Users consistently grouped the experience around two things: a <strong>command center</strong> for getting things done, and a <strong>social layer</strong> for learning from peers.</p>
 
         <figure class="case-figure">
-          <div class="case-figure-frame" data-placeholder="Card sorting + IA: Home as command center, Profile as launchpad">
-            <img src="https://framerusercontent.com/images/iRZEynwfxl2oTqVAiMIxuAGu0s.png?width=1600" alt="Card sorting and IA" />
+          <div class="case-figure-frame full-image" data-placeholder="Card sorting + IA: Home as command center, Profile as launchpad">
+            <img src="https://framerusercontent.com/images/iRZEynwfxl2oTqVAiMIxuAGu0s.png?width=2400" alt="Card sorting and IA" />
           </div>
           <figcaption>Card sorting with 5 pilot users informed the IA: Home for progress + training, Profile for AI-tool access</figcaption>
         </figure>
@@ -2345,6 +2436,24 @@
         sticky.addEventListener('pointerdown', onPointerDown);
         window.addEventListener('pointermove', onPointerMove);
         window.addEventListener('pointerup', onPointerUp);
+      });
+    })();
+
+    // Reframe interactive: hover/focus/click swaps the detail panel
+    (function setupReframe() {
+      const tabs = document.querySelectorAll('.reframe-tab');
+      const panels = document.querySelectorAll('.reframe-panel');
+      if (!tabs.length || !panels.length) return;
+
+      const activate = (target) => {
+        tabs.forEach(t => t.classList.toggle('is-active', t.dataset.target === target));
+        panels.forEach(p => p.classList.toggle('is-active', p.dataset.id === target));
+      };
+
+      tabs.forEach(tab => {
+        tab.addEventListener('mouseenter', () => activate(tab.dataset.target));
+        tab.addEventListener('focus', () => activate(tab.dataset.target));
+        tab.addEventListener('click', () => activate(tab.dataset.target));
       });
     })();
   </script>
