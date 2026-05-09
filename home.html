@@ -470,38 +470,8 @@
       background: var(--ink); color: #f4f1ea;
       border-radius: var(--r-xl);
       padding: 18px 24px 22px;
-      padding-bottom: 50px;          /* breathing room above tulips */
-      position: relative; overflow: visible;
+      position: relative; overflow: hidden;
       transition: padding .3s var(--ease);
-    }
-    .latest-log-tulip {
-      position: absolute;
-      bottom: 6px;
-      width: 40px;
-      height: 38px;                  /* box dimensions unchanged */
-      object-fit: contain;           /* tulip stays at natural aspect inside the box */
-      object-position: bottom center;/* anchored to the bottom so it sits on the card edge */
-      pointer-events: none;
-      z-index: 1;
-      filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.28));
-    }
-    .latest-log-tulip.lt-1 {
-      right: 60px;
-      transform: rotate(-7deg);
-      transform-origin: bottom center;
-    }
-    .latest-log-tulip.lt-2 {
-      right: 14px;
-      width: 46px;
-      height: 44px;
-      transform: rotate(6deg);
-      transform-origin: bottom center;
-    }
-    @media (max-width: 600px) {
-      .latest-log { padding-bottom: 42px; }
-      .latest-log-tulip { width: 32px; height: 30px; }
-      .latest-log-tulip.lt-1 { right: 48px; }
-      .latest-log-tulip.lt-2 { right: 12px; width: 36px; height: 34px; }
     }
     .latest-log-head {
       display: flex; align-items: center; gap: 12px; margin-bottom: 10px;
@@ -1197,8 +1167,6 @@
             Just shipped <a class="mention" href="case-ai-accelerator.html">CGI's AI Adoption Platform</a> after eight months with my team, now in production. Spending the rest of spring coaching MBA teams at <a class="mention" href="https://www.linkedin.com/posts/sakshiishahh_uxresearch-edtech-agenticai-share-7451290849050533889-uF-h" target="_blank" rel="noopener">Kellogg</a>, building two more AI agents on the side, and graduating from <a class="mention" href="about.html">Northwestern</a> this June.
           </p>
         </div>
-        <img class="latest-log-tulip lt-1" src="assets/tulips/tulip-2.svg" alt="" aria-hidden="true" />
-        <img class="latest-log-tulip lt-2" src="assets/tulips/tulip-4.svg" alt="" aria-hidden="true" />
       </section>
 
       <div class="grid" id="work">
