@@ -572,7 +572,8 @@
       border-left: 3px solid var(--accent);
       border-radius: var(--r-md);
       margin: 18px 0 22px;
-      max-width: 720px;
+      max-width: none;
+      width: 100%;
     }
     .nda-icon {
       font-size: 15px;
@@ -1044,6 +1045,130 @@
     .insight-card-quote cite {
       font-family: var(--mono); font-size: 10.5px;
       letter-spacing: .12em; color: var(--ink-mute); font-style: normal;
+    }
+
+    /* Reframe vertical stack, distinct from research-phases */
+    .reframe-stack {
+      display: flex; flex-direction: column;
+      gap: 18px;
+      margin: 24px 0 28px;
+    }
+    .reframe-item {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 24px;
+      align-items: start;
+      padding: 22px 26px;
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-lg);
+      transition: transform .25s var(--ease), border-color .25s var(--ease);
+    }
+    .reframe-item:hover {
+      transform: translateX(2px);
+      border-color: var(--accent);
+    }
+    .reframe-num {
+      font-family: var(--display); font-weight: 600;
+      font-size: 36px; line-height: 1;
+      color: var(--accent);
+      letter-spacing: -0.03em;
+      min-width: 50px;
+    }
+    .reframe-body h4 {
+      font-family: var(--display); font-weight: 500;
+      font-size: 19px; line-height: 1.25;
+      color: var(--ink); margin: 0 0 8px;
+      letter-spacing: -0.012em;
+    }
+    .reframe-body > p {
+      font-size: 14.5px; color: var(--ink-soft);
+      line-height: 1.55; margin: 0 0 14px;
+    }
+    .reframe-body .case-insight-quote {
+      margin: 0;
+    }
+    @media (max-width: 760px) {
+      .reframe-item { grid-template-columns: 1fr; gap: 8px; }
+    }
+
+    /* Native Venn diagram with breathing motion */
+    .venn-container {
+      margin: 28px 0;
+      padding: 32px 24px;
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-lg);
+      text-align: center;
+    }
+    .venn-svg {
+      width: 100%; max-width: 480px;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+    .venn-circle {
+      transform-origin: center;
+      animation: vennBreathe 7s ease-in-out infinite;
+    }
+    .venn-circle.vc-2 { animation-delay: 1s; }
+    .venn-circle.vc-3 { animation-delay: 2s; }
+    @keyframes vennBreathe {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.04); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .venn-circle { animation: none; }
+    }
+    .venn-caption {
+      font-family: "Fraunces", Georgia, serif;
+      font-style: italic;
+      font-size: 13px;
+      color: var(--ink-mute);
+      margin: 16px 0 0;
+    }
+
+    /* Four layers, 4-up grid (replaces .loop-flow for this section) */
+    .layers-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin: 24px 0 28px;
+    }
+    @media (max-width: 980px) { .layers-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 540px) { .layers-grid { grid-template-columns: 1fr; } }
+    .layer-card {
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-md);
+      padding: 22px 20px;
+      display: flex; flex-direction: column;
+      transition: transform .25s var(--ease), border-color .25s var(--ease);
+      position: relative;
+    }
+    .layer-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+    }
+    .layer-card.highlight {
+      background: color-mix(in srgb, var(--accent) 10%, var(--bg-elev));
+      border-color: var(--accent);
+    }
+    .layer-num {
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: .14em; color: var(--accent);
+      font-weight: 500; margin-bottom: 12px;
+    }
+    .layer-card h5 {
+      font-family: var(--display); font-weight: 500;
+      font-size: 16px; margin: 0 0 8px;
+      color: var(--ink); letter-spacing: -0.012em;
+      line-height: 1.25;
+    }
+    .layer-card p {
+      font-size: 13px; color: var(--ink-soft);
+      line-height: 1.5; margin: 0;
+      flex: 1;
     }
 
     /* Affinity map 9-cluster grid */
@@ -1786,35 +1911,49 @@
         </div>
 
         <h3>The reframe</h3>
+
+        <figure class="case-figure">
+          <div class="case-figure-frame" data-placeholder="Research whiteboard, mapping the assumed barriers vs the real ones">
+            <img src="https://framerusercontent.com/images/odB5PolWivbaAcWOPKBbPmgQyc.jpg?width=1600" alt="Research whiteboard from the team's synthesis session" />
+          </div>
+          <figcaption>Research synthesis whiteboard, where the assumed barriers met the real ones</figcaption>
+        </figure>
+
         <p>Going in, we assumed the barrier was resistance to AI. Research showed something different. Users were curious and willing, but time-constrained. The tools didn't give them a reason to return after first use because they weren't embedded in day-to-day work.</p>
 
-        <div class="insights-grid">
-          <article class="insight-card">
-            <div class="insight-num">01</div>
-            <h4>Day zero drop-off</h4>
-            <p>Getting users to start at all was the first failure point. Whatever came before "try the tool" was already losing them.</p>
-            <blockquote class="insight-card-quote">
-              <p>"I keep meaning to log in. I just never get to it during the workday."</p>
-              <cite>R1 Participant · Marketing</cite>
-            </blockquote>
+        <div class="reframe-stack">
+          <article class="reframe-item">
+            <div class="reframe-num">01</div>
+            <div class="reframe-body">
+              <h4>Day zero drop-off</h4>
+              <p>Getting users to start at all was the first failure point. Whatever came before "try the tool" was already losing them.</p>
+              <blockquote class="case-insight-quote">
+                <p>"I keep meaning to log in. I just never get to it during the workday."</p>
+                <cite>R1 Participant · Marketing</cite>
+              </blockquote>
+            </div>
           </article>
-          <article class="insight-card">
-            <div class="insight-num">02</div>
-            <h4>Weeks 3-6 fade</h4>
-            <p>Initial novelty faded fast. AI learning became another competing task, not part of the workflow.</p>
-            <blockquote class="insight-card-quote">
-              <p>"It started feeling like another mandatory training. I dropped off."</p>
-              <cite>R2 Participant · Engineering</cite>
-            </blockquote>
+          <article class="reframe-item">
+            <div class="reframe-num">02</div>
+            <div class="reframe-body">
+              <h4>Weeks 3-6 fade</h4>
+              <p>Initial novelty faded fast. AI learning became another competing task, not part of the workflow.</p>
+              <blockquote class="case-insight-quote">
+                <p>"It started feeling like another mandatory training. I dropped off."</p>
+                <cite>R2 Participant · Engineering</cite>
+              </blockquote>
+            </div>
           </article>
-          <article class="insight-card">
-            <div class="insight-num">03</div>
-            <h4>Utility beats incentive</h4>
-            <p>Users who stuck around were driven by practical utility and social validation, not incentives or mandates.</p>
-            <blockquote class="insight-card-quote">
-              <p>"I kept using it because it actually helped with the report I was writing."</p>
-              <cite>R2 High-engagement user</cite>
-            </blockquote>
+          <article class="reframe-item">
+            <div class="reframe-num">03</div>
+            <div class="reframe-body">
+              <h4>Utility beats incentive</h4>
+              <p>Users who stuck around were driven by practical utility and social validation, not incentives or mandates.</p>
+              <blockquote class="case-insight-quote">
+                <p>"I kept using it because it actually helped with the report I was writing."</p>
+                <cite>R2 High-engagement user</cite>
+              </blockquote>
+            </div>
           </article>
         </div>
 
@@ -1830,12 +1969,32 @@
 
         <p>The platform sits on CGI's <strong>AI Adoption Framework</strong>, which fuses habit psychology, behavioral science, and gamification. The framework lets us meet employees where they are, instead of forcing another mandated training on them.</p>
 
-        <figure class="case-figure">
-          <div class="case-figure-frame" data-placeholder="Behavioral science framework: habit psychology + behavioral science + gamification">
-            <img src="https://framerusercontent.com/images/4nTAeZgMJcpn6DDeDNHmZ4nLAQ.svg" alt="Behavioral science framework" />
-          </div>
-          <figcaption>Where habit psychology, behavioral science, and gamification overlap</figcaption>
-        </figure>
+        <div class="venn-container">
+          <svg class="venn-svg" viewBox="0 0 400 360" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <radialGradient id="venn-coral" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#ec6478" stop-opacity="0.35"/>
+                <stop offset="100%" stop-color="#ec6478" stop-opacity="0.18"/>
+              </radialGradient>
+              <radialGradient id="venn-sage" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#5e8a4f" stop-opacity="0.32"/>
+                <stop offset="100%" stop-color="#5e8a4f" stop-opacity="0.16"/>
+              </radialGradient>
+              <radialGradient id="venn-leaf" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#4ea862" stop-opacity="0.32"/>
+                <stop offset="100%" stop-color="#4ea862" stop-opacity="0.16"/>
+              </radialGradient>
+            </defs>
+            <circle class="venn-circle vc-1" cx="200" cy="130" r="110" fill="url(#venn-coral)" stroke="#ec6478" stroke-opacity="0.5" stroke-width="1.5"/>
+            <circle class="venn-circle vc-2" cx="135" cy="230" r="110" fill="url(#venn-sage)" stroke="#5e8a4f" stroke-opacity="0.5" stroke-width="1.5"/>
+            <circle class="venn-circle vc-3" cx="265" cy="230" r="110" fill="url(#venn-leaf)" stroke="#4ea862" stroke-opacity="0.5" stroke-width="1.5"/>
+            <text x="200" y="80" text-anchor="middle" font-family="Bricolage Grotesque, system-ui, sans-serif" font-weight="600" font-size="14" fill="#3a2818">Habit psychology</text>
+            <text x="80" y="285" text-anchor="middle" font-family="Bricolage Grotesque, system-ui, sans-serif" font-weight="600" font-size="14" fill="#3a2818">Behavioral science</text>
+            <text x="320" y="285" text-anchor="middle" font-family="Bricolage Grotesque, system-ui, sans-serif" font-weight="600" font-size="14" fill="#3a2818">Gamification</text>
+            <text x="200" y="195" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-style="italic" font-size="13" fill="#5a4632">the framework</text>
+          </svg>
+          <p class="venn-caption">Where habit psychology, behavioral science, and gamification overlap</p>
+        </div>
 
         <h3>The design challenge</h3>
         <p>How do we translate this behavioral framework into a product employees would <em>genuinely want to open</em>, inside their daily workflow, rather than another mandated training tool?</p>
@@ -1843,27 +2002,24 @@
         <h3>Four layers, one product</h3>
         <p>The platform is a centralized, role-specific dashboard integrating learning journeys, tool access, social validation, and performance tracking, all informed by behavioral science.</p>
 
-        <div class="loop-flow" style="grid-template-columns: repeat(4, 1fr);">
-          <div class="loop-step">
-            <div class="loop-num">01</div>
+        <div class="layers-grid">
+          <div class="layer-card">
+            <div class="layer-num">01</div>
             <h5>Behavioral assessment</h5>
             <p>Profile each user across 6 psychological dimensions before they start.</p>
           </div>
-          <div class="loop-arrow" aria-hidden="true">→</div>
-          <div class="loop-step">
-            <div class="loop-num">02</div>
+          <div class="layer-card">
+            <div class="layer-num">02</div>
             <h5>Seamless onboarding</h5>
             <p>Role-specific. No generic AI 101 detour for someone who already uses Copilot.</p>
           </div>
-          <div class="loop-arrow" aria-hidden="true">→</div>
-          <div class="loop-step">
-            <div class="loop-num">03</div>
+          <div class="layer-card">
+            <div class="layer-num">03</div>
             <h5>Gamified challenges</h5>
             <p>Daily, role-tailored AI tasks that fit inside actual work, not on top of it.</p>
           </div>
-          <div class="loop-arrow" aria-hidden="true">→</div>
-          <div class="loop-step highlight">
-            <div class="loop-num">04</div>
+          <div class="layer-card highlight">
+            <div class="layer-num">04</div>
             <h5>Social system</h5>
             <p>Peer validation and visibility. The retention engine.</p>
           </div>
