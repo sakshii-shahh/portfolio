@@ -467,11 +467,34 @@
 
     /* ============ LATEST LOG ============ */
     .latest-log {
-      background: var(--black-card); color: #f4f1ea;
+      background: var(--ink); color: #f4f1ea;
       border-radius: var(--r-xl);
       padding: 18px 24px 22px;
-      position: relative; overflow: hidden;
+      position: relative; overflow: visible;
       transition: padding .3s var(--ease);
+    }
+    .latest-log-tulip {
+      position: absolute;
+      width: auto;
+      pointer-events: none;
+      z-index: 1;
+      filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.25));
+    }
+    .latest-log-tulip.lt-1 {
+      top: -34px; right: 90px;
+      height: 64px;
+      transform: rotate(-9deg);
+      transform-origin: bottom center;
+    }
+    .latest-log-tulip.lt-2 {
+      top: -42px; right: 28px;
+      height: 76px;
+      transform: rotate(7deg);
+      transform-origin: bottom center;
+    }
+    @media (max-width: 600px) {
+      .latest-log-tulip.lt-1 { top: -24px; right: 60px; height: 48px; }
+      .latest-log-tulip.lt-2 { top: -30px; right: 20px; height: 56px; }
     }
     .latest-log-head {
       display: flex; align-items: center; gap: 12px; margin-bottom: 10px;
@@ -498,6 +521,7 @@
       display: grid; place-items: center;
       color: #aaa498; transition: transform .3s var(--ease), color .2s var(--ease), background .2s var(--ease);
       background: transparent; border: 0; border-radius: 50%;
+      z-index: 3;
     }
     .latest-log .caret:hover { color: #f4f1ea; background: rgba(255,255,255,.06); }
     .latest-log .caret svg { width: 14px; height: 14px; }
@@ -1157,6 +1181,8 @@
         <button class="caret" id="logCaret" aria-label="Toggle log">
           <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 6 L8 11 L13 6"/></svg>
         </button>
+        <img class="latest-log-tulip lt-1" src="assets/tulips/tulip-2.svg" alt="" aria-hidden="true" />
+        <img class="latest-log-tulip lt-2" src="assets/tulips/tulip-4.svg" alt="" aria-hidden="true" />
         <div class="latest-log-head" id="logHead" role="button" tabindex="0" aria-expanded="true">
           <strong>Latest log</strong>
           <span>May 1, 2026</span>
