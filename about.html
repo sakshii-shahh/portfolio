@@ -1025,6 +1025,39 @@
       *, *::before, *::after { animation: none !important; transition: none !important; }
       .reveal { opacity: 1; transform: none; }
     }
+      /* ============ MOBILE PERF: drop expensive effects ============ */
+    @media (max-width: 760px) {
+      body::before { opacity: 0.15; }
+      .card,
+      .case-figure-frame,
+      .community-card,
+      .insight-card,
+      .reframe-item,
+      .frag-card,
+      .layer-card,
+      .reflect-card,
+      .market-tier,
+      .defensibility-card,
+      .phase-card,
+      .loop-step,
+      .agent-card,
+      .resource-mini { transition: none !important; }
+      .tulip,
+      .leaf,
+      .latest-log-tulip { filter: none; }
+    }
+      /* ============ CONTENT-VISIBILITY: skip layout for off-screen sections ============ */
+    .section,
+    .agents-grid,
+    .stack-grid,
+    .resources-grid-9,
+    .communities-cards,
+    .fun-facts-grid,
+    .testi-section,
+    .grid {
+      content-visibility: auto;
+      contain-intrinsic-size: auto 600px;
+    }
   </style>
 </head>
 <body>
@@ -1047,9 +1080,9 @@
         <div class="preview-sub">5 projects · 2023–2026</div>
         <div class="preview-thumbs">
           <div class="preview-thumb"><img src="https://framerusercontent.com/images/N7w1YubiD84GL7EiMPkmWlm8O6Q.png?width=400" alt=""/></div>
-          <div class="preview-thumb"><img src="https://framerusercontent.com/images/dpZldLfzlLgOtQ0b3drHMkf364.png?width=400" alt=""/></div>
-          <div class="preview-thumb"><img src="https://framerusercontent.com/images/HdC68dR1nstnnuVvBvimCxrBc.png?width=400" alt=""/></div>
-          <div class="preview-thumb"><img src="https://framerusercontent.com/images/CHxiZTDMYmwNlyCdANa6TZmqbs8.png?width=400" alt=""/></div>
+          <div class="preview-thumb"><img src="https://framerusercontent.com/images/dpZldLfzlLgOtQ0b3drHMkf364.png?width=400" alt="" loading="lazy"/></div>
+          <div class="preview-thumb"><img src="https://framerusercontent.com/images/HdC68dR1nstnnuVvBvimCxrBc.png?width=400" alt="" loading="lazy"/></div>
+          <div class="preview-thumb"><img src="https://framerusercontent.com/images/CHxiZTDMYmwNlyCdANa6TZmqbs8.png?width=400" alt="" loading="lazy"/></div>
         </div>
       </div>
     </div>
@@ -1057,7 +1090,7 @@
     <div class="preview" data-for="about">
       <div class="preview-card">
         <div class="preview-about-row">
-          <img src="assets/avatar.png" alt="Sakshi" />
+          <img src="assets/avatar.png" alt="Sakshi" loading="lazy" />
           <div>
             <div class="greet">Hi, I'm Sakshi 👋</div>
             <div class="preview-sub" style="margin:0;">My story, communities, what I read</div>
@@ -1110,7 +1143,7 @@
 
       <!-- AVATAR, replace src with an illustrated portrait when ready -->
       <div class="avatar reveal">
-        <img src="assets/avatar.png" alt="Sakshi Shah" />
+        <img src="assets/avatar.png" alt="Sakshi Shah" loading="lazy" />
       </div>
 
       <h1 class="name reveal d1">Sakshi Shah</h1>
@@ -1181,7 +1214,7 @@
             <span class="photo-sparkle s5" aria-hidden="true"><svg viewBox="0 0 28 28"><path d="M14 2 L16 11 L25 14 L16 17 L14 26 L12 17 L3 14 L12 11 Z" fill="#ffd23f"/></svg></span>
             <div class="about-photo">
               <!-- Replace src with a portrait/illustration when ready -->
-              <img src="https://framerusercontent.com/images/yWcAmam0HfUbCIUDWf7Pm80qu8I.jpeg?width=900" alt="Sakshi Shah" />
+              <img src="https://framerusercontent.com/images/yWcAmam0HfUbCIUDWf7Pm80qu8I.jpeg?width=900" alt="Sakshi Shah" loading="lazy" />
             </div>
           </div>
 
@@ -1266,7 +1299,7 @@
                 <span>FriendsOfFigma Mumbai</span>
               </div>
               <p>Part of the core organizing team for a Figma-backed design community of 3,000+ members, leading events and workshops to foster creativity, knowledge-sharing, and networking. Contributed to scaling community engagement and growing the chapter's reach across diverse design professionals.</p>
-              <div class="community-card-photo"><img src="assets/about/fof-mumbai.jpg" alt="FriendsOfFigma Mumbai watch party team photo" /></div>
+              <div class="community-card-photo"><img src="assets/about/fof-mumbai.jpg" alt="FriendsOfFigma Mumbai watch party team photo" loading="lazy" /></div>
             </article>
 
             <article class="community-card">
@@ -1275,7 +1308,7 @@
                 <span>McCormick Leadership Graduate Council</span>
               </div>
               <p>Working closely with the McCormick School of Engineering and Applied Science's administrators and the Dean's Office to plan and facilitate events for McCormick graduate students, including circles within tenure-track faculty and alumni connections through formal and informal networking events.</p>
-              <div class="community-card-photo"><img src="assets/about/mccormick.jpg" alt="McCormick Leadership Graduate Council" /></div>
+              <div class="community-card-photo"><img src="assets/about/mccormick.jpg" alt="McCormick Leadership Graduate Council" loading="lazy" /></div>
             </article>
 
             <article class="community-card">
@@ -1284,7 +1317,7 @@
                 <span>Enrich Lives Foundation</span>
               </div>
               <p>Volunteer teaching staff for underprivileged children in India's slums. Learning alongside them was one of the most rewarding things I've done.</p>
-              <div class="community-card-photo"><img src="assets/about/enrich-lives.png" alt="Enrich Lives Foundation volunteer teaching" /></div>
+              <div class="community-card-photo"><img src="assets/about/enrich-lives.png" alt="Enrich Lives Foundation volunteer teaching" loading="lazy" /></div>
             </article>
 
           </div>
@@ -1296,22 +1329,22 @@
           <div class="fun-facts-grid">
 
             <div class="fun-fact">
-              <div class="fun-fact-thumb"><img src="assets/about/cafe.png" alt="" /></div>
+              <div class="fun-fact-thumb"><img src="assets/about/cafe.png" alt="" loading="lazy" /></div>
               <p>I keep a running list of cafés worth coming back to in every city I've lived in.</p>
             </div>
 
             <div class="fun-fact">
-              <div class="fun-fact-thumb"><img src="assets/about/half-marathon.jpg" alt="" /></div>
+              <div class="fun-fact-thumb"><img src="assets/about/half-marathon.jpg" alt="" loading="lazy" /></div>
               <p>Two 10Ks down. A half-marathon next on the list.</p>
             </div>
 
             <div class="fun-fact">
-              <div class="fun-fact-thumb"><img src="assets/about/experience.png" alt="" /></div>
+              <div class="fun-fact-thumb"><img src="assets/about/experience.png" alt="" loading="lazy" /></div>
               <p>I'm always game for a new experience, the unfamiliar ones especially.</p>
             </div>
 
             <div class="fun-fact">
-              <div class="fun-fact-thumb"><img src="assets/about/baking.png" alt="" /></div>
+              <div class="fun-fact-thumb"><img src="assets/about/baking.png" alt="" loading="lazy" /></div>
               <p>I make desserts especially for the people I love.</p>
             </div>
 
@@ -1325,25 +1358,25 @@
 
   <!-- ====================== TULIP BAND (decorative, sits behind footer top) ====================== -->
   <div class="tulip-band" aria-hidden="true">
-    <img src="assets/tulips/tulip-1.svg" alt="" class="tulip t-yellow" />
-    <img src="assets/tulips/tulip-3.svg" alt="" class="tulip t-coral" />
-    <img src="assets/tulips/tulip-5.svg" alt="" class="tulip t-yellow tilt-l" />
-    <img src="assets/tulips/leaf-2.svg" alt="" class="leaf" />
-    <img src="assets/tulips/tulip-2.svg" alt="" class="tulip t-pink" />
-    <img src="assets/tulips/tulip-4.svg" alt="" class="tulip t-sage tilt-r" />
-    <img src="assets/tulips/tulip-6.svg" alt="" class="tulip t-yellow" />
-    <img src="assets/tulips/leaf-1.svg" alt="" class="leaf tilt-l" />
-    <img src="assets/tulips/tulip-1.svg" alt="" class="tulip t-coral tilt-l" />
-    <img src="assets/tulips/tulip-3.svg" alt="" class="tulip t-pink" />
-    <img src="assets/tulips/tulip-2.svg" alt="" class="tulip t-yellow tilt-r" />
-    <img src="assets/tulips/tulip-4.svg" alt="" class="tulip t-coral" />
-    <img src="assets/tulips/leaf-3.svg" alt="" class="leaf" />
-    <img src="assets/tulips/tulip-5.svg" alt="" class="tulip t-pink tilt-l" />
-    <img src="assets/tulips/tulip-6.svg" alt="" class="tulip t-sage" />
-    <img src="assets/tulips/tulip-1.svg" alt="" class="tulip t-yellow tilt-r" />
-    <img src="assets/tulips/leaf-2.svg" alt="" class="leaf tilt-r" />
-    <img src="assets/tulips/tulip-3.svg" alt="" class="tulip t-coral" />
-    <img src="assets/tulips/tulip-5.svg" alt="" class="tulip t-pink tilt-l" />
+    <img src="assets/tulips/tulip-1.svg" alt="" class="tulip t-yellow" loading="lazy" />
+    <img src="assets/tulips/tulip-3.svg" alt="" class="tulip t-coral" loading="lazy" />
+    <img src="assets/tulips/tulip-5.svg" alt="" class="tulip t-yellow tilt-l" loading="lazy" />
+    <img src="assets/tulips/leaf-2.svg" alt="" class="leaf" loading="lazy" />
+    <img src="assets/tulips/tulip-2.svg" alt="" class="tulip t-pink" loading="lazy" />
+    <img src="assets/tulips/tulip-4.svg" alt="" class="tulip t-sage tilt-r" loading="lazy" />
+    <img src="assets/tulips/tulip-6.svg" alt="" class="tulip t-yellow" loading="lazy" />
+    <img src="assets/tulips/leaf-1.svg" alt="" class="leaf tilt-l" loading="lazy" />
+    <img src="assets/tulips/tulip-1.svg" alt="" class="tulip t-coral tilt-l" loading="lazy" />
+    <img src="assets/tulips/tulip-3.svg" alt="" class="tulip t-pink" loading="lazy" />
+    <img src="assets/tulips/tulip-2.svg" alt="" class="tulip t-yellow tilt-r" loading="lazy" />
+    <img src="assets/tulips/tulip-4.svg" alt="" class="tulip t-coral" loading="lazy" />
+    <img src="assets/tulips/leaf-3.svg" alt="" class="leaf" loading="lazy" />
+    <img src="assets/tulips/tulip-5.svg" alt="" class="tulip t-pink tilt-l" loading="lazy" />
+    <img src="assets/tulips/tulip-6.svg" alt="" class="tulip t-sage" loading="lazy" />
+    <img src="assets/tulips/tulip-1.svg" alt="" class="tulip t-yellow tilt-r" loading="lazy" />
+    <img src="assets/tulips/leaf-2.svg" alt="" class="leaf tilt-r" loading="lazy" />
+    <img src="assets/tulips/tulip-3.svg" alt="" class="tulip t-coral" loading="lazy" />
+    <img src="assets/tulips/tulip-5.svg" alt="" class="tulip t-pink tilt-l" loading="lazy" />
   </div>
 
   <!-- ====================== FOOTER ====================== -->
@@ -1406,15 +1439,19 @@
     document.addEventListener('mousemove', (e) => {
       mx = e.clientX; my = e.clientY;
       if (!visible) { dotEl.style.opacity = '1'; visible = true; }
+    scheduleCursorTick();
     });
     document.addEventListener('mouseleave', () => { dotEl.style.opacity = '0'; visible = false; });
     dotEl.style.opacity = '0';
+    let cursorRafId = null;
     function cursorTick() {
       dotEl.style.left = mx + 'px';
       dotEl.style.top = my + 'px';
-      requestAnimationFrame(cursorTick);
+      cursorRafId = null;
     }
-    cursorTick();
+    function scheduleCursorTick() {
+      if (cursorRafId === null) cursorRafId = requestAnimationFrame(cursorTick);
+    }
     const grow = document.querySelectorAll('a, button, .explore-item, .latest-log-head, .drawer-handle');
     grow.forEach(el => {
       el.addEventListener('mouseenter', () => document.body.classList.add('cursor-grow'));

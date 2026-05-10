@@ -64,6 +64,7 @@
       mix-blend-mode: multiply;
     }
 
+    body::before { display: none; }
     body {
       background: var(--bg); color: var(--ink);
       font-family: var(--sans); font-size: 16px; line-height: 1.65;
@@ -2106,6 +2107,39 @@
       display: grid; place-items: center;
     }
 
+      /* ============ MOBILE PERF: drop expensive effects ============ */
+    @media (max-width: 760px) {
+      body::before { opacity: 0.15; }
+      .card,
+      .case-figure-frame,
+      .community-card,
+      .insight-card,
+      .reframe-item,
+      .frag-card,
+      .layer-card,
+      .reflect-card,
+      .market-tier,
+      .defensibility-card,
+      .phase-card,
+      .loop-step,
+      .agent-card,
+      .resource-mini { transition: none !important; }
+      .tulip,
+      .leaf,
+      .latest-log-tulip { filter: none; }
+    }
+      /* ============ CONTENT-VISIBILITY: skip layout for off-screen sections ============ */
+    .section,
+    .agents-grid,
+    .stack-grid,
+    .resources-grid-9,
+    .communities-cards,
+    .fun-facts-grid,
+    .testi-section,
+    .grid {
+      content-visibility: auto;
+      contain-intrinsic-size: auto 600px;
+    }
   </style>
 </head>
 <body>
@@ -2264,7 +2298,7 @@
 
         <figure class="case-figure">
           <div class="case-figure-frame" data-placeholder="Research whiteboard, mapping the assumed barriers vs the real ones">
-            <img src="https://framerusercontent.com/images/odB5PolWivbaAcWOPKBbPmgQyc.jpg?width=1600" alt="Research whiteboard from the team's synthesis session" />
+            <img src="https://framerusercontent.com/images/odB5PolWivbaAcWOPKBbPmgQyc.jpg?width=1600" alt="Research whiteboard from the team's synthesis session" loading="lazy" />
           </div>
           <figcaption>Research synthesis whiteboard, where the assumed barriers met the real ones</figcaption>
         </figure>
@@ -2397,7 +2431,7 @@
 
         <figure class="case-figure">
           <div class="case-figure-frame full-image" data-placeholder="Card sorting + IA: Home as command center, Profile as launchpad">
-            <img src="https://framerusercontent.com/images/iRZEynwfxl2oTqVAiMIxuAGu0s.png?width=2400" alt="Card sorting and IA" />
+            <img src="https://framerusercontent.com/images/iRZEynwfxl2oTqVAiMIxuAGu0s.png?width=2400" alt="Card sorting and IA" loading="lazy" />
           </div>
           <figcaption>Card sorting with 5 pilot users informed the IA: Home for progress + training, Profile for AI-tool access</figcaption>
         </figure>
@@ -2439,7 +2473,7 @@
 
         <figure class="case-figure">
           <div class="case-figure-frame full-image" data-placeholder="Personalization model: role × behavioral profile generates the experience">
-            <img src="https://framerusercontent.com/images/cc0DNXKydISnrzIKcH33EyUY.png?width=2400" alt="Personalization model" />
+            <img src="https://framerusercontent.com/images/cc0DNXKydISnrzIKcH33EyUY.png?width=2400" alt="Personalization model" loading="lazy" />
           </div>
           <figcaption>Role × behavioral profile combine to generate a personalized experience without dozens of static paths</figcaption>
         </figure>
@@ -2449,7 +2483,7 @@
 
         <figure class="case-figure">
           <div class="case-figure-frame full-image" data-placeholder="High-fidelity mockups">
-            <img src="https://framerusercontent.com/images/QxgXDWzUfy42iaYCQl9RAZ63Y.png?width=2400" alt="Hi-fi mockups" />
+            <img src="https://framerusercontent.com/images/QxgXDWzUfy42iaYCQl9RAZ63Y.png?width=2400" alt="Hi-fi mockups" loading="lazy" />
           </div>
         </figure>
       </section>
@@ -2599,25 +2633,25 @@
   <!-- ============ FOOTER ============ -->
   <!-- ====================== TULIP BAND (decorative, sits behind footer top) ====================== -->
   <div class="tulip-band" aria-hidden="true">
-    <img src="assets/tulips/tulip-1.svg" alt="" class="tulip t-yellow" />
-    <img src="assets/tulips/tulip-3.svg" alt="" class="tulip t-coral" />
-    <img src="assets/tulips/tulip-5.svg" alt="" class="tulip t-yellow tilt-l" />
-    <img src="assets/tulips/leaf-2.svg" alt="" class="leaf" />
-    <img src="assets/tulips/tulip-2.svg" alt="" class="tulip t-pink" />
-    <img src="assets/tulips/tulip-4.svg" alt="" class="tulip t-sage tilt-r" />
-    <img src="assets/tulips/tulip-6.svg" alt="" class="tulip t-yellow" />
-    <img src="assets/tulips/leaf-1.svg" alt="" class="leaf tilt-l" />
-    <img src="assets/tulips/tulip-1.svg" alt="" class="tulip t-coral tilt-l" />
-    <img src="assets/tulips/tulip-3.svg" alt="" class="tulip t-pink" />
-    <img src="assets/tulips/tulip-2.svg" alt="" class="tulip t-yellow tilt-r" />
-    <img src="assets/tulips/tulip-4.svg" alt="" class="tulip t-coral" />
-    <img src="assets/tulips/leaf-3.svg" alt="" class="leaf" />
-    <img src="assets/tulips/tulip-5.svg" alt="" class="tulip t-pink tilt-l" />
-    <img src="assets/tulips/tulip-6.svg" alt="" class="tulip t-sage" />
-    <img src="assets/tulips/tulip-1.svg" alt="" class="tulip t-yellow tilt-r" />
-    <img src="assets/tulips/leaf-2.svg" alt="" class="leaf tilt-r" />
-    <img src="assets/tulips/tulip-3.svg" alt="" class="tulip t-coral" />
-    <img src="assets/tulips/tulip-5.svg" alt="" class="tulip t-pink tilt-l" />
+    <img src="assets/tulips/tulip-1.svg" alt="" class="tulip t-yellow" loading="lazy" />
+    <img src="assets/tulips/tulip-3.svg" alt="" class="tulip t-coral" loading="lazy" />
+    <img src="assets/tulips/tulip-5.svg" alt="" class="tulip t-yellow tilt-l" loading="lazy" />
+    <img src="assets/tulips/leaf-2.svg" alt="" class="leaf" loading="lazy" />
+    <img src="assets/tulips/tulip-2.svg" alt="" class="tulip t-pink" loading="lazy" />
+    <img src="assets/tulips/tulip-4.svg" alt="" class="tulip t-sage tilt-r" loading="lazy" />
+    <img src="assets/tulips/tulip-6.svg" alt="" class="tulip t-yellow" loading="lazy" />
+    <img src="assets/tulips/leaf-1.svg" alt="" class="leaf tilt-l" loading="lazy" />
+    <img src="assets/tulips/tulip-1.svg" alt="" class="tulip t-coral tilt-l" loading="lazy" />
+    <img src="assets/tulips/tulip-3.svg" alt="" class="tulip t-pink" loading="lazy" />
+    <img src="assets/tulips/tulip-2.svg" alt="" class="tulip t-yellow tilt-r" loading="lazy" />
+    <img src="assets/tulips/tulip-4.svg" alt="" class="tulip t-coral" loading="lazy" />
+    <img src="assets/tulips/leaf-3.svg" alt="" class="leaf" loading="lazy" />
+    <img src="assets/tulips/tulip-5.svg" alt="" class="tulip t-pink tilt-l" loading="lazy" />
+    <img src="assets/tulips/tulip-6.svg" alt="" class="tulip t-sage" loading="lazy" />
+    <img src="assets/tulips/tulip-1.svg" alt="" class="tulip t-yellow tilt-r" loading="lazy" />
+    <img src="assets/tulips/leaf-2.svg" alt="" class="leaf tilt-r" loading="lazy" />
+    <img src="assets/tulips/tulip-3.svg" alt="" class="tulip t-coral" loading="lazy" />
+    <img src="assets/tulips/tulip-5.svg" alt="" class="tulip t-pink tilt-l" loading="lazy" />
   </div>
 
   <footer>
@@ -2685,15 +2719,19 @@
     document.addEventListener('mousemove', (e) => {
       mx = e.clientX; my = e.clientY;
       if (!visible) { dotEl.style.opacity = '1'; visible = true; }
+    scheduleCursorTick();
     });
     document.addEventListener('mouseleave', () => { dotEl.style.opacity = '0'; visible = false; });
     dotEl.style.opacity = '0';
+    let cursorRafId = null;
     function tick() {
       dotEl.style.left = mx + 'px';
       dotEl.style.top = my + 'px';
-      requestAnimationFrame(tick);
+      cursorRafId = null;
     }
-    tick();
+    function scheduleCursorTick() {
+      if (cursorRafId === null) cursorRafId = requestAnimationFrame(tick);
+    }
     document.querySelectorAll('a, button').forEach(el => {
       el.addEventListener('mouseenter', () => document.body.classList.add('cursor-grow'));
       el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-grow'));
@@ -2706,8 +2744,8 @@
       if (img.complete && img.naturalWidth === 0) markMissing();
     });
 
-    // Affinity stickies are draggable for fun
-    (function makeAffinityDraggable() {
+    // Affinity stickies are draggable for fun -- lazy-init when scrolled into view
+    function makeAffinityDraggable() {
       const stickies = document.querySelectorAll('.affinity-cluster');
       stickies.forEach((sticky, idx) => {
         let isDragging = false;
@@ -2747,6 +2785,15 @@
         window.addEventListener('pointermove', onPointerMove);
         window.addEventListener('pointerup', onPointerUp);
       });
+    }
+    (function deferAffinityInit() {
+      const target = document.querySelector('.affinity-map');
+      if (!target) return;
+      if (!('IntersectionObserver' in window)) { makeAffinityDraggable(); return; }
+      const obs = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) { makeAffinityDraggable(); obs.disconnect(); }
+      }, { rootMargin: '200px' });
+      obs.observe(target);
     })();
 
     // Reframe interactive: hover/focus/click swaps the detail panel

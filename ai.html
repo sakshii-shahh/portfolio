@@ -1396,6 +1396,39 @@
       *, *::before, *::after { animation: none !important; transition: none !important; }
       .reveal { opacity: 1; transform: none; }
     }
+      /* ============ MOBILE PERF: drop expensive effects ============ */
+    @media (max-width: 760px) {
+      body::before { opacity: 0.15; }
+      .card,
+      .case-figure-frame,
+      .community-card,
+      .insight-card,
+      .reframe-item,
+      .frag-card,
+      .layer-card,
+      .reflect-card,
+      .market-tier,
+      .defensibility-card,
+      .phase-card,
+      .loop-step,
+      .agent-card,
+      .resource-mini { transition: none !important; }
+      .tulip,
+      .leaf,
+      .latest-log-tulip { filter: none; }
+    }
+      /* ============ CONTENT-VISIBILITY: skip layout for off-screen sections ============ */
+    .section,
+    .agents-grid,
+    .stack-grid,
+    .resources-grid-9,
+    .communities-cards,
+    .fun-facts-grid,
+    .testi-section,
+    .grid {
+      content-visibility: auto;
+      contain-intrinsic-size: auto 600px;
+    }
   </style>
 </head>
 <body>
@@ -1418,9 +1451,9 @@
         <div class="preview-sub">5 projects · 2023–2026</div>
         <div class="preview-thumbs">
           <div class="preview-thumb"><img src="https://framerusercontent.com/images/N7w1YubiD84GL7EiMPkmWlm8O6Q.png?width=400" alt=""/></div>
-          <div class="preview-thumb"><img src="https://framerusercontent.com/images/dpZldLfzlLgOtQ0b3drHMkf364.png?width=400" alt=""/></div>
-          <div class="preview-thumb"><img src="https://framerusercontent.com/images/HdC68dR1nstnnuVvBvimCxrBc.png?width=400" alt=""/></div>
-          <div class="preview-thumb"><img src="https://framerusercontent.com/images/CHxiZTDMYmwNlyCdANa6TZmqbs8.png?width=400" alt=""/></div>
+          <div class="preview-thumb"><img src="https://framerusercontent.com/images/dpZldLfzlLgOtQ0b3drHMkf364.png?width=400" alt="" loading="lazy"/></div>
+          <div class="preview-thumb"><img src="https://framerusercontent.com/images/HdC68dR1nstnnuVvBvimCxrBc.png?width=400" alt="" loading="lazy"/></div>
+          <div class="preview-thumb"><img src="https://framerusercontent.com/images/CHxiZTDMYmwNlyCdANa6TZmqbs8.png?width=400" alt="" loading="lazy"/></div>
         </div>
       </div>
     </div>
@@ -1428,7 +1461,7 @@
     <div class="preview" data-for="about">
       <div class="preview-card">
         <div class="preview-about-row">
-          <img src="assets/avatar.png" alt="Sakshi" />
+          <img src="assets/avatar.png" alt="Sakshi" loading="lazy" />
           <div>
             <div class="greet">Hi, I'm Sakshi 👋</div>
             <div class="preview-sub" style="margin:0;">My story, communities, what I read</div>
@@ -1481,7 +1514,7 @@
 
       <!-- AVATAR, replace src with an illustrated portrait when ready -->
       <div class="avatar reveal">
-        <img src="assets/avatar.png" alt="Sakshi Shah" />
+        <img src="assets/avatar.png" alt="Sakshi Shah" loading="lazy" />
       </div>
 
       <h1 class="name reveal d1">Sakshi Shah</h1>
@@ -1943,25 +1976,25 @@
   <!-- ====================== FOOTER ====================== -->
   <!-- ====================== TULIP BAND (decorative, sits behind footer top) ====================== -->
   <div class="tulip-band" aria-hidden="true">
-    <img src="assets/tulips/tulip-1.svg" alt="" class="tulip t-yellow" />
-    <img src="assets/tulips/tulip-3.svg" alt="" class="tulip t-coral" />
-    <img src="assets/tulips/tulip-5.svg" alt="" class="tulip t-yellow tilt-l" />
-    <img src="assets/tulips/leaf-2.svg" alt="" class="leaf" />
-    <img src="assets/tulips/tulip-2.svg" alt="" class="tulip t-pink" />
-    <img src="assets/tulips/tulip-4.svg" alt="" class="tulip t-sage tilt-r" />
-    <img src="assets/tulips/tulip-6.svg" alt="" class="tulip t-yellow" />
-    <img src="assets/tulips/leaf-1.svg" alt="" class="leaf tilt-l" />
-    <img src="assets/tulips/tulip-1.svg" alt="" class="tulip t-coral tilt-l" />
-    <img src="assets/tulips/tulip-3.svg" alt="" class="tulip t-pink" />
-    <img src="assets/tulips/tulip-2.svg" alt="" class="tulip t-yellow tilt-r" />
-    <img src="assets/tulips/tulip-4.svg" alt="" class="tulip t-coral" />
-    <img src="assets/tulips/leaf-3.svg" alt="" class="leaf" />
-    <img src="assets/tulips/tulip-5.svg" alt="" class="tulip t-pink tilt-l" />
-    <img src="assets/tulips/tulip-6.svg" alt="" class="tulip t-sage" />
-    <img src="assets/tulips/tulip-1.svg" alt="" class="tulip t-yellow tilt-r" />
-    <img src="assets/tulips/leaf-2.svg" alt="" class="leaf tilt-r" />
-    <img src="assets/tulips/tulip-3.svg" alt="" class="tulip t-coral" />
-    <img src="assets/tulips/tulip-5.svg" alt="" class="tulip t-pink tilt-l" />
+    <img src="assets/tulips/tulip-1.svg" alt="" class="tulip t-yellow" loading="lazy" />
+    <img src="assets/tulips/tulip-3.svg" alt="" class="tulip t-coral" loading="lazy" />
+    <img src="assets/tulips/tulip-5.svg" alt="" class="tulip t-yellow tilt-l" loading="lazy" />
+    <img src="assets/tulips/leaf-2.svg" alt="" class="leaf" loading="lazy" />
+    <img src="assets/tulips/tulip-2.svg" alt="" class="tulip t-pink" loading="lazy" />
+    <img src="assets/tulips/tulip-4.svg" alt="" class="tulip t-sage tilt-r" loading="lazy" />
+    <img src="assets/tulips/tulip-6.svg" alt="" class="tulip t-yellow" loading="lazy" />
+    <img src="assets/tulips/leaf-1.svg" alt="" class="leaf tilt-l" loading="lazy" />
+    <img src="assets/tulips/tulip-1.svg" alt="" class="tulip t-coral tilt-l" loading="lazy" />
+    <img src="assets/tulips/tulip-3.svg" alt="" class="tulip t-pink" loading="lazy" />
+    <img src="assets/tulips/tulip-2.svg" alt="" class="tulip t-yellow tilt-r" loading="lazy" />
+    <img src="assets/tulips/tulip-4.svg" alt="" class="tulip t-coral" loading="lazy" />
+    <img src="assets/tulips/leaf-3.svg" alt="" class="leaf" loading="lazy" />
+    <img src="assets/tulips/tulip-5.svg" alt="" class="tulip t-pink tilt-l" loading="lazy" />
+    <img src="assets/tulips/tulip-6.svg" alt="" class="tulip t-sage" loading="lazy" />
+    <img src="assets/tulips/tulip-1.svg" alt="" class="tulip t-yellow tilt-r" loading="lazy" />
+    <img src="assets/tulips/leaf-2.svg" alt="" class="leaf tilt-r" loading="lazy" />
+    <img src="assets/tulips/tulip-3.svg" alt="" class="tulip t-coral" loading="lazy" />
+    <img src="assets/tulips/tulip-5.svg" alt="" class="tulip t-pink tilt-l" loading="lazy" />
   </div>
 
   <footer>
@@ -2023,15 +2056,19 @@
     document.addEventListener('mousemove', (e) => {
       mx = e.clientX; my = e.clientY;
       if (!visible) { dotEl.style.opacity = '1'; visible = true; }
+    scheduleCursorTick();
     });
     document.addEventListener('mouseleave', () => { dotEl.style.opacity = '0'; visible = false; });
     dotEl.style.opacity = '0';
+    let cursorRafId = null;
     function cursorTick() {
       dotEl.style.left = mx + 'px';
       dotEl.style.top = my + 'px';
-      requestAnimationFrame(cursorTick);
+      cursorRafId = null;
     }
-    cursorTick();
+    function scheduleCursorTick() {
+      if (cursorRafId === null) cursorRafId = requestAnimationFrame(cursorTick);
+    }
     const grow = document.querySelectorAll('a, button, .explore-item, .latest-log-head, .drawer-handle');
     grow.forEach(el => {
       el.addEventListener('mouseenter', () => document.body.classList.add('cursor-grow'));
