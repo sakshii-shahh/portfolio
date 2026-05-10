@@ -64,6 +64,7 @@
       mix-blend-mode: multiply;
     }
 
+    body::before { display: none; }
     body {
       background: var(--bg); color: var(--ink);
       font-family: var(--sans); font-size: 16px; line-height: 1.65;
@@ -842,6 +843,39 @@
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
     }
+      /* ============ MOBILE PERF: drop expensive effects ============ */
+    @media (max-width: 760px) {
+      body::before { opacity: 0.15; }
+      .card,
+      .case-figure-frame,
+      .community-card,
+      .insight-card,
+      .reframe-item,
+      .frag-card,
+      .layer-card,
+      .reflect-card,
+      .market-tier,
+      .defensibility-card,
+      .phase-card,
+      .loop-step,
+      .agent-card,
+      .resource-mini { transition: none !important; }
+      .tulip,
+      .leaf,
+      .latest-log-tulip { filter: none; }
+    }
+      /* ============ CONTENT-VISIBILITY: skip layout for off-screen sections ============ */
+    .section,
+    .agents-grid,
+    .stack-grid,
+    .resources-grid-9,
+    .communities-cards,
+    .fun-facts-grid,
+    .testi-section,
+    .grid {
+      content-visibility: auto;
+      contain-intrinsic-size: auto 600px;
+    }
   </style>
 </head>
 <body>
@@ -1161,25 +1195,25 @@
   <!-- ============ FOOTER ============ -->
   <!-- ====================== TULIP BAND (decorative, sits behind footer top) ====================== -->
   <div class="tulip-band" aria-hidden="true">
-    <img src="assets/tulips/tulip-1.svg" alt="" class="tulip t-yellow" />
-    <img src="assets/tulips/tulip-3.svg" alt="" class="tulip t-coral" />
-    <img src="assets/tulips/tulip-5.svg" alt="" class="tulip t-yellow tilt-l" />
-    <img src="assets/tulips/leaf-2.svg" alt="" class="leaf" />
-    <img src="assets/tulips/tulip-2.svg" alt="" class="tulip t-pink" />
-    <img src="assets/tulips/tulip-4.svg" alt="" class="tulip t-sage tilt-r" />
-    <img src="assets/tulips/tulip-6.svg" alt="" class="tulip t-yellow" />
-    <img src="assets/tulips/leaf-1.svg" alt="" class="leaf tilt-l" />
-    <img src="assets/tulips/tulip-1.svg" alt="" class="tulip t-coral tilt-l" />
-    <img src="assets/tulips/tulip-3.svg" alt="" class="tulip t-pink" />
-    <img src="assets/tulips/tulip-2.svg" alt="" class="tulip t-yellow tilt-r" />
-    <img src="assets/tulips/tulip-4.svg" alt="" class="tulip t-coral" />
-    <img src="assets/tulips/leaf-3.svg" alt="" class="leaf" />
-    <img src="assets/tulips/tulip-5.svg" alt="" class="tulip t-pink tilt-l" />
-    <img src="assets/tulips/tulip-6.svg" alt="" class="tulip t-sage" />
-    <img src="assets/tulips/tulip-1.svg" alt="" class="tulip t-yellow tilt-r" />
-    <img src="assets/tulips/leaf-2.svg" alt="" class="leaf tilt-r" />
-    <img src="assets/tulips/tulip-3.svg" alt="" class="tulip t-coral" />
-    <img src="assets/tulips/tulip-5.svg" alt="" class="tulip t-pink tilt-l" />
+    <img src="assets/tulips/tulip-1.svg" alt="" class="tulip t-yellow" loading="lazy" />
+    <img src="assets/tulips/tulip-3.svg" alt="" class="tulip t-coral" loading="lazy" />
+    <img src="assets/tulips/tulip-5.svg" alt="" class="tulip t-yellow tilt-l" loading="lazy" />
+    <img src="assets/tulips/leaf-2.svg" alt="" class="leaf" loading="lazy" />
+    <img src="assets/tulips/tulip-2.svg" alt="" class="tulip t-pink" loading="lazy" />
+    <img src="assets/tulips/tulip-4.svg" alt="" class="tulip t-sage tilt-r" loading="lazy" />
+    <img src="assets/tulips/tulip-6.svg" alt="" class="tulip t-yellow" loading="lazy" />
+    <img src="assets/tulips/leaf-1.svg" alt="" class="leaf tilt-l" loading="lazy" />
+    <img src="assets/tulips/tulip-1.svg" alt="" class="tulip t-coral tilt-l" loading="lazy" />
+    <img src="assets/tulips/tulip-3.svg" alt="" class="tulip t-pink" loading="lazy" />
+    <img src="assets/tulips/tulip-2.svg" alt="" class="tulip t-yellow tilt-r" loading="lazy" />
+    <img src="assets/tulips/tulip-4.svg" alt="" class="tulip t-coral" loading="lazy" />
+    <img src="assets/tulips/leaf-3.svg" alt="" class="leaf" loading="lazy" />
+    <img src="assets/tulips/tulip-5.svg" alt="" class="tulip t-pink tilt-l" loading="lazy" />
+    <img src="assets/tulips/tulip-6.svg" alt="" class="tulip t-sage" loading="lazy" />
+    <img src="assets/tulips/tulip-1.svg" alt="" class="tulip t-yellow tilt-r" loading="lazy" />
+    <img src="assets/tulips/leaf-2.svg" alt="" class="leaf tilt-r" loading="lazy" />
+    <img src="assets/tulips/tulip-3.svg" alt="" class="tulip t-coral" loading="lazy" />
+    <img src="assets/tulips/tulip-5.svg" alt="" class="tulip t-pink tilt-l" loading="lazy" />
   </div>
 
   <footer>
@@ -1247,15 +1281,19 @@
     document.addEventListener('mousemove', (e) => {
       mx = e.clientX; my = e.clientY;
       if (!visible) { dotEl.style.opacity = '1'; visible = true; }
+    scheduleCursorTick();
     });
     document.addEventListener('mouseleave', () => { dotEl.style.opacity = '0'; visible = false; });
     dotEl.style.opacity = '0';
+    let cursorRafId = null;
     function tick() {
       dotEl.style.left = mx + 'px';
       dotEl.style.top = my + 'px';
-      requestAnimationFrame(tick);
+      cursorRafId = null;
     }
-    tick();
+    function scheduleCursorTick() {
+      if (cursorRafId === null) cursorRafId = requestAnimationFrame(tick);
+    }
     document.querySelectorAll('a, button').forEach(el => {
       el.addEventListener('mouseenter', () => document.body.classList.add('cursor-grow'));
       el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-grow'));

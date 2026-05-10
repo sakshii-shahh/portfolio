@@ -616,6 +616,39 @@
       .reveal { opacity: 1; transform: none; }
       .pot-entry.featured::before { animation: none !important; opacity: .6; }
     }
+      /* ============ MOBILE PERF: drop expensive effects ============ */
+    @media (max-width: 760px) {
+      body::before { opacity: 0.15; }
+      .card,
+      .case-figure-frame,
+      .community-card,
+      .insight-card,
+      .reframe-item,
+      .frag-card,
+      .layer-card,
+      .reflect-card,
+      .market-tier,
+      .defensibility-card,
+      .phase-card,
+      .loop-step,
+      .agent-card,
+      .resource-mini { transition: none !important; }
+      .tulip,
+      .leaf,
+      .latest-log-tulip { filter: none; }
+    }
+      /* ============ CONTENT-VISIBILITY: skip layout for off-screen sections ============ */
+    .section,
+    .agents-grid,
+    .stack-grid,
+    .resources-grid-9,
+    .communities-cards,
+    .fun-facts-grid,
+    .testi-section,
+    .grid {
+      content-visibility: auto;
+      contain-intrinsic-size: auto 600px;
+    }
   </style>
 </head>
 <body>

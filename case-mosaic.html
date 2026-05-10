@@ -64,6 +64,7 @@
       mix-blend-mode: multiply;
     }
 
+    body::before { display: none; }
     body {
       background: var(--bg); color: var(--ink);
       font-family: var(--sans); font-size: 16px; line-height: 1.65;
@@ -1744,6 +1745,39 @@
       display: grid; place-items: center;
     }
 
+      /* ============ MOBILE PERF: drop expensive effects ============ */
+    @media (max-width: 760px) {
+      body::before { opacity: 0.15; }
+      .card,
+      .case-figure-frame,
+      .community-card,
+      .insight-card,
+      .reframe-item,
+      .frag-card,
+      .layer-card,
+      .reflect-card,
+      .market-tier,
+      .defensibility-card,
+      .phase-card,
+      .loop-step,
+      .agent-card,
+      .resource-mini { transition: none !important; }
+      .tulip,
+      .leaf,
+      .latest-log-tulip { filter: none; }
+    }
+      /* ============ CONTENT-VISIBILITY: skip layout for off-screen sections ============ */
+    .section,
+    .agents-grid,
+    .stack-grid,
+    .resources-grid-9,
+    .communities-cards,
+    .fun-facts-grid,
+    .testi-section,
+    .grid {
+      content-visibility: auto;
+      contain-intrinsic-size: auto 600px;
+    }
   </style>
 </head>
 <body>
@@ -1785,7 +1819,7 @@
 
       <!-- Mosaic logo lockup -->
       <div class="case-brand-mark reveal d1">
-        <img src="assets/mosaic/logo.png" alt="Mosaic" />
+        <img src="assets/mosaic/logo.png" alt="Mosaic" loading="lazy" />
       </div>
 
       <!-- Tags -->
@@ -2063,7 +2097,7 @@
         <h3>Brand and visual language</h3>
         <figure class="case-figure">
           <div class="case-figure-frame moodboard" data-placeholder="Mosaic moodboard: visual language, brand direction, type and color">
-            <img src="assets/mosaic/16_moodboard.png" alt="Mosaic moodboard" />
+            <img src="assets/mosaic/16_moodboard.png" alt="Mosaic moodboard" loading="lazy" />
           </div>
           <figcaption>Mosaic moodboard: visual language and brand direction</figcaption>
         </figure>
@@ -2106,7 +2140,7 @@
         <h3>30-second voice log</h3>
         <figure class="case-figure">
           <div class="case-figure-frame" data-placeholder="Voice log: FAB sheet with mic capture and one-tap mood">
-            <img src="assets/mosaic/08_voice_log.png" alt="Voice log FAB" />
+            <img src="assets/mosaic/08_voice_log.png" alt="Voice log FAB" loading="lazy" />
           </div>
         </figure>
         <p class="feature-summary">Voice-first capture from anywhere in the app. AI handles transcription, environment, mood, and topic tagging post-capture.</p>
@@ -2119,7 +2153,7 @@
         <h3>Shared 24-hour timeline</h3>
         <figure class="case-figure">
           <div class="case-figure-frame" data-placeholder="Home (parent): today's observations from the full team">
-            <img src="assets/mosaic/09_home_parent.png" alt="Home Parent timeline" />
+            <img src="assets/mosaic/09_home_parent.png" alt="Home Parent timeline" loading="lazy" />
           </div>
         </figure>
         <p class="feature-summary">One feed, every caregiver, attribution and mood signals included. Replaces five fragmented systems.</p>
@@ -2132,7 +2166,7 @@
         <h3>AI pattern detection</h3>
         <figure class="case-figure">
           <div class="case-figure-frame" data-placeholder="Pattern detection: cross-environment correlation with confidence scoring and validate/dismiss workflow">
-            <img src="assets/mosaic/10_pattern_detection.png" alt="Pattern detection screen" />
+            <img src="assets/mosaic/10_pattern_detection.png" alt="Pattern detection screen" loading="lazy" />
           </div>
         </figure>
         <p class="feature-summary">Cross-environment correlation with confidence scoring. Validate or dismiss inline.</p>
@@ -2145,7 +2179,7 @@
         <h3>One-page summary with per-recipient privacy</h3>
         <figure class="case-figure">
           <div class="case-figure-frame" data-placeholder="One-page summary: auto-assembled, scoped per recipient, shareable link">
-            <img src="assets/mosaic/11_one_page_summary.png" alt="One-page summary" />
+            <img src="assets/mosaic/11_one_page_summary.png" alt="One-page summary" loading="lazy" />
           </div>
         </figure>
         <p class="feature-summary">Auto-assembled handoff document, scoped per recipient. Shareable link, no install needed.</p>
@@ -2158,7 +2192,7 @@
         <h3>Dual-interface design</h3>
         <figure class="case-figure">
           <div class="case-figure-frame" data-placeholder="Aide Today: start-of-shift context, quick-reference triggers, last 24h read-only">
-            <img src="assets/mosaic/12_aide_today.png" alt="Aide Today screen" />
+            <img src="assets/mosaic/12_aide_today.png" alt="Aide Today screen" loading="lazy" />
           </div>
         </figure>
         <p class="feature-summary">Two surfaces, one shared content layer. Asymmetric tabs and authority match asymmetric roles.</p>
@@ -2334,25 +2368,25 @@
   <!-- ============ FOOTER ============ -->
   <!-- ====================== TULIP BAND (decorative, sits behind footer top) ====================== -->
   <div class="tulip-band" aria-hidden="true">
-    <img src="assets/tulips/tulip-1.svg" alt="" class="tulip t-yellow" />
-    <img src="assets/tulips/tulip-3.svg" alt="" class="tulip t-coral" />
-    <img src="assets/tulips/tulip-5.svg" alt="" class="tulip t-yellow tilt-l" />
-    <img src="assets/tulips/leaf-2.svg" alt="" class="leaf" />
-    <img src="assets/tulips/tulip-2.svg" alt="" class="tulip t-pink" />
-    <img src="assets/tulips/tulip-4.svg" alt="" class="tulip t-sage tilt-r" />
-    <img src="assets/tulips/tulip-6.svg" alt="" class="tulip t-yellow" />
-    <img src="assets/tulips/leaf-1.svg" alt="" class="leaf tilt-l" />
-    <img src="assets/tulips/tulip-1.svg" alt="" class="tulip t-coral tilt-l" />
-    <img src="assets/tulips/tulip-3.svg" alt="" class="tulip t-pink" />
-    <img src="assets/tulips/tulip-2.svg" alt="" class="tulip t-yellow tilt-r" />
-    <img src="assets/tulips/tulip-4.svg" alt="" class="tulip t-coral" />
-    <img src="assets/tulips/leaf-3.svg" alt="" class="leaf" />
-    <img src="assets/tulips/tulip-5.svg" alt="" class="tulip t-pink tilt-l" />
-    <img src="assets/tulips/tulip-6.svg" alt="" class="tulip t-sage" />
-    <img src="assets/tulips/tulip-1.svg" alt="" class="tulip t-yellow tilt-r" />
-    <img src="assets/tulips/leaf-2.svg" alt="" class="leaf tilt-r" />
-    <img src="assets/tulips/tulip-3.svg" alt="" class="tulip t-coral" />
-    <img src="assets/tulips/tulip-5.svg" alt="" class="tulip t-pink tilt-l" />
+    <img src="assets/tulips/tulip-1.svg" alt="" class="tulip t-yellow" loading="lazy" />
+    <img src="assets/tulips/tulip-3.svg" alt="" class="tulip t-coral" loading="lazy" />
+    <img src="assets/tulips/tulip-5.svg" alt="" class="tulip t-yellow tilt-l" loading="lazy" />
+    <img src="assets/tulips/leaf-2.svg" alt="" class="leaf" loading="lazy" />
+    <img src="assets/tulips/tulip-2.svg" alt="" class="tulip t-pink" loading="lazy" />
+    <img src="assets/tulips/tulip-4.svg" alt="" class="tulip t-sage tilt-r" loading="lazy" />
+    <img src="assets/tulips/tulip-6.svg" alt="" class="tulip t-yellow" loading="lazy" />
+    <img src="assets/tulips/leaf-1.svg" alt="" class="leaf tilt-l" loading="lazy" />
+    <img src="assets/tulips/tulip-1.svg" alt="" class="tulip t-coral tilt-l" loading="lazy" />
+    <img src="assets/tulips/tulip-3.svg" alt="" class="tulip t-pink" loading="lazy" />
+    <img src="assets/tulips/tulip-2.svg" alt="" class="tulip t-yellow tilt-r" loading="lazy" />
+    <img src="assets/tulips/tulip-4.svg" alt="" class="tulip t-coral" loading="lazy" />
+    <img src="assets/tulips/leaf-3.svg" alt="" class="leaf" loading="lazy" />
+    <img src="assets/tulips/tulip-5.svg" alt="" class="tulip t-pink tilt-l" loading="lazy" />
+    <img src="assets/tulips/tulip-6.svg" alt="" class="tulip t-sage" loading="lazy" />
+    <img src="assets/tulips/tulip-1.svg" alt="" class="tulip t-yellow tilt-r" loading="lazy" />
+    <img src="assets/tulips/leaf-2.svg" alt="" class="leaf tilt-r" loading="lazy" />
+    <img src="assets/tulips/tulip-3.svg" alt="" class="tulip t-coral" loading="lazy" />
+    <img src="assets/tulips/tulip-5.svg" alt="" class="tulip t-pink tilt-l" loading="lazy" />
   </div>
 
   <footer>
@@ -2420,15 +2454,19 @@
     document.addEventListener('mousemove', (e) => {
       mx = e.clientX; my = e.clientY;
       if (!visible) { dotEl.style.opacity = '1'; visible = true; }
+    scheduleCursorTick();
     });
     document.addEventListener('mouseleave', () => { dotEl.style.opacity = '0'; visible = false; });
     dotEl.style.opacity = '0';
+    let cursorRafId = null;
     function tick() {
       dotEl.style.left = mx + 'px';
       dotEl.style.top = my + 'px';
-      requestAnimationFrame(tick);
+      cursorRafId = null;
     }
-    tick();
+    function scheduleCursorTick() {
+      if (cursorRafId === null) cursorRafId = requestAnimationFrame(tick);
+    }
     document.querySelectorAll('a, button').forEach(el => {
       el.addEventListener('mouseenter', () => document.body.classList.add('cursor-grow'));
       el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-grow'));
@@ -2441,8 +2479,8 @@
       if (img.complete && img.naturalWidth === 0) markMissing();
     });
 
-    // Affinity stickies are draggable for fun
-    (function makeAffinityDraggable() {
+    // Affinity stickies are draggable for fun -- lazy-init when scrolled into view
+    function makeAffinityDraggable() {
       const stickies = document.querySelectorAll('.affinity-cluster');
       stickies.forEach((sticky, idx) => {
         let isDragging = false;
@@ -2482,6 +2520,24 @@
         window.addEventListener('pointermove', onPointerMove);
         window.addEventListener('pointerup', onPointerUp);
       });
+    }
+
+    // Defer affinity-sticky drag init until the section scrolls into view
+    (function deferAffinityInit() {
+      const target = document.querySelector('.affinity-map');
+      if (!target) return;
+      if (!('IntersectionObserver' in window)) {
+        // graceful fallback for ancient browsers
+        makeAffinityDraggable();
+        return;
+      }
+      const obs = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          makeAffinityDraggable();
+          obs.disconnect();
+        }
+      }, { rootMargin: '200px' });
+      obs.observe(target);
     })();
   </script>
 
