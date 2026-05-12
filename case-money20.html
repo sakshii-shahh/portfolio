@@ -983,6 +983,62 @@
       background: var(--accent-soft);
       border-radius: 999px;
     }
+
+    .loop-flow {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      align-items: stretch;
+      margin: 24px 0 28px;
+    }
+    @media (max-width: 980px) {
+      .loop-flow { grid-template-columns: 1fr; gap: 12px; }
+      .loop-arrow { display: none; }
+    }
+    .loop-step {
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-md);
+      padding: 16px 14px;
+      display: flex; flex-direction: column;
+      transition: transform .25s var(--ease), border-color .25s var(--ease);
+    }
+    .loop-step:hover { transform: translateY(-2px); border-color: var(--accent); }
+    .loop-step.highlight {
+      background: color-mix(in srgb, var(--accent) 10%, var(--bg-elev));
+      border-color: var(--accent);
+    }
+    .loop-num {
+      font-family: var(--mono); font-size: 10.5px;
+      letter-spacing: .14em; color: var(--accent);
+      font-weight: 500; margin-bottom: 8px;
+    }
+    .loop-step h5 {
+      font-family: var(--display); font-weight: 500;
+      font-size: 15px; margin: 0 0 6px;
+      color: var(--ink); letter-spacing: -0.01em;
+    }
+    .loop-step p {
+      font-size: 12.5px; color: var(--ink-soft);
+      line-height: 1.45; margin: 0;
+    }
+    .loop-arrow {
+      font-family: var(--mono); font-size: 18px;
+      color: var(--ink-mute);
+      display: grid; place-items: center;
+    }
+
+    .design-decisions {
+      background: var(--bg-elev); border: 1px solid var(--rule);
+      border-radius: var(--r-md); padding: 22px 26px; margin: 24px 0;
+    }
+    .design-decisions p { margin: 0 0 14px; }
+    .design-decisions p:last-child { margin-bottom: 0; }
+    .design-decisions strong {
+      color: var(--ink); font-weight: 500;
+      display: block; margin-bottom: 4px;
+    }
+
       /* ============ MOBILE PERF: drop expensive effects ============ */
     @media (max-width: 760px) {
       body::before { opacity: 0.15; }
@@ -1032,8 +1088,8 @@
         <p class="toc-label">Table of Contents</p>
         <ol>
           <li><a href="#context" class="toc-link active"><span class="num">01.</span>Context</a></li>
-          <li><a href="#research" class="toc-link"><span class="num">02.</span>Research</a></li>
-          <li><a href="#solution" class="toc-link"><span class="num">03.</span>Solution</a></li>
+          <li><a href="#solution" class="toc-link"><span class="num">02.</span>Solution</a></li>
+          <li><a href="#ui" class="toc-link"><span class="num">03.</span>UI</a></li>
           <li><a href="#features" class="toc-link"><span class="num">04.</span>Features</a></li>
           <li><a href="#impact" class="toc-link"><span class="num">05.</span>Impact</a></li>
           <li><a href="#reflection" class="toc-link"><span class="num">06.</span>Reflection</a></li>
@@ -1130,26 +1186,6 @@
         <p>The brief wasn't to teach <em>what</em> to buy. It was to tackle <em>how</em> people behave when money is on the line, before they had real money on the line.</p>
       </section>
 
-      <section class="section" id="research">
-        <p class="section-eyebrow">Research</p>
-        <h2 class="section-title">Where the friction actually lived.</h2>
-
-        <figure class="case-figure">
-          <div class="case-figure-frame full-image" data-placeholder="Discovery and findings from research">
-            <img src="https://framerusercontent.com/images/a5UiCBDL3ZcvZaTlbCvh9tf9O3Y.png?width=2400" alt="Discovery findings" loading="lazy" />
-          </div>
-        </figure>
-
-        <h3>The problem</h3>
-        <p>Traditional investment education lacks engagement and fails to give users a realistic sense of consequences. For young adults grasping risk tolerance and long-term implications at the same time, the abstraction is the blocker.</p>
-
-        <h3>The goal</h3>
-        <p>Build a tool that integrates <strong>behavioral finance concepts</strong>, loss aversion and herd mentality especially, directly into gameplay. A unique value proposition in a market full of static educational tools.</p>
-
-        <h3>The business angle</h3>
-        <p>Higher engagement and retention than competing platforms positioned the client as an innovator in financial education, not just another LMS.</p>
-      </section>
-
       <section class="section" id="solution">
         <p class="section-eyebrow">Solution</p>
         <h2 class="section-title">A game that turns behavior into curriculum.</h2>
@@ -1163,22 +1199,74 @@
           <figcaption>Working within a tight-knit team: Lead UX Designer, Software Developer, UX Writer</figcaption>
         </figure>
 
-        <h3>The design system</h3>
-        <p>The interface depended on the game's narrative. With an inevitable amount of financial information on every screen, the UI had to require very little cognitive effort.</p>
+        <p>Our target demographic, young adults in India, was paralyzed by two forces: the complexity of financial products and the fear of irreversible loss. The opportunity was to design a product that integrated <strong>behavioral finance concepts</strong>, loss aversion and herd mentality, directly into gameplay. A unique value proposition in a market full of static educational tools.</p>
+
+        <h3>The core loop</h3>
+
+        <div class="loop-flow" style="grid-template-columns: repeat(4, 1fr);">
+          <div class="loop-step">
+            <div class="loop-num">01</div>
+            <h5>Time advances</h5>
+            <p>A year passes every minute. Markets move. New products unlock.</p>
+          </div>
+          <div class="loop-step">
+            <div class="loop-num">02</div>
+            <h5>Events fire</h5>
+            <p>Medical bill. Festive bonus. Job loss. Real-life shocks force decisions.</p>
+          </div>
+          <div class="loop-step">
+            <div class="loop-num">03</div>
+            <h5>Player chooses</h5>
+            <p>Sell, hold, buy, follow. The system tracks the pattern.</p>
+          </div>
+          <div class="loop-step highlight">
+            <div class="loop-num">04</div>
+            <h5>Reflection</h5>
+            <p>End-of-session report shows the player their own bias profile.</p>
+          </div>
+        </div>
+
+        <h3>Design decisions</h3>
+
+        <div class="design-decisions">
+          <p><strong>Why behavioral, not curricular.</strong>Most existing tools teach the names of concepts. Money20 teaches the feel of them.</p>
+          <p><strong>Why a 20-minute compress.</strong>Long enough for emotional swings to actually happen. Short enough that players finish a session and want a second.</p>
+          <p><strong>Why competitive AND single-player.</strong>Solo lets players learn without performance anxiety. Competitive lets them feel herd dynamics. Same content, two ways in.</p>
+        </div>
+      </section>
+      <section class="section" id="ui">
+        <p class="section-eyebrow">UI</p>
+        <h2 class="section-title">Designing for cognitive ease.</h2>
+
+        <p>The game throws a lot of information at every screen. Stock prices, portfolio allocations, real-life event prompts, time pressure. The UI's primary job wasn't to communicate the financial concepts. It was to <strong>get out of the way</strong> so players could focus on the decisions in front of them.</p>
+
+        <h3>Information architecture</h3>
+        <p>Players move between four core surfaces during a session: the dashboard, the investment screen, the event modal, and the leaderboard. I structured navigation so each surface owns one job and players never have to remember where to find a control. Persistent timer at the top, persistent portfolio at the bottom, decision content in the middle.</p>
+
+        <h3>Color palette</h3>
 
         <figure class="case-figure">
-          <div class="case-figure-frame full-image" data-placeholder="Color palette: simple UI that keeps the focus on the game">
+          <div class="case-figure-frame full-image" data-placeholder="Money20 color palette">
             <img src="https://framerusercontent.com/images/dJiNh0w3CW2vVgu69vAGHLcgY84.png?width=2400" alt="Money20 color palette" loading="lazy" />
           </div>
-          <figcaption>Color palette: kept deliberately spare so the game systems read clearly</figcaption>
+          <figcaption>A spare palette, calibrated for long-session readability and signal clarity</figcaption>
         </figure>
 
+        <p>I anchored the palette around a calm neutral base, with a single accent for actionable moments (buy, sell, advance year). Green and red were reserved exclusively for portfolio gains and losses, never for UI states, so colors stayed truthful to the game's signal layer. Players learned that color meant something within seconds of session start.</p>
+
+        <h3>Typography</h3>
+
         <figure class="case-figure">
-          <div class="case-figure-frame full-image" data-placeholder="Typography: IBM Plex Sans + IBM Plex Mono">
-            <img src="https://framerusercontent.com/images/Fo3rQdlK5b1SikSkB6iRGaquhM.png?width=2400" alt="Typography choices" loading="lazy" />
+          <div class="case-figure-frame full-image" data-placeholder="Typography: IBM Plex Sans for narrative, IBM Plex Mono for numerics">
+            <img src="https://framerusercontent.com/images/Fo3rQdlK5b1SikSkB6iRGaquhM.png?width=2400" alt="Money20 typography" loading="lazy" />
           </div>
-          <figcaption>Typography: IBM Plex Sans for clarity, IBM Plex Mono for data and numeric moments</figcaption>
+          <figcaption>IBM Plex Sans for narrative and labels, IBM Plex Mono for prices, percentages, and time</figcaption>
         </figure>
+
+        <p><strong>IBM Plex Sans</strong> for narrative text, labels, and CTAs. Its open counters and clean grotesque feel kept the educational moments approachable. For every numeric surface (prices, percentages, time remaining, returns) I switched to <strong>IBM Plex Mono</strong>. The monospace alignment was functional, prices stayed visually stable as digits changed, and it gave the game its serious-finance signal without feeling like a Bloomberg terminal.</p>
+
+        <h3>Visual language</h3>
+        <p>Every component, buttons, modals, cards, tooltips, was designed to feel calm under pressure. Generous padding, subtle elevation, no decorative gradients. The Elephant Hint and the leaderboard were the only moments that allowed playful detail, because those were the moments players were meant to lean in.</p>
       </section>
 
       <section class="section" id="features">
