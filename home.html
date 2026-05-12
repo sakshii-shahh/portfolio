@@ -848,6 +848,29 @@
       .testi-track { animation: none; }
       .testi-rail { overflow-x: auto; }
     }
+    /* Mobile: stop the marquee, stack vertically, full-width cards */
+    @media (max-width: 760px) {
+      .testi-rail {
+        overflow: visible;
+        mask-image: none;
+        -webkit-mask-image: none;
+        padding: 4px 0 12px;
+      }
+      .testi-track {
+        flex-direction: column;
+        gap: 14px;
+        width: 100%;
+        animation: none;
+      }
+      .testi-card {
+        flex: 1 1 auto;
+        max-width: none;
+        width: 100%;
+        padding: 20px 20px 18px;
+      }
+      /* Hide duplicate cards that exist only for the desktop marquee loop */
+      .testi-track > .testi-card:nth-child(n+7) { display: none; }
+    }
 
     .testi-card {
       flex: 0 0 360px;
