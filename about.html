@@ -174,7 +174,7 @@
       gap: 4px;
       padding: 0 14px;
       pointer-events: none;
-      transition: opacity .4s ease;
+      transition: opacity .6s ease;
       z-index: 0;
     }
     .sb-tulip,
@@ -467,7 +467,7 @@
       color: var(--ink-mute); letter-spacing: .03em;
       display: flex; flex-direction: column; gap: 3px;
     }
-    .clock { color: var(--ink-soft); font-feature-settings: "tnum"; }
+    .clock { display: none; }
     .rights { color: var(--ink-mute); }
 
     /* ============ HOVER PREVIEW CARDS ============ */
@@ -1609,14 +1609,16 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // ============ Fade sidebar tulips when footer is in view ============
+    // ============ Fade sidebar tulips when footer is approaching ============
     (function setupSidebarTulipFade() {
       const sidebarTulips = document.querySelector('.sidebar-tulips');
       const footerEl = document.querySelector('footer');
       if (!sidebarTulips || !footerEl) return;
+      // Trigger 400px before footer enters viewport, so sidebar tulips
+      // are fully faded out by the time the footer tulip band is visible.
       const obs = new IntersectionObserver((entries) => {
         document.body.classList.toggle('footer-visible', entries[0].isIntersecting);
-      }, { threshold: 0.05 });
+      }, { rootMargin: '0px 0px 400px 0px', threshold: 0 });
       obs.observe(footerEl);
     })();
 
