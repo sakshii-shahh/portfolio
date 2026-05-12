@@ -833,16 +833,26 @@
     }
     .community-card-head {
       display: flex; align-items: center; gap: 10px;
+      flex-wrap: wrap;
       font-family: var(--display); font-weight: 600;
       font-size: 22px; letter-spacing: -.012em; line-height: 1.1;
       color: var(--ink);
     }
+    .community-card-head > span:not(.emoji) {
+      flex: 1 1 auto; min-width: 0;
+      overflow-wrap: anywhere;
+    }
     .community-card-head .emoji {
       width: 32px; height: 32px;
+      flex-shrink: 0;
       display: grid; place-items: center;
       background: var(--bg-card);
       border-radius: 8px;
       font-size: 18px;
+    }
+    @media (max-width: 540px) {
+      .community-card { padding: 18px; }
+      .community-card-head { font-size: 19px; }
     }
     .community-card p {
       margin: 0; font-size: 14px;
