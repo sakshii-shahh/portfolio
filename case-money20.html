@@ -1039,6 +1039,309 @@
       display: block; margin-bottom: 4px;
     }
 
+    /* Full-bleed hero (kill side gutters of .main) */
+    .hero.hero-bleed {
+      margin-left: -96px; margin-right: -96px;
+      margin-top: -48px; margin-bottom: 28px;
+    }
+    .hero.hero-bleed .case-figure-frame {
+      border: none; border-radius: 0;
+      aspect-ratio: auto; background: transparent;
+      padding: 0;
+    }
+    .hero.hero-bleed .case-figure-frame img { width: 100%; height: auto; display: block; }
+    @media (max-width: 980px) { .hero.hero-bleed { margin-left: -24px; margin-right: -24px; margin-top: -32px; } }
+    @media (max-width: 600px) { .hero.hero-bleed { margin-left: -16px; margin-right: -16px; margin-top: -24px; } }
+
+    /* Context 3-pillar layout */
+    .context-pillars {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+      margin: 28px 0;
+    }
+    @media (max-width: 760px) { .context-pillars { grid-template-columns: 1fr; } }
+    .context-pillar {
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-top: 3px solid;
+      border-radius: var(--r-md);
+      padding: 22px 20px;
+      transition: transform .25s var(--ease);
+    }
+    .context-pillar.problem { border-top-color: var(--accent); }
+    .context-pillar.goal { border-top-color: var(--leaf); }
+    .context-pillar.business { border-top-color: var(--secondary); }
+    .context-pillar:hover { transform: translateY(-2px); }
+    .pillar-icon { font-size: 26px; margin-bottom: 12px; }
+    .pillar-label {
+      font-family: var(--mono); font-size: 10.5px;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--ink-mute); margin: 0 0 10px;
+    }
+    .context-pillar p:last-child {
+      font-size: 14px; color: var(--ink-soft);
+      line-height: 1.55; margin: 0;
+    }
+
+    /* Market 2x2 map */
+    .market-map { margin: 24px 0 28px; }
+    .market-y-label,
+    .market-x-label {
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--ink-mute); margin: 0 0 8px;
+    }
+    .market-x-label { margin: 8px 0 0; text-align: right; }
+    .market-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+      border: 1px solid var(--rule);
+      border-radius: var(--r-md);
+      overflow: hidden; background: var(--bg-elev);
+    }
+    .market-cell {
+      padding: 26px 24px;
+      background: var(--bg-elev);
+      border-right: 1px dashed var(--rule);
+      border-bottom: 1px dashed var(--rule);
+      min-height: 200px;
+      display: flex; flex-direction: column;
+      transition: background .25s var(--ease);
+    }
+    .market-cell.tr, .market-cell.br { border-right: none; }
+    .market-cell.bl, .market-cell.br { border-bottom: none; }
+    .market-cell.highlight {
+      background: color-mix(in srgb, var(--accent) 10%, var(--bg-elev));
+    }
+    .market-cell.muted {
+      background: color-mix(in srgb, var(--ink-mute) 5%, var(--bg-elev));
+    }
+    .market-cell-tag {
+      display: inline-block; align-self: flex-start;
+      font-family: var(--mono); font-size: 10.5px;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--ink-soft);
+      padding: 5px 11px;
+      background: var(--bg);
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      margin-bottom: 14px;
+    }
+    .market-cell-tag.mosaic-tag {
+      background: var(--accent); color: #fff;
+      border-color: var(--accent); font-weight: 500;
+    }
+    .market-cell-tag.muted-tag {
+      color: var(--ink-mute); background: transparent; border-style: dashed;
+    }
+    .market-cell ul {
+      list-style: none; padding: 0; margin: 0;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .market-cell ul li {
+      font-family: var(--display); font-weight: 500;
+      font-size: 16px; color: var(--ink); letter-spacing: -0.01em;
+    }
+    .market-cell.highlight p {
+      margin: 0;
+      font-family: "Fraunces", Georgia, serif;
+      font-style: italic; font-size: 15px;
+      color: var(--ink); line-height: 1.4;
+    }
+    @media (max-width: 760px) {
+      .market-grid { grid-template-columns: 1fr; }
+      .market-cell { border-right: none; border-bottom: 1px dashed var(--rule); min-height: auto; }
+      .market-cell.br { border-bottom: none; }
+    }
+
+    /* Venn diagram */
+    .venn-container {
+      margin: 28px 0;
+      padding: 32px 24px;
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-lg);
+      text-align: center;
+    }
+    .venn-svg {
+      width: 100%; max-width: 480px;
+      height: auto; display: block; margin: 0 auto;
+    }
+    .venn-circle {
+      transform-origin: center;
+      animation: vennBreathe 7s ease-in-out infinite;
+    }
+    .venn-circle.vc-2 { animation-delay: 1s; }
+    .venn-circle.vc-3 { animation-delay: 2s; }
+    @keyframes vennBreathe {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.04); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .venn-circle { animation: none; }
+    }
+    .venn-caption {
+      font-family: "Fraunces", Georgia, serif;
+      font-style: italic; font-size: 13px;
+      color: var(--ink-mute); margin: 16px 0 0;
+    }
+
+    /* Design process flow (5-step horizontal) */
+    .design-process {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr auto 1fr;
+      gap: 8px; align-items: stretch;
+      margin: 24px 0 32px;
+    }
+    @media (max-width: 980px) {
+      .design-process { grid-template-columns: 1fr; gap: 12px; }
+      .dp-arrow { display: none; }
+    }
+    .dp-step {
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-md);
+      padding: 16px 14px;
+      display: flex; flex-direction: column;
+      transition: transform .25s var(--ease), border-color .25s var(--ease);
+    }
+    .dp-step:hover { transform: translateY(-2px); border-color: var(--accent); }
+    .dp-step.highlight {
+      background: color-mix(in srgb, var(--accent) 10%, var(--bg-elev));
+      border-color: var(--accent);
+    }
+    .dp-num {
+      font-family: var(--mono); font-size: 10.5px;
+      letter-spacing: .14em; color: var(--accent);
+      font-weight: 500; margin-bottom: 8px;
+    }
+    .dp-step h5 {
+      font-family: var(--display); font-weight: 500;
+      font-size: 15px; margin: 0 0 6px;
+      color: var(--ink); letter-spacing: -0.01em;
+    }
+    .dp-step p {
+      font-size: 12.5px; color: var(--ink-soft);
+      line-height: 1.45; margin: 0;
+    }
+    .dp-arrow {
+      font-family: var(--mono); font-size: 18px;
+      color: var(--ink-mute);
+      display: grid; place-items: center;
+    }
+
+    /* Features tabs */
+    .features-tabs {
+      display: grid;
+      grid-template-columns: minmax(260px, 1fr) 1.6fr;
+      gap: 24px; margin: 24px 0 28px;
+      align-items: start;
+    }
+    @media (max-width: 760px) { .features-tabs { grid-template-columns: 1fr; gap: 16px; } }
+    .feat-tabs-list { display: flex; flex-direction: column; gap: 6px; }
+    .feat-tab {
+      display: grid; grid-template-columns: auto 1fr;
+      align-items: center; gap: 14px;
+      padding: 16px 18px;
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: var(--r-md);
+      text-align: left; cursor: pointer;
+      font-family: inherit;
+      transition: all .25s var(--ease);
+    }
+    .feat-tab:hover { background: var(--bg-elev); }
+    .feat-tab.is-active {
+      background: var(--bg-elev);
+      border-color: var(--accent);
+    }
+    .feat-tab-num {
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: .14em; color: var(--ink-mute);
+      font-weight: 500;
+    }
+    .feat-tab.is-active .feat-tab-num { color: var(--accent); }
+    .feat-tab-title {
+      font-family: var(--display); font-weight: 500;
+      font-size: 16px; color: var(--ink);
+      letter-spacing: -0.012em;
+    }
+    .feat-detail {
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-lg);
+      padding: 24px;
+    }
+    .feat-panel { display: none; animation: featFade .35s var(--ease); }
+    .feat-panel.is-active { display: block; }
+    @keyframes featFade {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .feat-panel img {
+      width: 100%; height: auto; display: block;
+      border-radius: var(--r-md); margin-bottom: 18px;
+    }
+    .feat-panel h4 {
+      font-family: var(--display); font-weight: 500;
+      font-size: 19px; line-height: 1.25;
+      color: var(--ink); margin: 0 0 10px;
+      letter-spacing: -0.012em;
+    }
+    .feat-panel p {
+      font-size: 14.5px; color: var(--ink-soft);
+      line-height: 1.55; margin: 0;
+    }
+
+    /* Before/after impact viz */
+    .pricing-viz {
+      display: grid; grid-template-columns: 1fr auto 1fr;
+      gap: 24px; align-items: center;
+      padding: 36px 32px;
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-top: 3px solid var(--accent);
+      border-radius: var(--r-lg);
+      margin: 20px 0;
+    }
+    @media (max-width: 760px) {
+      .pricing-viz { grid-template-columns: 1fr; gap: 18px; }
+    }
+    .pricing-side { text-align: center; }
+    .pricing-label {
+      display: block;
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--ink-mute); margin-bottom: 12px;
+    }
+    .pricing-side.validated .pricing-label { color: var(--accent); font-weight: 500; }
+    .pricing-num {
+      font-family: var(--display); font-weight: 700;
+      font-size: clamp(48px, 6vw, 80px);
+      line-height: 1; color: var(--ink-mute);
+      letter-spacing: -0.04em; margin-bottom: 6px;
+    }
+    .pricing-side.validated .pricing-num { color: var(--accent); }
+    .pricing-unit {
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: .12em; color: var(--ink-mute);
+    }
+    .pricing-side.validated .pricing-unit { color: var(--accent); }
+    .pricing-arrow {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 4px;
+    }
+    @media (max-width: 760px) {
+      .pricing-arrow { transform: rotate(90deg); margin: 8px 0; }
+    }
+    .pricing-arrow-mark {
+      font-family: var(--mono); font-size: 36px;
+      color: var(--accent); line-height: 1;
+    }
+    .pricing-arrow-meta {
+      font-family: var(--mono); font-size: 9.5px;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--ink-mute);
+    }
+
       /* ============ MOBILE PERF: drop expensive effects ============ */
     @media (max-width: 760px) {
       body::before { opacity: 0.15; }
@@ -1090,9 +1393,8 @@
           <li><a href="#context" class="toc-link active"><span class="num">01.</span>Context</a></li>
           <li><a href="#solution" class="toc-link"><span class="num">02.</span>Solution</a></li>
           <li><a href="#ui" class="toc-link"><span class="num">03.</span>UI</a></li>
-          <li><a href="#features" class="toc-link"><span class="num">04.</span>Features</a></li>
-          <li><a href="#impact" class="toc-link"><span class="num">05.</span>Impact</a></li>
-          <li><a href="#reflection" class="toc-link"><span class="num">06.</span>Reflection</a></li>
+          <li><a href="#impact" class="toc-link"><span class="num">04.</span>Impact</a></li>
+          <li><a href="#reflection" class="toc-link"><span class="num">05.</span>Reflection</a></li>
         </ol>
       </div>
 
@@ -1104,7 +1406,7 @@
     <!-- ============ MAIN ============ -->
     <main class="main" id="top">
 
-      <div class="hero reveal">
+      <div class="hero hero-bleed reveal">
         <div class="case-figure-frame full-image" data-placeholder="Money20: investment simulation game built at HumanX">
           <img src="https://framerusercontent.com/images/dpZldLfzlLgOtQ0b3drHMkf364.png?width=2400" alt="Money20 hero" />
         </div>
@@ -1114,10 +1416,6 @@
         <span class="case-tag">Game Design</span>
         <span class="case-tag shipped">Shipped</span>
       </div>
-
-      <h1 class="case-title reveal d1">
-        <span>Money20</span>
-      </h1>
 
       <blockquote class="case-pullquote reveal d2">
         <p>"Live 20 years in 20 minutes."</p>
@@ -1152,7 +1450,6 @@
           <p class="pb-col-label">Timeline</p>
           <div class="pb-col-val">
             <span>Nov – Dec 2020</span>
-            <span class="softer">at HumanX</span>
           </div>
         </div>
         <div>
@@ -1168,22 +1465,62 @@
         <p class="section-eyebrow">Context</p>
         <h2 class="section-title">Traditional financial education is failing.</h2>
 
-        <p>It's too theoretical. It teaches the names of concepts without the feel of them. Our target demographic, young adults in India, was paralyzed by two forces.</p>
+        <p>It's too theoretical. It teaches the names of concepts without the feel of them. The target demographic, young adults in India, was paralyzed by two forces: the complexity of financial products and the fear of irreversible loss. The brief wasn't to teach <em>what</em> to buy. It was to tackle <em>how</em> people behave when money is on the line, before they had real money on the line.</p>
 
-        <div class="fragmented-systems" style="grid-template-columns: repeat(2, 1fr);">
-          <div class="frag-card">
-            <div class="frag-icon">🧩</div>
-            <strong>Complexity of products</strong>
-            <span>Mutual funds, ETFs, equities, bonds. The first decision was usually freezing.</span>
+        <div class="context-pillars">
+          <div class="context-pillar problem">
+            <div class="pillar-icon">⚠️</div>
+            <p class="pillar-label">The problem</p>
+            <p>Traditional financial education is too theoretical. Users were paralyzed by complexity of products and fear of irreversible loss.</p>
           </div>
-          <div class="frag-card">
-            <div class="frag-icon">😬</div>
-            <strong>Fear of irreversible loss</strong>
-            <span>The biggest learning moments happen with real money. Users never got a safe rehearsal.</span>
+          <div class="context-pillar goal">
+            <div class="pillar-icon">🎯</div>
+            <p class="pillar-label">The goal</p>
+            <p>Build a product that integrates behavioral finance concepts, loss aversion and herd mentality, directly into gameplay.</p>
+          </div>
+          <div class="context-pillar business">
+            <div class="pillar-icon">📈</div>
+            <p class="pillar-label">The business angle</p>
+            <p>Higher engagement and retention than static platforms. Position the client as an innovator in financial education.</p>
           </div>
         </div>
 
-        <p>The brief wasn't to teach <em>what</em> to buy. It was to tackle <em>how</em> people behave when money is on the line, before they had real money on the line.</p>
+        <figure class="case-figure">
+          <div class="case-figure-frame full-image" data-placeholder="The team at HumanX">
+            <img src="https://framerusercontent.com/images/uG6erfIqzqbtXRrCOWBB8LV3MM.png?width=2400" alt="Team at HumanX" loading="lazy" />
+          </div>
+          <figcaption>Built with a tight-knit team at HumanX: Lead UX Designer, Software Developer, UX Writer</figcaption>
+        </figure>
+
+        <h3>Where Money20 sits in the market</h3>
+
+        <div class="market-map">
+          <p class="market-y-label">↑ Real consequences felt</p>
+          <div class="market-grid">
+            <div class="market-cell tl">
+              <span class="market-cell-tag">Clinical simulators</span>
+              <ul>
+                <li>Stock market trainers</li>
+                <li>Bloomberg-style demos</li>
+              </ul>
+            </div>
+            <div class="market-cell tr highlight">
+              <span class="market-cell-tag mosaic-tag">Money20</span>
+              <p>High consequence + high engagement. Empty quadrant.</p>
+            </div>
+            <div class="market-cell bl muted">
+              <span class="market-cell-tag muted-tag">unserved</span>
+            </div>
+            <div class="market-cell br">
+              <span class="market-cell-tag">Static learning apps</span>
+              <ul>
+                <li>Khan Academy modules</li>
+                <li>Investopedia tutorials</li>
+              </ul>
+            </div>
+          </div>
+          <p class="market-x-label">Engagement →</p>
+        </div>
       </section>
 
       <section class="section" id="solution">
@@ -1192,22 +1529,80 @@
 
         <p>Money20 integrates behavioral finance directly into the play loop. Players make 20 years of investing decisions in 20 minutes. The system surfaces their behavioral patterns back to them as they play, so the learning happens through experience rather than after it.</p>
 
-        <figure class="case-figure">
-          <div class="case-figure-frame full-image" data-placeholder="Money20 team and process at HumanX">
-            <img src="https://framerusercontent.com/images/uG6erfIqzqbtXRrCOWBB8LV3MM.png?width=2400" alt="Money20 team at HumanX" loading="lazy" />
+        <h3>Where it sits</h3>
+        <p>Money20 lives at the intersection of three disciplines. Each one shaped a different layer of the product.</p>
+
+        <div class="venn-container">
+          <svg class="venn-svg" viewBox="0 0 400 360" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <radialGradient id="m20-venn-coral" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#ec6478" stop-opacity="0.32"/>
+                <stop offset="100%" stop-color="#ec6478" stop-opacity="0.16"/>
+              </radialGradient>
+              <radialGradient id="m20-venn-sage" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#5e8a4f" stop-opacity="0.30"/>
+                <stop offset="100%" stop-color="#5e8a4f" stop-opacity="0.14"/>
+              </radialGradient>
+              <radialGradient id="m20-venn-leaf" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#4ea862" stop-opacity="0.30"/>
+                <stop offset="100%" stop-color="#4ea862" stop-opacity="0.14"/>
+              </radialGradient>
+            </defs>
+            <circle class="venn-circle vc-1" cx="200" cy="130" r="110" fill="url(#m20-venn-coral)" stroke="#ec6478" stroke-opacity="0.5" stroke-width="1.5"/>
+            <circle class="venn-circle vc-2" cx="135" cy="230" r="110" fill="url(#m20-venn-sage)" stroke="#5e8a4f" stroke-opacity="0.5" stroke-width="1.5"/>
+            <circle class="venn-circle vc-3" cx="265" cy="230" r="110" fill="url(#m20-venn-leaf)" stroke="#4ea862" stroke-opacity="0.5" stroke-width="1.5"/>
+            <ellipse cx="200" cy="200" rx="62" ry="40" fill="#ec6478" fill-opacity="0.22"/>
+            <ellipse cx="200" cy="200" rx="58" ry="36" fill="#f0e8d2" fill-opacity="0.85"/>
+            <text x="200" y="80" text-anchor="middle" font-family="Bricolage Grotesque, system-ui, sans-serif" font-weight="600" font-size="15" fill="#3a2818">Game design</text>
+            <text x="80" y="290" text-anchor="middle" font-family="Bricolage Grotesque, system-ui, sans-serif" font-weight="600" font-size="15" fill="#3a2818">Behavioral finance</text>
+            <text x="320" y="290" text-anchor="middle" font-family="Bricolage Grotesque, system-ui, sans-serif" font-weight="600" font-size="15" fill="#3a2818">Financial education</text>
+            <text x="200" y="196" text-anchor="middle" font-family="Bricolage Grotesque, system-ui, sans-serif" font-weight="600" font-size="14" fill="#b13e58" letter-spacing="-0.01em">Money20</text>
+            <text x="200" y="214" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-style="italic" font-size="11" fill="#5a4632">where they meet</text>
+          </svg>
+          <p class="venn-caption">Three disciplines, one product. Each circle shaped a different layer.</p>
+        </div>
+
+        <h3>My process</h3>
+
+        <div class="design-process">
+          <div class="dp-step">
+            <div class="dp-num">01</div>
+            <h5>Discover</h5>
+            <p>Behavioral finance literature, competitor games, audience research with young adults in India.</p>
           </div>
-          <figcaption>Working within a tight-knit team: Lead UX Designer, Software Developer, UX Writer</figcaption>
-        </figure>
+          <div class="dp-arrow" aria-hidden="true">→</div>
+          <div class="dp-step">
+            <div class="dp-num">02</div>
+            <h5>Define</h5>
+            <p>Reframed the brief from "teach investing" to "rehearse behavior." Sketched the 20-year compression.</p>
+          </div>
+          <div class="dp-arrow" aria-hidden="true">→</div>
+          <div class="dp-step">
+            <div class="dp-num">03</div>
+            <h5>Wireframe</h5>
+            <p>Information architecture for four core surfaces. Persistent timer and portfolio frames.</p>
+          </div>
+          <div class="dp-arrow" aria-hidden="true">→</div>
+          <div class="dp-step">
+            <div class="dp-num">04</div>
+            <h5>Design</h5>
+            <p>High-fi visual pass. Color palette, typography, component system, five core screens.</p>
+          </div>
+          <div class="dp-arrow" aria-hidden="true">→</div>
+          <div class="dp-step highlight">
+            <div class="dp-num">05</div>
+            <h5>Test + ship</h5>
+            <p>Unmoderated usability testing. Iteration on the Elephant Hint. Live on humanx.io.</p>
+          </div>
+        </div>
 
-        <p>Our target demographic, young adults in India, was paralyzed by two forces: the complexity of financial products and the fear of irreversible loss. The opportunity was to design a product that integrated <strong>behavioral finance concepts</strong>, loss aversion and herd mentality, directly into gameplay. A unique value proposition in a market full of static educational tools.</p>
-
-        <h3>The core loop</h3>
+        <h3>The core loop players experience</h3>
 
         <div class="loop-flow" style="grid-template-columns: repeat(4, 1fr);">
           <div class="loop-step">
             <div class="loop-num">01</div>
             <h5>Time advances</h5>
-            <p>A year passes every minute. Markets move. New products unlock.</p>
+            <p>A year passes every minute. Markets move. Products unlock.</p>
           </div>
           <div class="loop-step">
             <div class="loop-num">02</div>
@@ -1226,12 +1621,59 @@
           </div>
         </div>
 
-        <h3>Design decisions</h3>
+        <h3>Five core features</h3>
+        <p>Click each to see the design moment.</p>
 
-        <div class="design-decisions">
-          <p><strong>Why behavioral, not curricular.</strong>Most existing tools teach the names of concepts. Money20 teaches the feel of them.</p>
-          <p><strong>Why a 20-minute compress.</strong>Long enough for emotional swings to actually happen. Short enough that players finish a session and want a second.</p>
-          <p><strong>Why competitive AND single-player.</strong>Solo lets players learn without performance anxiety. Competitive lets them feel herd dynamics. Same content, two ways in.</p>
+        <div class="features-tabs">
+          <div class="feat-tabs-list">
+            <button class="feat-tab is-active" data-target="f1" type="button">
+              <span class="feat-tab-num">01</span>
+              <span class="feat-tab-title">Mode selection</span>
+            </button>
+            <button class="feat-tab" data-target="f2" type="button">
+              <span class="feat-tab-num">02</span>
+              <span class="feat-tab-title">Scaffolded products</span>
+            </button>
+            <button class="feat-tab" data-target="f3" type="button">
+              <span class="feat-tab-num">03</span>
+              <span class="feat-tab-title">The Elephant Hint</span>
+            </button>
+            <button class="feat-tab" data-target="f4" type="button">
+              <span class="feat-tab-num">04</span>
+              <span class="feat-tab-title">Follow the best</span>
+            </button>
+            <button class="feat-tab" data-target="f5" type="button">
+              <span class="feat-tab-num">05</span>
+              <span class="feat-tab-title">Real-life events</span>
+            </button>
+          </div>
+          <div class="feat-detail">
+            <div class="feat-panel is-active" data-id="f1">
+              <img src="https://framerusercontent.com/images/sGrB1eSQHXPzOU4TJavoQLRGq4Y.png?width=1600" alt="Mode selection" loading="lazy" />
+              <h4>Competitive and single-player modes</h4>
+              <p>Players can compete head-to-head or go solo against the computer. Solo removes performance anxiety. Competitive introduces the herd-mentality variable we wanted them to feel.</p>
+            </div>
+            <div class="feat-panel" data-id="f2">
+              <img src="https://framerusercontent.com/images/fFdGovF21168sgs6CKicI5SJ9dk.png?width=1600" alt="Scaffolded products" loading="lazy" />
+              <h4>Scaffolded financial products</h4>
+              <p>Investments unlock over time. Each unlock pairs with a behavioral nudge so players grasp their own risk tolerance, not abstract definitions. Sequenced unlocks let them build literacy without overwhelm.</p>
+            </div>
+            <div class="feat-panel" data-id="f3">
+              <img src="https://framerusercontent.com/images/mdWElxFAmqrXGm639q5zy2fw6Q.png?width=1600" alt="Elephant Hint" loading="lazy" />
+              <h4>The Elephant Hint</h4>
+              <p>If a player hasn't made a move for over two minutes, an in-game elephant prompts them with a helper tip. After copy and timing iteration: <strong>20% lift in engagement</strong> with the guidance system.</p>
+            </div>
+            <div class="feat-panel" data-id="f4">
+              <img src="https://framerusercontent.com/images/9P62iBznbssFAfZv2sXgMGMUSs.png?width=1600" alt="Follow the best investors" loading="lazy" />
+              <h4>Follow the best investors</h4>
+              <p>Players see how top performers in their cohort structured their portfolios. Social proof is a real-world driver. Modeling it inside the game lets players feel the bias being formed.</p>
+            </div>
+            <div class="feat-panel" data-id="f5">
+              <img src="https://framerusercontent.com/images/0nKD25rge6mNTJyWT3cEeSiSv6g.png?width=1600" alt="Real-life events" loading="lazy" />
+              <h4>Real-life situations</h4>
+              <p>Emergency expenses (medical bills, unemployment) and positive breakers (festive bonus, gifts) keep stakes real. Excluding real-world shocks sanitizes the simulation. The lesson lives in the liquidity scramble.</p>
+            </div>
+          </div>
         </div>
       </section>
       <section class="section" id="ui">
@@ -1269,113 +1711,48 @@
         <p>Every component, buttons, modals, cards, tooltips, was designed to feel calm under pressure. Generous padding, subtle elevation, no decorative gradients. The Elephant Hint and the leaderboard were the only moments that allowed playful detail, because those were the moments players were meant to lean in.</p>
       </section>
 
-      <section class="section" id="features">
-        <p class="section-eyebrow">Features</p>
-        <h2 class="section-title">Five features doing most of the work.</h2>
-
-        <h3>Competitive and single-player modes</h3>
-        <figure class="case-figure">
-          <div class="case-figure-frame full-image" data-placeholder="Competitive and single-player modes">
-            <img src="https://framerusercontent.com/images/sGrB1eSQHXPzOU4TJavoQLRGq4Y.png?width=1600" alt="Game modes" loading="lazy" />
-          </div>
-        </figure>
-        <p class="feature-summary">Players can compete head-to-head or go solo against the computer.</p>
-        <ul class="feature-spec">
-          <li><strong>Why.</strong> Solo mode removes performance anxiety while players learn. Competitive mode introduces the herd-mentality variable we wanted them to feel.</li>
-          <li><strong>Outcome.</strong> Same content layer, two ways in.</li>
-        </ul>
-
-        <h3>Scaffolded financial products</h3>
-        <figure class="case-figure">
-          <div class="case-figure-frame full-image" data-placeholder="Introduction to financial products, unlocked over time">
-            <img src="https://framerusercontent.com/images/fFdGovF21168sgs6CKicI5SJ9dk.png?width=1600" alt="Financial products introduction" loading="lazy" />
-          </div>
-        </figure>
-        <p class="feature-summary">Investments unlock over time. Each unlock pairs with a behavioral nudge so players grasp their own risk tolerance, not abstract definitions.</p>
-        <ul class="feature-spec">
-          <li><strong>Why.</strong> Research showed users froze when shown all products at once.</li>
-          <li><strong>Outcome.</strong> Sequenced unlocks tied to in-game progression let players build literacy without overwhelm.</li>
-        </ul>
-
-        <h3>The Elephant Hint</h3>
-        <figure class="case-figure">
-          <div class="case-figure-frame full-image" data-placeholder="The Elephant Hint: idle for 2 minutes, get a nudge">
-            <img src="https://framerusercontent.com/images/mdWElxFAmqrXGm639q5zy2fw6Q.png?width=1600" alt="Elephant Hint nudge" loading="lazy" />
-          </div>
-        </figure>
-        <p class="feature-summary">If a player hasn't made a move for more than two minutes, an in-game elephant prompts them with a helper tip.</p>
-        <ul class="feature-spec">
-          <li><strong>Why.</strong> Stuck players disengage. The nudge catches the "I don't know what to do" moment before churn.</li>
-          <li><strong>Outcome.</strong> After iteration on copy and timing, a <strong>20% lift in engagement</strong> with the guidance system.</li>
-        </ul>
-
-        <h3>Follow the best investors</h3>
-        <figure class="case-figure">
-          <div class="case-figure-frame full-image" data-placeholder="See how top players structured their portfolios">
-            <img src="https://framerusercontent.com/images/9P62iBznbssFAfZv2sXgMGMUSs.png?width=1600" alt="Follow the best investors" loading="lazy" />
-          </div>
-        </figure>
-        <p class="feature-summary">Players see how top performers in their cohort structured their portfolios so they can apply the same strategies.</p>
-        <ul class="feature-spec">
-          <li><strong>Why.</strong> Social proof is a real-world driver. Modeling it inside the game lets players feel the bias being formed.</li>
-          <li><strong>Outcome.</strong> Players who studied the leaderboards iterated their strategies faster.</li>
-        </ul>
-
-        <h3>Real-life situations</h3>
-        <figure class="case-figure">
-          <div class="case-figure-frame full-image" data-placeholder="Emergency expenses and positive breakers force liquidity decisions">
-            <img src="https://framerusercontent.com/images/0nKD25rge6mNTJyWT3cEeSiSv6g.png?width=1600" alt="Real-life events" loading="lazy" />
-          </div>
-        </figure>
-        <p class="feature-summary">Emergency expenses (medical bills, unemployment) and positive breakers (festive bonus, gifts) keep stakes real.</p>
-        <ul class="feature-spec">
-          <li><strong>Why.</strong> Excluding real-world shocks sanitizes the simulation. The lesson lives in the liquidity scramble.</li>
-          <li><strong>Outcome.</strong> Players locked into long-term investments learned why an emergency fund matters.</li>
-        </ul>
-      </section>
 
       <section class="section" id="impact">
         <p class="section-eyebrow">Impact</p>
         <h2 class="section-title">Validation, iteration, and a shipped product.</h2>
 
-        <p>My responsibility didn't end with design. It extended to validating the design worked and influencing what shipped next.</p>
+        <p>My responsibility didn't end with design. It extended to validating the design worked and influencing what shipped next. I ran unmoderated usability testing on a clickable prototype. The biggest finding was on the Elephant Hint, users didn't understand the motivation behind the prompt. We iterated copy and timing.</p>
 
-        <h3>Usability testing and refinement</h3>
-        <p>I ran unmoderated usability testing on a clickable prototype. The most significant finding was user confusion around the generic "Elephant Hint", users didn't understand the motivation behind the prompt. We iterated copy and timing, and the new version made the nudge feel like guidance rather than interruption.</p>
-
-        <div class="impact-grid">
-          <div class="impact-card coral">
-            <p class="impact-num">20%</p>
-            <p class="impact-lbl">lift in engagement</p>
-            <p class="impact-desc">With the Elephant Hint guidance system after copy and timing iteration.</p>
+        <div class="pricing-viz">
+          <div class="pricing-side hypothesis">
+            <span class="pricing-label">Before iteration</span>
+            <div class="pricing-num">Baseline</div>
+            <span class="pricing-unit">Elephant Hint engagement</span>
           </div>
-          <div class="impact-card sage">
-            <p class="impact-num">20 yrs</p>
-            <p class="impact-lbl">compressed into 20 min</p>
-            <p class="impact-desc">Each in-game year takes one real minute. Stakes feel real because the timing is.</p>
+          <div class="pricing-arrow" aria-hidden="true">
+            <span class="pricing-arrow-meta">Copy + timing</span>
+            <span class="pricing-arrow-mark">→</span>
+            <span class="pricing-arrow-meta">refinement</span>
           </div>
-          <div class="impact-card">
-            <p class="impact-num">Live</p>
-            <p class="impact-lbl">at humanx.io</p>
-            <p class="impact-desc">Shipped to production with HumanX's FinTech edu partner.</p>
+          <div class="pricing-side validated">
+            <span class="pricing-label">After iteration</span>
+            <div class="pricing-num">+20%</div>
+            <span class="pricing-unit">engagement lift</span>
           </div>
         </div>
 
-        <h3>Cross-functional collaboration</h3>
-        <p>Throughout development, I made sure the features I designed were buildable. That meant working with the <strong>Content Expert</strong> to lock down the exact sequence of financial product unlocks, and with the <strong>engineering team</strong> during QA to make sure the complex logic of the real-life events worked in the live build.</p>
+        <p style="font-family: 'Fraunces', Georgia, serif; font-style: italic; font-size: 16px; color: var(--ink-soft); text-align: center; margin: 16px 0 28px;">The system was right. The execution needed iteration.</p>
+
+        <h3>Cross-functional handoff</h3>
+        <p>I worked closely with the <strong>Content Expert</strong> to lock down the exact financial product unlock sequence so the UI could reflect it correctly. With the <strong>engineering team</strong>, I sat through QA on the real-life event modal to make sure the timer pause + resume logic was visually correct in the live build. Money20 shipped to production with HumanX's FinTech edu partner, currently <a href="https://www.humanx.io/work/money20" target="_blank" rel="noopener">live at humanx.io</a>.</p>
       </section>
 
       <section class="section" id="reflection">
         <p class="section-eyebrow">Reflection</p>
-        <h2 class="section-title">Connecting design to behavioral strategy.</h2>
+        <h2 class="section-title">What this taught me about behavioral design.</h2>
 
-        <p>Money20 was my first time designing a system where the goal was behavior change, not task completion. The framework I picked up here has shown up in every project since.</p>
+        <p>Money20 was my first time designing a system where the goal was behavior change, not task completion. The framework that emerged from it has shown up in every project since.</p>
 
         <div class="reflect-grid">
           <article class="reflect-card">
             <div class="reflect-num">01</div>
             <h4>The smallest interaction holds the most weight</h4>
-            <p>The Elephant Hint felt like a small UX problem until testing showed it was the single biggest churn risk. In a behavioral product, the smallest interactions carry the most weight.</p>
+            <p>The Elephant Hint felt like a small UX problem until usability testing showed it was the single biggest churn risk. In a behavioral product, the smallest interactions carry the most weight.</p>
             <span class="reflect-tag">Feature priority</span>
           </article>
           <article class="reflect-card">
@@ -1387,7 +1764,7 @@
           <article class="reflect-card">
             <div class="reflect-num">03</div>
             <h4>The lesson lives in the loss</h4>
-            <p>Players learned more from a 30-second bad decision than any tutorial could deliver. Designing for productive failure became a craft I've been refining ever since.</p>
+            <p>Players learned more from a 30-second bad decision than from any tutorial. Designing for productive failure was a new craft I've been refining ever since.</p>
             <span class="reflect-tag">Craft</span>
           </article>
         </div>
@@ -1514,6 +1891,22 @@
       el.addEventListener('mouseenter', () => document.body.classList.add('cursor-grow'));
       el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-grow'));
     });
+
+    // Features tabs: switch the visible panel on click/hover/focus
+    (function setupFeaturesTabs() {
+      const tabs = document.querySelectorAll('.feat-tab');
+      const panels = document.querySelectorAll('.feat-panel');
+      if (!tabs.length || !panels.length) return;
+      const activate = (target) => {
+        tabs.forEach(t => t.classList.toggle('is-active', t.dataset.target === target));
+        panels.forEach(p => p.classList.toggle('is-active', p.dataset.id === target));
+      };
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => activate(tab.dataset.target));
+        tab.addEventListener('mouseenter', () => activate(tab.dataset.target));
+        tab.addEventListener('focus', () => activate(tab.dataset.target));
+      });
+    })();
   </script>
 
 </body>
