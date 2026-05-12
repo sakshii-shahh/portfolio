@@ -156,7 +156,7 @@
       min-height: 100vh;
     }
     .sidebar {
-      padding: 32px 28px 84px;
+      padding: 32px 28px 24px;
       position: sticky; top: 0;
       height: 100vh;
       display: flex; flex-direction: column;
@@ -166,16 +166,14 @@
     }
     .sidebar::-webkit-scrollbar { width: 0; }
     .sidebar-tulips {
-      position: absolute;
-      bottom: 8px;
-      left: 0; right: 0;
+      margin-top: 16px;
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
-      padding: 0 22px;
+      padding: 0 4px;
       pointer-events: none;
       transition: opacity .4s ease;
-      z-index: 0;
+      flex-shrink: 0;
     }
     .sb-tulip {
       height: 48px;
@@ -1885,6 +1883,7 @@
     (function setupSidebarTulipFade() {
       const sidebarTulips = document.querySelector('.sidebar-tulips');
       const footerEl = document.querySelector('footer');
+      console.log('[tulips] sidebar tulips el:', !!sidebarTulips, 'footer el:', !!footerEl);
       if (!sidebarTulips || !footerEl) return;
       const obs = new IntersectionObserver((entries) => {
         document.body.classList.toggle('footer-visible', entries[0].isIntersecting);
@@ -1895,6 +1894,7 @@
     // ============ Click anywhere on the footer to plant a tulip ============
     (function setupFooterClickPlant() {
       const footerEl = document.querySelector('footer');
+      console.log('[tulips] footer plant handler attached:', !!footerEl);
       if (!footerEl) return;
       const variants = ['tulip-1.svg', 'tulip-2.svg', 'tulip-3.svg', 'tulip-4.svg', 'tulip-5.svg', 'tulip-6.svg'];
       footerEl.addEventListener('click', (e) => {
