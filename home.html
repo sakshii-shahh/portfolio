@@ -156,7 +156,7 @@
       min-height: 100vh;
     }
     .sidebar {
-      padding: 32px 28px 24px;
+      padding: 32px 28px 0;
       position: sticky; top: 0;
       height: 100vh;
       display: flex; flex-direction: column;
@@ -166,24 +166,33 @@
     }
     .sidebar::-webkit-scrollbar { width: 0; }
     .sidebar-tulips {
-      margin-top: 16px;
+      position: absolute;
+      bottom: 0;
+      left: 0; right: 0;
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
-      padding: 0 4px;
+      padding: 0 14px;
       pointer-events: none;
       transition: opacity .4s ease;
-      flex-shrink: 0;
+      z-index: 0;
     }
     .sb-tulip {
-      height: 48px;
+      height: 88px;
       width: auto;
-      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.08));
+      filter: drop-shadow(0 2px 4px rgba(20, 18, 12, 0.08));
     }
-    .sb-tulip:nth-child(3n) { height: 40px; }
-    .sb-tulip:nth-child(4n+1) { height: 54px; }
-    .sb-tulip:nth-child(2n) { transform: rotate(-6deg); transform-origin: bottom center; }
-    .sb-tulip:nth-child(2n+1) { transform: rotate(5deg); transform-origin: bottom center; }
+    .sb-tulip:nth-child(3n) { height: 76px; }
+    .sb-tulip:nth-child(4n+1) { height: 95px; }
+    .sb-tulip:nth-child(5n) { height: 82px; }
+    .sb-tulip:nth-child(even) {
+      transform: rotate(-6deg);
+      transform-origin: bottom center;
+    }
+    .sb-tulip:nth-child(odd) {
+      transform: rotate(5deg);
+      transform-origin: bottom center;
+    }
     body.footer-visible .sidebar-tulips { opacity: 0; }
     @media (max-width: 980px) {
       .sidebar-tulips { display: none; }
@@ -1330,9 +1339,7 @@
         <img src="assets/tulips/tulip-1.svg" alt="" class="sb-tulip" loading="lazy" />
         <img src="assets/tulips/tulip-3.svg" alt="" class="sb-tulip" loading="lazy" />
         <img src="assets/tulips/tulip-5.svg" alt="" class="sb-tulip" loading="lazy" />
-        <img src="assets/tulips/tulip-2.svg" alt="" class="sb-tulip" loading="lazy" />
         <img src="assets/tulips/tulip-4.svg" alt="" class="sb-tulip" loading="lazy" />
-        <img src="assets/tulips/tulip-6.svg" alt="" class="sb-tulip" loading="lazy" />
       </div>
 
     </aside>
