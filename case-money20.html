@@ -849,6 +849,140 @@
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
     }
+
+    /* ============ CASE STUDY SHARED COMPONENTS ============ */
+    .case-figure { margin: 28px 0; }
+    .case-figure-frame {
+      position: relative; width: 100%; aspect-ratio: 16/10;
+      border-radius: var(--r-md); overflow: hidden;
+      background: var(--bg-elev); border: 1px solid var(--rule);
+    }
+    .case-figure-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .case-figure-frame.img-missing { border: 1px dashed var(--rule-strong); display: grid; place-items: center; }
+    .case-figure-frame.img-missing img { display: none; }
+    .case-figure-frame.img-missing::after {
+      content: attr(data-placeholder);
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--ink-mute); text-align: center;
+      padding: 0 24px; line-height: 1.5;
+    }
+    .case-figure figcaption {
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--ink-mute); margin-top: 12px; text-align: center;
+    }
+    .case-figure-frame.full-image {
+      aspect-ratio: auto; height: auto;
+      padding: 24px; background: var(--bg-elev);
+    }
+    .case-figure-frame.full-image img {
+      width: 100%; height: auto; object-fit: contain;
+      border-radius: var(--r-md);
+    }
+
+    .case-pullquote {
+      margin: 32px 0 28px; padding: 0 0 0 26px;
+      border-left: 3px solid var(--accent);
+    }
+    .case-pullquote p {
+      font-family: "Fraunces", Georgia, serif; font-style: italic;
+      font-size: clamp(28px, 3vw, 40px); line-height: 1.2;
+      color: var(--ink); margin: 0 0 12px;
+      letter-spacing: -0.018em;
+    }
+    .case-pullquote cite {
+      font-family: var(--mono); font-size: 12px;
+      letter-spacing: .14em; color: var(--ink-mute); font-style: normal;
+    }
+
+    .fragmented-systems {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      margin: 24px 0 28px;
+    }
+    @media (max-width: 980px) { .fragmented-systems { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 540px) { .fragmented-systems { grid-template-columns: 1fr; } }
+    .frag-card {
+      background: var(--bg-elev);
+      border: 1px dashed var(--rule-strong);
+      border-radius: var(--r-md);
+      padding: 16px 14px; text-align: center;
+      transition: transform .25s var(--ease), border-color .25s var(--ease);
+    }
+    .frag-card:hover { transform: translateY(-2px); border-color: var(--ink-soft); border-style: solid; }
+    .frag-icon { font-size: 22px; margin-bottom: 6px; }
+    .frag-card strong {
+      display: block;
+      font-family: var(--display); font-weight: 500;
+      font-size: 14px; color: var(--ink); margin-bottom: 4px;
+    }
+    .frag-card span {
+      font-size: 12px; color: var(--ink-soft); line-height: 1.4;
+    }
+
+    .feature-summary {
+      font-family: "Fraunces", Georgia, serif;
+      font-style: italic; font-size: 17px;
+      color: var(--ink); line-height: 1.4;
+      margin: 14px 0 16px;
+    }
+    .feature-spec {
+      list-style: none; padding: 18px 22px; margin: 0 0 28px;
+      display: flex; flex-direction: column; gap: 10px;
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-md);
+    }
+    .feature-spec li { font-size: 14px; color: var(--ink-soft); line-height: 1.5; }
+    .feature-spec li strong {
+      color: var(--ink); font-weight: 500;
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: .12em; text-transform: uppercase;
+      display: inline-block; margin-right: 6px;
+    }
+
+    .reflect-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 20px 0 32px;
+    }
+    @media (max-width: 980px) { .reflect-grid { grid-template-columns: 1fr; } }
+    .reflect-card {
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-lg);
+      padding: 22px 20px;
+      display: flex; flex-direction: column;
+      transition: transform .25s var(--ease), border-color .25s var(--ease);
+    }
+    .reflect-card:hover { transform: translateY(-3px); border-color: var(--accent); }
+    .reflect-num {
+      font-family: var(--mono); font-size: 12px;
+      letter-spacing: .14em; color: var(--accent);
+      font-weight: 500; margin-bottom: 12px;
+    }
+    .reflect-card h4 {
+      font-family: var(--display); font-weight: 500;
+      font-size: 17px; line-height: 1.25;
+      color: var(--ink); margin: 0 0 10px;
+      letter-spacing: -0.012em;
+    }
+    .reflect-card > p {
+      font-size: 13.5px; color: var(--ink-soft);
+      line-height: 1.5; margin: 0 0 14px; flex: 1;
+    }
+    .reflect-tag {
+      display: inline-block; align-self: flex-start;
+      font-family: var(--mono); font-size: 10px;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--accent-deep);
+      padding: 5px 10px;
+      background: var(--accent-soft);
+      border-radius: 999px;
+    }
       /* ============ MOBILE PERF: drop expensive effects ============ */
     @media (max-width: 760px) {
       body::before { opacity: 0.15; }
@@ -899,8 +1033,8 @@
         <ol>
           <li><a href="#context" class="toc-link active"><span class="num">01.</span>Context</a></li>
           <li><a href="#research" class="toc-link"><span class="num">02.</span>Research</a></li>
-          <li><a href="#solution" class="toc-link"><span class="num">03.</span>The solution</a></li>
-          <li><a href="#flows" class="toc-link"><span class="num">04.</span>Key flows</a></li>
+          <li><a href="#solution" class="toc-link"><span class="num">03.</span>Solution</a></li>
+          <li><a href="#features" class="toc-link"><span class="num">04.</span>Features</a></li>
           <li><a href="#impact" class="toc-link"><span class="num">05.</span>Impact</a></li>
           <li><a href="#reflection" class="toc-link"><span class="num">06.</span>Reflection</a></li>
         </ol>
@@ -914,280 +1048,271 @@
     <!-- ============ MAIN ============ -->
     <main class="main" id="top">
 
-      <!-- HERO -->
       <div class="hero reveal">
-        <img src="https://framerusercontent.com/images/N7w1YubiD84GL7EiMPkmWlm8O6Q.png?width=1600" alt="IBM Deal Registration interface" />
+        <div class="case-figure-frame full-image" data-placeholder="Money20: investment simulation game built at HumanX">
+          <img src="https://framerusercontent.com/images/dpZldLfzlLgOtQ0b3drHMkf364.png?width=2400" alt="Money20 hero" />
+        </div>
       </div>
 
-      <!-- TAGS + TITLE + LEDE -->
       <div class="case-tags reveal d1">
         <span class="case-tag">Game Design</span>
         <span class="case-tag shipped">Shipped</span>
       </div>
 
       <h1 class="case-title reveal d1">
-        <span>Designing Money20, financial literacy for teens</span>
+        <span>Money20</span>
       </h1>
 
+      <blockquote class="case-pullquote reveal d2">
+        <p>"Live 20 years in 20 minutes."</p>
+        <cite>The Money20 tagline</cite>
+      </blockquote>
+
       <p class="case-lede reveal d2">
-        I co-designed <strong>Money20</strong>, a financial-literacy game for teens with HumanX, turning abstract money concepts into a playable narrative <strong>played by 12,000+ students</strong> in pilot. I led game design, narrative structure, and player research.
+        Money20 is an investment simulation game built at <strong>HumanX</strong> for a major FinTech education client. It doesn't just teach young adults about investing, it forces them to confront their <strong>psychological biases</strong> in a safe environment. The final product simulates 20 years of investing in a 20-minute session, currently <a href="https://www.humanx.io/work/money20" target="_blank" rel="noopener">live at humanx.io</a>. As UX Design Intern, I owned research, information architecture, and the design decisions that made the behavioral framing land.
       </p>
 
-      <a class="visit-btn reveal d2" href="#">
-        <span>Try the Money20 demo</span>
+      <a class="visit-btn reveal d2" href="https://www.humanx.io/work/money20" target="_blank" rel="noopener">
+        <span>See Money20 Live</span>
         <span class="arrow">→</span>
       </a>
 
-      <!-- PROJECT BANNER -->
       <div class="project-banner reveal d3">
         <div>
           <p class="pb-col-label">Role</p>
           <div class="pb-col-val">
-            <span>Game Designer</span><span>UX Researcher</span>
+            <span>UX Design Intern</span>
           </div>
         </div>
         <div>
           <p class="pb-col-label">Team</p>
           <div class="pb-col-val">
-            <span class="softer">with</span><span>HumanX learning team</span>
+            <span>Lead UX Designer</span>
+            <span>Software Developer</span>
+            <span>UX Writer</span>
           </div>
         </div>
         <div>
           <p class="pb-col-label">Timeline</p>
           <div class="pb-col-val">
-            <span>Nov – Dec 2020</span><span class="softer">at HumanX</span>
+            <span>Nov – Dec 2020</span>
+            <span class="softer">at HumanX</span>
           </div>
         </div>
         <div>
-          <p class="pb-col-label">Skills</p>
+          <p class="pb-col-label">Tools</p>
           <div class="pb-col-val">
-            <span>Game Design</span><span>Narrative</span><span>Research</span>
+            <span>Figma</span>
+            <span>Adobe Illustrator</span>
           </div>
         </div>
       </div>
 
-      <!-- ============ 01. CONTEXT ============ -->
       <section class="section" id="context">
         <p class="section-eyebrow">Context</p>
-        <h2 class="section-title">Teens think money is boring, until it's a story.</h2>
-        <p>
-          Financial literacy classes have a retention problem. Most content reads like a textbook; most apps gamify with points instead of meaning. We wanted a third option: a narrative-driven game where money decisions actually move the plot.
-        </p>
-        <p>
-          Internally, this looked like <strong>missing pipeline visibility</strong>. From the partner side, it
-          looked like a bureaucratic gate that didn't pay them back. Both sides were losing.
-        </p>
+        <h2 class="section-title">Traditional financial education is failing.</h2>
+
+        <p>It's too theoretical. It teaches the names of concepts without the feel of them. Our target demographic, young adults in India, was paralyzed by two forces.</p>
+
+        <div class="fragmented-systems" style="grid-template-columns: repeat(2, 1fr);">
+          <div class="frag-card">
+            <div class="frag-icon">🧩</div>
+            <strong>Complexity of products</strong>
+            <span>Mutual funds, ETFs, equities, bonds. The first decision was usually freezing.</span>
+          </div>
+          <div class="frag-card">
+            <div class="frag-icon">😬</div>
+            <strong>Fear of irreversible loss</strong>
+            <span>The biggest learning moments happen with real money. Users never got a safe rehearsal.</span>
+          </div>
+        </div>
+
+        <p>The brief wasn't to teach <em>what</em> to buy. It was to tackle <em>how</em> people behave when money is on the line, before they had real money on the line.</p>
       </section>
 
-      <!-- ============ 02. RESEARCH ============ -->
       <section class="section" id="research">
         <p class="section-eyebrow">Research</p>
-        <h2 class="section-title">Where teens actually opt in</h2>
-        <p>
-          I ran playtests with 32 students aged 13–17 across three school districts. The pattern was clear, they wanted agency, characters they could see themselves in, and stakes that felt real (not just "score points").
-        </p>
-        <ol>
-          <li>Partners abandoned mid-flow when fields they didn't have data for were marked required.</li>
-          <li>Approval status was opaque, reps would re-submit the same deal three times to "wake it up."</li>
-          <li>The form treated every deal like a net-new enterprise opportunity, even for $5k SaaS renewals.</li>
-        </ol>
-        <p>
-          The synthesis became a tight problem statement: <strong>the form didn't match the shape of the work.</strong>
-        </p>
+        <h2 class="section-title">Where the friction actually lived.</h2>
+
+        <figure class="case-figure">
+          <div class="case-figure-frame full-image" data-placeholder="Discovery and findings from research">
+            <img src="https://framerusercontent.com/images/a5UiCBDL3ZcvZaTlbCvh9tf9O3Y.png?width=2400" alt="Discovery findings" loading="lazy" />
+          </div>
+        </figure>
+
+        <h3>The problem</h3>
+        <p>Traditional investment education lacks engagement and fails to give users a realistic sense of consequences. For young adults grasping risk tolerance and long-term implications at the same time, the abstraction is the blocker.</p>
+
+        <h3>The goal</h3>
+        <p>Build a tool that integrates <strong>behavioral finance concepts</strong>, loss aversion and herd mentality especially, directly into gameplay. A unique value proposition in a market full of static educational tools.</p>
+
+        <h3>The business angle</h3>
+        <p>Higher engagement and retention than competing platforms positioned the client as an innovator in financial education, not just another LMS.</p>
       </section>
 
-      <!-- ============ 03. THE SOLUTION ============ -->
       <section class="section" id="solution">
-        <p class="section-eyebrow">The solution</p>
-        <h2 class="section-title">A choose-your-own-adventure where every choice has a price.</h2>
-        <p>
-          Money20 follows three teen characters making real money decisions, first job, first emergency, first big purchase. Players are never told what's right; the consequences play out across the story.
-        </p>
-        <div class="duo">
-          <div class="duo-tile">Before, flat form</div>
-          <div class="duo-tile">After, archetype-led flow</div>
-        </div>
-        <p>
-          We also stripped the registration form down to its essentials. <strong>Required fields dropped from 24 to 9</strong> on the
-          most common path. Everything else became conditional, postponed, or pre-filled.
-        </p>
+        <p class="section-eyebrow">Solution</p>
+        <h2 class="section-title">A game that turns behavior into curriculum.</h2>
+
+        <p>Money20 integrates behavioral finance directly into the play loop. Players make 20 years of investing decisions in 20 minutes. The system surfaces their behavioral patterns back to them as they play, so the learning happens through experience rather than after it.</p>
+
+        <figure class="case-figure">
+          <div class="case-figure-frame full-image" data-placeholder="Money20 team and process at HumanX">
+            <img src="https://framerusercontent.com/images/uG6erfIqzqbtXRrCOWBB8LV3MM.png?width=2400" alt="Money20 team at HumanX" loading="lazy" />
+          </div>
+          <figcaption>Working within a tight-knit team: Lead UX Designer, Software Developer, UX Writer</figcaption>
+        </figure>
+
+        <h3>The design system</h3>
+        <p>The interface depended on the game's narrative. With an inevitable amount of financial information on every screen, the UI had to require very little cognitive effort.</p>
+
+        <figure class="case-figure">
+          <div class="case-figure-frame full-image" data-placeholder="Color palette: simple UI that keeps the focus on the game">
+            <img src="https://framerusercontent.com/images/dJiNh0w3CW2vVgu69vAGHLcgY84.png?width=2400" alt="Money20 color palette" loading="lazy" />
+          </div>
+          <figcaption>Color palette: kept deliberately spare so the game systems read clearly</figcaption>
+        </figure>
+
+        <figure class="case-figure">
+          <div class="case-figure-frame full-image" data-placeholder="Typography: IBM Plex Sans + IBM Plex Mono">
+            <img src="https://framerusercontent.com/images/Fo3rQdlK5b1SikSkB6iRGaquhM.png?width=2400" alt="Typography choices" loading="lazy" />
+          </div>
+          <figcaption>Typography: IBM Plex Sans for clarity, IBM Plex Mono for data and numeric moments</figcaption>
+        </figure>
       </section>
 
-      <!-- ============ 04. KEY FLOWS / FEATURES ============ -->
-      <section class="section" id="flows">
-        <p class="section-eyebrow">Key flows</p>
-        <h2 class="section-title">Three loops, each tested with kids before code.</h2>
-        <p>
-          Three core flows did the heaviest lifting. Each was paper-prototyped with players before any pixel went into Unity.
-        </p>
+      <section class="section" id="features">
+        <p class="section-eyebrow">Features</p>
+        <h2 class="section-title">Five features doing most of the work.</h2>
 
-        <div class="feature-grid">
-          <div class="feature-list" id="featureList">
-            <div class="feature-item is-active" data-screen="renewal">
-              <h4><span class="num">01</span> Quick-register a renewal</h4>
-              <p>Pre-fills 80% of fields from the existing customer record. A rep can register and submit in under 60 seconds.</p>
-            </div>
-            <div class="feature-item" data-screen="timeline">
-              <h4><span class="num">02</span> Status timeline</h4>
-              <p>Replaces the legacy approved/pending/rejected dropdown with a live timeline showing exactly what's happened and what's next.</p>
-            </div>
-            <div class="feature-item" data-screen="handoff">
-              <h4><span class="num">03</span> Save, share, hand off</h4>
-              <p>Reps can save mid-form drafts and share them with a co-rep, fixing the #1 complaint about the legacy flow.</p>
-            </div>
-            <div class="feature-item" data-screen="conditional">
-              <h4><span class="num">04</span> Conditional fields</h4>
-              <p>The form asks for what's relevant, when it's relevant. Fields appear only after the deal type clarifies what's needed.</p>
-            </div>
+        <h3>Competitive and single-player modes</h3>
+        <figure class="case-figure">
+          <div class="case-figure-frame full-image" data-placeholder="Competitive and single-player modes">
+            <img src="https://framerusercontent.com/images/sGrB1eSQHXPzOU4TJavoQLRGq4Y.png?width=1600" alt="Game modes" loading="lazy" />
           </div>
+        </figure>
+        <p class="feature-summary">Players can compete head-to-head or go solo against the computer.</p>
+        <ul class="feature-spec">
+          <li><strong>Why.</strong> Solo mode removes performance anxiety while players learn. Competitive mode introduces the herd-mentality variable we wanted them to feel.</li>
+          <li><strong>Outcome.</strong> Same content layer, two ways in.</li>
+        </ul>
 
-          <div class="feature-mockup" aria-label="Interactive mockup">
-            <!-- Screen 1: Quick renewal, pre-filled form -->
-            <div class="screen is-active" data-id="renewal">
-              <div class="ms-statusbar"><span>9:41</span><span>●●●</span></div>
-              <p class="ms-sub">Register · Renewal</p>
-              <p class="ms-h">Acme Corp renewal</p>
-              <div class="ms-card"><div class="row"><strong>$48,200</strong><span class="ms-pill green">Pre-filled</span></div><span>From CRM record · 12mo</span></div>
-              <div class="ms-field dim"><span class="lbl">Account</span><span class="val">Acme Corp · Tier 2</span></div>
-              <div class="ms-field dim"><span class="lbl">Region</span><span class="val">North America</span></div>
-              <div class="ms-field"><span class="lbl">Close date</span><span class="val">Mar 14, 2025</span></div>
-              <div class="ms-card coral" style="margin-top:auto"><div class="row"><strong>Submit registration</strong><span>→</span></div></div>
-            </div>
-
-            <!-- Screen 2: Status timeline -->
-            <div class="screen" data-id="timeline">
-              <div class="ms-statusbar"><span>9:41</span><span>●●●</span></div>
-              <p class="ms-sub">Deal · #DR-7821</p>
-              <p class="ms-h">Status timeline</p>
-              <div class="ms-step done"><span class="dot"></span><span><strong>Submitted</strong>Mon · 9:14 AM</span></div>
-              <div class="ms-step done"><span class="dot"></span><span><strong>Auto-validated</strong>Mon · 9:14 AM</span></div>
-              <div class="ms-step now"><span class="dot"></span><span><strong>In review</strong>IBM partner ops · 1 day</span></div>
-              <div class="ms-step"><span class="dot"></span><span><strong>Approved</strong>Estimated by Wed</span></div>
-              <div class="ms-step"><span class="dot"></span><span><strong>Locked</strong>, </span></div>
-            </div>
-
-            <!-- Screen 3: Save / hand off -->
-            <div class="screen" data-id="handoff">
-              <div class="ms-statusbar"><span>9:41</span><span>●●●</span></div>
-              <p class="ms-sub">Drafts · 3 active</p>
-              <p class="ms-h">Hand to a co-rep</p>
-              <div class="ms-card"><div class="row"><strong>Globex expansion</strong><span class="ms-pill amber">Draft</span></div><span>Last edit · you · 2h ago</span></div>
-              <div class="ms-card sage"><div class="row"><strong>Initech net-new</strong><span class="ms-pill green">Shared</span></div><span>With · D. Patel · 1d ago</span></div>
-              <div class="ms-card"><div class="row"><strong>Soylent renewal</strong><span class="ms-pill">Draft</span></div><span>Last edit · K. Lee · 3d ago</span></div>
-              <div class="ms-card coral" style="margin-top:auto"><div class="row"><strong>Share with co-rep</strong><span>→</span></div></div>
-            </div>
-
-            <!-- Screen 4: Conditional fields -->
-            <div class="screen" data-id="conditional">
-              <div class="ms-statusbar"><span>9:41</span><span>●●●</span></div>
-              <p class="ms-sub">Register · Step 2 of 3</p>
-              <p class="ms-h">Tell us about the deal</p>
-              <div class="ms-card"><div class="row"><strong>Deal type</strong><span class="ms-pill green">Renewal</span></div><span>Selected · 9 fields shown</span></div>
-              <div class="ms-bar"><span style="width:62%"></span></div>
-              <p class="ms-sub" style="margin-bottom:0">Required for this path</p>
-              <div class="ms-field"><span class="lbl">Renewal value</span><span class="val">$ 48,200</span></div>
-              <div class="ms-field"><span class="lbl">Term length</span><span class="val">12 months</span></div>
-              <div class="ms-field dim"><span class="lbl">Net-new fields · hidden</span><span class="val">,  (not relevant)</span></div>
-            </div>
+        <h3>Scaffolded financial products</h3>
+        <figure class="case-figure">
+          <div class="case-figure-frame full-image" data-placeholder="Introduction to financial products, unlocked over time">
+            <img src="https://framerusercontent.com/images/fFdGovF21168sgs6CKicI5SJ9dk.png?width=1600" alt="Financial products introduction" loading="lazy" />
           </div>
-        </div>
+        </figure>
+        <p class="feature-summary">Investments unlock over time. Each unlock pairs with a behavioral nudge so players grasp their own risk tolerance, not abstract definitions.</p>
+        <ul class="feature-spec">
+          <li><strong>Why.</strong> Research showed users froze when shown all products at once.</li>
+          <li><strong>Outcome.</strong> Sequenced unlocks tied to in-game progression let players build literacy without overwhelm.</li>
+        </ul>
+
+        <h3>The Elephant Hint</h3>
+        <figure class="case-figure">
+          <div class="case-figure-frame full-image" data-placeholder="The Elephant Hint: idle for 2 minutes, get a nudge">
+            <img src="https://framerusercontent.com/images/mdWElxFAmqrXGm639q5zy2fw6Q.png?width=1600" alt="Elephant Hint nudge" loading="lazy" />
+          </div>
+        </figure>
+        <p class="feature-summary">If a player hasn't made a move for more than two minutes, an in-game elephant prompts them with a helper tip.</p>
+        <ul class="feature-spec">
+          <li><strong>Why.</strong> Stuck players disengage. The nudge catches the "I don't know what to do" moment before churn.</li>
+          <li><strong>Outcome.</strong> After iteration on copy and timing, a <strong>20% lift in engagement</strong> with the guidance system.</li>
+        </ul>
+
+        <h3>Follow the best investors</h3>
+        <figure class="case-figure">
+          <div class="case-figure-frame full-image" data-placeholder="See how top players structured their portfolios">
+            <img src="https://framerusercontent.com/images/9P62iBznbssFAfZv2sXgMGMUSs.png?width=1600" alt="Follow the best investors" loading="lazy" />
+          </div>
+        </figure>
+        <p class="feature-summary">Players see how top performers in their cohort structured their portfolios so they can apply the same strategies.</p>
+        <ul class="feature-spec">
+          <li><strong>Why.</strong> Social proof is a real-world driver. Modeling it inside the game lets players feel the bias being formed.</li>
+          <li><strong>Outcome.</strong> Players who studied the leaderboards iterated their strategies faster.</li>
+        </ul>
+
+        <h3>Real-life situations</h3>
+        <figure class="case-figure">
+          <div class="case-figure-frame full-image" data-placeholder="Emergency expenses and positive breakers force liquidity decisions">
+            <img src="https://framerusercontent.com/images/0nKD25rge6mNTJyWT3cEeSiSv6g.png?width=1600" alt="Real-life events" loading="lazy" />
+          </div>
+        </figure>
+        <p class="feature-summary">Emergency expenses (medical bills, unemployment) and positive breakers (festive bonus, gifts) keep stakes real.</p>
+        <ul class="feature-spec">
+          <li><strong>Why.</strong> Excluding real-world shocks sanitizes the simulation. The lesson lives in the liquidity scramble.</li>
+          <li><strong>Outcome.</strong> Players locked into long-term investments learned why an emergency fund matters.</li>
+        </ul>
       </section>
 
-      <!-- ============ 05. IMPACT ============ -->
       <section class="section" id="impact">
         <p class="section-eyebrow">Impact</p>
-        <h2 class="section-title">What changed when partners stopped routing around us.</h2>
-        <p>
-          The redesign rolled out to a 12-account pilot, then expanded to 200+ accounts over Q3. Three months
-          post-launch, the numbers told the story:
-        </p>
+        <h2 class="section-title">Validation, iteration, and a shipped product.</h2>
+
+        <p>My responsibility didn't end with design. It extended to validating the design worked and influencing what shipped next.</p>
+
+        <h3>Usability testing and refinement</h3>
+        <p>I ran unmoderated usability testing on a clickable prototype. The most significant finding was user confusion around the generic "Elephant Hint", users didn't understand the motivation behind the prompt. We iterated copy and timing, and the new version made the nudge feel like guidance rather than interruption.</p>
 
         <div class="impact-grid">
           <div class="impact-card coral">
-            <p class="impact-num">30%</p>
-            <p class="impact-lbl">faster cycle time</p>
-            <p class="impact-desc">From first registration to closed-won, measured across 200+ accounts.</p>
+            <p class="impact-num">20%</p>
+            <p class="impact-lbl">lift in engagement</p>
+            <p class="impact-desc">With the Elephant Hint guidance system after copy and timing iteration.</p>
           </div>
           <div class="impact-card sage">
-            <p class="impact-num">62%</p>
-            <p class="impact-lbl">less form abandonment</p>
-            <p class="impact-desc">Required-field reduction (24 → 9) was the biggest single lever.</p>
+            <p class="impact-num">20 yrs</p>
+            <p class="impact-lbl">compressed into 20 min</p>
+            <p class="impact-desc">Each in-game year takes one real minute. Stakes feel real because the timing is.</p>
           </div>
           <div class="impact-card">
-            <p class="impact-num">200+</p>
-            <p class="impact-lbl">enterprise accounts</p>
-            <p class="impact-desc">Rolled out from a 12-account pilot to the full Partner Plus footprint.</p>
+            <p class="impact-num">Live</p>
+            <p class="impact-lbl">at humanx.io</p>
+            <p class="impact-desc">Shipped to production with HumanX's FinTech edu partner.</p>
           </div>
         </div>
 
-        <!-- Testimonials -->
-        <p class="section-eyebrow" style="margin-top:48px;">What partners said</p>
-        <div class="testimonial-grid">
-          <div class="testimonial">
-            <p class="testimonial-quote">Honestly, the timeline alone saved me three follow-up emails this week. I can finally see what's actually happening with my deal.</p>
-            <div class="testimonial-author">
-              <span class="testimonial-avatar">DP</span>
-              <div class="testimonial-meta">
-                <span class="testimonial-name">D. Patel</span>
-                <span class="testimonial-role">Partner Rep · Mid-market SI</span>
-              </div>
-            </div>
-          </div>
-          <div class="testimonial">
-            <p class="testimonial-quote">The renewal flow used to take 15 minutes and now takes under one. That's the difference between registering a deal and not bothering.</p>
-            <div class="testimonial-author">
-              <span class="testimonial-avatar">MR</span>
-              <div class="testimonial-meta">
-                <span class="testimonial-name">M. Rodriguez</span>
-                <span class="testimonial-role">Channel Account Manager · Reseller</span>
-              </div>
-            </div>
-          </div>
-          <div class="testimonial">
-            <p class="testimonial-quote">Sakshi pushed for the archetype framing early. It changed the shape of the entire program, not just the form. We're shipping faster as a team because of it.</p>
-            <div class="testimonial-author">
-              <span class="testimonial-avatar">JC</span>
-              <div class="testimonial-meta">
-                <span class="testimonial-name">J. Chen</span>
-                <span class="testimonial-role">Eng Lead · IBM Partner Cloud</span>
-              </div>
-            </div>
-          </div>
-          <div class="testimonial">
-            <p class="testimonial-quote">She brought research, design, and our partner-side reality into one room. The numbers are the proof, but the way she got there is what I'd hire her for again.</p>
-            <div class="testimonial-author">
-              <span class="testimonial-avatar">AT</span>
-              <div class="testimonial-meta">
-                <span class="testimonial-name">A. Thompson</span>
-                <span class="testimonial-role">Director of Product · IBM Partner Plus</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        <h3>Cross-functional collaboration</h3>
+        <p>Throughout development, I made sure the features I designed were buildable. That meant working with the <strong>Content Expert</strong> to lock down the exact sequence of financial product unlocks, and with the <strong>engineering team</strong> during QA to make sure the complex logic of the real-life events worked in the live build.</p>
       </section>
 
-      <!-- ============ 06. REFLECTION ============ -->
       <section class="section" id="reflection">
         <p class="section-eyebrow">Reflection</p>
-        <h2 class="section-title">What I'd do differently next time</h2>
-        <p>
-          The biggest unlock wasn't the form redesign, it was the <strong>archetype framing</strong>. Once we stopped
-          treating "a deal" as one shape and started designing around the three real shapes, every other
-          decision got easier. I'd push to find that framing earlier next time, even at the cost of slower
-          discovery.
-        </p>
-        <p>
-          The thing I'd revisit: we deferred the admin-side dashboard to a later phase. With more time I'd have
-          designed both sides in parallel, the partner experience can only be as fast as the IBM-side review,
-          and that loop is still the rate-limiter.
+        <h2 class="section-title">Connecting design to behavioral strategy.</h2>
+
+        <p>Money20 was my first time designing a system where the goal was behavior change, not task completion. The framework I picked up here has shown up in every project since.</p>
+
+        <div class="reflect-grid">
+          <article class="reflect-card">
+            <div class="reflect-num">01</div>
+            <h4>The smallest interaction holds the most weight</h4>
+            <p>The Elephant Hint felt like a small UX problem until testing showed it was the single biggest churn risk. In a behavioral product, the smallest interactions carry the most weight.</p>
+            <span class="reflect-tag">Feature priority</span>
+          </article>
+          <article class="reflect-card">
+            <div class="reflect-num">02</div>
+            <h4>Iteration over instinct</h4>
+            <p>The 20% engagement lift wasn't an insight. It was a copy and timing tweak that came out of testing. The system was right. The execution needed iteration.</p>
+            <span class="reflect-tag">Process</span>
+          </article>
+          <article class="reflect-card">
+            <div class="reflect-num">03</div>
+            <h4>The lesson lives in the loss</h4>
+            <p>Players learned more from a 30-second bad decision than any tutorial could deliver. Designing for productive failure became a craft I've been refining ever since.</p>
+            <span class="reflect-tag">Craft</span>
+          </article>
+        </div>
+
+        <p style="margin-top: 24px; font-family: 'Fraunces', Georgia, serif; font-style: italic; font-size: 18px; color: var(--ink); line-height: 1.5;">
+          The best behavior-change products don't teach. They let you teach yourself.
         </p>
       </section>
 
-      <!-- ============ NEXT ============ -->
       <div class="next">
         <p class="next-label">Next</p>
-        <a class="next-link" href="home.html#work">
-          <span>Money20, financial-literacy for teens</span>
+        <a class="next-link" href="case-ai-accelerator.html">
+          <span>CGI AI Adoption Accelerator</span>
           <span class="arr">→</span>
         </a>
       </div>
