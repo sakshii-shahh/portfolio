@@ -176,22 +176,23 @@
       transition: opacity .4s ease;
       z-index: 0;
     }
-    .sb-tulip {
-      height: 88px;
+    .sb-tulip,
+    .sb-leaf {
       width: auto;
+      flex-shrink: 0;
+      transform-origin: bottom center;
       filter: drop-shadow(0 2px 4px rgba(20, 18, 12, 0.08));
     }
+    .sb-tulip { height: 88px; }
     .sb-tulip:nth-child(3n) { height: 76px; }
     .sb-tulip:nth-child(4n+1) { height: 95px; }
     .sb-tulip:nth-child(5n) { height: 82px; }
-    .sb-tulip:nth-child(even) {
-      transform: rotate(-6deg);
-      transform-origin: bottom center;
-    }
-    .sb-tulip:nth-child(odd) {
-      transform: rotate(5deg);
-      transform-origin: bottom center;
-    }
+    .sb-leaf { height: 72px; }
+    .sb-leaf:nth-child(odd) { height: 80px; }
+    .sb-tulip:nth-child(even),
+    .sb-leaf:nth-child(even) { transform: rotate(-6deg); }
+    .sb-tulip:nth-child(odd),
+    .sb-leaf:nth-child(odd) { transform: rotate(5deg); }
     body.footer-visible .sidebar-tulips { opacity: 0; }
     @media (max-width: 980px) {
       .sidebar-tulips { display: none; }
@@ -1261,7 +1262,7 @@
 
       <div class="sidebar-tulips" aria-hidden="true">
         <img src="assets/tulips/tulip-1.svg" alt="" class="sb-tulip" loading="lazy" />
-        <img src="assets/tulips/tulip-3.svg" alt="" class="sb-tulip" loading="lazy" />
+        <img src="assets/tulips/leaf-2.svg" alt="" class="sb-leaf" loading="lazy" />
         <img src="assets/tulips/tulip-5.svg" alt="" class="sb-tulip" loading="lazy" />
         <img src="assets/tulips/tulip-4.svg" alt="" class="sb-tulip" loading="lazy" />
       </div>
