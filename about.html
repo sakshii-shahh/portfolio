@@ -1391,7 +1391,7 @@
                 <span>Enrich Lives Foundation</span>
               </div>
               <p>Volunteer teaching staff for underprivileged children in India's slums. Learning alongside them was one of the most rewarding things I've done.</p>
-              <div class="community-card-photo"><img src="assets/about/enrich-lives.png" alt="Enrich Lives Foundation volunteer teaching" loading="lazy" /></div>
+              <div class="community-card-photo"><img src="assets/about/enrich-lives.webp" alt="Enrich Lives Foundation volunteer teaching" loading="lazy" /></div>
             </article>
 
           </div>
@@ -1403,7 +1403,7 @@
           <div class="fun-facts-grid">
 
             <div class="fun-fact">
-              <div class="fun-fact-thumb"><img src="assets/about/cafe.png" alt="" loading="lazy" /></div>
+              <div class="fun-fact-thumb"><img src="assets/about/cafe.webp" alt="" loading="lazy" /></div>
               <p>I keep a running list of cafés worth coming back to in every city I've lived in.</p>
             </div>
 
@@ -1413,12 +1413,12 @@
             </div>
 
             <div class="fun-fact">
-              <div class="fun-fact-thumb"><img src="assets/about/experience.png" alt="" loading="lazy" /></div>
+              <div class="fun-fact-thumb"><img src="assets/about/experience.webp" alt="" loading="lazy" /></div>
               <p>I'm always game for a new experience, the unfamiliar ones especially.</p>
             </div>
 
             <div class="fun-fact">
-              <div class="fun-fact-thumb"><img src="assets/about/baking.jpg" alt="" loading="lazy" /></div>
+              <div class="fun-fact-thumb"><img src="assets/about/baking.webp" alt="" loading="lazy" /></div>
               <p>I make desserts especially for the people I love.</p>
             </div>
 
@@ -1483,19 +1483,8 @@
   </footer>
 
   <script>
-    // Live clock
-    const clockEl = document.getElementById('clock');
-    function tickClock() {
-      const d = new Date();
-      const h = d.getHours();
-      const m = d.getMinutes().toString().padStart(2,'0');
-      const s = d.getSeconds().toString().padStart(2,'0');
-      const period = h >= 12 ? 'PM' : 'AM';
-      const hh = ((h + 11) % 12 + 1).toString().padStart(2,'0');
-      clockEl.textContent = `${hh}:${m}:${s} ${period}`;
-    }
-    tickClock();
-    setInterval(tickClock, 1000);
+    // Live clock — disabled (clock element is hidden via CSS)
+    // Was: setInterval(tickClock, 1000) — removed to avoid per-second wake-ups.
 
     // EXPLORE active state
     const items = document.querySelectorAll('.explore-item');
