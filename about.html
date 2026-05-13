@@ -735,10 +735,9 @@
     .polaroid-pile {
       position: relative;
       width: 100%;
-      max-width: 460px;
-      min-height: 420px;
+      max-width: 520px;
+      min-height: 500px;
       margin: 0 auto;
-      touch-action: none;
       display: grid;
       place-items: center;
     }
@@ -746,9 +745,9 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 220px;
+      width: 290px;
       background: #fff;
-      padding: 14px 14px 16px;
+      padding: 16px 16px 18px;
       border-radius: 2px;
       box-shadow:
         0 8px 22px rgba(20, 18, 12, 0.18),
@@ -787,37 +786,37 @@
 
     /* Stack positions — 0 = top (biggest), 4 = back */
     .polaroid[data-stack="0"] {
-      transform: translate(-50%, -50%) rotate(-2deg) scale(1.15);
+      transform: translate(-50%, -50%) rotate(-2deg) scale(1.08);
       z-index: 10;
       box-shadow:
-        0 18px 42px rgba(20, 18, 12, 0.26),
-        0 3px 8px rgba(20, 18, 12, 0.14);
+        0 22px 48px rgba(20, 18, 12, 0.28),
+        0 4px 10px rgba(20, 18, 12, 0.14);
     }
     .polaroid[data-stack="1"] {
-      transform: translate(-50%, -50%) translate(-26px, -16px) rotate(-8deg) scale(0.92);
+      transform: translate(-50%, -50%) translate(-34px, -20px) rotate(-8deg) scale(0.94);
       z-index: 4;
     }
     .polaroid[data-stack="2"] {
-      transform: translate(-50%, -50%) translate(28px, -10px) rotate(7deg) scale(0.88);
+      transform: translate(-50%, -50%) translate(36px, -12px) rotate(7deg) scale(0.9);
       z-index: 3;
     }
     .polaroid[data-stack="3"] {
-      transform: translate(-50%, -50%) translate(-14px, 18px) rotate(-4deg) scale(0.84);
+      transform: translate(-50%, -50%) translate(-18px, 22px) rotate(-4deg) scale(0.86);
       z-index: 2;
     }
     .polaroid[data-stack="4"] {
-      transform: translate(-50%, -50%) translate(18px, 24px) rotate(6deg) scale(0.8);
+      transform: translate(-50%, -50%) translate(24px, 28px) rotate(6deg) scale(0.82);
       z-index: 1;
     }
     @media (max-width: 760px) {
-      .polaroid-pile { min-height: 380px; max-width: 100%; }
-      .polaroid { width: 180px; padding: 12px 12px 14px; }
-      .polaroid-caption { font-size: 12px; }
-      .polaroid[data-stack="0"] { transform: translate(-50%, -50%) rotate(-2deg) scale(1.12); }
-      .polaroid[data-stack="1"] { transform: translate(-50%, -50%) translate(-20px, -12px) rotate(-8deg) scale(0.92); }
-      .polaroid[data-stack="2"] { transform: translate(-50%, -50%) translate(22px, -8px)  rotate(7deg)  scale(0.88); }
-      .polaroid[data-stack="3"] { transform: translate(-50%, -50%) translate(-10px, 14px) rotate(-4deg) scale(0.84); }
-      .polaroid[data-stack="4"] { transform: translate(-50%, -50%) translate(14px, 18px)  rotate(6deg)  scale(0.8); }
+      .polaroid-pile { min-height: 420px; max-width: 100%; }
+      .polaroid { width: 240px; padding: 14px 14px 16px; }
+      .polaroid-caption { font-size: 12.5px; }
+      .polaroid[data-stack="0"] { transform: translate(-50%, -50%) rotate(-2deg) scale(1.05); }
+      .polaroid[data-stack="1"] { transform: translate(-50%, -50%) translate(-26px, -14px) rotate(-8deg) scale(0.93); }
+      .polaroid[data-stack="2"] { transform: translate(-50%, -50%) translate(28px, -10px)  rotate(7deg)  scale(0.89); }
+      .polaroid[data-stack="3"] { transform: translate(-50%, -50%) translate(-14px, 18px)  rotate(-4deg) scale(0.85); }
+      .polaroid[data-stack="4"] { transform: translate(-50%, -50%) translate(18px, 22px)   rotate(6deg)  scale(0.82); }
     }
 
     .about-bio {
