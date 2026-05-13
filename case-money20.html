@@ -1051,7 +1051,7 @@
     }
     .hero.hero-bleed .case-figure-frame img { width: 100%; height: auto; display: block; }
     @media (max-width: 980px) { .hero.hero-bleed { margin-left: -24px; margin-right: -24px; margin-top: -32px; } }
-    @media (max-width: 600px) { .hero.hero-bleed { margin-left: -16px; margin-right: -16px; margin-top: -24px; } }
+    @media (max-width: 480px) { .hero.hero-bleed { margin-left: -16px; margin-right: -16px; margin-top: -24px; } }
 
     /* Context 3-pillar layout */
     .context-pillars {
@@ -1090,7 +1090,7 @@
       letter-spacing: .14em; text-transform: uppercase;
       color: var(--ink-mute); margin: 0 0 8px;
     }
-    .market-x-label { margin: 8px 0 0; text-align: right; }
+    .market-x-label { margin: 8px 0 0; text-align: left; }
     .market-grid {
       display: grid; grid-template-columns: 1fr 1fr; gap: 0;
       border: 1px solid var(--rule);
@@ -1419,7 +1419,6 @@
 
       <blockquote class="case-pullquote reveal d2">
         <p>"Live 20 years in 20 minutes."</p>
-        <cite>The Money20 tagline</cite>
       </blockquote>
 
       <p class="case-lede reveal d2">
@@ -1485,13 +1484,6 @@
           </div>
         </div>
 
-        <figure class="case-figure">
-          <div class="case-figure-frame full-image" data-placeholder="The team at HumanX">
-            <img src="https://framerusercontent.com/images/uG6erfIqzqbtXRrCOWBB8LV3MM.png?width=2400" alt="Team at HumanX" loading="lazy" />
-          </div>
-          <figcaption>Built with a tight-knit team at HumanX: Lead UX Designer, Software Developer, UX Writer</figcaption>
-        </figure>
-
         <h3>Where Money20 sits in the market</h3>
 
         <div class="market-map">
@@ -1521,6 +1513,35 @@
           </div>
           <p class="market-x-label">Engagement →</p>
         </div>
+
+        <h3>The core loop players experience</h3>
+        <p>Money20 runs on a tight player loop that compresses 20 years of investing decisions into a 20-minute session.</p>
+
+        <div class="loop-flow" style="grid-template-columns: repeat(4, 1fr);">
+          <div class="loop-step">
+            <div class="loop-num">01</div>
+            <h5>Time advances</h5>
+            <p>A year passes every minute. Markets move. Products unlock.</p>
+          </div>
+          <div class="loop-arrow" aria-hidden="true">→</div>
+          <div class="loop-step">
+            <div class="loop-num">02</div>
+            <h5>Events fire</h5>
+            <p>Medical bill. Festive bonus. Job loss. Real-life shocks force decisions.</p>
+          </div>
+          <div class="loop-arrow" aria-hidden="true">→</div>
+          <div class="loop-step">
+            <div class="loop-num">03</div>
+            <h5>Player chooses</h5>
+            <p>Sell, hold, buy, follow. The system tracks the pattern.</p>
+          </div>
+          <div class="loop-arrow" aria-hidden="true">→</div>
+          <div class="loop-step highlight">
+            <div class="loop-num">04</div>
+            <h5>Reflection</h5>
+            <p>End-of-session report shows the player their own bias profile.</p>
+          </div>
+        </div>
       </section>
 
       <section class="section" id="solution">
@@ -1529,100 +1550,7 @@
 
         <p>Money20 integrates behavioral finance directly into the play loop. Players make 20 years of investing decisions in 20 minutes. The system surfaces their behavioral patterns back to them as they play, so the learning happens through experience rather than after it.</p>
 
-        <h3>Where it sits</h3>
-        <p>Money20 lives at the intersection of three disciplines. Each one shaped a different layer of the product.</p>
-
-        <div class="venn-container">
-          <svg class="venn-svg" viewBox="0 0 400 360" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <defs>
-              <radialGradient id="m20-venn-coral" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stop-color="#ec6478" stop-opacity="0.32"/>
-                <stop offset="100%" stop-color="#ec6478" stop-opacity="0.16"/>
-              </radialGradient>
-              <radialGradient id="m20-venn-sage" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stop-color="#5e8a4f" stop-opacity="0.30"/>
-                <stop offset="100%" stop-color="#5e8a4f" stop-opacity="0.14"/>
-              </radialGradient>
-              <radialGradient id="m20-venn-leaf" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stop-color="#4ea862" stop-opacity="0.30"/>
-                <stop offset="100%" stop-color="#4ea862" stop-opacity="0.14"/>
-              </radialGradient>
-            </defs>
-            <circle class="venn-circle vc-1" cx="200" cy="130" r="110" fill="url(#m20-venn-coral)" stroke="#ec6478" stroke-opacity="0.5" stroke-width="1.5"/>
-            <circle class="venn-circle vc-2" cx="135" cy="230" r="110" fill="url(#m20-venn-sage)" stroke="#5e8a4f" stroke-opacity="0.5" stroke-width="1.5"/>
-            <circle class="venn-circle vc-3" cx="265" cy="230" r="110" fill="url(#m20-venn-leaf)" stroke="#4ea862" stroke-opacity="0.5" stroke-width="1.5"/>
-            <ellipse cx="200" cy="200" rx="62" ry="40" fill="#ec6478" fill-opacity="0.22"/>
-            <ellipse cx="200" cy="200" rx="58" ry="36" fill="#f0e8d2" fill-opacity="0.85"/>
-            <text x="200" y="80" text-anchor="middle" font-family="Bricolage Grotesque, system-ui, sans-serif" font-weight="600" font-size="15" fill="#3a2818">Game design</text>
-            <text x="80" y="290" text-anchor="middle" font-family="Bricolage Grotesque, system-ui, sans-serif" font-weight="600" font-size="15" fill="#3a2818">Behavioral finance</text>
-            <text x="320" y="290" text-anchor="middle" font-family="Bricolage Grotesque, system-ui, sans-serif" font-weight="600" font-size="15" fill="#3a2818">Financial education</text>
-            <text x="200" y="196" text-anchor="middle" font-family="Bricolage Grotesque, system-ui, sans-serif" font-weight="600" font-size="14" fill="#b13e58" letter-spacing="-0.01em">Money20</text>
-            <text x="200" y="214" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-style="italic" font-size="11" fill="#5a4632">where they meet</text>
-          </svg>
-          <p class="venn-caption">Three disciplines, one product. Each circle shaped a different layer.</p>
-        </div>
-
-        <h3>My process</h3>
-
-        <div class="design-process">
-          <div class="dp-step">
-            <div class="dp-num">01</div>
-            <h5>Discover</h5>
-            <p>Behavioral finance literature, competitor games, audience research with young adults in India.</p>
-          </div>
-          <div class="dp-arrow" aria-hidden="true">→</div>
-          <div class="dp-step">
-            <div class="dp-num">02</div>
-            <h5>Define</h5>
-            <p>Reframed the brief from "teach investing" to "rehearse behavior." Sketched the 20-year compression.</p>
-          </div>
-          <div class="dp-arrow" aria-hidden="true">→</div>
-          <div class="dp-step">
-            <div class="dp-num">03</div>
-            <h5>Wireframe</h5>
-            <p>Information architecture for four core surfaces. Persistent timer and portfolio frames.</p>
-          </div>
-          <div class="dp-arrow" aria-hidden="true">→</div>
-          <div class="dp-step">
-            <div class="dp-num">04</div>
-            <h5>Design</h5>
-            <p>High-fi visual pass. Color palette, typography, component system, five core screens.</p>
-          </div>
-          <div class="dp-arrow" aria-hidden="true">→</div>
-          <div class="dp-step highlight">
-            <div class="dp-num">05</div>
-            <h5>Test + ship</h5>
-            <p>Unmoderated usability testing. Iteration on the Elephant Hint. Live on humanx.io.</p>
-          </div>
-        </div>
-
-        <h3>The core loop players experience</h3>
-
-        <div class="loop-flow" style="grid-template-columns: repeat(4, 1fr);">
-          <div class="loop-step">
-            <div class="loop-num">01</div>
-            <h5>Time advances</h5>
-            <p>A year passes every minute. Markets move. Products unlock.</p>
-          </div>
-          <div class="loop-step">
-            <div class="loop-num">02</div>
-            <h5>Events fire</h5>
-            <p>Medical bill. Festive bonus. Job loss. Real-life shocks force decisions.</p>
-          </div>
-          <div class="loop-step">
-            <div class="loop-num">03</div>
-            <h5>Player chooses</h5>
-            <p>Sell, hold, buy, follow. The system tracks the pattern.</p>
-          </div>
-          <div class="loop-step highlight">
-            <div class="loop-num">04</div>
-            <h5>Reflection</h5>
-            <p>End-of-session report shows the player their own bias profile.</p>
-          </div>
-        </div>
-
         <h3>Five core features</h3>
-        <p>Click each to see the design moment.</p>
 
         <div class="features-tabs">
           <div class="feat-tabs-list">
