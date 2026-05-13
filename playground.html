@@ -322,7 +322,7 @@
       color: var(--ink-mute); letter-spacing: .03em;
       display: flex; flex-direction: column; gap: 3px;
     }
-    .clock { color: var(--ink-soft); font-feature-settings: "tnum"; }
+    .clock { display: none; }
 
     /* ============ MAIN, twilight garden coming-soon scene ============ */
     .stage {
@@ -755,19 +755,7 @@
   </footer>
 
   <script>
-    // Live clock
-    const clockEl = document.getElementById('clock');
-    function tickClock() {
-      const d = new Date();
-      const h = d.getHours();
-      const m = d.getMinutes().toString().padStart(2,'0');
-      const s = d.getSeconds().toString().padStart(2,'0');
-      const period = h >= 12 ? 'PM' : 'AM';
-      const hh = ((h + 11) % 12 + 1).toString().padStart(2,'0');
-      clockEl.textContent = `${hh}:${m}:${s} ${period}`;
-    }
-    tickClock();
-    setInterval(tickClock, 1000);
+    // Live clock — disabled (clock element is hidden via CSS)
 
     // Cursor
     const dotEl = document.querySelector('.cursor-dot');
