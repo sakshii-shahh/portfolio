@@ -736,23 +736,45 @@
       position: relative;
       width: 100%;
       max-width: 460px;
-      min-height: 520px;
+      min-height: 420px;
       margin: 0 auto;
       touch-action: none;
+      display: grid;
+      place-items: center;
     }
     .polaroid {
+      --bx: 0px;
+      --by: 0px;
+      --rot: 0deg;
+      --scale: 1;
+      --dx: 0px;
+      --dy: 0px;
+      --lift: 1;
       position: absolute;
-      width: 200px;
+      top: 50%;
+      left: 50%;
+      width: 220px;
       background: #fff;
-      padding: 12px 12px 14px;
+      padding: 14px 14px 16px;
       border-radius: 2px;
       box-shadow:
-        0 6px 18px rgba(20, 18, 12, 0.18),
-        0 1px 3px rgba(20, 18, 12, 0.10);
+        0 8px 22px rgba(20, 18, 12, 0.18),
+        0 2px 4px rgba(20, 18, 12, 0.10);
       cursor: grab;
       user-select: none;
       transform-origin: center center;
-      transition: box-shadow .2s var(--ease);
+      transform:
+        translate(-50%, -50%)
+        translate(calc(var(--bx) + var(--dx)), calc(var(--by) + var(--dy)))
+        rotate(var(--rot))
+        scale(calc(var(--scale) * var(--lift)));
+      transition: transform .25s var(--ease), box-shadow .2s var(--ease);
+    }
+    .polaroid.is-dragging {
+      --lift: 1.04;
+      z-index: 100;
+      transition: none;
+      cursor: grabbing;
     }
     .polaroid:hover {
       box-shadow:
@@ -778,21 +800,25 @@
       line-height: 1.3;
       pointer-events: none;
     }
-    /* z-index stack: perspective (5) in the back, beach (3) on top */
-    .polaroid:nth-child(1) { top: 0;    left: 0;     transform: rotate(-8deg); z-index: 2; }
-    .polaroid:nth-child(2) { top: 50px;  left: 200px; transform: rotate(5deg);  z-index: 3; }
-    .polaroid:nth-child(3) { top: 220px; left: 30px;  transform: rotate(-3deg); z-index: 10; }
-    .polaroid:nth-child(4) { top: 260px; left: 220px; transform: rotate(7deg);  z-index: 4; }
-    .polaroid:nth-child(5) { top: 140px; left: 120px; transform: rotate(3deg);  z-index: 1; }
+    /* Stack centered; beach (3) on top + slightly bigger, perspective (5) in back */
+    .polaroid:nth-child(1) { --bx: -46px; --by: -28px; --rot: -9deg; z-index: 2; }
+    .polaroid:nth-child(2) { --bx: 58px;  --by: -16px; --rot: 6deg;  z-index: 3; }
+    .polaroid:nth-child(3) {
+      --bx: 0;     --by: 6px;   --rot: -2deg; --scale: 1.12;
+      z-index: 10;
+      box-shadow: 0 16px 38px rgba(20,18,12,0.26), 0 3px 8px rgba(20,18,12,0.14);
+    }
+    .polaroid:nth-child(4) { --bx: -26px; --by: 36px;  --rot: 8deg;  z-index: 4; }
+    .polaroid:nth-child(5) { --bx: 34px;  --by: 44px;  --rot: 4deg;  z-index: 1; }
     @media (max-width: 760px) {
-      .polaroid-pile { min-height: 460px; max-width: 100%; }
-      .polaroid { width: 160px; padding: 10px 10px 12px; }
+      .polaroid-pile { min-height: 380px; max-width: 100%; }
+      .polaroid { width: 180px; padding: 12px 12px 14px; }
       .polaroid-caption { font-size: 12px; }
-      .polaroid:nth-child(1) { top: 0;    left: 4%;  }
-      .polaroid:nth-child(2) { top: 40px;  left: 42%; }
-      .polaroid:nth-child(3) { top: 200px; left: 8%;  }
-      .polaroid:nth-child(4) { top: 230px; left: 48%; }
-      .polaroid:nth-child(5) { top: 120px; left: 28%; }
+      .polaroid:nth-child(1) { --bx: -38px; --by: -22px; --rot: -9deg; }
+      .polaroid:nth-child(2) { --bx: 46px;  --by: -14px; --rot: 6deg; }
+      .polaroid:nth-child(3) { --bx: 0;     --by: 4px;   --rot: -2deg; --scale: 1.1; }
+      .polaroid:nth-child(4) { --bx: -22px; --by: 30px;  --rot: 8deg; }
+      .polaroid:nth-child(5) { --bx: 28px;  --by: 36px;  --rot: 4deg; }
     }
 
     .about-bio {
@@ -1673,40 +1699,36 @@
       });
     })();
 
-    // Polaroids are draggable for fun
+    // Polaroids are draggable for fun. Drag delta is tracked via --dx/--dy
+    // CSS vars; CSS handles the composition with the per-card base offset.
     (function makePolaroidsDraggable() {
       const polaroids = document.querySelectorAll('.polaroid');
       polaroids.forEach((poly) => {
         let isDragging = false;
         let startX = 0, startY = 0;
-        let currentX = 0, currentY = 0;
-        const baseRotation = parseFloat(poly.dataset.rotation || 0);
+        let dx = 0, dy = 0;
 
         const onPointerDown = (e) => {
           isDragging = true;
-          poly.style.cursor = 'grabbing';
-          poly.style.zIndex = 100;
-          poly.style.transition = 'none';
-          startX = e.clientX - currentX;
-          startY = e.clientY - currentY;
+          poly.classList.add('is-dragging');
+          startX = e.clientX - dx;
+          startY = e.clientY - dy;
           poly.setPointerCapture && poly.setPointerCapture(e.pointerId);
           e.preventDefault();
         };
 
         const onPointerMove = (e) => {
           if (!isDragging) return;
-          currentX = e.clientX - startX;
-          currentY = e.clientY - startY;
-          const wobble = baseRotation + (Math.random() * 1.5 - 0.75);
-          poly.style.transform = `translate(${currentX}px, ${currentY}px) rotate(${wobble}deg) scale(1.04)`;
+          dx = e.clientX - startX;
+          dy = e.clientY - startY;
+          poly.style.setProperty('--dx', dx + 'px');
+          poly.style.setProperty('--dy', dy + 'px');
         };
 
         const onPointerUp = () => {
           if (!isDragging) return;
           isDragging = false;
-          poly.style.cursor = 'grab';
-          poly.style.transition = 'transform .25s var(--ease), box-shadow .2s var(--ease)';
-          poly.style.transform = `translate(${currentX}px, ${currentY}px) rotate(${baseRotation}deg)`;
+          poly.classList.remove('is-dragging');
         };
 
         poly.addEventListener('pointerdown', onPointerDown);
