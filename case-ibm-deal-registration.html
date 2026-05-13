@@ -658,9 +658,12 @@
     }
 
     .features-list {
-      list-style: none; padding: 0; margin: 28px 0 0;
+      list-style: none; list-style-type: none;
+      padding: 0; margin: 28px 0 0;
       display: flex; flex-direction: column; gap: 14px;
+      counter-reset: feat;
     }
+    .features-list li::marker { content: ''; }
     .features-list li {
       background: var(--bg-elev);
       border: 1px solid var(--rule);
@@ -668,7 +671,7 @@
       padding: 22px 26px;
       font-size: 15.5px; line-height: 1.55;
       color: var(--ink-soft);
-      list-style: none;
+      list-style: none; list-style-type: none;
     }
     .features-list strong { color: var(--ink); font-weight: 500; }
 
@@ -1163,8 +1166,8 @@
       <!-- ============ NEXT ============ -->
       <div class="next">
         <p class="next-label">Next</p>
-        <a class="next-link" href="home.html#work">
-          <span>Money20, financial-literacy for teens</span>
+        <a class="next-link" href="case-money20.html">
+          <span>Money20 — Live 20 years in 20 minutes</span>
           <span class="arr">→</span>
         </a>
       </div>
