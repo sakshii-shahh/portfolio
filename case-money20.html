@@ -1092,26 +1092,6 @@
       display: block; margin-bottom: 4px;
     }
 
-    /* Full-bleed hero (kill side gutters of .main and reset base .hero box) */
-    .hero.hero-bleed {
-      width: auto;
-      aspect-ratio: auto;
-      border-radius: 0;
-      overflow: visible;
-      background: transparent;
-      box-shadow: none;
-      margin-left: -96px; margin-right: -96px;
-      margin-top: -48px; margin-bottom: 28px;
-    }
-    .hero.hero-bleed .case-figure-frame {
-      border: none; border-radius: 0;
-      aspect-ratio: auto; background: transparent;
-      padding: 0;
-    }
-    .hero.hero-bleed .case-figure-frame img { width: 100%; height: auto; display: block; }
-    @media (max-width: 980px) { .hero.hero-bleed { margin-left: -24px; margin-right: -24px; margin-top: -32px; } }
-    @media (max-width: 480px) { .hero.hero-bleed { margin-left: -16px; margin-right: -16px; margin-top: -24px; } }
-
     /* Context 3-pillar layout */
     .context-pillars {
       display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
@@ -1465,10 +1445,8 @@
     <!-- ============ MAIN ============ -->
     <main class="main" id="top">
 
-      <div class="hero hero-bleed reveal">
-        <div class="case-figure-frame full-image" data-placeholder="Money20: investment simulation game built at HumanX">
-          <img src="https://framerusercontent.com/images/dpZldLfzlLgOtQ0b3drHMkf364.png?width=2400" alt="Money20 hero" />
-        </div>
+      <div class="hero reveal">
+        <img src="https://framerusercontent.com/images/dpZldLfzlLgOtQ0b3drHMkf364.png?width=2400" alt="Money20 hero" />
       </div>
 
       <div class="case-tags reveal d1">
