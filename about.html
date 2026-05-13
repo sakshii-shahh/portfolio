@@ -743,13 +743,6 @@
       place-items: center;
     }
     .polaroid {
-      --bx: 0px;
-      --by: 0px;
-      --rot: 0deg;
-      --scale: 1;
-      --dx: 0px;
-      --dy: 0px;
-      --lift: 1;
       position: absolute;
       top: 50%;
       left: 50%;
@@ -760,28 +753,19 @@
       box-shadow:
         0 8px 22px rgba(20, 18, 12, 0.18),
         0 2px 4px rgba(20, 18, 12, 0.10);
-      cursor: grab;
+      cursor: pointer;
       user-select: none;
       transform-origin: center center;
-      transform:
-        translate(-50%, -50%)
-        translate(calc(var(--bx) + var(--dx)), calc(var(--by) + var(--dy)))
-        rotate(var(--rot))
-        scale(calc(var(--scale) * var(--lift)));
-      transition: transform .25s var(--ease), box-shadow .2s var(--ease);
-    }
-    .polaroid.is-dragging {
-      --lift: 1.04;
-      z-index: 100;
-      transition: none;
-      cursor: grabbing;
+      will-change: transform;
+      transition:
+        transform .55s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow .25s var(--ease);
     }
     .polaroid:hover {
       box-shadow:
         0 10px 24px rgba(20, 18, 12, 0.22),
         0 2px 4px rgba(20, 18, 12, 0.14);
     }
-    .polaroid:active { cursor: grabbing; }
     .polaroid img {
       width: 100%;
       aspect-ratio: 1 / 1;
@@ -800,25 +784,40 @@
       line-height: 1.3;
       pointer-events: none;
     }
-    /* Stack centered; beach (3) on top + slightly bigger, perspective (5) in back */
-    .polaroid:nth-child(1) { --bx: -46px; --by: -28px; --rot: -9deg; z-index: 2; }
-    .polaroid:nth-child(2) { --bx: 58px;  --by: -16px; --rot: 6deg;  z-index: 3; }
-    .polaroid:nth-child(3) {
-      --bx: 0;     --by: 6px;   --rot: -2deg; --scale: 1.12;
+
+    /* Stack positions — 0 = top (biggest), 4 = back */
+    .polaroid[data-stack="0"] {
+      transform: translate(-50%, -50%) rotate(-2deg) scale(1.15);
       z-index: 10;
-      box-shadow: 0 16px 38px rgba(20,18,12,0.26), 0 3px 8px rgba(20,18,12,0.14);
+      box-shadow:
+        0 18px 42px rgba(20, 18, 12, 0.26),
+        0 3px 8px rgba(20, 18, 12, 0.14);
     }
-    .polaroid:nth-child(4) { --bx: -26px; --by: 36px;  --rot: 8deg;  z-index: 4; }
-    .polaroid:nth-child(5) { --bx: 34px;  --by: 44px;  --rot: 4deg;  z-index: 1; }
+    .polaroid[data-stack="1"] {
+      transform: translate(-50%, -50%) translate(-26px, -16px) rotate(-8deg) scale(0.92);
+      z-index: 4;
+    }
+    .polaroid[data-stack="2"] {
+      transform: translate(-50%, -50%) translate(28px, -10px) rotate(7deg) scale(0.88);
+      z-index: 3;
+    }
+    .polaroid[data-stack="3"] {
+      transform: translate(-50%, -50%) translate(-14px, 18px) rotate(-4deg) scale(0.84);
+      z-index: 2;
+    }
+    .polaroid[data-stack="4"] {
+      transform: translate(-50%, -50%) translate(18px, 24px) rotate(6deg) scale(0.8);
+      z-index: 1;
+    }
     @media (max-width: 760px) {
       .polaroid-pile { min-height: 380px; max-width: 100%; }
       .polaroid { width: 180px; padding: 12px 12px 14px; }
       .polaroid-caption { font-size: 12px; }
-      .polaroid:nth-child(1) { --bx: -38px; --by: -22px; --rot: -9deg; }
-      .polaroid:nth-child(2) { --bx: 46px;  --by: -14px; --rot: 6deg; }
-      .polaroid:nth-child(3) { --bx: 0;     --by: 4px;   --rot: -2deg; --scale: 1.1; }
-      .polaroid:nth-child(4) { --bx: -22px; --by: 30px;  --rot: 8deg; }
-      .polaroid:nth-child(5) { --bx: 28px;  --by: 36px;  --rot: 4deg; }
+      .polaroid[data-stack="0"] { transform: translate(-50%, -50%) rotate(-2deg) scale(1.12); }
+      .polaroid[data-stack="1"] { transform: translate(-50%, -50%) translate(-20px, -12px) rotate(-8deg) scale(0.92); }
+      .polaroid[data-stack="2"] { transform: translate(-50%, -50%) translate(22px, -8px)  rotate(7deg)  scale(0.88); }
+      .polaroid[data-stack="3"] { transform: translate(-50%, -50%) translate(-10px, 14px) rotate(-4deg) scale(0.84); }
+      .polaroid[data-stack="4"] { transform: translate(-50%, -50%) translate(14px, 18px)  rotate(6deg)  scale(0.8); }
     }
 
     .about-bio {
@@ -1334,24 +1333,24 @@
 
         <!-- Hero: photo + bio -->
         <div class="about-hero">
-          <div class="polaroid-pile reveal" id="polaroidPile" aria-label="Polaroid photos of Sakshi. Drag them around to play.">
-            <div class="polaroid" data-rotation="-8">
+          <div class="polaroid-pile reveal" id="polaroidPile" aria-label="Polaroid photos of Sakshi. Click the top one to cycle through.">
+            <div class="polaroid" data-id="beach">
+              <img src="assets/about/03-beach-and-sunshine.webp" alt="At the beach" loading="lazy" />
+              <p class="polaroid-caption">hey there!</p>
+            </div>
+            <div class="polaroid" data-id="concrete">
               <img src="assets/about/01-concrete-jungle.webp" alt="In New York" loading="lazy" />
               <p class="polaroid-caption">Concrete jungle where dreams are made of</p>
             </div>
-            <div class="polaroid" data-rotation="5">
+            <div class="polaroid" data-id="grad">
               <img src="assets/about/02-grad-era.webp" alt="Northwestern grad era" loading="lazy" />
               <p class="polaroid-caption">In my grad era</p>
             </div>
-            <div class="polaroid" data-rotation="-3">
-              <img src="assets/about/03-beach-and-sunshine.webp" alt="At the beach" loading="lazy" />
-              <p class="polaroid-caption">Only BS I need is beach and sunshine</p>
-            </div>
-            <div class="polaroid" data-rotation="7">
+            <div class="polaroid" data-id="floating">
               <img src="assets/about/04-floating.webp" alt="Floating around ideas" loading="lazy" />
               <p class="polaroid-caption">Floating around ideas</p>
             </div>
-            <div class="polaroid" data-rotation="3">
+            <div class="polaroid" data-id="perspective">
               <img src="assets/about/05-perspective.webp" alt="A different perspective" loading="lazy" />
               <p class="polaroid-caption">Always having a different perspective</p>
             </div>
@@ -1699,41 +1698,30 @@
       });
     })();
 
-    // Polaroids are draggable for fun. Drag delta is tracked via --dx/--dy
-    // CSS vars; CSS handles the composition with the per-card base offset.
-    (function makePolaroidsDraggable() {
-      const polaroids = document.querySelectorAll('.polaroid');
+    // Polaroid stack — click any card to cycle: top card moves to the back,
+    // next card becomes the top.
+    (function setupPolaroidStack() {
+      const polaroids = Array.from(document.querySelectorAll('.polaroid'));
+      if (!polaroids.length) return;
+      // Initial order: DOM order = stack order (first is top)
+      let order = polaroids.slice();
+      const applyStack = () => {
+        order.forEach((el, i) => el.dataset.stack = i);
+      };
+      applyStack();
       polaroids.forEach((poly) => {
-        let isDragging = false;
-        let startX = 0, startY = 0;
-        let dx = 0, dy = 0;
-
-        const onPointerDown = (e) => {
-          isDragging = true;
-          poly.classList.add('is-dragging');
-          startX = e.clientX - dx;
-          startY = e.clientY - dy;
-          poly.setPointerCapture && poly.setPointerCapture(e.pointerId);
-          e.preventDefault();
-        };
-
-        const onPointerMove = (e) => {
-          if (!isDragging) return;
-          dx = e.clientX - startX;
-          dy = e.clientY - startY;
-          poly.style.setProperty('--dx', dx + 'px');
-          poly.style.setProperty('--dy', dy + 'px');
-        };
-
-        const onPointerUp = () => {
-          if (!isDragging) return;
-          isDragging = false;
-          poly.classList.remove('is-dragging');
-        };
-
-        poly.addEventListener('pointerdown', onPointerDown);
-        window.addEventListener('pointermove', onPointerMove);
-        window.addEventListener('pointerup', onPointerUp);
+        poly.addEventListener('click', () => {
+          const idx = order.indexOf(poly);
+          if (idx === 0) {
+            // Top card: send to back
+            order.push(order.shift());
+          } else {
+            // Background card: bring to front
+            order.splice(idx, 1);
+            order.unshift(poly);
+          }
+          applyStack();
+        });
       });
     })();
   </script>
