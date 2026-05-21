@@ -1501,6 +1501,220 @@
       line-height: 1.55;
     }
 
+
+    /* World map */
+    .world-map {
+      background: #fbf6e5;
+      border: 1px solid #d6c8a4;
+      border-radius: 10px;
+      padding: 16px;
+    }
+    .world-map svg { width: 100%; height: auto; display: block; }
+
+    /* Journey map */
+    .journey-map { width: 100%; height: auto; display: block; }
+
+    /* Story carousel */
+    .story-carousel {
+      position: relative;
+      display: grid;
+      grid-template-columns: 36px 1fr 36px;
+      gap: 8px;
+      align-items: stretch;
+    }
+    .story-nav {
+      background: #fbf6e5;
+      border: 1px solid #d6c8a4;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      align-self: center;
+      font-size: 18px;
+      color: #3a2818;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .story-nav:hover { background: #ec6478; color: #fbf6e5; border-color: #ec6478; }
+    .story-track {
+      display: flex;
+      gap: 14px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      padding: 4px 0;
+    }
+    .story-track::-webkit-scrollbar { display: none; }
+    .story-track .story-card {
+      flex: 0 0 calc(50% - 7px);
+      scroll-snap-align: start;
+      background: #fbf6e5;
+      border: 1px solid #d6c8a4;
+      border-radius: 10px;
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .story-track .story-card.dim { background: transparent; border-style: dashed; }
+    @media (max-width: 720px) {
+      .story-track .story-card { flex: 0 0 100%; }
+    }
+
+    /* Feature prioritization */
+    .priority-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .priority-col {
+      background: #fbf6e5;
+      border: 1px solid #d6c8a4;
+      border-radius: 10px;
+      padding: 16px;
+    }
+    .priority-col.p0 { border-top: 3px solid #ec6478; }
+    .priority-col.p1 { border-top: 3px solid #d6c08a; }
+    .priority-col.p2 { border-top: 3px solid #b8a988; }
+    .priority-col-label {
+      font-family: ui-monospace, monospace;
+      font-size: 10.5px;
+      letter-spacing: 1.5px;
+      font-weight: 600;
+      margin: 0 0 14px;
+      text-transform: uppercase;
+      color: #3a2818;
+    }
+    .priority-item {
+      background: #ffffff;
+      border-radius: 6px;
+      padding: 10px 12px;
+      margin-bottom: 8px;
+    }
+    .priority-item:last-child { margin-bottom: 0; }
+    .priority-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: #3a2818;
+      margin: 0 0 4px;
+    }
+    .priority-desc { font-size: 12.5px; color: #5a4632; margin: 0; line-height: 1.5; }
+    @media (max-width: 720px) { .priority-grid { grid-template-columns: 1fr; } }
+
+    /* Carbon-styled flow diagram */
+    .flow-diagram-carbon {
+      background: #f4f4f4;
+      border: 1px solid #d6c8a4;
+      border-radius: 10px;
+      padding: 20px;
+      overflow-x: auto;
+    }
+    .flow-diagram-carbon svg { width: 100%; min-width: 720px; height: auto; display: block; }
+
+    /* Lo-fi mockup */
+    .lofi-mockup {
+      background: linear-gradient(180deg, #fbf6e5 0%, #f0e8d2 100%);
+      border: 1px solid #d6c8a4;
+      border-radius: 12px;
+      padding: 20px 12px;
+      overflow-x: auto;
+    }
+    .lofi-mockup svg { width: 100%; min-width: 720px; height: auto; display: block; }
+
+    /* Hi-fi NDA overlay */
+    .hifi-nda {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fbf6e5;
+      border: 1px solid #d6c8a4;
+      aspect-ratio: 16 / 10;
+    }
+    .hifi-nda img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: blur(6px) brightness(0.9);
+    }
+    .hifi-nda-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(58, 40, 24, 0.4);
+    }
+    .hifi-nda-stamp {
+      background: #fbf6e5;
+      border: 2px solid #ec6478;
+      border-radius: 12px;
+      padding: 24px 36px;
+      text-align: center;
+      transform: rotate(-3deg);
+      box-shadow: 0 8px 24px rgba(58, 40, 24, 0.2);
+    }
+    .hifi-nda-eyebrow {
+      font-family: ui-monospace, monospace;
+      font-size: 10.5px;
+      letter-spacing: 2px;
+      color: #ec6478;
+      font-weight: 700;
+      margin: 0 0 8px;
+      text-transform: uppercase;
+    }
+    .hifi-nda-text {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: #3a2818;
+      margin: 0;
+      line-height: 1.3;
+    }
+
+    /* Carbon collapsible details */
+    .carbon-details {
+      background: #fbf6e5;
+      border: 1px solid #d6c8a4;
+      border-radius: 10px;
+      margin: 16px 0;
+      overflow: hidden;
+    }
+    .carbon-details summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 16px 20px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 16px;
+      align-items: center;
+    }
+    .carbon-details summary::-webkit-details-marker { display: none; }
+    .details-eyebrow {
+      font-family: ui-monospace, monospace;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      color: #ec6478;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    .details-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: #3a2818;
+    }
+    .details-icon {
+      font-family: ui-monospace, monospace;
+      font-size: 20px;
+      color: #5a4632;
+      transition: transform 0.2s ease;
+    }
+    .carbon-details[open] .details-icon { transform: rotate(45deg); }
+    .carbon-details[open] summary { border-bottom: 1px solid #d6c8a4; }
+    .carbon-details > *:not(summary) { padding: 0 20px; }
+    .carbon-details > *:not(summary):first-of-type { padding-top: 16px; }
+    .carbon-details > *:not(summary):last-child { padding-bottom: 20px; }
+
   </style>
 </head>
 <body>
@@ -1518,10 +1732,10 @@
         <ol>
           <li><a href="#context" class="toc-link active"><span class="num">01.</span>Context</a></li>
           <li><a href="#research" class="toc-link"><span class="num">02.</span>Research</a></li>
-          <li><a href="#process" class="toc-link"><span class="num">03.</span>Process</a></li>
+          <li><a href="#process" class="toc-link"><span class="num">03.</span>UX Process</a></li>
           <li><a href="#solution" class="toc-link"><span class="num">04.</span>Solution</a></li>
-          <li><a href="#features" class="toc-link"><span class="num">05.</span>Features</a></li>
-          <li><a href="#carbon" class="toc-link"><span class="num">06.</span>Carbon components</a></li>
+          <li><a href="#carbon" class="toc-link"><span class="num">05.</span>Carbon contribution</a></li>
+          <li><a href="#validation" class="toc-link"><span class="num">06.</span>Validation</a></li>
           <li><a href="#impact" class="toc-link"><span class="num">07.</span>Impact</a></li>
           <li><a href="#reflection" class="toc-link"><span class="num">08.</span>Reflection</a></li>
         </ol>
@@ -1628,320 +1842,361 @@
         <p>
           The synthesis became a tight problem statement: <strong>the form didn't match the shape of the work</strong>. After a prioritization matrix with the Product Owner, we agreed to tackle the high-impact "Add Products" flow first.
         </p>
+
+        <div class="process-visual">
+          <div class="world-map">
+            <svg viewBox="0 0 800 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="World map showing locations of 12 partner contextual inquiry sessions">
+              <rect width="800" height="380" fill="#f0e8d2"/>
+              <g fill="#e3d6b1" stroke="#cdc0a0" stroke-width="0.5">
+                <path d="M80 90 Q90 70 120 65 L180 60 Q210 70 230 95 L240 130 Q220 160 180 175 L130 180 Q100 170 85 150 Q75 120 80 90 Z"/>
+                <path d="M195 200 Q210 195 220 210 L225 250 Q220 290 210 320 Q195 335 180 320 L175 280 Q175 230 195 200 Z"/>
+                <path d="M370 80 Q400 75 430 85 L450 110 Q445 135 425 145 L390 145 Q375 130 370 110 Z"/>
+                <path d="M390 160 Q420 155 445 175 L455 230 Q445 280 420 305 Q395 310 380 280 L375 220 Q380 185 390 160 Z"/>
+                <path d="M460 75 Q510 65 570 75 L640 100 Q670 130 660 165 L600 175 Q550 170 510 155 L475 130 Q460 100 460 75 Z"/>
+                <path d="M620 240 Q655 235 685 245 L695 270 Q680 290 645 285 L620 275 Q615 255 620 240 Z"/>
+              </g>
+              <g>
+                <circle cx="150" cy="130" r="6" fill="#ec6478"/>
+                <circle cx="150" cy="130" r="12" fill="#ec6478" opacity="0.25"/>
+                <text x="150" y="108" font-family="ui-monospace, monospace" font-size="10" fill="#3a2818" text-anchor="middle" font-weight="600">3 partners</text>
+                <text x="150" y="98" font-family="ui-monospace, monospace" font-size="8.5" fill="#8a7a5e" text-anchor="middle" letter-spacing="1">N. AMERICA</text>
+                <circle cx="405" cy="115" r="6" fill="#ec6478"/>
+                <circle cx="405" cy="115" r="12" fill="#ec6478" opacity="0.25"/>
+                <text x="405" y="93" font-family="ui-monospace, monospace" font-size="10" fill="#3a2818" text-anchor="middle" font-weight="600">4 partners</text>
+                <text x="405" y="83" font-family="ui-monospace, monospace" font-size="8.5" fill="#8a7a5e" text-anchor="middle" letter-spacing="1">EUROPE</text>
+                <circle cx="555" cy="160" r="6" fill="#ec6478"/>
+                <circle cx="555" cy="160" r="12" fill="#ec6478" opacity="0.25"/>
+                <text x="555" y="185" font-family="ui-monospace, monospace" font-size="10" fill="#3a2818" text-anchor="middle" font-weight="600">3 partners</text>
+                <text x="555" y="197" font-family="ui-monospace, monospace" font-size="8.5" fill="#8a7a5e" text-anchor="middle" letter-spacing="1">INDIA</text>
+                <circle cx="210" cy="280" r="6" fill="#ec6478"/>
+                <circle cx="210" cy="280" r="12" fill="#ec6478" opacity="0.25"/>
+                <text x="210" y="305" font-family="ui-monospace, monospace" font-size="10" fill="#3a2818" text-anchor="middle" font-weight="600">1 partner</text>
+                <text x="210" y="317" font-family="ui-monospace, monospace" font-size="8.5" fill="#8a7a5e" text-anchor="middle" letter-spacing="1">BRAZIL</text>
+                <circle cx="660" cy="260" r="6" fill="#ec6478"/>
+                <circle cx="660" cy="260" r="12" fill="#ec6478" opacity="0.25"/>
+                <text x="660" y="285" font-family="ui-monospace, monospace" font-size="10" fill="#3a2818" text-anchor="middle" font-weight="600">1 partner</text>
+                <text x="660" y="297" font-family="ui-monospace, monospace" font-size="8.5" fill="#8a7a5e" text-anchor="middle" letter-spacing="1">AUSTRALIA</text>
+              </g>
+              <g transform="translate(20 345)">
+                <circle cx="8" cy="8" r="5" fill="#ec6478"/>
+                <text x="22" y="12" font-family="ui-monospace, monospace" font-size="10" fill="#5a4632">12 contextual inquiry sessions &middot; 5 regions &middot; 4 time zones</text>
+              </g>
+            </svg>
+          </div>
+          <p class="process-visual-caption">Contextual inquiry footprint &middot; 12 partners shadowed across 5 regions over 4 weeks</p>
+        </div>
+
       </section>
 
       <!-- ============ 03. PROCESS ============ -->
       <section class="section" id="process">
         <p class="section-eyebrow">UX process</p>
-        <h2 class="section-title">Six weeks between "the form is broken" and "here's the prototype"</h2>
-        <p>
-          Five overlapping phases &mdash; discovery, research, synthesis, design and test, then validation and handoff. Each one produced an artifact the next phase depended on, and each one is summarized below.
-        </p>
+        <h2 class="section-title">From research to prototype</h2>
+        <p>Research told us the form didn't match the shape of the work. Process is how we translated that finding into a Carbon-grade flow without skipping the steps that make a redesign defensible. Each artifact below fed the next.</p>
 
+        <h3 class="subsection-title">Where the emotion actually dipped</h3>
+        <p>With raw interview notes from 12 partners, I mapped the end-to-end registration journey across five stages: discover, prepare, fill, submit, await approval. The dip was sharpest at fill &rarr; submit, where partners pasted from spreadsheets, hit validation errors, and lost the data they'd just typed.</p>
         <div class="process-visual">
-          <div class="phase-overview">
-            <div class="phase-card">
-              <div class="phase-num">01</div>
-              <p class="phase-title">Discovery &amp; Strategy</p>
-              <ul class="phase-acts">
-                <li>Stakeholder workshops</li>
-                <li>Problem framing</li>
-                <li>Success metric alignment</li>
-                <li>Project roadmap</li>
-              </ul>
-            </div>
-            <div class="phase-arrow" aria-hidden="true">&rarr;</div>
-            <div class="phase-card">
-              <div class="phase-num">02</div>
-              <p class="phase-title">User Research</p>
-              <ul class="phase-acts">
-                <li>Stakeholder interviews</li>
-                <li>Contextual inquiry &middot; 12 partners</li>
-                <li>Telemetry &amp; data analysis</li>
-                <li>Competitive audit</li>
-              </ul>
-            </div>
-            <div class="phase-arrow" aria-hidden="true">&rarr;</div>
-            <div class="phase-card highlight">
-              <div class="phase-num">03</div>
-              <p class="phase-title">Synthesis &amp; Definition</p>
-              <ul class="phase-acts">
-                <li>Affinity mapping</li>
-                <li>Journey mapping</li>
-                <li>User stories &middot; 32 written</li>
-                <li>Feature prioritization</li>
-              </ul>
-            </div>
-            <div class="phase-arrow" aria-hidden="true">&rarr;</div>
-            <div class="phase-card">
-              <div class="phase-num">04</div>
-              <p class="phase-title">Design &amp; Test</p>
-              <ul class="phase-acts">
-                <li>IA restructure</li>
-                <li>11 user flows</li>
-                <li>Lo-fi wireframes</li>
-                <li>Hi-fi Carbon prototype</li>
-              </ul>
-            </div>
-            <div class="phase-arrow" aria-hidden="true">&rarr;</div>
-            <div class="phase-card">
-              <div class="phase-num">05</div>
-              <p class="phase-title">Validation &amp; Handoff</p>
-              <ul class="phase-acts">
-                <li>Usability testing &middot; 8 sessions</li>
-                <li>Accessibility audit</li>
-                <li>Engineering handoff</li>
-                <li>Carbon contribution</li>
-              </ul>
-            </div>
-          </div>
-          <p class="process-visual-caption">Five-phase UX program &middot; ~6 weeks between research kickoff and engineering handoff</p>
+          <svg class="journey-map" viewBox="0 0 800 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Journey map: emotion curve dipping at fill to submit phase">
+            <rect width="800" height="260" fill="#fbf6e5" rx="8"/>
+            <line x1="100" y1="40" x2="100" y2="240" stroke="#cdc0a0" stroke-dasharray="3 4"/>
+            <line x1="240" y1="40" x2="240" y2="240" stroke="#cdc0a0" stroke-dasharray="3 4"/>
+            <line x1="380" y1="40" x2="380" y2="240" stroke="#cdc0a0" stroke-dasharray="3 4"/>
+            <line x1="520" y1="40" x2="520" y2="240" stroke="#cdc0a0" stroke-dasharray="3 4"/>
+            <line x1="660" y1="40" x2="660" y2="240" stroke="#cdc0a0" stroke-dasharray="3 4"/>
+            <text x="20" y="80" font-family="ui-monospace, monospace" font-size="9" fill="#8a7a5e" letter-spacing="1">EMOTION</text>
+            <text x="20" y="155" font-family="ui-monospace, monospace" font-size="9" fill="#8a7a5e" letter-spacing="1">THOUGHTS</text>
+            <text x="20" y="220" font-family="ui-monospace, monospace" font-size="9" fill="#8a7a5e" letter-spacing="1">TOUCHPOINTS</text>
+            <path d="M 150 70 C 220 75, 280 80, 320 85 C 360 100, 410 150, 440 175 C 470 185, 510 165, 580 120 C 640 90, 710 70, 750 65" fill="none" stroke="#ec6478" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="170" cy="72" r="5" fill="#ec6478"/>
+            <circle cx="310" cy="85" r="5" fill="#ec6478"/>
+            <circle cx="450" cy="180" r="8" fill="#b13e58"/>
+            <circle cx="590" cy="115" r="5" fill="#ec6478"/>
+            <circle cx="730" cy="68" r="5" fill="#ec6478"/>
+            <text x="450" y="205" font-family="ui-monospace, monospace" font-size="9" fill="#b13e58" text-anchor="middle" font-weight="700" letter-spacing="1">&uarr; PAIN</text>
+            <rect x="115" y="135" width="115" height="32" rx="4" fill="#ffffff" stroke="#cdc0a0"/>
+            <text x="172" y="150" font-family="ui-monospace, monospace" font-size="8" fill="#5a4632" text-anchor="middle">"Found a deal,</text>
+            <text x="172" y="161" font-family="ui-monospace, monospace" font-size="8" fill="#5a4632" text-anchor="middle">let me register"</text>
+            <rect x="255" y="135" width="115" height="32" rx="4" fill="#ffffff" stroke="#cdc0a0"/>
+            <text x="312" y="150" font-family="ui-monospace, monospace" font-size="8" fill="#5a4632" text-anchor="middle">"Where's the</text>
+            <text x="312" y="161" font-family="ui-monospace, monospace" font-size="8" fill="#5a4632" text-anchor="middle">right form?"</text>
+            <rect x="395" y="135" width="115" height="32" rx="4" fill="#f7d4dc" stroke="#ec6478"/>
+            <text x="452" y="150" font-family="ui-monospace, monospace" font-size="8" fill="#b13e58" text-anchor="middle" font-weight="700">"Why won't</text>
+            <text x="452" y="161" font-family="ui-monospace, monospace" font-size="8" fill="#b13e58" text-anchor="middle" font-weight="700">it accept this?"</text>
+            <rect x="535" y="135" width="115" height="32" rx="4" fill="#ffffff" stroke="#cdc0a0"/>
+            <text x="592" y="150" font-family="ui-monospace, monospace" font-size="8" fill="#5a4632" text-anchor="middle">"Now I wait"</text>
+            <rect x="675" y="135" width="115" height="32" rx="4" fill="#ffffff" stroke="#cdc0a0"/>
+            <text x="732" y="150" font-family="ui-monospace, monospace" font-size="8" fill="#5a4632" text-anchor="middle">"Got approval"</text>
+            <text x="172" y="225" font-family="ui-monospace, monospace" font-size="9" fill="#5a4632" text-anchor="middle">CRM</text>
+            <text x="312" y="225" font-family="ui-monospace, monospace" font-size="9" fill="#5a4632" text-anchor="middle">Partner Plus</text>
+            <text x="452" y="225" font-family="ui-monospace, monospace" font-size="9" fill="#b13e58" text-anchor="middle" font-weight="700">Form &middot; Spreadsheet</text>
+            <text x="592" y="225" font-family="ui-monospace, monospace" font-size="9" fill="#5a4632" text-anchor="middle">Email &middot; Legal</text>
+            <text x="732" y="225" font-family="ui-monospace, monospace" font-size="9" fill="#5a4632" text-anchor="middle">Confirmation</text>
+            <text x="172" y="30" font-family="ui-monospace, monospace" font-size="9" fill="#3a2818" text-anchor="middle" font-weight="600" letter-spacing="1">01 &middot; DISCOVER</text>
+            <text x="312" y="30" font-family="ui-monospace, monospace" font-size="9" fill="#3a2818" text-anchor="middle" font-weight="600" letter-spacing="1">02 &middot; PREPARE</text>
+            <text x="452" y="30" font-family="ui-monospace, monospace" font-size="9" fill="#b13e58" text-anchor="middle" font-weight="700" letter-spacing="1">03 &middot; FILL &rarr; SUBMIT</text>
+            <text x="592" y="30" font-family="ui-monospace, monospace" font-size="9" fill="#3a2818" text-anchor="middle" font-weight="600" letter-spacing="1">04 &middot; AWAIT</text>
+            <text x="732" y="30" font-family="ui-monospace, monospace" font-size="9" fill="#3a2818" text-anchor="middle" font-weight="600" letter-spacing="1">05 &middot; APPROVED</text>
+          </svg>
+          <p class="process-visual-caption">Journey map &middot; the dip at fill &rarr; submit anchored the redesign brief</p>
         </div>
 
-        <!-- 03b. Journey Map -->
-        <h3 class="subsection-title"><span class="phase-tag synthesis">Synthesis</span>Where the emotion actually dipped</h3>
-        <p>
-          With raw interview notes from 12 partners, I mapped the end-to-end registration journey across five stages: discover, prepare, fill, submit, await approval. Each stage got an emotion curve, a thoughts row, and a list of system touchpoints. The dip was sharpest at <strong>fill &rarr; submit</strong>, where partners pasted from spreadsheets, hit validation errors, and lost the data they'd just typed.
-        </p>
-        <div class="process-visual">
-          <div class="process-placeholder">Journey map &middot; 5 stages &times; 3 lanes (emotion, thoughts, touchpoints) &middot; original under NDA</div>
-          <p class="process-visual-caption">Journey map artifact &middot; dip at fill&rarr;submit anchored the redesign brief</p>
-        </div>
-
-        <!-- 03c. User Stories -->
-        <h3 class="subsection-title"><span class="phase-tag synthesis">Synthesis</span>32 user stories, written before a single screen</h3>
-        <p>
-          Journey mapping showed where partners hurt. User stories translated that pain into testable, scope-able units of work. I wrote 32 stories across the three partner archetypes, each tagged with priority and acceptance criteria. The discipline of writing them forced us to define "done" before we drew &mdash; and the priority tags became the first cut at the backlog Engineering scoped against.
-        </p>
-
+        <h3 class="subsection-title">32 user stories, written before a single screen</h3>
+        <p>Journey mapping showed where partners hurt. User stories translated that pain into testable, scope-able units of work. I wrote 32 stories across the three partner archetypes, each tagged with priority and acceptance criteria.</p>
         <div class="process-visual">
           <div class="story-stats">
-            <div>
-              <div class="story-stat-num">32</div>
-              <div class="story-stat-lbl">User stories</div>
-            </div>
-            <div>
-              <div class="story-stat-num">14</div>
-              <div class="story-stat-lbl">Marked P0</div>
-            </div>
-            <div>
-              <div class="story-stat-num">3</div>
-              <div class="story-stat-lbl">Archetypes covered</div>
-            </div>
+            <div><div class="story-stat-num">32</div><div class="story-stat-lbl">User stories</div></div>
+            <div><div class="story-stat-num">14</div><div class="story-stat-lbl">Marked P0</div></div>
+            <div><div class="story-stat-num">3</div><div class="story-stat-lbl">Archetypes covered</div></div>
           </div>
-
-          <div class="story-grid">
-            <div class="story-card">
-              <p class="story-tag reseller">RESELLER &middot; P0</p>
-              <p class="story-text">As a <strong>reseller</strong>, I want to <strong>search and add products by name</strong> so that I don't have to leave the form to look up SKU codes.</p>
-              <p class="story-ac">AC &middot; search matches partial strings, returns within 300ms, adds product inline</p>
+          <div class="story-carousel">
+            <button class="story-nav prev" aria-label="Previous story">&lsaquo;</button>
+            <div class="story-track" id="storyTrack">
+              <div class="story-card">
+                <p class="story-tag reseller">RESELLER &middot; P0</p>
+                <p class="story-text">As a <strong>reseller</strong>, I want to <strong>search and add products by name</strong> so that I don't have to leave the form to look up SKU codes.</p>
+                <p class="story-ac">AC &middot; search matches partial strings, returns within 300ms, adds product inline</p>
+              </div>
+              <div class="story-card">
+                <p class="story-tag isv">ISV &middot; P0</p>
+                <p class="story-text">As an <strong>ISV</strong>, I want to <strong>register multi-product co-sell deals in one flow</strong> so that I'm not creating separate registrations per SKU.</p>
+                <p class="story-ac">AC &middot; single submission supports up to 25 products, each with its own pricing</p>
+              </div>
+              <div class="story-card">
+                <p class="story-tag si">SI &middot; P1</p>
+                <p class="story-text">As a <strong>system integrator</strong>, I want to <strong>save partial registrations</strong> so that I can pause when I'm waiting on client info.</p>
+                <p class="story-ac">AC &middot; draft auto-saves every 30s, retrievable for 30 days</p>
+              </div>
+              <div class="story-card">
+                <p class="story-tag reseller">RESELLER &middot; P0</p>
+                <p class="story-text">As a <strong>reseller</strong>, I want to <strong>see inline validation errors</strong> so that I don't lose data I've typed when a field is wrong.</p>
+                <p class="story-ac">AC &middot; errors shown on blur, focus retains entered value, helper text describes fix</p>
+              </div>
+              <div class="story-card">
+                <p class="story-tag isv">ISV &middot; P1</p>
+                <p class="story-text">As an <strong>ISV</strong>, I want <strong>account data pre-filled from CRM</strong> so that I only enter what's deal-specific.</p>
+                <p class="story-ac">AC &middot; CRM lookup auto-fills 8 fields, partner can override any with one click</p>
+              </div>
+              <div class="story-card dim">
+                <p class="story-tag">+ 27 more</p>
+                <p class="story-text">Stories covering edge cases &middot; renewal flows, expansion deals, multi-region compliance, validation errors, partial submissions, approval handoff.</p>
+                <p class="story-ac">Full backlog scoped with Engineering during sprint planning</p>
+              </div>
             </div>
-            <div class="story-card">
-              <p class="story-tag isv">ISV &middot; P0</p>
-              <p class="story-text">As an <strong>ISV</strong>, I want to <strong>register multi-product co-sell deals in one flow</strong> so that I'm not creating separate registrations per SKU.</p>
-              <p class="story-ac">AC &middot; single submission supports up to 25 products, each with its own pricing</p>
-            </div>
-            <div class="story-card">
-              <p class="story-tag si">SI &middot; P1</p>
-              <p class="story-text">As a <strong>system integrator</strong>, I want to <strong>save partial registrations</strong> so that I can pause when I'm waiting on client info.</p>
-              <p class="story-ac">AC &middot; draft auto-saves every 30s, retrievable for 30 days</p>
-            </div>
-            <div class="story-card dim">
-              <p class="story-tag">+ 29 more</p>
-              <p class="story-text">Stories covering edge cases &middot; renewal flows, expansion deals, multi-region compliance, validation errors, partial submissions, and approval handoff.</p>
-              <p class="story-ac">Full backlog scoped with Engineering during sprint planning</p>
-            </div>
+            <button class="story-nav next" aria-label="Next story">&rsaquo;</button>
           </div>
           <p class="process-visual-caption">Sample user stories &middot; representative format, originals under NDA</p>
         </div>
 
-        <!-- 03d. User Flows -->
-        <h3 class="subsection-title"><span class="phase-tag design">Design</span>11 user flows across 3 deal scenarios</h3>
-        <p>
-          The P0 stories needed paths. I drew 11 user flows mapping how a reseller, ISV, and system integrator each move from intent to closed-won, including branch points for renewal vs. new deal, single vs. multi-product, and the four most common error states. Engineering used the flows directly to scope state machines.
-        </p>
+        <h3 class="subsection-title">Feature prioritization with stakeholders</h3>
+        <p>32 stories was a backlog, not a release. I ran a half-day prioritization workshop with the Product Owner, Engineering lead, and Legal counsel &mdash; impact on the X-axis, effort on the Y-axis. Three features came out clearly P0. Everything else either deferred or got rolled into Phase 2.</p>
         <div class="process-visual">
-          <div class="process-placeholder">11 user flows &middot; reseller / ISV / SI &times; new / renew / expansion &middot; original under NDA</div>
-          <p class="process-visual-caption">User flows artifact &middot; the spine engineering scoped against</p>
+          <div class="priority-grid">
+            <div class="priority-col p0">
+              <p class="priority-col-label">P0 &middot; ship first</p>
+              <div class="priority-item">
+                <p class="priority-name">Embedded search</p>
+                <p class="priority-desc">Replaces manual product code lookup &middot; killed the 49% drop-off</p>
+              </div>
+              <div class="priority-item">
+                <p class="priority-name">Inline validation</p>
+                <p class="priority-desc">Carbon form components flag errors before submit</p>
+              </div>
+              <div class="priority-item">
+                <p class="priority-name">Pre-filled smart defaults</p>
+                <p class="priority-desc">CRM data auto-populates account fields</p>
+              </div>
+            </div>
+            <div class="priority-col p1">
+              <p class="priority-col-label">P1 &middot; phase 2</p>
+              <div class="priority-item">
+                <p class="priority-name">Draft auto-save</p>
+                <p class="priority-desc">Partial registrations retrievable for 30 days</p>
+              </div>
+              <div class="priority-item">
+                <p class="priority-name">Multi-product co-sell</p>
+                <p class="priority-desc">Single submission supports up to 25 products</p>
+              </div>
+            </div>
+            <div class="priority-col p2">
+              <p class="priority-col-label">P2 &middot; backlog</p>
+              <div class="priority-item">
+                <p class="priority-name">Compliance simplification</p>
+                <p class="priority-desc">Slimmed Q-bank, regional conditional questions</p>
+              </div>
+              <div class="priority-item">
+                <p class="priority-name">Approval status surfacing</p>
+                <p class="priority-desc">In-product notification when legal signs off</p>
+              </div>
+            </div>
+          </div>
+          <p class="process-visual-caption">Impact &middot; effort workshop &middot; 3 P0 features anchored the first release</p>
         </div>
 
-        <!-- 03e. IA Restructure -->
-        <h3 class="subsection-title"><span class="phase-tag design">Design</span>Restructuring the information architecture</h3>
-        <p>
-          The original form was organized around IBM's internal hierarchy (legal entity &rarr; product line &rarr; deal). Card-sorting with partners showed they think the other way around: deal &rarr; products &rarr; legal entity. I rebuilt the IA so the form's groupings matched the partner mental model. Every section had a job and a payoff line so partners knew why they were filling it in.
-        </p>
+        <h3 class="subsection-title">11 user flows across 3 deal scenarios</h3>
+        <p>Partners weren't all running the same path. A reseller registering a transactional deal looks nothing like an ISV co-selling a multi-product opportunity. I mapped 11 distinct flows across 3 partner archetypes (Reseller, ISV, System Integrator) and 3 deal scenarios (new business, renewal, expansion). Boxes below are Carbon-styled placeholders; production diagrams are under NDA.</p>
         <div class="process-visual">
-          <div class="process-placeholder">IA restructure &middot; before / after sitemap of the registration flow &middot; original under NDA</div>
-          <p class="process-visual-caption">IA artifact &middot; reorganized around partner mental model</p>
+          <div class="flow-diagram-carbon">
+            <svg viewBox="0 0 800 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Simplified user flow showing branching by archetype and scenario">
+              <rect x="20" y="100" width="100" height="40" fill="#0f62fe"/>
+              <text x="70" y="125" fill="#ffffff" font-family="ui-monospace, monospace" font-size="11" text-anchor="middle">START</text>
+              <path d="M120 120 L 220 50" stroke="#3a2818" stroke-width="1" fill="none"/>
+              <path d="M120 120 L 220 120" stroke="#3a2818" stroke-width="1" fill="none"/>
+              <path d="M120 120 L 220 190" stroke="#3a2818" stroke-width="1" fill="none"/>
+              <rect x="220" y="30" width="120" height="40" fill="#ffffff" stroke="#0f62fe" stroke-width="1.5"/>
+              <text x="280" y="48" font-family="ui-monospace, monospace" font-size="10" fill="#0f62fe" text-anchor="middle" font-weight="600">RESELLER</text>
+              <text x="280" y="62" font-family="ui-monospace, monospace" font-size="8" fill="#5a4632" text-anchor="middle">4 flows</text>
+              <rect x="220" y="100" width="120" height="40" fill="#ffffff" stroke="#0f62fe" stroke-width="1.5"/>
+              <text x="280" y="118" font-family="ui-monospace, monospace" font-size="10" fill="#0f62fe" text-anchor="middle" font-weight="600">ISV</text>
+              <text x="280" y="132" font-family="ui-monospace, monospace" font-size="8" fill="#5a4632" text-anchor="middle">4 flows</text>
+              <rect x="220" y="170" width="120" height="40" fill="#ffffff" stroke="#0f62fe" stroke-width="1.5"/>
+              <text x="280" y="188" font-family="ui-monospace, monospace" font-size="10" fill="#0f62fe" text-anchor="middle" font-weight="600">SYS. INTEGRATOR</text>
+              <text x="280" y="202" font-family="ui-monospace, monospace" font-size="8" fill="#5a4632" text-anchor="middle">3 flows</text>
+              <g stroke="#3a2818" stroke-width="1" fill="none">
+                <path d="M340 50 L 440 50"/>
+                <path d="M340 60 L 440 95"/>
+                <path d="M340 120 L 440 120"/>
+                <path d="M340 130 L 440 165"/>
+                <path d="M340 190 L 440 190"/>
+              </g>
+              <rect x="440" y="30" width="120" height="40" fill="#f4f4f4" stroke="#3a2818" stroke-width="1"/>
+              <text x="500" y="55" font-family="ui-monospace, monospace" font-size="10" fill="#3a2818" text-anchor="middle">New business</text>
+              <rect x="440" y="100" width="120" height="40" fill="#f4f4f4" stroke="#3a2818" stroke-width="1"/>
+              <text x="500" y="125" font-family="ui-monospace, monospace" font-size="10" fill="#3a2818" text-anchor="middle">Renewal</text>
+              <rect x="440" y="170" width="120" height="40" fill="#f4f4f4" stroke="#3a2818" stroke-width="1"/>
+              <text x="500" y="195" font-family="ui-monospace, monospace" font-size="10" fill="#3a2818" text-anchor="middle">Expansion</text>
+              <g stroke="#3a2818" stroke-width="1" fill="none">
+                <path d="M560 50 L 660 110"/>
+                <path d="M560 120 L 660 120"/>
+                <path d="M560 190 L 660 130"/>
+              </g>
+              <rect x="660" y="100" width="120" height="40" fill="#ec6478"/>
+              <text x="720" y="125" fill="#ffffff" font-family="ui-monospace, monospace" font-size="11" text-anchor="middle">SUBMIT</text>
+              <text x="70" y="15" font-family="ui-monospace, monospace" font-size="9" fill="#8a7a5e" letter-spacing="1.5" text-anchor="middle">ENTRY</text>
+              <text x="280" y="15" font-family="ui-monospace, monospace" font-size="9" fill="#8a7a5e" letter-spacing="1.5" text-anchor="middle">ARCHETYPE</text>
+              <text x="500" y="15" font-family="ui-monospace, monospace" font-size="9" fill="#8a7a5e" letter-spacing="1.5" text-anchor="middle">SCENARIO</text>
+              <text x="720" y="15" font-family="ui-monospace, monospace" font-size="9" fill="#8a7a5e" letter-spacing="1.5" text-anchor="middle">OUTCOME</text>
+            </svg>
+          </div>
+          <p class="process-visual-caption">Composite flow &middot; 11 paths simplified to 3 archetypes &times; 3 scenarios &middot; Carbon visual language</p>
         </div>
 
-        <!-- 03f. Wireframes -->
-        <h3 class="subsection-title"><span class="phase-tag design">Design</span>Lo-fi wireframes, validated before Carbon</h3>
-        <p>
-          Before any Carbon styling, I sketched lo-fi wireframes for the three highest-stakes screens: entry, products, and submit. The intention was to lock down structure and information density before color, type, and components could distract the conversation. Reviews with the Product Owner and Engineering converged in two iteration rounds.
-        </p>
+        <h3 class="subsection-title">Lo-fi wireframes, validated before Carbon</h3>
+        <p>Two rounds of lo-fi testing with 6 partners before any high-fidelity work. Greybox sketches were deliberately ugly so feedback would focus on structure and sequence, not color or polish. The embedded search pattern for "Add Products" emerged from this round &mdash; partners kept reaching for it in the prototype before it actually existed.</p>
         <div class="process-visual">
-          <div class="process-placeholder">Lo-fi wireframes &middot; entry &middot; products &middot; submit &middot; original under NDA</div>
-          <p class="process-visual-caption">Lo-fi wireframes artifact &middot; structure agreed before high-fi began</p>
-        </div>
-
-        <!-- Hi-fi prototype mockup -->
-        <h3 class="subsection-title"><span class="phase-tag design">Design</span>Hi-fi Carbon prototype, end-to-end</h3>
-        <p>
-          Once the lo-fi structure tested clean, I rebuilt the flow in Carbon. Six screens, one continuous task. The mockup below is a simplified composite of the redesigned flow &mdash; production screens are under NDA, but the structure, pacing, and key interactions match.
-        </p>
-        <div class="process-visual">
-          <div class="hifi-mockup">
-            <svg viewBox="0 0 980 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Hi-fi prototype showing six redesigned screens of the deal registration flow">
-              <!-- screen 1 -->
-              <g transform="translate(8 30)">
-                <rect width="150" height="210" rx="6" fill="#ffffff" stroke="#cdc0a0"/>
-                <rect x="0" y="0" width="150" height="22" rx="6" fill="#3a2818"/>
-                <rect x="0" y="16" width="150" height="6" fill="#3a2818"/>
-                <rect x="10" y="34" width="60" height="6" rx="2" fill="#b8a988"/>
-                <rect x="10" y="48" width="90" height="10" rx="2" fill="#3a2818"/>
-                <rect x="10" y="74" width="130" height="22" rx="3" fill="#fbf6e5" stroke="#cdc0a0"/>
-                <rect x="10" y="104" width="130" height="22" rx="3" fill="#fbf6e5" stroke="#cdc0a0"/>
-                <rect x="10" y="134" width="130" height="22" rx="3" fill="#fbf6e5" stroke="#cdc0a0"/>
-                <rect x="10" y="178" width="60" height="20" rx="2" fill="#ec6478"/>
-                <text x="40" y="192" fill="#fbf6e5" font-family="ui-monospace, monospace" font-size="7" text-anchor="middle" letter-spacing="1">CONTINUE</text>
-                <text x="75" y="262" font-family="ui-monospace, monospace" font-size="8.5" fill="#5a4632" letter-spacing="1" text-anchor="middle">01 &middot; DEAL CONTEXT</text>
+          <div class="lofi-mockup">
+            <svg viewBox="0 0 980 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Lo-fi wireframes of six redesigned web screens">
+              <g transform="translate(8 20)">
+                <rect width="150" height="160" rx="4" fill="#ffffff" stroke="#cdc0a0"/>
+                <rect width="150" height="16" fill="#5a4632"/>
+                <circle cx="6" cy="8" r="2" fill="#fbf6e5"/>
+                <circle cx="12" cy="8" r="2" fill="#fbf6e5"/>
+                <circle cx="18" cy="8" r="2" fill="#fbf6e5"/>
+                <rect x="10" y="28" width="60" height="5" fill="#cdc0a0"/>
+                <rect x="10" y="42" width="100" height="9" fill="#5a4632"/>
+                <rect x="10" y="62" width="130" height="14" fill="#fbf6e5" stroke="#cdc0a0"/>
+                <rect x="10" y="82" width="130" height="14" fill="#fbf6e5" stroke="#cdc0a0"/>
+                <rect x="10" y="102" width="130" height="14" fill="#fbf6e5" stroke="#cdc0a0"/>
+                <rect x="10" y="134" width="55" height="16" fill="#5a4632"/>
+                <text x="75" y="195" font-family="ui-monospace, monospace" font-size="8" fill="#5a4632" letter-spacing="1" text-anchor="middle">01 &middot; DEAL CONTEXT</text>
               </g>
-              <text x="170" y="135" font-family="ui-monospace, monospace" font-size="12" fill="#b8a988" text-anchor="middle">&rsaquo;</text>
-              <!-- screen 2 -->
-              <g transform="translate(180 30)">
-                <rect width="150" height="210" rx="6" fill="#ffffff" stroke="#cdc0a0"/>
-                <rect x="0" y="0" width="150" height="22" rx="6" fill="#3a2818"/>
-                <rect x="0" y="16" width="150" height="6" fill="#3a2818"/>
-                <rect x="10" y="34" width="80" height="6" rx="2" fill="#b8a988"/>
-                <rect x="10" y="48" width="100" height="10" rx="2" fill="#3a2818"/>
-                <rect x="10" y="74" width="130" height="40" rx="3" fill="#f7d4dc" stroke="#ec6478"/>
-                <text x="20" y="92" font-family="ui-monospace, monospace" font-size="7" fill="#b13e58" letter-spacing="0.5">AUTO-FILLED</text>
-                <text x="20" y="104" font-family="ui-monospace, monospace" font-size="6.5" fill="#5a4632">Customer &middot; CRM lookup</text>
-                <rect x="10" y="124" width="130" height="32" rx="3" fill="#fbf6e5" stroke="#cdc0a0"/>
-                <rect x="10" y="178" width="60" height="20" rx="2" fill="#ec6478"/>
-                <text x="40" y="192" fill="#fbf6e5" font-family="ui-monospace, monospace" font-size="7" text-anchor="middle" letter-spacing="1">CONTINUE</text>
-                <text x="75" y="262" font-family="ui-monospace, monospace" font-size="8.5" fill="#5a4632" letter-spacing="1" text-anchor="middle">02 &middot; ACCOUNT</text>
+              <text x="170" y="100" font-family="ui-monospace, monospace" font-size="11" fill="#b8a988" text-anchor="middle">&rsaquo;</text>
+              <g transform="translate(180 20)">
+                <rect width="150" height="160" rx="4" fill="#ffffff" stroke="#cdc0a0"/>
+                <rect width="150" height="16" fill="#5a4632"/>
+                <circle cx="6" cy="8" r="2" fill="#fbf6e5"/>
+                <circle cx="12" cy="8" r="2" fill="#fbf6e5"/>
+                <circle cx="18" cy="8" r="2" fill="#fbf6e5"/>
+                <rect x="10" y="28" width="80" height="5" fill="#cdc0a0"/>
+                <rect x="10" y="42" width="100" height="9" fill="#5a4632"/>
+                <rect x="10" y="62" width="130" height="30" fill="#fbf6e5" stroke="#cdc0a0" stroke-dasharray="2 2"/>
+                <text x="15" y="78" font-family="ui-monospace, monospace" font-size="7" fill="#5a4632">[auto-filled]</text>
+                <rect x="10" y="100" width="130" height="20" fill="#fbf6e5" stroke="#cdc0a0"/>
+                <rect x="10" y="134" width="55" height="16" fill="#5a4632"/>
+                <text x="75" y="195" font-family="ui-monospace, monospace" font-size="8" fill="#5a4632" letter-spacing="1" text-anchor="middle">02 &middot; ACCOUNT</text>
               </g>
-              <text x="342" y="135" font-family="ui-monospace, monospace" font-size="12" fill="#b8a988" text-anchor="middle">&rsaquo;</text>
-              <!-- screen 3 - PRODUCTS (highlighted, the big win) -->
-              <g transform="translate(352 30)">
-                <rect width="150" height="210" rx="6" fill="#ffffff" stroke="#ec6478" stroke-width="2"/>
-                <rect x="0" y="0" width="150" height="22" rx="6" fill="#ec6478"/>
-                <rect x="0" y="16" width="150" height="6" fill="#ec6478"/>
-                <rect x="10" y="34" width="60" height="6" rx="2" fill="#b8a988"/>
-                <rect x="10" y="48" width="100" height="10" rx="2" fill="#3a2818"/>
-                <rect x="10" y="74" width="130" height="20" rx="3" fill="#fbf6e5" stroke="#cdc0a0"/>
-                <circle cx="20" cy="84" r="3" fill="none" stroke="#5a4632" stroke-width="1"/>
-                <line x1="22" y1="86" x2="25" y2="89" stroke="#5a4632" stroke-width="1"/>
-                <text x="30" y="87" font-family="ui-monospace, monospace" font-size="6.5" fill="#5a4632">Search products...</text>
-                <rect x="10" y="102" width="130" height="14" rx="2" fill="#f7d4dc"/>
-                <rect x="10" y="120" width="130" height="14" rx="2" fill="#fbf6e5"/>
-                <rect x="10" y="138" width="130" height="14" rx="2" fill="#fbf6e5"/>
-                <rect x="10" y="178" width="60" height="20" rx="2" fill="#ec6478"/>
-                <text x="40" y="192" fill="#fbf6e5" font-family="ui-monospace, monospace" font-size="7" text-anchor="middle" letter-spacing="1">CONTINUE</text>
-                <text x="75" y="262" font-family="ui-monospace, monospace" font-size="8.5" fill="#b13e58" font-weight="700" letter-spacing="1" text-anchor="middle">03 &middot; PRODUCTS &#9733;</text>
+              <text x="342" y="100" font-family="ui-monospace, monospace" font-size="11" fill="#b8a988" text-anchor="middle">&rsaquo;</text>
+              <g transform="translate(352 20)">
+                <rect width="150" height="160" rx="4" fill="#ffffff" stroke="#ec6478" stroke-width="1.5"/>
+                <rect width="150" height="16" fill="#ec6478"/>
+                <circle cx="6" cy="8" r="2" fill="#fbf6e5"/>
+                <circle cx="12" cy="8" r="2" fill="#fbf6e5"/>
+                <circle cx="18" cy="8" r="2" fill="#fbf6e5"/>
+                <rect x="10" y="28" width="60" height="5" fill="#cdc0a0"/>
+                <rect x="10" y="42" width="100" height="9" fill="#5a4632"/>
+                <rect x="10" y="62" width="130" height="16" fill="#fbf6e5" stroke="#cdc0a0"/>
+                <text x="15" y="73" font-family="ui-monospace, monospace" font-size="7" fill="#8a7a5e">&#8980;  search products</text>
+                <rect x="10" y="84" width="130" height="10" fill="#f7d4dc"/>
+                <rect x="10" y="98" width="130" height="10" fill="#fbf6e5"/>
+                <rect x="10" y="112" width="130" height="10" fill="#fbf6e5"/>
+                <rect x="10" y="134" width="55" height="16" fill="#5a4632"/>
+                <text x="75" y="195" font-family="ui-monospace, monospace" font-size="8" fill="#b13e58" font-weight="700" letter-spacing="1" text-anchor="middle">03 &middot; PRODUCTS &#9733;</text>
               </g>
-              <text x="514" y="135" font-family="ui-monospace, monospace" font-size="12" fill="#b8a988" text-anchor="middle">&rsaquo;</text>
-              <!-- screen 4 -->
-              <g transform="translate(524 30)">
-                <rect width="150" height="210" rx="6" fill="#ffffff" stroke="#cdc0a0"/>
-                <rect x="0" y="0" width="150" height="22" rx="6" fill="#3a2818"/>
-                <rect x="0" y="16" width="150" height="6" fill="#3a2818"/>
-                <rect x="10" y="34" width="50" height="6" rx="2" fill="#b8a988"/>
-                <rect x="10" y="48" width="80" height="10" rx="2" fill="#3a2818"/>
-                <rect x="10" y="74" width="60" height="22" rx="3" fill="#fbf6e5" stroke="#cdc0a0"/>
-                <rect x="80" y="74" width="60" height="22" rx="3" fill="#fbf6e5" stroke="#cdc0a0"/>
-                <rect x="10" y="104" width="130" height="22" rx="3" fill="#fbf6e5" stroke="#cdc0a0"/>
-                <rect x="10" y="134" width="130" height="22" rx="3" fill="#fbf6e5" stroke="#cdc0a0"/>
-                <rect x="10" y="178" width="60" height="20" rx="2" fill="#ec6478"/>
-                <text x="40" y="192" fill="#fbf6e5" font-family="ui-monospace, monospace" font-size="7" text-anchor="middle" letter-spacing="1">CONTINUE</text>
-                <text x="75" y="262" font-family="ui-monospace, monospace" font-size="8.5" fill="#5a4632" letter-spacing="1" text-anchor="middle">04 &middot; PRICING</text>
+              <text x="514" y="100" font-family="ui-monospace, monospace" font-size="11" fill="#b8a988" text-anchor="middle">&rsaquo;</text>
+              <g transform="translate(524 20)">
+                <rect width="150" height="160" rx="4" fill="#ffffff" stroke="#cdc0a0"/>
+                <rect width="150" height="16" fill="#5a4632"/>
+                <circle cx="6" cy="8" r="2" fill="#fbf6e5"/>
+                <circle cx="12" cy="8" r="2" fill="#fbf6e5"/>
+                <circle cx="18" cy="8" r="2" fill="#fbf6e5"/>
+                <rect x="10" y="28" width="50" height="5" fill="#cdc0a0"/>
+                <rect x="10" y="42" width="80" height="9" fill="#5a4632"/>
+                <rect x="10" y="62" width="60" height="16" fill="#fbf6e5" stroke="#cdc0a0"/>
+                <rect x="80" y="62" width="60" height="16" fill="#fbf6e5" stroke="#cdc0a0"/>
+                <rect x="10" y="84" width="130" height="16" fill="#fbf6e5" stroke="#cdc0a0"/>
+                <rect x="10" y="106" width="130" height="16" fill="#fbf6e5" stroke="#cdc0a0"/>
+                <rect x="10" y="134" width="55" height="16" fill="#5a4632"/>
+                <text x="75" y="195" font-family="ui-monospace, monospace" font-size="8" fill="#5a4632" letter-spacing="1" text-anchor="middle">04 &middot; PRICING</text>
               </g>
-              <text x="686" y="135" font-family="ui-monospace, monospace" font-size="12" fill="#b8a988" text-anchor="middle">&rsaquo;</text>
-              <!-- screen 5 -->
-              <g transform="translate(696 30)">
-                <rect width="150" height="210" rx="6" fill="#ffffff" stroke="#cdc0a0"/>
-                <rect x="0" y="0" width="150" height="22" rx="6" fill="#3a2818"/>
-                <rect x="0" y="16" width="150" height="6" fill="#3a2818"/>
-                <rect x="10" y="34" width="70" height="6" rx="2" fill="#b8a988"/>
-                <rect x="10" y="48" width="100" height="10" rx="2" fill="#3a2818"/>
-                <rect x="10" y="74" width="130" height="16" rx="3" fill="#fbf6e5" stroke="#cdc0a0"/>
-                <rect x="10" y="94" width="130" height="16" rx="3" fill="#fbf6e5" stroke="#cdc0a0"/>
-                <rect x="10" y="114" width="130" height="16" rx="3" fill="#fbf6e5" stroke="#cdc0a0"/>
-                <rect x="10" y="134" width="130" height="16" rx="3" fill="#fbf6e5" stroke="#cdc0a0"/>
-                <rect x="10" y="178" width="60" height="20" rx="2" fill="#ec6478"/>
-                <text x="40" y="192" fill="#fbf6e5" font-family="ui-monospace, monospace" font-size="7" text-anchor="middle" letter-spacing="1">CONTINUE</text>
-                <text x="75" y="262" font-family="ui-monospace, monospace" font-size="8.5" fill="#5a4632" letter-spacing="1" text-anchor="middle">05 &middot; COMPLIANCE</text>
+              <text x="686" y="100" font-family="ui-monospace, monospace" font-size="11" fill="#b8a988" text-anchor="middle">&rsaquo;</text>
+              <g transform="translate(696 20)">
+                <rect width="150" height="160" rx="4" fill="#ffffff" stroke="#cdc0a0"/>
+                <rect width="150" height="16" fill="#5a4632"/>
+                <circle cx="6" cy="8" r="2" fill="#fbf6e5"/>
+                <circle cx="12" cy="8" r="2" fill="#fbf6e5"/>
+                <circle cx="18" cy="8" r="2" fill="#fbf6e5"/>
+                <rect x="10" y="28" width="70" height="5" fill="#cdc0a0"/>
+                <rect x="10" y="42" width="100" height="9" fill="#5a4632"/>
+                <rect x="10" y="62" width="130" height="12" fill="#fbf6e5" stroke="#cdc0a0"/>
+                <rect x="10" y="78" width="130" height="12" fill="#fbf6e5" stroke="#cdc0a0"/>
+                <rect x="10" y="94" width="130" height="12" fill="#fbf6e5" stroke="#cdc0a0"/>
+                <rect x="10" y="110" width="130" height="12" fill="#fbf6e5" stroke="#cdc0a0"/>
+                <rect x="10" y="134" width="55" height="16" fill="#5a4632"/>
+                <text x="75" y="195" font-family="ui-monospace, monospace" font-size="8" fill="#5a4632" letter-spacing="1" text-anchor="middle">05 &middot; COMPLIANCE</text>
               </g>
-              <text x="858" y="135" font-family="ui-monospace, monospace" font-size="12" fill="#b8a988" text-anchor="middle">&rsaquo;</text>
-              <!-- screen 6 -->
-              <g transform="translate(868 30)">
-                <rect width="104" height="210" rx="6" fill="#ffffff" stroke="#cdc0a0"/>
-                <rect x="0" y="0" width="104" height="22" rx="6" fill="#3a2818"/>
-                <rect x="0" y="16" width="104" height="6" fill="#3a2818"/>
-                <rect x="10" y="34" width="50" height="6" rx="2" fill="#b8a988"/>
-                <rect x="10" y="48" width="70" height="10" rx="2" fill="#3a2818"/>
-                <rect x="10" y="74" width="84" height="40" rx="3" fill="#d4dfb8" stroke="#5e8a4f"/>
-                <text x="20" y="92" font-family="ui-monospace, monospace" font-size="6.5" fill="#3d6b2c" letter-spacing="0.5">ALL CHECKS PASSED</text>
-                <text x="20" y="104" font-family="ui-monospace, monospace" font-size="6" fill="#5a4632">Ready to submit</text>
-                <rect x="10" y="178" width="84" height="20" rx="2" fill="#5e8a4f"/>
-                <text x="52" y="192" fill="#fbf6e5" font-family="ui-monospace, monospace" font-size="7" text-anchor="middle" letter-spacing="1">SUBMIT</text>
-                <text x="52" y="262" font-family="ui-monospace, monospace" font-size="8.5" fill="#5a4632" letter-spacing="1" text-anchor="middle">06 &middot; REVIEW</text>
+              <text x="858" y="100" font-family="ui-monospace, monospace" font-size="11" fill="#b8a988" text-anchor="middle">&rsaquo;</text>
+              <g transform="translate(868 20)">
+                <rect width="100" height="160" rx="4" fill="#ffffff" stroke="#cdc0a0"/>
+                <rect width="100" height="16" fill="#5a4632"/>
+                <circle cx="6" cy="8" r="2" fill="#fbf6e5"/>
+                <circle cx="12" cy="8" r="2" fill="#fbf6e5"/>
+                <circle cx="18" cy="8" r="2" fill="#fbf6e5"/>
+                <rect x="10" y="28" width="50" height="5" fill="#cdc0a0"/>
+                <rect x="10" y="42" width="70" height="9" fill="#5a4632"/>
+                <rect x="10" y="62" width="80" height="40" fill="#d4dfb8" stroke="#5e8a4f"/>
+                <text x="15" y="78" font-family="ui-monospace, monospace" font-size="6.5" fill="#3d6b2c">&#10003; all checks pass</text>
+                <rect x="10" y="134" width="80" height="16" fill="#5e8a4f"/>
+                <text x="50" y="195" font-family="ui-monospace, monospace" font-size="8" fill="#5a4632" letter-spacing="1" text-anchor="middle">06 &middot; REVIEW</text>
               </g>
             </svg>
           </div>
-          <p class="process-visual-caption">Six-screen Carbon prototype &middot; embedded search at step 03 was the load-bearing change &middot; production under NDA</p>
+          <p class="process-visual-caption">Lo-fi greybox wireframes &middot; six-screen web flow &middot; tested with 6 partners across 2 rounds</p>
         </div>
 
-        <!-- 03g. Prototyping & Validation -->
-        <h3 class="subsection-title"><span class="phase-tag validation">Validation</span>8 usability sessions before engineering build</h3>
-        <p>
-          Lo-fi got us to "the structure works." Hi-fi got us to "the interaction works." I built a clickable Carbon prototype covering the four critical screens &mdash; entry, products, pricing, and submit &mdash; and ran 8 moderated usability sessions across the three partner archetypes. Two rounds: first round to surface friction, second round to confirm the friction was gone. Three issues were caught and fixed before a single line of production code shipped.
-        </p>
-
+        <h3 class="subsection-title">Hi-fi Carbon prototype</h3>
+        <p>Once the lo-fi structure tested clean, I rebuilt the flow in Carbon. Six screens, one continuous task. Production assets are under NDA, so the file thumbnail below is shown with overlay.</p>
         <div class="process-visual">
-          <div class="validation-grid">
-            <div class="validation-stat">
-              <div class="validation-num">8</div>
-              <div class="validation-lbl">Usability sessions</div>
-              <p class="validation-sub">Moderated &middot; across 3 archetypes</p>
-            </div>
-            <div class="validation-stat">
-              <div class="validation-num">2</div>
-              <div class="validation-lbl">Test rounds</div>
-              <p class="validation-sub">Discover &middot; confirm</p>
-            </div>
-            <div class="validation-stat">
-              <div class="validation-num">3</div>
-              <div class="validation-lbl">Critical fixes</div>
-              <p class="validation-sub">Caught pre-engineering</p>
-            </div>
-            <div class="validation-stat">
-              <div class="validation-num">A11y</div>
-              <div class="validation-lbl">WCAG 2.1 AA</div>
-              <p class="validation-sub">Screen reader &amp; keyboard pass</p>
+          <div class="hifi-nda">
+            <img src="assets/ibm/hifi-prototype.png" alt="Hi-fi Carbon prototype, file thumbnail" loading="lazy">
+            <div class="hifi-nda-overlay">
+              <div class="hifi-nda-stamp">
+                <p class="hifi-nda-eyebrow">Protected</p>
+                <p class="hifi-nda-text">Production design file<br>under NDA</p>
+              </div>
             </div>
           </div>
-
-          <div class="validation-findings">
-            <p class="findings-eyebrow">What we caught</p>
-            <div class="finding">
-              <span class="finding-num">01</span>
-              <p><strong>Search ranking surfaced obsolete SKUs first.</strong> Reweighted to favor active catalog entries.</p>
-            </div>
-            <div class="finding">
-              <span class="finding-num">02</span>
-              <p><strong>Conditional fields appeared without warning.</strong> Added a one-line preface so partners weren't startled mid-flow.</p>
-            </div>
-            <div class="finding">
-              <span class="finding-num">03</span>
-              <p><strong>Submit confirmation was too quiet.</strong> Upgraded from inline toast to a confirmation page with next-steps and a record ID.</p>
-            </div>
-          </div>
-          <p class="process-visual-caption">Validation round &middot; prototype tested before engineering build</p>
+          <p class="process-visual-caption">Hi-fi Carbon prototype &middot; six-screen flow &middot; original file under IBM NDA</p>
         </div>
-
       </section>
 
       <!-- ============ 04. THE SOLUTION ============ -->
@@ -1962,26 +2217,7 @@
         </p>
       </section>
 
-      <!-- ============ 04. FEATURES ============ -->
-      <section class="section" id="features">
-        <p class="section-eyebrow">Features</p>
-        <h2 class="section-title">What partners actually saw differently</h2>
-        <p>Three things landed on partners' screens that hadn't been there before.</p>
-
-        <ol class="features-list">
-          <li>
-            <strong>Embedded Search.</strong> Search-as-you-type pulled directly from IBM's product catalog. No more leaving the workflow to find a product code, no more pasting from spreadsheets.
-          </li>
-          <li>
-            <strong>Inline validation.</strong> Carbon's form components flagged errors before submit, not after. Partners knew if a field was wrong while they were still in it.
-          </li>
-          <li>
-            <strong>Pre-filled smart defaults.</strong> Account-level data populated automatically from the CRM record. Partners only filled in what was deal-specific.
-          </li>
-        </ol>
-      </section>
-
-      <!-- ============ 06. CARBON COMPONENTS ============ -->
+      <!-- ============ 05. CARBON COMPONENTS ============ -->
       <section class="section" id="carbon">
         <p class="section-eyebrow">Carbon contribution</p>
         <h2 class="section-title">A new modal variant, written into the system</h2>
@@ -2043,29 +2279,40 @@
           </figure>
         </div>
 
-        <h3 class="subsection-title"><span class="num">06 &middot; B</span>When to use</h3>
-        <div class="usage-grid">
-          <div class="usage-col do">
-            <p class="usage-col-label">Use it for</p>
-            <ul>
-              <li>Selecting one record from a large indexed dataset (10k+ entries)</li>
-              <li>Lookups that require multiple disambiguating columns (name, region, ID)</li>
-              <li>Workflows where the user needs to stay on the parent page after selection</li>
-              <li>Cases where a "create new" fall-through is part of the same task</li>
-            </ul>
+        <details class="carbon-details">
+          <summary>
+            <span class="details-eyebrow">Usage</span>
+            <span class="details-title">When to use, when not to use</span>
+            <span class="details-icon">+</span>
+          </summary>
+          <div class="usage-grid">
+            <div class="usage-col do">
+              <p class="usage-col-label">Use it for</p>
+              <ul>
+                <li>Selecting one record from a large indexed dataset (10k+ entries)</li>
+                <li>Lookups that require multiple disambiguating columns (name, region, ID)</li>
+                <li>Workflows where the user needs to stay on the parent page after selection</li>
+                <li>Cases where a "create new" fall-through is part of the same task</li>
+              </ul>
+            </div>
+            <div class="usage-col dont">
+              <p class="usage-col-label">Don't use it for</p>
+              <ul>
+                <li>Short, finite lists &mdash; a dropdown or combo box is lighter</li>
+                <li>Multi-select (use a sidebar selector instead)</li>
+                <li>Workflows that need full-page editing after selection</li>
+                <li>Destructive actions &mdash; route through the danger modal variant</li>
+              </ul>
+            </div>
           </div>
-          <div class="usage-col dont">
-            <p class="usage-col-label">Don't use it for</p>
-            <ul>
-              <li>Short, finite lists &mdash; a dropdown or combo box is lighter</li>
-              <li>Multi-select (use a sidebar selector instead)</li>
-              <li>Workflows that need full-page editing after selection</li>
-              <li>Destructive actions &mdash; route through the danger modal variant</li>
-            </ul>
-          </div>
-        </div>
+        </details>
 
-        <h3 class="subsection-title"><span class="num">06 &middot; C</span>Anatomy</h3>
+        <details class="carbon-details">
+          <summary>
+            <span class="details-eyebrow">Structure</span>
+            <span class="details-title">Anatomy &middot; 6 parts</span>
+            <span class="details-icon">+</span>
+          </summary>
         <p>
           Six structural parts, all built from existing Carbon primitives. The variant introduced no new tokens or components &mdash; it composed elements that were already in the system into a pattern that hadn't been documented yet.
         </p>
@@ -2097,17 +2344,65 @@
           </div>
         </div>
 
-        <h3 class="subsection-title"><span class="num">06 &middot; D</span>Accessibility &amp; behavior</h3>
-        <p>
-          The variant passed Carbon's WCAG 2.1 AA review &mdash; focus traps to the modal on open, returns to the trigger element on close, escape key cancels, enter submits the search from the input. Screen reader announcements tier through three priorities: results-count, selected-row, and submit-confirmation.
-        </p>
+        </details>
+
+        <details class="carbon-details">
+          <summary>
+            <span class="details-eyebrow">A11y</span>
+            <span class="details-title">Accessibility &amp; behavior</span>
+            <span class="details-icon">+</span>
+          </summary>
+          <p>
+            The variant passed Carbon's WCAG 2.1 AA review &mdash; focus traps to the modal on open, returns to the trigger element on close, escape cancels, enter submits the search. Screen reader announcements tier through three priorities: results-count, selected-row, submit-confirmation.
+          </p>
+        </details>
 
         <p style="margin-top: 28px;">
-          The component shipped with usage guidelines, do's-and-don'ts, accessibility specs, and code examples in the Carbon documentation. Working at the system level meant our 8 months of design effort became a multi-year asset for IBM's broader UX organization &mdash; the variant still ships in production today, used by other IBM partner-facing products beyond Partner Plus.
+          The component shipped with usage guidelines, do's-and-don'ts, accessibility specs, and code examples in the Carbon documentation. The variant still ships in production today, used by other IBM partner-facing products beyond Partner Plus.
         </p>
       </section>
 
-      <!-- ============ 06. IMPACT ============ -->
+
+      <!-- ============ 06. VALIDATION ============ -->
+      <section class="section" id="validation">
+        <p class="section-eyebrow">Validation</p>
+        <h2 class="section-title">8 usability sessions before engineering build</h2>
+        <p>
+          Lo-fi got us to "the structure works." Hi-fi got us to "the interaction works." I built a clickable Carbon prototype covering the four critical screens &mdash; entry, products, pricing, and submit &mdash; and ran 8 moderated usability sessions across the three partner archetypes. Two rounds: first round to surface friction, second round to confirm the friction was gone. Three issues were caught and fixed before a single line of production code shipped.
+        </p>
+        <div class="process-visual">
+          <div class="validation-grid">
+            <div class="validation-stat">
+              <div class="validation-num">8</div>
+              <div class="validation-lbl">Usability sessions</div>
+              <p class="validation-sub">Moderated &middot; across 3 archetypes</p>
+            </div>
+            <div class="validation-stat">
+              <div class="validation-num">2</div>
+              <div class="validation-lbl">Test rounds</div>
+              <p class="validation-sub">Discover &middot; confirm</p>
+            </div>
+            <div class="validation-stat">
+              <div class="validation-num">3</div>
+              <div class="validation-lbl">Critical fixes</div>
+              <p class="validation-sub">Caught pre-engineering</p>
+            </div>
+            <div class="validation-stat">
+              <div class="validation-num">A11y</div>
+              <div class="validation-lbl">WCAG 2.1 AA</div>
+              <p class="validation-sub">Screen reader &amp; keyboard pass</p>
+            </div>
+          </div>
+          <div class="validation-findings">
+            <p class="findings-eyebrow">What we caught</p>
+            <div class="finding"><span class="finding-num">01</span><p><strong>Search ranking surfaced obsolete SKUs first.</strong> Reweighted to favor active catalog entries.</p></div>
+            <div class="finding"><span class="finding-num">02</span><p><strong>Conditional fields appeared without warning.</strong> Added a one-line preface so partners weren't startled mid-flow.</p></div>
+            <div class="finding"><span class="finding-num">03</span><p><strong>Submit confirmation was too quiet.</strong> Upgraded from inline toast to a confirmation page with next-steps and a record ID.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 07. IMPACT ============ -->
       <section class="section" id="impact">
         <p class="section-eyebrow">Impact</p>
         <h2 class="section-title">What changed when the form started working with partners.</h2>
@@ -2269,6 +2564,18 @@
       el.addEventListener('mouseenter', () => document.body.classList.add('cursor-grow'));
       el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-grow'));
     });
+  </script>
+
+  <script>
+    (function() {
+      const track = document.getElementById('storyTrack');
+      if (!track) return;
+      const prev = document.querySelector('.story-nav.prev');
+      const next = document.querySelector('.story-nav.next');
+      const scrollBy = () => track.clientWidth * 0.5 + 14;
+      prev && prev.addEventListener('click', () => track.scrollBy({ left: -scrollBy(), behavior: 'smooth' }));
+      next && next.addEventListener('click', () => track.scrollBy({ left: scrollBy(), behavior: 'smooth' }));
+    })();
   </script>
 
 </body>
