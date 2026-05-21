@@ -650,7 +650,8 @@
       border-left: 3px solid var(--accent);
       border-radius: var(--r-md);
       margin: 18px 0 22px;
-      max-width: 720px;
+      width: 100%;
+      box-sizing: border-box;
     }
     .nda-icon {
       font-size: 15px;
@@ -1485,18 +1486,6 @@
     .carbon-details > *:not(summary):last-child { padding-bottom: 20px; }
 
 
-    /* ============ STEP-9 REFINEMENTS ============ */
-    /* Interactive world map (legacy block, retained for shell; superseded below) */
-    .world-map-interactive {
-      position: relative;
-      background: #fbf6e5;
-      border: 1px solid #d6c8a4;
-      border-radius: 10px;
-      padding: 16px;
-      overflow: visible;
-    }
-    .world-map-interactive > img { width: 100%; height: auto; display: block; border-radius: 6px; }
-
 
     /* Workshop visual */
     .priority-item { background: #f0e8d2 !important; border: 1px solid #d6c8a4; }
@@ -1660,9 +1649,9 @@
         <div>
           <p class="pb-col-label">Team</p>
           <div class="pb-col-val">
-            <span>CIO · 1 PM</span>
-            <span>2 Researchers</span>
-            <span>3 Developers · 1 BA</span>
+            <span>1 PO · 1 BA</span>
+            <span>1 Researcher</span>
+            <span>3 Devs</span>
           </div>
         </div>
         <div>
@@ -1714,8 +1703,24 @@
 
         <div class="process-visual">
           <div class="world-map-interactive">
-            <img src="assets/ibm/world-map.jpg" alt="World map showing contextual inquiry locations" loading="lazy">
-            <span class="map-caption">Contextual inquiry footprint &middot; 12 partners shadowed across 5 regions</span>
+            <div class="world-map-frame">
+              <img src="assets/ibm/world-map.jpg" alt="World map showing contextual inquiry locations" loading="lazy">
+              <button class="map-dot" style="top: 38%; left: 22%;" aria-label="North America">
+                <span class="map-tooltip"><strong>North America</strong>3 partners &middot; Austin, Toronto</span>
+              </button>
+              <button class="map-dot" style="top: 32%; left: 49%;" aria-label="Europe">
+                <span class="map-tooltip"><strong>Europe</strong>4 partners &middot; London, Berlin, Madrid</span>
+              </button>
+              <button class="map-dot" style="top: 48%; left: 70%;" aria-label="India">
+                <span class="map-tooltip"><strong>India</strong>3 partners &middot; Bangalore</span>
+              </button>
+              <button class="map-dot" style="top: 70%; left: 33%;" aria-label="Brazil">
+                <span class="map-tooltip"><strong>Brazil</strong>1 partner &middot; S&atilde;o Paulo</span>
+              </button>
+              <button class="map-dot" style="top: 72%; left: 84%;" aria-label="Australia">
+                <span class="map-tooltip"><strong>Australia</strong>1 partner &middot; Sydney</span>
+              </button>
+            </div>
           </div>
         </div>
 
@@ -1785,38 +1790,38 @@
             <div class="story-card">
               <span class="story-num">01</span>
               <h4>Search and add products by name</h4>
-              <p class="story-reveal">As a partner, I want to type a product name and pick from results so I don't memorize SKUs.</p>
+              <p>Type a product name and pick from results, no SKU memorization.</p>
             </div>
             <div class="story-card">
               <span class="story-num">02</span>
-              <h4>Register multi-product co-sell deals</h4>
-              <p class="story-reveal">Add multiple SKUs in one registration without re-entering account data.</p>
+              <h4>Register multi-product co-sell</h4>
+              <p>Add multiple SKUs in one flow without re-entering account data.</p>
             </div>
             <div class="story-card">
               <span class="story-num">03</span>
               <h4>Save partial registrations</h4>
-              <p class="story-reveal">Stop mid-flow and resume later without losing entered fields.</p>
+              <p>Stop mid-flow and resume later without losing entered fields.</p>
             </div>
             <div class="story-card">
               <span class="story-num">04</span>
               <h4>See inline validation errors</h4>
-              <p class="story-reveal">Know exactly which field broke before clicking submit.</p>
+              <p>Know which field broke before clicking submit.</p>
             </div>
             <div class="story-card">
               <span class="story-num">05</span>
-              <h4>Auto-fill account data from CRM</h4>
-              <p class="story-reveal">Pre-populate customer fields from existing CRM records.</p>
+              <h4>Auto-fill account data</h4>
+              <p>Pre-populate customer fields from existing CRM records.</p>
             </div>
             <div class="story-card story-more">
               <span class="story-num">+27</span>
               <h4>Edge cases</h4>
-              <p class="story-reveal">Renewal, expansion, multi-region, partial submissions, and 23 more.</p>
+              <p>Renewal, expansion, multi-region, partial submissions, and 23 more.</p>
             </div>
           </div>
         </div>
 
         <h3 class="subsection-title">Feature prioritization with stakeholders</h3>
-        <p>32 stories was a backlog, not a release. I ran a half-day prioritization workshop with the Product Owner, Engineering Lead, Legal Counsel, and Business Analyst, with impact on the X-axis and effort on the Y-axis. Three features came out clearly P0. Everything else either deferred or got rolled into Phase 2.</p>
+        <p>32 stories was a lot to carry forward. After sharing research insights with the wider team, I ran a prioritization workshop to align stakeholders on what to ship first, what to defer to Phase 2, and what to park. Impact on the X-axis, effort on the Y-axis. Three features emerged as clear P0s, anchoring the first release.</p>
         <div class="process-visual">
           <div class="priority-grid">
             <div class="priority-col p0">
@@ -1857,7 +1862,6 @@
               </div>
             </div>
           </div>
-          <p class="process-visual-caption" style="text-align:center;">Half-day impact &times; effort workshop &middot; 3 P0 features anchored the first release</p>
         </div>
 
         <h3 class="subsection-title">11 user flows across 3 deal scenarios</h3>
@@ -2179,7 +2183,7 @@
         <p class="section-eyebrow">Validation</p>
         <h2 class="section-title">8 usability sessions before engineering build</h2>
         <p>
-          Lo-fi got us to "the structure works." Hi-fi got us to "the interaction works." I built a clickable Carbon prototype covering the four critical screens (entry, products, pricing, and submit) and ran 8 moderated usability sessions across the three partner archetypes. Two rounds: first round to surface friction, second round to confirm the friction was gone. Three issues were caught and fixed before a single line of production code shipped.
+          I built a clickable Carbon prototype covering the four critical screens (entry, products, pricing, submit) and ran 8 moderated sessions across the three partner archetypes. Two rounds: discover friction, then confirm it was gone. Three issues caught and fixed before a single line of production code shipped.
         </p>
         <div class="process-visual">
           <div class="validation-grid">
@@ -2204,22 +2208,24 @@
               <p class="validation-sub">Screen reader &amp; keyboard pass</p>
             </div>
           </div>
-          <p class="findings-eyebrow">What we caught</p>
-          <div class="caught-grid">
-            <div class="caught-card caught-coral">
-              <div class="caught-icon">&#9888;</div>
-              <h4>Search surfaced obsolete SKUs</h4>
-              <p>Reweighted ranking to favor active catalog entries.</p>
-            </div>
-            <div class="caught-card caught-sage">
-              <div class="caught-icon">&#8618;</div>
-              <h4>Conditional fields appeared without warning</h4>
-              <p>Added a one-line preface so partners weren't startled mid-flow.</p>
-            </div>
-            <div class="caught-card caught-gold">
-              <div class="caught-icon">&#10003;</div>
-              <h4>Submit confirmation was too quiet</h4>
-              <p>Upgraded from inline toast to a confirmation page with next-steps and a record ID.</p>
+          <div class="caught-block">
+            <h4 class="caught-label">What we caught</h4>
+            <div class="caught-grid">
+              <div class="caught-card caught-coral">
+                <div class="caught-icon">&#9888;</div>
+                <h5>Search surfaced obsolete SKUs</h5>
+                <p>Reweighted ranking to favor active catalog entries.</p>
+              </div>
+              <div class="caught-card caught-sage">
+                <div class="caught-icon">&#8618;</div>
+                <h5>Conditional fields appeared without warning</h5>
+                <p>Added a one-line preface so partners weren't startled mid-flow.</p>
+              </div>
+              <div class="caught-card caught-gold">
+                <div class="caught-icon">&#10003;</div>
+                <h5>Submit confirmation was too quiet</h5>
+                <p>Upgraded from inline toast to a confirmation page with next-steps and a record ID.</p>
+              </div>
             </div>
           </div>
         </div>
