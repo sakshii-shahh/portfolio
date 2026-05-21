@@ -1112,105 +1112,10 @@
     }
 
     /* User stories */
-    .story-stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-      margin-bottom: 22px;
-      text-align: center;
-    }
-    .story-stat-num {
-      font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 38px;
-      font-weight: 700;
-      color: #ec6478;
-      line-height: 1;
-    }
-    .story-stat-lbl {
-      font-family: ui-monospace, monospace;
-      font-size: 11px;
-      letter-spacing: 1.2px;
-      color: #8a7a5e;
-      margin-top: 6px;
-      text-transform: uppercase;
-    }
-    .story-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-    }
-    .story-card {
-      background: #fbf6e5;
-      border: 1px solid #d6c8a4;
-      border-radius: 10px;
-      padding: 16px 18px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .story-card.dim {
-      background: transparent;
-      border-style: dashed;
-    }
-    .story-tag {
-      font-family: ui-monospace, monospace;
-      font-size: 10px;
-      letter-spacing: 1.5px;
-      color: #8a7a5e;
-      font-weight: 600;
-      margin: 0;
-    }
-    .story-tag.reseller { color: #b13e58; }
-    .story-tag.isv { color: #3d6b2c; }
-    .story-tag.si { color: #8a6418; }
-    .story-text {
-      font-size: 14.5px;
-      color: #3a2818;
-      line-height: 1.5;
-      margin: 0;
-    }
     @media (max-width: 720px) {
-      .story-grid { grid-template-columns: 1fr; }
-      .story-stats { grid-template-columns: repeat(3, 1fr); gap: 10px; }
-      .story-stat-num { font-size: 30px; }
     }
 
     /* Validation */
-    .validation-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-      margin-bottom: 22px;
-    }
-    .validation-stat {
-      background: #fbf6e5;
-      border: 1px solid #d6c8a4;
-      border-radius: 10px;
-      padding: 16px 14px;
-      text-align: center;
-    }
-    .validation-num {
-      font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 32px;
-      font-weight: 700;
-      color: #ec6478;
-      line-height: 1;
-    }
-    .validation-lbl {
-      font-family: ui-monospace, monospace;
-      font-size: 10.5px;
-      letter-spacing: 1.2px;
-      color: #3a2818;
-      font-weight: 600;
-      margin-top: 6px;
-      text-transform: uppercase;
-    }
-    .validation-sub {
-      font-size: 12px;
-      color: #8a7a5e;
-      margin: 6px 0 0;
-      line-height: 1.4;
-    }
     .findings-eyebrow {
       font-family: ui-monospace, monospace;
       font-size: 10.5px;
@@ -1221,7 +1126,6 @@
       text-transform: uppercase;
     }
     @media (max-width: 720px) {
-      .validation-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
 
@@ -1779,44 +1683,83 @@
           <p class="process-visual-caption" style="text-align:center;">Mocked journey map &middot; <em>this is a representative version, the original is under NDA</em> &middot; the dip at fill &rarr; submit anchored the redesign brief</p>
         </div>
 
-        <h3 class="subsection-title">32 user stories, written before a single screen</h3>
-        <p>Journey mapping showed where partners hurt. User stories translated that pain into testable, scope-able units of work. I wrote 32 stories, each tagged with priority and acceptance criteria.</p>
-        <div class="process-visual">
-          <div class="story-stats">
-            <div><div class="story-stat-num n-coral">32</div><div class="story-stat-lbl">User stories</div></div>
-            <div><div class="story-stat-num n-sage">14</div><div class="story-stat-lbl">Marked P0</div></div>
+        <div class="stories-block">
+          <h3 class="subsection-title">32 user stories, written before a single screen</h3>
+          <p class="stories-intro">
+            Journey mapping showed where partners hurt. User stories translated that pain into testable, scope-able units of work. I wrote 32 stories grouped into 5 epics, each tagged with priority and acceptance criteria.
+          </p>
+
+          <div class="stories-stats">
+            <div class="sstat">
+              <span class="sstat-num" style="color: #ec6478;">32</span>
+              <span class="sstat-label">User stories</span>
+            </div>
+            <div class="sstat-divider"></div>
+            <div class="sstat">
+              <span class="sstat-num" style="color: #5e8a4f;">14</span>
+              <span class="sstat-label">Marked P0</span>
+            </div>
+            <div class="sstat-divider"></div>
+            <div class="sstat">
+              <span class="sstat-num" style="color: #8a6418;">5</span>
+              <span class="sstat-label">Epics covered</span>
+            </div>
           </div>
-          <div class="story-grid">
-            <div class="story-card">
-              <span class="story-num">01</span>
+
+          <div class="stories-grid">
+            <article class="story-tile story-coral">
+              <div class="story-tile-head">
+                <span class="story-tile-num">01</span>
+                <span class="story-tile-tag">Search</span>
+              </div>
               <h4>Search and add products by name</h4>
-              <p>Type a product name and pick from results, no SKU memorization.</p>
-            </div>
-            <div class="story-card">
-              <span class="story-num">02</span>
-              <h4>Register multi-product co-sell</h4>
-              <p>Add multiple SKUs in one flow without re-entering account data.</p>
-            </div>
-            <div class="story-card">
-              <span class="story-num">03</span>
+              <p>As a partner, I want to type a product name and pick from results so I don't have to memorize SKUs.</p>
+            </article>
+
+            <article class="story-tile story-sage">
+              <div class="story-tile-head">
+                <span class="story-tile-num">02</span>
+                <span class="story-tile-tag">Registration</span>
+              </div>
+              <h4>Register multi-product co-sell deals</h4>
+              <p>As a partner, I want to add multiple SKUs in one registration without re-entering account data each time.</p>
+            </article>
+
+            <article class="story-tile story-gold">
+              <div class="story-tile-head">
+                <span class="story-tile-num">03</span>
+                <span class="story-tile-tag">Persistence</span>
+              </div>
               <h4>Save partial registrations</h4>
-              <p>Stop mid-flow and resume later without losing entered fields.</p>
-            </div>
-            <div class="story-card">
-              <span class="story-num">04</span>
+              <p>As a partner, I want to save and resume later so I can stop mid-flow without losing entered data.</p>
+            </article>
+
+            <article class="story-tile story-coral">
+              <div class="story-tile-head">
+                <span class="story-tile-num">04</span>
+                <span class="story-tile-tag">Validation</span>
+              </div>
               <h4>See inline validation errors</h4>
-              <p>Know which field broke before clicking submit.</p>
-            </div>
-            <div class="story-card">
-              <span class="story-num">05</span>
-              <h4>Auto-fill account data</h4>
-              <p>Pre-populate customer fields from existing CRM records.</p>
-            </div>
-            <div class="story-card story-more">
-              <span class="story-num">+27</span>
-              <h4>Edge cases</h4>
-              <p>Renewal, expansion, multi-region, partial submissions, and 23 more.</p>
-            </div>
+              <p>As a partner, I want to know which field broke before clicking submit so I can fix issues as I go.</p>
+            </article>
+
+            <article class="story-tile story-sage">
+              <div class="story-tile-head">
+                <span class="story-tile-num">05</span>
+                <span class="story-tile-tag">Efficiency</span>
+              </div>
+              <h4>Auto-fill account data from CRM</h4>
+              <p>As a partner, I want pre-populated customer fields from existing CRM records so I don't rekey data.</p>
+            </article>
+
+            <article class="story-tile story-more">
+              <div class="story-tile-head">
+                <span class="story-tile-num">+27</span>
+                <span class="story-tile-tag">Edge cases</span>
+              </div>
+              <h4>Renewal, expansion, multi-region</h4>
+              <p>Partial submissions, regional compliance variants, expansion flows, and 23 more edge cases mapped end-to-end.</p>
+            </article>
           </div>
         </div>
 
@@ -2179,55 +2122,80 @@
 
 
       <!-- ============ 06. VALIDATION ============ -->
-      <section class="section" id="validation">
+      <section class="section validation-section" id="validation">
         <p class="section-eyebrow">Validation</p>
         <h2 class="section-title">8 usability sessions before engineering build</h2>
-        <p>
+        <p class="section-intro">
           I built a clickable Carbon prototype covering the four critical screens (entry, products, pricing, submit) and ran 8 moderated sessions across the three partner archetypes. Two rounds: discover friction, then confirm it was gone. Three issues caught and fixed before a single line of production code shipped.
         </p>
-        <div class="process-visual">
-          <div class="validation-grid">
-            <div class="validation-stat">
-              <div class="validation-num">8</div>
-              <div class="validation-lbl">Usability sessions</div>
-              <p class="validation-sub">Moderated &middot; across 3 archetypes</p>
-            </div>
-            <div class="validation-stat">
-              <div class="validation-num">2</div>
-              <div class="validation-lbl">Test rounds</div>
-              <p class="validation-sub">Discover &middot; confirm</p>
-            </div>
-            <div class="validation-stat">
-              <div class="validation-num">3</div>
-              <div class="validation-lbl">Critical fixes</div>
-              <p class="validation-sub">Caught pre-engineering</p>
-            </div>
-            <div class="validation-stat">
-              <div class="validation-num">A11y</div>
-              <div class="validation-lbl">WCAG 2.1 AA</div>
-              <p class="validation-sub">Screen reader &amp; keyboard pass</p>
-            </div>
+
+        <div class="validation-stats">
+          <div class="vstat">
+            <span class="vstat-num" style="color: #ec6478;">8</span>
+            <span class="vstat-label">Usability sessions</span>
+            <span class="vstat-sub">Moderated &middot; 3 archetypes</span>
           </div>
-          <div class="caught-block">
-            <h4 class="caught-label">What we caught</h4>
-            <div class="caught-grid">
-              <div class="caught-card caught-coral">
-                <div class="caught-icon">&#9888;</div>
-                <h5>Search surfaced obsolete SKUs</h5>
-                <p>Reweighted ranking to favor active catalog entries.</p>
-              </div>
-              <div class="caught-card caught-sage">
-                <div class="caught-icon">&#8618;</div>
-                <h5>Conditional fields appeared without warning</h5>
-                <p>Added a one-line preface so partners weren't startled mid-flow.</p>
-              </div>
-              <div class="caught-card caught-gold">
-                <div class="caught-icon">&#10003;</div>
-                <h5>Submit confirmation was too quiet</h5>
-                <p>Upgraded from inline toast to a confirmation page with next-steps and a record ID.</p>
-              </div>
-            </div>
+          <div class="vstat-divider"></div>
+          <div class="vstat">
+            <span class="vstat-num" style="color: #5e8a4f;">2</span>
+            <span class="vstat-label">Test rounds</span>
+            <span class="vstat-sub">Discover &middot; confirm</span>
           </div>
+          <div class="vstat-divider"></div>
+          <div class="vstat">
+            <span class="vstat-num" style="color: #8a6418;">3</span>
+            <span class="vstat-label">Critical fixes</span>
+            <span class="vstat-sub">Caught pre-engineering</span>
+          </div>
+          <div class="vstat-divider"></div>
+          <div class="vstat">
+            <span class="vstat-num" style="color: #ec6478;">A11y</span>
+            <span class="vstat-label">WCAG 2.1 AA</span>
+            <span class="vstat-sub">Screen reader &amp; keyboard pass</span>
+          </div>
+        </div>
+
+        <h3 class="caught-heading">Three issues, three fixes</h3>
+
+        <div class="caught-row">
+          <article class="caught-tile caught-coral">
+            <div class="caught-tile-head">
+              <span class="caught-tile-num">01</span>
+              <span class="caught-tile-tag">Search</span>
+            </div>
+            <h4>Obsolete SKUs surfaced first</h4>
+            <p>Partners hit deprecated entries before active ones.</p>
+            <div class="caught-fix">
+              <span class="caught-fix-label">Fix</span>
+              <span>Reweighted ranking to favor active catalog entries.</span>
+            </div>
+          </article>
+
+          <article class="caught-tile caught-sage">
+            <div class="caught-tile-head">
+              <span class="caught-tile-num">02</span>
+              <span class="caught-tile-tag">Form</span>
+            </div>
+            <h4>Conditional fields appeared without warning</h4>
+            <p>New questions popped in mid-flow, startling partners.</p>
+            <div class="caught-fix">
+              <span class="caught-fix-label">Fix</span>
+              <span>Added a one-line preface explaining when new fields appear.</span>
+            </div>
+          </article>
+
+          <article class="caught-tile caught-gold">
+            <div class="caught-tile-head">
+              <span class="caught-tile-num">03</span>
+              <span class="caught-tile-tag">Submit</span>
+            </div>
+            <h4>Submit confirmation was too quiet</h4>
+            <p>Inline toast left partners unsure if it actually submitted.</p>
+            <div class="caught-fix">
+              <span class="caught-fix-label">Fix</span>
+              <span>Upgraded to a confirmation page with next-steps and a record ID.</span>
+            </div>
+          </article>
         </div>
       </section>
 
