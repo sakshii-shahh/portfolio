@@ -1298,6 +1298,181 @@
       .validation-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
+
+    /* ============ CARBON VARIANT DOC ============ */
+    .variant-block {
+      background: #fbf6e5;
+      border-left: 3px solid #ec6478;
+      border-radius: 4px;
+      padding: 20px 24px;
+      margin: 32px 0 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .variant-eyebrow {
+      font-family: ui-monospace, monospace;
+      font-size: 10.5px;
+      letter-spacing: 1.5px;
+      color: #b13e58;
+      font-weight: 600;
+      margin: 0;
+      text-transform: uppercase;
+    }
+    .variant-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: #3a2818;
+      margin: 0;
+      line-height: 1.2;
+    }
+    .variant-desc {
+      font-size: 15px;
+      color: #5a4632;
+      line-height: 1.6;
+      margin: 4px 0 0;
+    }
+
+    .carbon-states {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin: 20px 0 12px;
+    }
+    .carbon-state-fig {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .carbon-state-img {
+      background: #ffffff;
+      border: 1px solid #d6c8a4;
+      border-radius: 8px;
+      padding: 0;
+      overflow: hidden;
+      aspect-ratio: 16 / 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .carbon-state-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: left center;
+      display: block;
+    }
+    .carbon-state-label {
+      font-family: ui-monospace, monospace;
+      font-size: 11px;
+      letter-spacing: 1.2px;
+      color: #b13e58;
+      font-weight: 600;
+      margin: 0;
+      text-transform: uppercase;
+    }
+    .carbon-state-desc {
+      font-size: 13.5px;
+      color: #5a4632;
+      line-height: 1.55;
+      margin: 6px 0 0;
+    }
+    @media (max-width: 720px) {
+      .carbon-states { grid-template-columns: 1fr; }
+    }
+
+    .usage-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin-top: 16px;
+    }
+    .usage-col {
+      background: #fbf6e5;
+      border: 1px solid #d6c8a4;
+      border-radius: 10px;
+      padding: 20px 22px;
+    }
+    .usage-col.do { border-top: 3px solid #5e8a4f; }
+    .usage-col.dont { border-top: 3px solid #b13e58; }
+    .usage-col-label {
+      font-family: ui-monospace, monospace;
+      font-size: 10.5px;
+      letter-spacing: 1.5px;
+      font-weight: 600;
+      margin: 0 0 12px;
+      text-transform: uppercase;
+    }
+    .usage-col.do .usage-col-label { color: #3d6b2c; }
+    .usage-col.dont .usage-col-label { color: #b13e58; }
+    .usage-col ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .usage-col li {
+      font-size: 14px;
+      color: #3a2818;
+      line-height: 1.5;
+      padding-left: 18px;
+      position: relative;
+    }
+    .usage-col.do li::before {
+      content: '\2713';
+      position: absolute;
+      left: 0;
+      color: #5e8a4f;
+      font-weight: 700;
+    }
+    .usage-col.dont li::before {
+      content: '\00D7';
+      position: absolute;
+      left: 2px;
+      color: #b13e58;
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 1.3;
+    }
+    @media (max-width: 720px) {
+      .usage-grid { grid-template-columns: 1fr; }
+    }
+
+    .anatomy-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .anatomy-row {
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: 14px;
+      align-items: start;
+      background: #fbf6e5;
+      border: 1px solid #d6c8a4;
+      border-radius: 8px;
+      padding: 14px 18px;
+    }
+    .anatomy-num {
+      font-family: ui-monospace, monospace;
+      font-size: 11px;
+      letter-spacing: 1.2px;
+      color: #ec6478;
+      font-weight: 700;
+      padding-top: 3px;
+    }
+    .anatomy-row p {
+      margin: 0;
+      font-size: 14px;
+      color: #3a2818;
+      line-height: 1.55;
+    }
+
   </style>
 </head>
 <body>
@@ -1678,35 +1853,130 @@
         </ol>
       </section>
 
-      <!-- ============ 05. CARBON COMPONENTS ============ -->
+      <!-- ============ 06. CARBON COMPONENTS ============ -->
       <section class="section" id="carbon">
-        <p class="section-eyebrow">Carbon components</p>
-        <h2 class="section-title">Building back into the system</h2>
+        <p class="section-eyebrow">Carbon contribution</p>
+        <h2 class="section-title">A new modal variant, written into the system</h2>
         <p>
-          While shipping the new flow, we identified an interaction pattern the standard Carbon library didn't cover. Rather than build it as a one-off, I designed and documented it as a new global component.
-        </p>
-        <p>
-          <strong>Modal Pop-up Asset.</strong> A reusable modal pattern designed for the Deal Registration flow, then contributed back to the Carbon Design System. It's now used across other IBM partner-facing products beyond Partner Plus.
-        </p>
-        <p>
-          Working at the system level meant our 8 months of design effort became a multi-year asset for IBM's broader UX organization. The component still ships in production today.
+          While shipping the new flow, I identified an interaction pattern the standard Carbon library didn't cover: a <strong>search-in-modal</strong> for finding an existing entity (a distributor, customer, or partner) from a large indexed dataset, with a fall-through to "create new" when nothing matches. Rather than build it as a one-off for Deal Registration, I designed and documented it as a new global variant &mdash; alongside Carbon's existing transactional, passive, and danger modals.
         </p>
 
-        <a class="link-preview-card" href="https://carbondesignsystem.com/" target="_blank" rel="noopener" aria-label="Visit Carbon Design System">
+        <a class="link-preview-card" href="https://carbondesignsystem.com/components/modal/usage/" target="_blank" rel="noopener">
           <div class="link-preview-icon" aria-hidden="true">
-            <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-              <rect width="32" height="32" rx="6" fill="#0f62fe"/>
-              <path d="M16 7 L25 12 L25 20 L16 25 L7 20 L7 12 Z" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linejoin="round"/>
-              <circle cx="16" cy="16" r="3" fill="#ffffff"/>
+            <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+              <rect width="32" height="32" rx="4" fill="#0f62fe"/>
+              <path d="M8 11h16v10H8z" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+              <line x1="8" y1="14" x2="24" y2="14" stroke="#ffffff" stroke-width="1.5"/>
+              <circle cx="11" cy="12.5" r="0.6" fill="#ffffff"/>
+              <circle cx="13" cy="12.5" r="0.6" fill="#ffffff"/>
+              <circle cx="15" cy="12.5" r="0.6" fill="#ffffff"/>
             </svg>
           </div>
           <div class="link-preview-body">
             <p class="link-preview-domain">carbondesignsystem.com</p>
-            <h4 class="link-preview-title">Carbon Design System</h4>
-            <p class="link-preview-desc">IBM's open-source design system for products and digital experiences. Browse the component library, design patterns, and contribution guidelines.</p>
+            <h4 class="link-preview-title">Modal &middot; Usage</h4>
+            <p class="link-preview-desc">Reference for Carbon's modal variants &mdash; transactional, passive, and danger &mdash; with anatomy, behavior, and accessibility specs.</p>
           </div>
-          <span class="link-preview-arrow" aria-hidden="true">↗</span>
+          <span class="link-preview-arrow" aria-hidden="true">&#8599;</span>
         </a>
+
+        <div class="variant-block">
+          <p class="variant-eyebrow">New variant</p>
+          <h3 class="variant-title">Search-in-modal</h3>
+          <p class="variant-desc">
+            A modal pattern that opens with a search field, returns a filtered table of indexed results, and provides single-select with a "create new" fall-through. Built for high-volume entity selection where a dropdown or combo box can't carry the metadata partners need to disambiguate.
+          </p>
+        </div>
+
+        <h3 class="subsection-title"><span class="num">06 &middot; A</span>States</h3>
+        <p>
+          Two documented states ship with the variant: the empty state (modal just opened, awaiting query) and the filled state (results returned, user selecting). A third validation state covers the inline error when a user submits without input.
+        </p>
+
+        <div class="carbon-states">
+          <figure class="carbon-state-fig">
+            <div class="carbon-state-img">
+              <img src="assets/ibm/carbon-modal-empty.png" alt="Search-in-modal, empty state. Title 'Change Distributor' with a search field and empty results table prompting the user to begin searching." loading="lazy">
+            </div>
+            <figcaption>
+              <p class="carbon-state-label">01 &middot; Empty</p>
+              <p class="carbon-state-desc">Modal opens with an inactive results table and a prompt to search. Confirm is disabled until a selection is made.</p>
+            </figcaption>
+          </figure>
+
+          <figure class="carbon-state-fig">
+            <div class="carbon-state-img">
+              <img src="assets/ibm/carbon-modal-filled.png" alt="Search-in-modal, filled state. Search query 'Distributor XYZ' returns two matching rows; the second row is selected via radio button and the Confirm button becomes active." loading="lazy">
+            </div>
+            <figcaption>
+              <p class="carbon-state-label">02 &middot; Filled</p>
+              <p class="carbon-state-desc">Query returns a filtered, single-select results table. Confirm activates once a row is selected. Clear button resets the field without closing the modal.</p>
+            </figcaption>
+          </figure>
+        </div>
+
+        <h3 class="subsection-title"><span class="num">06 &middot; B</span>When to use</h3>
+        <div class="usage-grid">
+          <div class="usage-col do">
+            <p class="usage-col-label">Use it for</p>
+            <ul>
+              <li>Selecting one record from a large indexed dataset (10k+ entries)</li>
+              <li>Lookups that require multiple disambiguating columns (name, region, ID)</li>
+              <li>Workflows where the user needs to stay on the parent page after selection</li>
+              <li>Cases where a "create new" fall-through is part of the same task</li>
+            </ul>
+          </div>
+          <div class="usage-col dont">
+            <p class="usage-col-label">Don't use it for</p>
+            <ul>
+              <li>Short, finite lists &mdash; a dropdown or combo box is lighter</li>
+              <li>Multi-select (use a sidebar selector instead)</li>
+              <li>Workflows that need full-page editing after selection</li>
+              <li>Destructive actions &mdash; route through the danger modal variant</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3 class="subsection-title"><span class="num">06 &middot; C</span>Anatomy</h3>
+        <p>
+          Six structural parts, all built from existing Carbon primitives. The variant introduced no new tokens or components &mdash; it composed elements that were already in the system into a pattern that hadn't been documented yet.
+        </p>
+
+        <div class="anatomy-list">
+          <div class="anatomy-row">
+            <span class="anatomy-num">01</span>
+            <p><strong>Title &amp; context.</strong> Modal title plus a single-line description of consequence. The Change Distributor variant flags eligibility impact directly under the title.</p>
+          </div>
+          <div class="anatomy-row">
+            <span class="anatomy-num">02</span>
+            <p><strong>Search field.</strong> Primary input with placeholder hinting at all searchable fields (name, country, CEID). Clear icon on the right when populated.</p>
+          </div>
+          <div class="anatomy-row">
+            <span class="anatomy-num">03</span>
+            <p><strong>Search action.</strong> Primary button submits the query. Disabled when input is empty in the Change Distributor variant; auto-search on debounce in lower-stakes variants.</p>
+          </div>
+          <div class="anatomy-row">
+            <span class="anatomy-num">04</span>
+            <p><strong>Results table.</strong> Standard Carbon data table with a leading radio column for single-select. Columns are configurable per implementation.</p>
+          </div>
+          <div class="anatomy-row">
+            <span class="anatomy-num">05</span>
+            <p><strong>Empty / fall-through state.</strong> Illustration plus prompt before search, and a "create new" link after a zero-result search.</p>
+          </div>
+          <div class="anatomy-row">
+            <span class="anatomy-num">06</span>
+            <p><strong>Footer actions.</strong> Cancel and Confirm. Confirm disabled until a row is selected. Both buttons full-width per Carbon's transactional modal footer spec.</p>
+          </div>
+        </div>
+
+        <h3 class="subsection-title"><span class="num">06 &middot; D</span>Accessibility &amp; behavior</h3>
+        <p>
+          The variant passed Carbon's WCAG 2.1 AA review &mdash; focus traps to the modal on open, returns to the trigger element on close, escape key cancels, enter submits the search from the input. Screen reader announcements tier through three priorities: results-count, selected-row, and submit-confirmation.
+        </p>
+
+        <p style="margin-top: 28px;">
+          The component shipped with usage guidelines, do's-and-don'ts, accessibility specs, and code examples in the Carbon documentation. Working at the system level meant our 8 months of design effort became a multi-year asset for IBM's broader UX organization &mdash; the variant still ships in production today, used by other IBM partner-facing products beyond Partner Plus.
+        </p>
       </section>
 
       <!-- ============ 06. IMPACT ============ -->
