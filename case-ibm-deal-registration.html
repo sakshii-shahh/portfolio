@@ -1112,67 +1112,7 @@
     }
 
     /* User stories */
-    .story-stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-      margin-bottom: 22px;
-      text-align: center;
-    }
-    .story-stat-num {
-      font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 38px;
-      font-weight: 700;
-      color: #ec6478;
-      line-height: 1;
-    }
-    .story-stat-lbl {
-      font-family: ui-monospace, monospace;
-      font-size: 11px;
-      letter-spacing: 1.2px;
-      color: #8a7a5e;
-      margin-top: 6px;
-      text-transform: uppercase;
-    }
-    .story-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-    }
-    .story-card {
-      background: #fbf6e5;
-      border: 1px solid #d6c8a4;
-      border-radius: 10px;
-      padding: 16px 18px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .story-card.dim {
-      background: transparent;
-      border-style: dashed;
-    }
-    .story-tag {
-      font-family: ui-monospace, monospace;
-      font-size: 10px;
-      letter-spacing: 1.5px;
-      color: #8a7a5e;
-      font-weight: 600;
-      margin: 0;
-    }
-    .story-tag.reseller { color: #b13e58; }
-    .story-tag.isv { color: #3d6b2c; }
-    .story-tag.si { color: #8a6418; }
-    .story-text {
-      font-size: 14.5px;
-      color: #3a2818;
-      line-height: 1.5;
-      margin: 0;
-    }
     @media (max-width: 720px) {
-      .story-grid { grid-template-columns: 1fr; }
-      .story-stats { grid-template-columns: repeat(3, 1fr); gap: 10px; }
-      .story-stat-num { font-size: 30px; }
     }
 
     /* Validation */
@@ -1743,44 +1683,83 @@
           <p class="process-visual-caption" style="text-align:center;">Mocked journey map &middot; <em>this is a representative version, the original is under NDA</em> &middot; the dip at fill &rarr; submit anchored the redesign brief</p>
         </div>
 
-        <h3 class="subsection-title">32 user stories, written before a single screen</h3>
-        <p>Journey mapping showed where partners hurt. User stories translated that pain into testable, scope-able units of work. I wrote 32 stories, each tagged with priority and acceptance criteria.</p>
-        <div class="process-visual">
-          <div class="story-stats">
-            <div><div class="story-stat-num n-coral">32</div><div class="story-stat-lbl">User stories</div></div>
-            <div><div class="story-stat-num n-sage">14</div><div class="story-stat-lbl">Marked P0</div></div>
+        <div class="stories-block">
+          <h3 class="subsection-title">32 user stories, written before a single screen</h3>
+          <p class="stories-intro">
+            Journey mapping showed where partners hurt. User stories translated that pain into testable, scope-able units of work. I wrote 32 stories grouped into 5 epics, each tagged with priority and acceptance criteria.
+          </p>
+
+          <div class="stories-stats">
+            <div class="sstat">
+              <span class="sstat-num" style="color: #ec6478;">32</span>
+              <span class="sstat-label">User stories</span>
+            </div>
+            <div class="sstat-divider"></div>
+            <div class="sstat">
+              <span class="sstat-num" style="color: #5e8a4f;">14</span>
+              <span class="sstat-label">Marked P0</span>
+            </div>
+            <div class="sstat-divider"></div>
+            <div class="sstat">
+              <span class="sstat-num" style="color: #8a6418;">5</span>
+              <span class="sstat-label">Epics covered</span>
+            </div>
           </div>
-          <div class="story-grid">
-            <div class="story-card">
-              <span class="story-num">01</span>
+
+          <div class="stories-grid">
+            <article class="story-tile story-coral">
+              <div class="story-tile-head">
+                <span class="story-tile-num">01</span>
+                <span class="story-tile-tag">Search</span>
+              </div>
               <h4>Search and add products by name</h4>
-              <p>Type a product name and pick from results, no SKU memorization.</p>
-            </div>
-            <div class="story-card">
-              <span class="story-num">02</span>
-              <h4>Register multi-product co-sell</h4>
-              <p>Add multiple SKUs in one flow without re-entering account data.</p>
-            </div>
-            <div class="story-card">
-              <span class="story-num">03</span>
+              <p>As a partner, I want to type a product name and pick from results so I don't have to memorize SKUs.</p>
+            </article>
+
+            <article class="story-tile story-sage">
+              <div class="story-tile-head">
+                <span class="story-tile-num">02</span>
+                <span class="story-tile-tag">Registration</span>
+              </div>
+              <h4>Register multi-product co-sell deals</h4>
+              <p>As a partner, I want to add multiple SKUs in one registration without re-entering account data each time.</p>
+            </article>
+
+            <article class="story-tile story-gold">
+              <div class="story-tile-head">
+                <span class="story-tile-num">03</span>
+                <span class="story-tile-tag">Persistence</span>
+              </div>
               <h4>Save partial registrations</h4>
-              <p>Stop mid-flow and resume later without losing entered fields.</p>
-            </div>
-            <div class="story-card">
-              <span class="story-num">04</span>
+              <p>As a partner, I want to save and resume later so I can stop mid-flow without losing entered data.</p>
+            </article>
+
+            <article class="story-tile story-coral">
+              <div class="story-tile-head">
+                <span class="story-tile-num">04</span>
+                <span class="story-tile-tag">Validation</span>
+              </div>
               <h4>See inline validation errors</h4>
-              <p>Know which field broke before clicking submit.</p>
-            </div>
-            <div class="story-card">
-              <span class="story-num">05</span>
-              <h4>Auto-fill account data</h4>
-              <p>Pre-populate customer fields from existing CRM records.</p>
-            </div>
-            <div class="story-card story-more">
-              <span class="story-num">+27</span>
-              <h4>Edge cases</h4>
-              <p>Renewal, expansion, multi-region, partial submissions, and 23 more.</p>
-            </div>
+              <p>As a partner, I want to know which field broke before clicking submit so I can fix issues as I go.</p>
+            </article>
+
+            <article class="story-tile story-sage">
+              <div class="story-tile-head">
+                <span class="story-tile-num">05</span>
+                <span class="story-tile-tag">Efficiency</span>
+              </div>
+              <h4>Auto-fill account data from CRM</h4>
+              <p>As a partner, I want pre-populated customer fields from existing CRM records so I don't rekey data.</p>
+            </article>
+
+            <article class="story-tile story-more">
+              <div class="story-tile-head">
+                <span class="story-tile-num">+27</span>
+                <span class="story-tile-tag">Edge cases</span>
+              </div>
+              <h4>Renewal, expansion, multi-region</h4>
+              <p>Partial submissions, regional compliance variants, expansion flows, and 23 more edge cases mapped end-to-end.</p>
+            </article>
           </div>
         </div>
 
