@@ -1028,6 +1028,276 @@
       content-visibility: auto;
       contain-intrinsic-size: auto 600px;
     }
+
+    /* ============ PROCESS SECTION ============ */
+    .subsection-title {
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: clamp(20px, 2vw, 24px);
+      line-height: 1.25;
+      letter-spacing: -0.012em;
+      color: var(--ink);
+      margin: 40px 0 14px;
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+    }
+    .subsection-title .num {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .14em;
+      color: var(--accent);
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
+    .process-visual {
+      margin: 22px 0 8px;
+    }
+    .process-visual-caption {
+      font-family: "Fraunces", Georgia, serif;
+      font-style: italic;
+      font-size: 13px;
+      color: var(--ink-mute);
+      margin: 14px 0 0;
+      text-align: center;
+    }
+    .process-placeholder {
+      background: var(--bg-elev);
+      border: 1px dashed var(--rule-strong);
+      border-radius: var(--r-md);
+      padding: 32px 24px;
+      text-align: center;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+      line-height: 1.6;
+    }
+
+    /* Phase overview */
+    .phase-overview {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr auto 1fr;
+      align-items: stretch;
+      gap: 0;
+    }
+    .phase-card {
+      background: #fbf6e5;
+      border: 1px solid #d6c8a4;
+      border-radius: 10px;
+      padding: 16px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .phase-card.highlight {
+      background: #f7d4dc;
+      border-color: #ec6478;
+    }
+    .phase-num {
+      font-family: ui-monospace, monospace;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      color: #8a7a5e;
+      font-weight: 600;
+    }
+    .phase-card.highlight .phase-num { color: #b13e58; }
+    .phase-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: #3a2818;
+      margin: 0;
+      line-height: 1.25;
+    }
+    .phase-acts {
+      list-style: none;
+      padding: 0;
+      margin: 6px 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .phase-acts li {
+      font-size: 12.5px;
+      color: #5a4632;
+      line-height: 1.4;
+      padding-left: 10px;
+      position: relative;
+    }
+    .phase-acts li::before {
+      content: '·';
+      position: absolute;
+      left: 2px;
+      color: #b8a988;
+      font-weight: 700;
+    }
+    .phase-arrow {
+      color: #b8a988;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 6px;
+    }
+    @media (max-width: 860px) {
+      .phase-overview { grid-template-columns: 1fr; gap: 10px; }
+      .phase-arrow { transform: rotate(90deg); padding: 4px 0; }
+    }
+
+    /* User stories */
+    .story-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-bottom: 22px;
+      text-align: center;
+    }
+    .story-stat-num {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 38px;
+      font-weight: 700;
+      color: #ec6478;
+      line-height: 1;
+    }
+    .story-stat-lbl {
+      font-family: ui-monospace, monospace;
+      font-size: 11px;
+      letter-spacing: 1.2px;
+      color: #8a7a5e;
+      margin-top: 6px;
+      text-transform: uppercase;
+    }
+    .story-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+    .story-card {
+      background: #fbf6e5;
+      border: 1px solid #d6c8a4;
+      border-radius: 10px;
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .story-card.dim {
+      background: transparent;
+      border-style: dashed;
+    }
+    .story-tag {
+      font-family: ui-monospace, monospace;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      color: #8a7a5e;
+      font-weight: 600;
+      margin: 0;
+    }
+    .story-tag.reseller { color: #b13e58; }
+    .story-tag.isv { color: #3d6b2c; }
+    .story-tag.si { color: #8a6418; }
+    .story-text {
+      font-size: 14.5px;
+      color: #3a2818;
+      line-height: 1.5;
+      margin: 0;
+    }
+    .story-ac {
+      font-family: ui-monospace, monospace;
+      font-size: 11.5px;
+      color: #5a4632;
+      line-height: 1.5;
+      margin: 0;
+      padding-top: 8px;
+      border-top: 1px dashed #d6c8a4;
+    }
+    @media (max-width: 720px) {
+      .story-grid { grid-template-columns: 1fr; }
+      .story-stats { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+      .story-stat-num { font-size: 30px; }
+    }
+
+    /* Validation */
+    .validation-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+    .validation-stat {
+      background: #fbf6e5;
+      border: 1px solid #d6c8a4;
+      border-radius: 10px;
+      padding: 16px 14px;
+      text-align: center;
+    }
+    .validation-num {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: #ec6478;
+      line-height: 1;
+    }
+    .validation-lbl {
+      font-family: ui-monospace, monospace;
+      font-size: 10.5px;
+      letter-spacing: 1.2px;
+      color: #3a2818;
+      font-weight: 600;
+      margin-top: 6px;
+      text-transform: uppercase;
+    }
+    .validation-sub {
+      font-size: 12px;
+      color: #8a7a5e;
+      margin: 6px 0 0;
+      line-height: 1.4;
+    }
+    .validation-findings {
+      background: #fbf6e5;
+      border: 1px solid #d6c8a4;
+      border-radius: 10px;
+      padding: 20px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .findings-eyebrow {
+      font-family: ui-monospace, monospace;
+      font-size: 10.5px;
+      letter-spacing: 1.5px;
+      color: #8a7a5e;
+      font-weight: 600;
+      margin: 0;
+      text-transform: uppercase;
+    }
+    .finding {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 12px;
+      align-items: start;
+    }
+    .finding-num {
+      font-family: ui-monospace, monospace;
+      font-size: 11px;
+      letter-spacing: 1px;
+      color: #ec6478;
+      font-weight: 700;
+      padding-top: 2px;
+    }
+    .finding p {
+      margin: 0;
+      font-size: 14px;
+      color: #3a2818;
+      line-height: 1.5;
+    }
+    @media (max-width: 720px) {
+      .validation-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
   </style>
 </head>
 <body>
@@ -1045,10 +1315,10 @@
         <ol>
           <li><a href="#context" class="toc-link active"><span class="num">01.</span>Context</a></li>
           <li><a href="#research" class="toc-link"><span class="num">02.</span>Research</a></li>
-          <li><a href="#solution" class="toc-link"><span class="num">03.</span>Solution</a></li>
-          <li><a href="#features" class="toc-link"><span class="num">04.</span>Features</a></li>
-          <li><a href="#carbon" class="toc-link"><span class="num">05.</span>Carbon components</a></li>
-          <li><a href="#handoff" class="toc-link"><span class="num">06.</span>Handoff &amp; documentation</a></li>
+          <li><a href="#process" class="toc-link"><span class="num">03.</span>Process</a></li>
+          <li><a href="#solution" class="toc-link"><span class="num">04.</span>Solution</a></li>
+          <li><a href="#features" class="toc-link"><span class="num">05.</span>Features</a></li>
+          <li><a href="#carbon" class="toc-link"><span class="num">06.</span>Carbon components</a></li>
           <li><a href="#impact" class="toc-link"><span class="num">07.</span>Impact</a></li>
           <li><a href="#reflection" class="toc-link"><span class="num">08.</span>Reflection</a></li>
         </ol>
@@ -1157,7 +1427,221 @@
         </p>
       </section>
 
-      <!-- ============ 03. THE SOLUTION ============ -->
+      <!-- ============ 03. PROCESS ============ -->
+      <section class="section" id="process">
+        <p class="section-eyebrow">Process</p>
+        <h2 class="section-title">How the redesign got built</h2>
+        <p>
+          Research told us the form didn't match the shape of the work. Process is how we translated that finding into a Carbon-grade flow without skipping the steps that make a redesign defensible.
+        </p>
+
+        <!-- 03a. Process Overview -->
+        <h3 class="subsection-title"><span class="num">03 · A</span>The full UX process behind the redesign</h3>
+        <p>
+          Six weeks of work sat between "the form is broken" and "here's the Carbon prototype." Five overlapping phases &mdash; discovery, research, synthesis, design and test, then validation and handoff. Each one produced an artifact the next phase depended on, and each one is summarized in the subsections below.
+        </p>
+
+        <div class="process-visual">
+          <div class="phase-overview">
+            <div class="phase-card">
+              <div class="phase-num">01</div>
+              <p class="phase-title">Discovery &amp; Strategy</p>
+              <ul class="phase-acts">
+                <li>Stakeholder workshops</li>
+                <li>Problem framing</li>
+                <li>Success metric alignment</li>
+                <li>Project roadmap</li>
+              </ul>
+            </div>
+            <div class="phase-arrow" aria-hidden="true">&rarr;</div>
+            <div class="phase-card">
+              <div class="phase-num">02</div>
+              <p class="phase-title">User Research</p>
+              <ul class="phase-acts">
+                <li>Stakeholder interviews</li>
+                <li>Contextual inquiry &middot; 12 partners</li>
+                <li>Telemetry &amp; data analysis</li>
+                <li>Competitive audit</li>
+              </ul>
+            </div>
+            <div class="phase-arrow" aria-hidden="true">&rarr;</div>
+            <div class="phase-card highlight">
+              <div class="phase-num">03</div>
+              <p class="phase-title">Synthesis &amp; Definition</p>
+              <ul class="phase-acts">
+                <li>Affinity mapping</li>
+                <li>Journey mapping</li>
+                <li>User stories &middot; 32 written</li>
+                <li>Feature prioritization</li>
+              </ul>
+            </div>
+            <div class="phase-arrow" aria-hidden="true">&rarr;</div>
+            <div class="phase-card">
+              <div class="phase-num">04</div>
+              <p class="phase-title">Design &amp; Test</p>
+              <ul class="phase-acts">
+                <li>IA restructure</li>
+                <li>11 user flows</li>
+                <li>Lo-fi wireframes</li>
+                <li>Hi-fi Carbon prototype</li>
+              </ul>
+            </div>
+            <div class="phase-arrow" aria-hidden="true">&rarr;</div>
+            <div class="phase-card">
+              <div class="phase-num">05</div>
+              <p class="phase-title">Validation &amp; Handoff</p>
+              <ul class="phase-acts">
+                <li>Usability testing &middot; 8 sessions</li>
+                <li>Accessibility audit</li>
+                <li>Engineering handoff</li>
+                <li>Carbon contribution</li>
+              </ul>
+            </div>
+          </div>
+          <p class="process-visual-caption">Five-phase UX program &middot; ~6 weeks between research kickoff and engineering handoff</p>
+        </div>
+
+        <!-- 03b. Journey Map -->
+        <h3 class="subsection-title"><span class="num">03 · B</span>Where the emotion actually dipped</h3>
+        <p>
+          With raw interview notes from 12 partners, I mapped the end-to-end registration journey across five stages: discover, prepare, fill, submit, await approval. Each stage got an emotion curve, a thoughts row, and a list of system touchpoints. The dip was sharpest at <strong>fill &rarr; submit</strong>, where partners pasted from spreadsheets, hit validation errors, and lost the data they'd just typed.
+        </p>
+        <div class="process-visual">
+          <div class="process-placeholder">Journey map &middot; 5 stages &times; 3 lanes (emotion, thoughts, touchpoints) &middot; original under NDA</div>
+          <p class="process-visual-caption">Journey map artifact &middot; dip at fill&rarr;submit anchored the redesign brief</p>
+        </div>
+
+        <!-- 03c. User Stories -->
+        <h3 class="subsection-title"><span class="num">03 · C</span>32 user stories, written before a single screen</h3>
+        <p>
+          Journey mapping showed where partners hurt. User stories translated that pain into testable, scope-able units of work. I wrote 32 stories across the three partner archetypes, each tagged with priority and acceptance criteria. The discipline of writing them forced us to define "done" before we drew &mdash; and the priority tags became the first cut at the backlog Engineering scoped against.
+        </p>
+
+        <div class="process-visual">
+          <div class="story-stats">
+            <div>
+              <div class="story-stat-num">32</div>
+              <div class="story-stat-lbl">User stories</div>
+            </div>
+            <div>
+              <div class="story-stat-num">14</div>
+              <div class="story-stat-lbl">Marked P0</div>
+            </div>
+            <div>
+              <div class="story-stat-num">3</div>
+              <div class="story-stat-lbl">Archetypes covered</div>
+            </div>
+          </div>
+
+          <div class="story-grid">
+            <div class="story-card">
+              <p class="story-tag reseller">RESELLER &middot; P0</p>
+              <p class="story-text">As a <strong>reseller</strong>, I want to <strong>search and add products by name</strong> so that I don't have to leave the form to look up SKU codes.</p>
+              <p class="story-ac">AC &middot; search matches partial strings, returns within 300ms, adds product inline</p>
+            </div>
+            <div class="story-card">
+              <p class="story-tag isv">ISV &middot; P0</p>
+              <p class="story-text">As an <strong>ISV</strong>, I want to <strong>register multi-product co-sell deals in one flow</strong> so that I'm not creating separate registrations per SKU.</p>
+              <p class="story-ac">AC &middot; single submission supports up to 25 products, each with its own pricing</p>
+            </div>
+            <div class="story-card">
+              <p class="story-tag si">SI &middot; P1</p>
+              <p class="story-text">As a <strong>system integrator</strong>, I want to <strong>save partial registrations</strong> so that I can pause when I'm waiting on client info.</p>
+              <p class="story-ac">AC &middot; draft auto-saves every 30s, retrievable for 30 days</p>
+            </div>
+            <div class="story-card dim">
+              <p class="story-tag">+ 29 more</p>
+              <p class="story-text">Stories covering edge cases &middot; renewal flows, expansion deals, multi-region compliance, validation errors, partial submissions, and approval handoff.</p>
+              <p class="story-ac">Full backlog scoped with Engineering during sprint planning</p>
+            </div>
+          </div>
+          <p class="process-visual-caption">Sample user stories &middot; representative format, originals under NDA</p>
+        </div>
+
+        <!-- 03d. User Flows -->
+        <h3 class="subsection-title"><span class="num">03 · D</span>11 user flows for 3 partner archetypes</h3>
+        <p>
+          The P0 stories needed paths. I drew 11 user flows mapping how a reseller, ISV, and system integrator each move from intent to closed-won, including branch points for renewal vs. new deal, single vs. multi-product, and the four most common error states. Engineering used the flows directly to scope state machines.
+        </p>
+        <div class="process-visual">
+          <div class="process-placeholder">11 user flows &middot; reseller / ISV / SI &times; new / renew / expansion &middot; original under NDA</div>
+          <p class="process-visual-caption">User flows artifact &middot; the spine engineering scoped against</p>
+        </div>
+
+        <!-- 03e. IA Restructure -->
+        <h3 class="subsection-title"><span class="num">03 · E</span>An information architecture that follows the deal</h3>
+        <p>
+          The original form was organized around IBM's internal hierarchy (legal entity &rarr; product line &rarr; deal). Card-sorting with partners showed they think the other way around: deal &rarr; products &rarr; legal entity. I rebuilt the IA so the form's groupings matched the partner mental model. Every section had a job and a payoff line so partners knew why they were filling it in.
+        </p>
+        <div class="process-visual">
+          <div class="process-placeholder">IA restructure &middot; before / after sitemap of the registration flow &middot; original under NDA</div>
+          <p class="process-visual-caption">IA artifact &middot; reorganized around partner mental model</p>
+        </div>
+
+        <!-- 03f. Wireframes -->
+        <h3 class="subsection-title"><span class="num">03 · F</span>Lo-fi wireframes for the three critical screens</h3>
+        <p>
+          Before any Carbon styling, I sketched lo-fi wireframes for the three highest-stakes screens: entry, products, and submit. The intention was to lock down structure and information density before color, type, and components could distract the conversation. Reviews with the Product Owner and Engineering converged in two iteration rounds.
+        </p>
+        <div class="process-visual">
+          <div class="process-placeholder">Lo-fi wireframes &middot; entry &middot; products &middot; submit &middot; original under NDA</div>
+          <p class="process-visual-caption">Lo-fi wireframes artifact &middot; structure agreed before high-fi began</p>
+        </div>
+
+        <!-- 03g. Prototyping & Validation -->
+        <h3 class="subsection-title"><span class="num">03 · G</span>Hi-fi prototype, then 8 usability sessions</h3>
+        <p>
+          Lo-fi got us to "the structure works." Hi-fi got us to "the interaction works." I built a clickable Carbon prototype covering the four critical screens &mdash; entry, products, pricing, and submit &mdash; and ran 8 moderated usability sessions across the three partner archetypes. Two rounds: first round to surface friction, second round to confirm the friction was gone. Three issues were caught and fixed before a single line of production code shipped.
+        </p>
+
+        <div class="process-visual">
+          <div class="validation-grid">
+            <div class="validation-stat">
+              <div class="validation-num">8</div>
+              <div class="validation-lbl">Usability sessions</div>
+              <p class="validation-sub">Moderated &middot; across 3 archetypes</p>
+            </div>
+            <div class="validation-stat">
+              <div class="validation-num">2</div>
+              <div class="validation-lbl">Test rounds</div>
+              <p class="validation-sub">Discover &middot; confirm</p>
+            </div>
+            <div class="validation-stat">
+              <div class="validation-num">3</div>
+              <div class="validation-lbl">Critical fixes</div>
+              <p class="validation-sub">Caught pre-engineering</p>
+            </div>
+            <div class="validation-stat">
+              <div class="validation-num">A11y</div>
+              <div class="validation-lbl">WCAG 2.1 AA</div>
+              <p class="validation-sub">Screen reader &amp; keyboard pass</p>
+            </div>
+          </div>
+
+          <div class="validation-findings">
+            <p class="findings-eyebrow">What we caught</p>
+            <div class="finding">
+              <span class="finding-num">01</span>
+              <p><strong>Search ranking surfaced obsolete SKUs first.</strong> Reweighted to favor active catalog entries.</p>
+            </div>
+            <div class="finding">
+              <span class="finding-num">02</span>
+              <p><strong>Conditional fields appeared without warning.</strong> Added a one-line preface so partners weren't startled mid-flow.</p>
+            </div>
+            <div class="finding">
+              <span class="finding-num">03</span>
+              <p><strong>Submit confirmation was too quiet.</strong> Upgraded from inline toast to a confirmation page with next-steps and a record ID.</p>
+            </div>
+          </div>
+          <p class="process-visual-caption">Validation round &middot; prototype tested before engineering build</p>
+        </div>
+
+        <p>
+          By the end of this six-week stretch, the prototype carried partner-validated interactions, an IA partners could navigate without coaching, and an engineering-ready spec. The Carbon components that ship in production today are the ones that came out of these sessions.
+        </p>
+      </section>
+
+      <!-- ============ 04. THE SOLUTION ============ -->
       <section class="section" id="solution">
         <p class="section-eyebrow">The solution</p>
         <h2 class="section-title">A flow that adapts to the deal, not the other way around.</h2>
