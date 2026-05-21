@@ -1168,15 +1168,6 @@
       line-height: 1.5;
       margin: 0;
     }
-    .story-ac {
-      font-family: ui-monospace, monospace;
-      font-size: 11.5px;
-      color: #5a4632;
-      line-height: 1.5;
-      margin: 0;
-      padding-top: 8px;
-      border-top: 1px dashed #d6c8a4;
-    }
     @media (max-width: 720px) {
       .story-grid { grid-template-columns: 1fr; }
       .story-stats { grid-template-columns: repeat(3, 1fr); gap: 10px; }
@@ -1219,15 +1210,6 @@
       margin: 6px 0 0;
       line-height: 1.4;
     }
-    .validation-findings {
-      background: #fbf6e5;
-      border: 1px solid #d6c8a4;
-      border-radius: 10px;
-      padding: 20px 22px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
     .findings-eyebrow {
       font-family: ui-monospace, monospace;
       font-size: 10.5px;
@@ -1236,26 +1218,6 @@
       font-weight: 600;
       margin: 0;
       text-transform: uppercase;
-    }
-    .finding {
-      display: grid;
-      grid-template-columns: 28px 1fr;
-      gap: 12px;
-      align-items: start;
-    }
-    .finding-num {
-      font-family: ui-monospace, monospace;
-      font-size: 11px;
-      letter-spacing: 1px;
-      color: #ec6478;
-      font-weight: 700;
-      padding-top: 2px;
-    }
-    .finding p {
-      margin: 0;
-      font-size: 14px;
-      color: #3a2818;
-      line-height: 1.5;
     }
     @media (max-width: 720px) {
       .validation-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1524,7 +1486,7 @@
 
 
     /* ============ STEP-9 REFINEMENTS ============ */
-    /* Interactive world map */
+    /* Interactive world map (legacy block, retained for shell; superseded below) */
     .world-map-interactive {
       position: relative;
       background: #fbf6e5;
@@ -1534,99 +1496,10 @@
       overflow: visible;
     }
     .world-map-interactive > img { width: 100%; height: auto; display: block; border-radius: 6px; }
-    .map-dot {
-      position: absolute;
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      background: #ec6478;
-      border: 3px solid #fbf6e5;
-      box-shadow: 0 0 0 2px #ec6478, 0 0 20px rgba(236, 100, 120, 0.5);
-      cursor: pointer;
-      padding: 0;
-      transform: translate(-50%, -50%);
-      animation: dot-pulse 2.4s ease-in-out infinite;
-      z-index: 2;
-    }
-    @keyframes dot-pulse {
-      0%, 100% { box-shadow: 0 0 0 2px #ec6478, 0 0 0 0 rgba(236, 100, 120, 0.5); }
-      50% { box-shadow: 0 0 0 2px #ec6478, 0 0 0 10px rgba(236, 100, 120, 0); }
-    }
-    .map-tooltip {
-      position: absolute;
-      bottom: calc(100% + 12px);
-      left: 50%;
-      transform: translateX(-50%);
-      background: #3a2818;
-      color: #fbf6e5;
-      border-radius: 8px;
-      padding: 10px 14px;
-      min-width: 160px;
-      text-align: left;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.2s ease, transform 0.2s ease;
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      z-index: 3;
-    }
-    .map-tooltip::after {
-      content: '';
-      position: absolute;
-      top: 100%;
-      left: 50%;
-      transform: translateX(-50%);
-      border: 6px solid transparent;
-      border-top-color: #3a2818;
-    }
-    .map-tooltip strong { font-family: 'Bricolage Grotesque', sans-serif; font-size: 13px; font-weight: 700; }
-    .map-tooltip-detail { font-family: 'Fraunces', serif; font-style: italic; font-size: 12px; color: #d6c8a4; }
-    .map-tooltip-count { font-family: ui-monospace, monospace; font-size: 10.5px; letter-spacing: 1px; color: #ec6478; text-transform: uppercase; margin-top: 2px; }
-    .map-dot:hover .map-tooltip,
-    .map-dot:focus .map-tooltip { opacity: 1; transform: translateX(-50%) translateY(-2px); }
 
-    /* Story accordion */
-    .story-accordion { display: flex; flex-direction: column; gap: 8px; }
-    .story-row { background: #fbf6e5; border: 1px solid #d6c8a4; border-radius: 8px; overflow: hidden; }
-    .story-row.dim { border-style: dashed; background: transparent; }
-    .story-row summary {
-      list-style: none; cursor: pointer;
-      padding: 14px 18px;
-      display: grid;
-      grid-template-columns: 40px 1fr 24px;
-      gap: 14px;
-      align-items: center;
-    }
-    .story-row summary::-webkit-details-marker { display: none; }
-    .story-num { font-family: ui-monospace, monospace; font-size: 12px; letter-spacing: 1px; color: #ec6478; font-weight: 700; }
-    .story-summary-text { font-size: 14.5px; color: #3a2818; font-weight: 600; }
-    .story-toggle { font-family: ui-monospace, monospace; font-size: 20px; color: #5a4632; text-align: right; transition: transform 0.2s ease; }
-    .story-row[open] .story-toggle { transform: rotate(45deg); }
-    .story-row[open] summary { border-bottom: 1px solid #d6c8a4; }
-    .story-body { padding: 14px 18px 18px 72px; display: flex; flex-direction: column; gap: 10px; }
-    .story-body p { margin: 0; font-size: 14px; color: #3a2818; line-height: 1.6; }
-    .story-ac {
-      font-family: ui-monospace, monospace !important;
-      font-size: 12px !important;
-      color: #5a4632 !important;
-      padding-top: 10px;
-      border-top: 1px dashed #d6c8a4;
-    }
 
     /* Workshop visual */
-    .workshop-vis { background: #fbf6e5; border: 1px solid #d6c8a4; border-radius: 10px; padding: 18px 20px; margin-bottom: 16px; }
-    .workshop-eyebrow { font-family: ui-monospace, monospace; font-size: 10.5px; letter-spacing: 1.5px; color: #8a7a5e; font-weight: 600; margin: 0 0 14px; text-transform: uppercase; }
-    .stakeholder-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-    .stakeholder { display: flex; flex-direction: column; align-items: center; gap: 8px; }
-    .stakeholder-avatar { width: 44px; height: 44px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-family: ui-monospace, monospace; font-size: 13px; font-weight: 700; letter-spacing: 0.5px; color: #fbf6e5; }
-    .stakeholder-avatar.po { background: #ec6478; }
-    .stakeholder-avatar.eng { background: #5e8a4f; }
-    .stakeholder-avatar.legal { background: #8a6418; }
-    .stakeholder-avatar.me { background: #3a2818; }
-    .stakeholder-role { font-size: 12px; color: #5a4632; margin: 0; text-align: center; line-height: 1.3; }
     .priority-item { background: #f0e8d2 !important; border: 1px solid #d6c8a4; }
-    @media (max-width: 720px) { .stakeholder-row { grid-template-columns: repeat(2, 1fr); } }
 
     /* User flow site palette */
     .flow-diagram-site { background: #fbf6e5; border: 1px solid #d6c8a4; border-radius: 10px; padding: 20px; overflow-x: auto; }
@@ -1842,43 +1715,8 @@
         <div class="process-visual">
           <div class="world-map-interactive">
             <img src="assets/ibm/world-map.jpg" alt="World map showing contextual inquiry locations" loading="lazy">
-            <button class="map-dot" style="top: 38%; left: 22%;" type="button" aria-label="North America: 3 partners">
-              <span class="map-tooltip">
-                <strong>North America</strong>
-                <span class="map-tooltip-detail">Austin &middot; Toronto</span>
-                <span class="map-tooltip-count">3 partners</span>
-              </span>
-            </button>
-            <button class="map-dot" style="top: 30%; left: 49%;" type="button" aria-label="Europe: 4 partners">
-              <span class="map-tooltip">
-                <strong>Europe</strong>
-                <span class="map-tooltip-detail">London &middot; Berlin &middot; Madrid</span>
-                <span class="map-tooltip-count">4 partners</span>
-              </span>
-            </button>
-            <button class="map-dot" style="top: 48%; left: 68%;" type="button" aria-label="India: 3 partners">
-              <span class="map-tooltip">
-                <strong>India</strong>
-                <span class="map-tooltip-detail">Bangalore</span>
-                <span class="map-tooltip-count">3 partners</span>
-              </span>
-            </button>
-            <button class="map-dot" style="top: 72%; left: 32%;" type="button" aria-label="Brazil: 1 partner">
-              <span class="map-tooltip">
-                <strong>Brazil</strong>
-                <span class="map-tooltip-detail">S&atilde;o Paulo</span>
-                <span class="map-tooltip-count">1 partner</span>
-              </span>
-            </button>
-            <button class="map-dot" style="top: 76%; left: 83%;" type="button" aria-label="Australia: 1 partner">
-              <span class="map-tooltip">
-                <strong>Australia</strong>
-                <span class="map-tooltip-detail">Sydney</span>
-                <span class="map-tooltip-count">1 partner</span>
-              </span>
-            </button>
+            <span class="map-caption">Contextual inquiry footprint &middot; 12 partners shadowed across 5 regions</span>
           </div>
-          <p class="process-visual-caption" style="text-align:center;">Contextual inquiry footprint &middot; 12 partners shadowed across 5 regions &middot; <em>hover any dot for details</em></p>
         </div>
 
       </section>
@@ -1902,12 +1740,12 @@
             <text x="20" y="80" font-family="ui-monospace, monospace" font-size="9" fill="#8a7a5e" letter-spacing="1">EMOTION</text>
             <text x="20" y="155" font-family="ui-monospace, monospace" font-size="9" fill="#8a7a5e" letter-spacing="1">THOUGHTS</text>
             <text x="20" y="220" font-family="ui-monospace, monospace" font-size="9" fill="#8a7a5e" letter-spacing="1">TOUCHPOINTS</text>
-            <path d="M 150 70 C 220 75, 280 80, 320 85 C 360 100, 410 150, 440 175 C 470 185, 510 165, 580 120 C 640 90, 710 70, 750 65" fill="none" stroke="#ec6478" stroke-width="2.5" stroke-linecap="round"/>
-            <circle cx="170" cy="72" r="5" fill="#ec6478"/>
-            <circle cx="310" cy="85" r="5" fill="#ec6478"/>
+            <path d="M 150 70 C 220 75, 280 80, 320 85 C 360 100, 410 150, 440 175 C 470 185, 510 165, 580 120 C 640 90, 710 70, 750 65" fill="none" stroke="#8a6418" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="170" cy="72" r="5" fill="#8a6418"/>
+            <circle cx="310" cy="85" r="5" fill="#5e8a4f"/>
             <circle cx="450" cy="180" r="8" fill="#b13e58"/>
-            <circle cx="590" cy="115" r="5" fill="#ec6478"/>
-            <circle cx="730" cy="68" r="5" fill="#ec6478"/>
+            <circle cx="590" cy="115" r="5" fill="#8a6418"/>
+            <circle cx="730" cy="68" r="5" fill="#5e8a4f"/>
             <text x="450" y="205" font-family="ui-monospace, monospace" font-size="9" fill="#b13e58" text-anchor="middle" font-weight="700" letter-spacing="1">&uarr; PAIN</text>
             <rect x="115" y="135" width="115" height="32" rx="4" fill="#fbf6e5" stroke="#cdc0a0"/>
             <text x="172" y="150" font-family="ui-monospace, monospace" font-size="8" fill="#5a4632" text-anchor="middle">"Found a deal,</text>
@@ -1927,118 +1765,59 @@
             <text x="452" y="225" font-family="ui-monospace, monospace" font-size="9" fill="#b13e58" text-anchor="middle" font-weight="700">Form &middot; Spreadsheet</text>
             <text x="592" y="225" font-family="ui-monospace, monospace" font-size="9" fill="#5a4632" text-anchor="middle">Email &middot; Legal</text>
             <text x="732" y="225" font-family="ui-monospace, monospace" font-size="9" fill="#5a4632" text-anchor="middle">Confirmation</text>
-            <text x="172" y="30" font-family="ui-monospace, monospace" font-size="9" fill="#3a2818" text-anchor="middle" font-weight="600" letter-spacing="1">01 &middot; DISCOVER</text>
-            <text x="312" y="30" font-family="ui-monospace, monospace" font-size="9" fill="#3a2818" text-anchor="middle" font-weight="600" letter-spacing="1">02 &middot; PREPARE</text>
+            <text x="172" y="30" font-family="ui-monospace, monospace" font-size="9" fill="#8a6418" text-anchor="middle" font-weight="700" letter-spacing="1">01 &middot; DISCOVER</text>
+            <text x="312" y="30" font-family="ui-monospace, monospace" font-size="9" fill="#5e8a4f" text-anchor="middle" font-weight="700" letter-spacing="1">02 &middot; PREPARE</text>
             <text x="452" y="30" font-family="ui-monospace, monospace" font-size="9" fill="#b13e58" text-anchor="middle" font-weight="700" letter-spacing="1">03 &middot; FILL &rarr; SUBMIT</text>
-            <text x="592" y="30" font-family="ui-monospace, monospace" font-size="9" fill="#3a2818" text-anchor="middle" font-weight="600" letter-spacing="1">04 &middot; AWAIT</text>
-            <text x="732" y="30" font-family="ui-monospace, monospace" font-size="9" fill="#3a2818" text-anchor="middle" font-weight="600" letter-spacing="1">05 &middot; APPROVED</text>
+            <text x="592" y="30" font-family="ui-monospace, monospace" font-size="9" fill="#8a6418" text-anchor="middle" font-weight="700" letter-spacing="1">04 &middot; AWAIT</text>
+            <text x="732" y="30" font-family="ui-monospace, monospace" font-size="9" fill="#5e8a4f" text-anchor="middle" font-weight="700" letter-spacing="1">05 &middot; APPROVED</text>
           </svg>
           <p class="process-visual-caption" style="text-align:center;">Mocked journey map &middot; <em>this is a representative version, the original is under NDA</em> &middot; the dip at fill &rarr; submit anchored the redesign brief</p>
         </div>
 
         <h3 class="subsection-title">32 user stories, written before a single screen</h3>
-        <p>Journey mapping showed where partners hurt. User stories translated that pain into testable, scope-able units of work. I wrote 32 stories across the three partner archetypes, each tagged with priority and acceptance criteria.</p>
+        <p>Journey mapping showed where partners hurt. User stories translated that pain into testable, scope-able units of work. I wrote 32 stories, each tagged with priority and acceptance criteria.</p>
         <div class="process-visual">
           <div class="story-stats">
-            <div><div class="story-stat-num">32</div><div class="story-stat-lbl">User stories</div></div>
-            <div><div class="story-stat-num">14</div><div class="story-stat-lbl">Marked P0</div></div>
-            <div><div class="story-stat-num">3</div><div class="story-stat-lbl">Archetypes covered</div></div>
+            <div><div class="story-stat-num n-coral">32</div><div class="story-stat-lbl">User stories</div></div>
+            <div><div class="story-stat-num n-sage">14</div><div class="story-stat-lbl">Marked P0</div></div>
           </div>
-          <div class="story-accordion">
-            <details class="story-row" open>
-              <summary>
-                <span class="story-num">01</span>
-                <span class="story-summary-text">Search and add products by name</span>
-                <span class="story-toggle" aria-hidden="true">+</span>
-              </summary>
-              <div class="story-body">
-                <p>As a <strong>reseller</strong>, I want to search and add products by name so that I don't have to leave the form to look up SKU codes.</p>
-                <p class="story-ac">AC &middot; search matches partial strings, returns within 300ms, adds product inline</p>
-              </div>
-            </details>
-            <details class="story-row">
-              <summary>
-                <span class="story-num">02</span>
-                <span class="story-summary-text">Register multi-product co-sell deals in one flow</span>
-                <span class="story-toggle" aria-hidden="true">+</span>
-              </summary>
-              <div class="story-body">
-                <p>As an <strong>ISV</strong>, I want to register multi-product co-sell deals in one flow so that I'm not creating separate registrations per SKU.</p>
-                <p class="story-ac">AC &middot; single submission supports up to 25 products, each with its own pricing</p>
-              </div>
-            </details>
-            <details class="story-row">
-              <summary>
-                <span class="story-num">03</span>
-                <span class="story-summary-text">Save partial registrations</span>
-                <span class="story-toggle" aria-hidden="true">+</span>
-              </summary>
-              <div class="story-body">
-                <p>As a <strong>system integrator</strong>, I want to save partial registrations so that I can pause when I'm waiting on client info.</p>
-                <p class="story-ac">AC &middot; draft auto-saves every 30s, retrievable for 30 days</p>
-              </div>
-            </details>
-            <details class="story-row">
-              <summary>
-                <span class="story-num">04</span>
-                <span class="story-summary-text">See inline validation errors</span>
-                <span class="story-toggle" aria-hidden="true">+</span>
-              </summary>
-              <div class="story-body">
-                <p>As a <strong>reseller</strong>, I want to see inline validation errors so that I don't lose data I've typed when a field is wrong.</p>
-                <p class="story-ac">AC &middot; errors shown on blur, focus retains entered value, helper text describes fix</p>
-              </div>
-            </details>
-            <details class="story-row">
-              <summary>
-                <span class="story-num">05</span>
-                <span class="story-summary-text">Auto-fill account data from CRM</span>
-                <span class="story-toggle" aria-hidden="true">+</span>
-              </summary>
-              <div class="story-body">
-                <p>As an <strong>ISV</strong>, I want account data pre-filled from CRM so that I only enter what's deal-specific.</p>
-                <p class="story-ac">AC &middot; CRM lookup auto-fills 8 fields, partner can override any with one click</p>
-              </div>
-            </details>
-            <details class="story-row dim">
-              <summary>
-                <span class="story-num">+27</span>
-                <span class="story-summary-text">Edge cases &middot; renewal, expansion, multi-region, partial submissions</span>
-                <span class="story-toggle" aria-hidden="true">+</span>
-              </summary>
-              <div class="story-body">
-                <p>Stories covering renewal flows, expansion deals, multi-region compliance, validation errors, partial submissions, and approval handoff. Full backlog scoped with Engineering during sprint planning.</p>
-              </div>
-            </details>
+          <div class="story-grid">
+            <div class="story-card">
+              <span class="story-num">01</span>
+              <h4>Search and add products by name</h4>
+              <p class="story-reveal">As a partner, I want to type a product name and pick from results so I don't memorize SKUs.</p>
+            </div>
+            <div class="story-card">
+              <span class="story-num">02</span>
+              <h4>Register multi-product co-sell deals</h4>
+              <p class="story-reveal">Add multiple SKUs in one registration without re-entering account data.</p>
+            </div>
+            <div class="story-card">
+              <span class="story-num">03</span>
+              <h4>Save partial registrations</h4>
+              <p class="story-reveal">Stop mid-flow and resume later without losing entered fields.</p>
+            </div>
+            <div class="story-card">
+              <span class="story-num">04</span>
+              <h4>See inline validation errors</h4>
+              <p class="story-reveal">Know exactly which field broke before clicking submit.</p>
+            </div>
+            <div class="story-card">
+              <span class="story-num">05</span>
+              <h4>Auto-fill account data from CRM</h4>
+              <p class="story-reveal">Pre-populate customer fields from existing CRM records.</p>
+            </div>
+            <div class="story-card story-more">
+              <span class="story-num">+27</span>
+              <h4>Edge cases</h4>
+              <p class="story-reveal">Renewal, expansion, multi-region, partial submissions, and 23 more.</p>
+            </div>
           </div>
-          <p class="process-visual-caption" style="text-align:center;">Sample user stories &middot; <em>representative format, originals under NDA</em></p>
         </div>
 
         <h3 class="subsection-title">Feature prioritization with stakeholders</h3>
-        <p>32 stories was a backlog, not a release. I ran a half-day prioritization workshop with the Product Owner, Engineering lead, and Legal counsel, with impact on the X-axis, effort on the Y-axis. Three features came out clearly P0. Everything else either deferred or got rolled into Phase 2.</p>
+        <p>32 stories was a backlog, not a release. I ran a half-day prioritization workshop with the Product Owner, Engineering Lead, Legal Counsel, and Business Analyst, with impact on the X-axis and effort on the Y-axis. Three features came out clearly P0. Everything else either deferred or got rolled into Phase 2.</p>
         <div class="process-visual">
-          <div class="workshop-vis">
-            <p class="workshop-eyebrow">Workshop attendees</p>
-            <div class="stakeholder-row">
-              <div class="stakeholder">
-                <span class="stakeholder-avatar po">PO</span>
-                <p class="stakeholder-role">Product Owner</p>
-              </div>
-              <div class="stakeholder">
-                <span class="stakeholder-avatar eng">EL</span>
-                <p class="stakeholder-role">Engineering Lead</p>
-              </div>
-              <div class="stakeholder">
-                <span class="stakeholder-avatar legal">LC</span>
-                <p class="stakeholder-role">Legal Counsel</p>
-              </div>
-              <div class="stakeholder">
-                <span class="stakeholder-avatar me">SS</span>
-                <p class="stakeholder-role">Me &middot; Design</p>
-              </div>
-            </div>
-          </div>
-
           <div class="priority-grid">
             <div class="priority-col p0">
               <p class="priority-col-label">P0 &middot; ship first</p>
@@ -2090,20 +1869,20 @@
               <text x="280" y="22" font-family="ui-monospace, monospace" font-size="10" fill="#8a7a5e" letter-spacing="1.5" text-anchor="middle">ARCHETYPE</text>
               <text x="500" y="22" font-family="ui-monospace, monospace" font-size="10" fill="#8a7a5e" letter-spacing="1.5" text-anchor="middle">SCENARIO</text>
               <text x="720" y="22" font-family="ui-monospace, monospace" font-size="10" fill="#8a7a5e" letter-spacing="1.5" text-anchor="middle">OUTCOME</text>
-              <rect x="20" y="110" width="100" height="40" rx="20" fill="#ec6478"/>
+              <rect x="20" y="110" width="100" height="40" rx="20" fill="#8a6418"/>
               <text x="70" y="135" fill="#fbf6e5" font-family="ui-monospace, monospace" font-size="11" text-anchor="middle" letter-spacing="1">START</text>
               <g stroke="#b8a988" stroke-width="1.5" fill="none">
                 <path d="M120 130 Q170 130 220 60"/>
                 <path d="M120 130 L 220 130"/>
                 <path d="M120 130 Q170 130 220 200"/>
               </g>
-              <rect x="220" y="40" width="120" height="40" rx="10" fill="#fbf6e5" stroke="#ec6478" stroke-width="1.5"/>
+              <rect x="220" y="40" width="120" height="40" rx="10" fill="#fbf6e5" stroke="#5e8a4f" stroke-width="1.5"/>
               <text x="280" y="58" font-family="ui-monospace, monospace" font-size="11" fill="#3a2818" text-anchor="middle" font-weight="600">RESELLER</text>
               <text x="280" y="71" font-family="ui-monospace, monospace" font-size="9" fill="#8a7a5e" text-anchor="middle">4 flows</text>
-              <rect x="220" y="110" width="120" height="40" rx="10" fill="#fbf6e5" stroke="#ec6478" stroke-width="1.5"/>
+              <rect x="220" y="110" width="120" height="40" rx="10" fill="#fbf6e5" stroke="#5e8a4f" stroke-width="1.5"/>
               <text x="280" y="128" font-family="ui-monospace, monospace" font-size="11" fill="#3a2818" text-anchor="middle" font-weight="600">ISV</text>
               <text x="280" y="141" font-family="ui-monospace, monospace" font-size="9" fill="#8a7a5e" text-anchor="middle">4 flows</text>
-              <rect x="220" y="180" width="120" height="40" rx="10" fill="#fbf6e5" stroke="#ec6478" stroke-width="1.5"/>
+              <rect x="220" y="180" width="120" height="40" rx="10" fill="#fbf6e5" stroke="#5e8a4f" stroke-width="1.5"/>
               <text x="280" y="198" font-family="ui-monospace, monospace" font-size="11" fill="#3a2818" text-anchor="middle" font-weight="600">SYS. INTEGRATOR</text>
               <text x="280" y="211" font-family="ui-monospace, monospace" font-size="9" fill="#8a7a5e" text-anchor="middle">3 flows</text>
               <g stroke="#b8a988" stroke-width="1.5" fill="none">
@@ -2215,28 +1994,27 @@
 
         <h3 class="subsection-title">Hi-fi Carbon prototype</h3>
         <p>
-          Once the lo-fi structure tested clean, I rebuilt the full flow in Carbon, and not just the happy path. I designed every screen and state across all 11 user flows: empty, filled, error, validation, loading, success, edge cases, and partial saves. By the time engineering opened the file, every interaction had a redline, every state had a wireframe, and every edge case had a spec.
+          Once the lo-fi structure tested clean, I rebuilt the full flow in Carbon, and not just the happy path. The production file lives under IBM NDA, but the spec was exhaustive: every screen and state across all 11 user flows: empty, filled, error, validation, loading, success, edge cases, and partial saves. By the time engineering opened the file, every interaction had a redline, every state had a wireframe, and every edge case had a spec.
         </p>
         <div class="process-visual">
           <div class="hifi-stats">
             <div class="hifi-stat">
-              <div class="hifi-stat-num">60+</div>
+              <div class="hifi-stat-num n-coral">60+</div>
               <div class="hifi-stat-lbl">Hi-fi screens</div>
             </div>
             <div class="hifi-stat">
-              <div class="hifi-stat-num">11</div>
+              <div class="hifi-stat-num n-sage">11</div>
               <div class="hifi-stat-lbl">User flows covered</div>
             </div>
             <div class="hifi-stat">
-              <div class="hifi-stat-num">8</div>
+              <div class="hifi-stat-num n-gold">8</div>
               <div class="hifi-stat-lbl">States per screen</div>
             </div>
             <div class="hifi-stat">
-              <div class="hifi-stat-num">100%</div>
+              <div class="hifi-stat-num n-coral">100%</div>
               <div class="hifi-stat-lbl">Carbon-compliant</div>
             </div>
           </div>
-          <p class="process-visual-caption" style="text-align:center;">Hi-fi Carbon prototype &middot; <em>production file under IBM NDA</em></p>
         </div>
       </section>
 
@@ -2426,11 +2204,23 @@
               <p class="validation-sub">Screen reader &amp; keyboard pass</p>
             </div>
           </div>
-          <div class="validation-findings">
-            <p class="findings-eyebrow">What we caught</p>
-            <div class="finding"><span class="finding-num">01</span><p><strong>Search ranking surfaced obsolete SKUs first.</strong> Reweighted to favor active catalog entries.</p></div>
-            <div class="finding"><span class="finding-num">02</span><p><strong>Conditional fields appeared without warning.</strong> Added a one-line preface so partners weren't startled mid-flow.</p></div>
-            <div class="finding"><span class="finding-num">03</span><p><strong>Submit confirmation was too quiet.</strong> Upgraded from inline toast to a confirmation page with next-steps and a record ID.</p></div>
+          <p class="findings-eyebrow">What we caught</p>
+          <div class="caught-grid">
+            <div class="caught-card caught-coral">
+              <div class="caught-icon">&#9888;</div>
+              <h4>Search surfaced obsolete SKUs</h4>
+              <p>Reweighted ranking to favor active catalog entries.</p>
+            </div>
+            <div class="caught-card caught-sage">
+              <div class="caught-icon">&#8618;</div>
+              <h4>Conditional fields appeared without warning</h4>
+              <p>Added a one-line preface so partners weren't startled mid-flow.</p>
+            </div>
+            <div class="caught-card caught-gold">
+              <div class="caught-icon">&#10003;</div>
+              <h4>Submit confirmation was too quiet</h4>
+              <p>Upgraded from inline toast to a confirmation page with next-steps and a record ID.</p>
+            </div>
           </div>
         </div>
       </section>
