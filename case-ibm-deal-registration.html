@@ -1477,6 +1477,359 @@
     .carbon-state-row .carbon-state-img img { width: 100%; height: auto; display: block; }
     @media (max-width: 720px) { .carbon-state-row { grid-template-columns: 1fr; } }
 
+
+    /* ============ IBM AI-ACCELERATOR LANGUAGE REBUILD ============ */
+
+    /* Research map */
+    .research-map {
+      background: var(--bg-card);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-xl);
+      padding: 28px;
+      margin: 36px 0;
+    }
+    .research-map-head {
+      display: flex; align-items: baseline; justify-content: space-between;
+      gap: 16px; flex-wrap: wrap;
+      margin-bottom: 22px;
+    }
+    .research-map-eyebrow {
+      font-family: var(--mono); font-size: 11px; font-weight: 500;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: var(--ink-mute);
+    }
+    .research-map-meta {
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+    .research-map-frame {
+      position: relative;
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+    }
+    .research-map-frame img { display: block; width: 100%; height: auto; }
+    .map-pin {
+      position: absolute;
+      width: 14px; height: 14px; border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--bg-elev);
+      padding: 0; cursor: pointer;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 0 4px rgba(236,100,120,.22);
+      transition: transform .2s var(--ease), box-shadow .2s var(--ease);
+      z-index: 2;
+    }
+    .map-pin:hover, .map-pin:focus-visible {
+      transform: translate(-50%, -50%) scale(1.3);
+      box-shadow: 0 0 0 6px rgba(236,100,120,.3);
+      outline: none;
+    }
+    .map-pin-tip {
+      position: absolute;
+      bottom: calc(100% + 12px); left: 50%;
+      transform: translateX(-50%);
+      background: var(--ink); color: #fbf6e5;
+      padding: 8px 12px; border-radius: 8px;
+      font-family: var(--sans); font-size: 12px; line-height: 1.45;
+      white-space: nowrap;
+      opacity: 0; pointer-events: none;
+      transition: opacity .2s var(--ease);
+      box-shadow: 0 6px 16px -6px rgba(20,18,12,.35);
+      z-index: 3;
+    }
+    .map-pin-tip::after {
+      content: ""; position: absolute;
+      top: 100%; left: 50%; transform: translateX(-50%);
+      border: 5px solid transparent; border-top-color: var(--ink);
+    }
+    .map-pin-tip strong {
+      display: block; font-weight: 600; color: var(--accent);
+      font-size: 12.5px; margin-bottom: 2px;
+    }
+    .map-pin:hover .map-pin-tip,
+    .map-pin:focus-visible .map-pin-tip { opacity: 1; }
+    .research-map-legend {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      margin-top: 22px;
+    }
+    @media (max-width: 760px) { .research-map-legend { grid-template-columns: repeat(2, 1fr); } }
+    .rml-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 12px 14px;
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-md);
+    }
+    .rml-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 3px rgba(236,100,120,.18);
+      flex-shrink: 0;
+    }
+    .rml-region {
+      font-family: var(--display); font-size: 13.5px; font-weight: 500;
+      color: var(--ink); flex: 1;
+    }
+    .rml-count {
+      font-family: var(--mono); font-size: 13px; font-weight: 500;
+      color: var(--ink-soft);
+    }
+
+    /* Stories */
+    .stories { margin: 36px 0 56px; }
+    .stories-eyebrow {
+      font-family: var(--mono); font-size: 11px; font-weight: 500;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: var(--ink-mute);
+      display: block; margin-bottom: 14px;
+    }
+    .stories-title {
+      font-family: var(--serif); font-weight: 500;
+      font-size: clamp(26px, 3.2vw, 36px);
+      line-height: 1.15; letter-spacing: -.01em;
+      margin: 0 0 18px; color: var(--ink);
+    }
+    .stories-lede {
+      font-size: 16px; color: var(--ink-soft);
+      line-height: 1.7; max-width: 70ch;
+      margin: 0 0 28px;
+    }
+    .stories-lede strong { color: var(--ink); font-weight: 500; }
+    .stories-stat-bar {
+      display: flex; align-items: stretch;
+      background: var(--bg-card);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-xl);
+      padding: 24px 28px;
+      margin-bottom: 28px;
+    }
+    .ssb-cell {
+      flex: 1;
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center; gap: 6px;
+    }
+    .ssb-num {
+      font-family: var(--serif); font-weight: 500;
+      font-size: clamp(36px, 4.6vw, 52px);
+      line-height: 1; letter-spacing: -.02em;
+      color: var(--accent);
+    }
+    .ssb-cell:nth-child(3) .ssb-num { color: var(--leaf-deep); }
+    .ssb-cell:nth-child(5) .ssb-num { color: #8a6418; }
+    .ssb-lbl {
+      font-family: var(--mono); font-size: 10.5px;
+      letter-spacing: .16em; text-transform: uppercase;
+      color: var(--ink-mute);
+    }
+    .ssb-divider {
+      width: 1px; background: var(--rule);
+      align-self: stretch; margin: 0 18px;
+    }
+    .stories-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    @media (max-width: 900px) { .stories-grid { grid-template-columns: 1fr; } }
+    .story-card {
+      background: var(--bg-card);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-xl);
+      padding: 24px 24px 22px;
+      display: flex; flex-direction: column;
+      min-height: 200px;
+      position: relative;
+      transition: border-color .2s var(--ease), transform .2s var(--ease);
+    }
+    .story-card::before {
+      content: ""; position: absolute;
+      top: 0; left: 24px; right: 24px;
+      height: 3px; border-radius: 0 0 3px 3px;
+      background: var(--rule);
+    }
+    .story-card:hover { border-color: var(--rule-strong); transform: translateY(-3px); }
+    .story-card .sc-head {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    .story-card .sc-num {
+      font-family: var(--mono); font-size: 11px; font-weight: 600;
+      letter-spacing: .12em; color: var(--ink-mute);
+    }
+    .story-card .sc-tag {
+      font-family: var(--mono); font-size: 9.5px; font-weight: 500;
+      letter-spacing: .14em; text-transform: uppercase;
+      padding: 3px 9px; border-radius: 999px;
+      background: var(--bg-elev); color: var(--ink-soft);
+      border: 1px solid var(--rule);
+    }
+    .story-card h4 {
+      font-family: var(--display); font-weight: 600;
+      font-size: 15.5px; line-height: 1.35;
+      margin: 0 0 8px; color: var(--ink);
+    }
+    .story-card p {
+      font-size: 13.5px; color: var(--ink-soft);
+      line-height: 1.55; margin: 0;
+    }
+    .accent-coral::before { background: var(--accent); }
+    .accent-coral .sc-num { color: var(--accent); }
+    .accent-sage::before  { background: var(--secondary); }
+    .accent-sage .sc-num  { color: var(--leaf-deep); }
+    .accent-gold::before  { background: #8a6418; }
+    .accent-gold .sc-num  { color: #8a6418; }
+    .story-card-more {
+      background: transparent;
+      border-style: dashed;
+    }
+    .story-card-more::before { display: none; }
+    .story-card-more h4 { opacity: .85; }
+
+    /* Validation */
+    .validation { margin: 64px 0; scroll-margin-top: 32px; }
+    .validation-eyebrow {
+      font-family: var(--mono); font-size: 11px; font-weight: 500;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: var(--ink-mute);
+      display: block; margin-bottom: 14px;
+    }
+    .validation-title {
+      font-family: var(--serif); font-weight: 500;
+      font-size: clamp(28px, 3.8vw, 42px);
+      line-height: 1.1; letter-spacing: -.01em;
+      margin: 0 0 20px; color: var(--ink);
+    }
+    .validation-lede {
+      font-size: 16px; color: var(--ink-soft);
+      line-height: 1.7; max-width: 70ch;
+      margin: 0 0 32px;
+    }
+    .validation-lede strong { color: var(--ink); font-weight: 500; }
+    .validation-stat-bar {
+      display: flex; align-items: stretch;
+      background: var(--bg-card);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-xl);
+      padding: 28px 32px;
+      margin-bottom: 36px;
+    }
+    .vsb-cell {
+      flex: 1;
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center; gap: 6px;
+    }
+    .vsb-num {
+      font-family: var(--serif); font-weight: 500;
+      font-size: clamp(36px, 4.4vw, 52px);
+      line-height: 1; letter-spacing: -.02em;
+      color: var(--accent);
+    }
+    .vsb-sage { color: var(--leaf-deep) !important; }
+    .vsb-gold { color: #8a6418 !important; }
+    .vsb-lbl {
+      font-family: var(--mono); font-size: 10.5px;
+      letter-spacing: .16em; text-transform: uppercase;
+      color: var(--ink);
+      margin-top: 4px;
+    }
+    .vsb-sub {
+      font-family: var(--sans); font-size: 12px;
+      color: var(--ink-mute); line-height: 1.45;
+    }
+    .vsb-divider {
+      width: 1px; background: var(--rule);
+      align-self: stretch; margin: 0 20px;
+    }
+    @media (max-width: 900px) {
+      .validation-stat-bar { flex-wrap: wrap; gap: 24px 0; padding: 24px; }
+      .vsb-cell { flex-basis: 50%; }
+      .vsb-divider { display: none; }
+    }
+    .caught-head {
+      display: flex; align-items: baseline; justify-content: space-between;
+      gap: 16px; flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+    .caught-head-eyebrow {
+      font-family: var(--mono); font-size: 11px; font-weight: 500;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: var(--ink-mute);
+    }
+    .caught-head-meta {
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+    .caught-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    @media (max-width: 900px) { .caught-grid { grid-template-columns: 1fr; } }
+    .caught-card {
+      background: var(--bg-card);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-xl);
+      padding: 26px 24px 22px;
+      display: flex; flex-direction: column;
+      min-height: 240px;
+      position: relative;
+      transition: border-color .2s var(--ease), transform .2s var(--ease);
+    }
+    .caught-card::before {
+      content: ""; position: absolute;
+      left: 0; top: 24px; bottom: 24px;
+      width: 3px; border-radius: 0 3px 3px 0;
+      background: var(--rule);
+    }
+    .caught-card:hover { border-color: var(--rule-strong); transform: translateY(-3px); }
+    .cc-head {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    .cc-num {
+      font-family: var(--mono); font-size: 11.5px; font-weight: 600;
+      letter-spacing: .12em;
+    }
+    .cc-tag {
+      font-family: var(--mono); font-size: 9.5px; font-weight: 500;
+      letter-spacing: .14em; text-transform: uppercase;
+      padding: 3px 9px; border-radius: 999px;
+      background: var(--bg-elev); color: var(--ink-soft);
+      border: 1px solid var(--rule);
+    }
+    .caught-card h4 {
+      font-family: var(--display); font-weight: 600;
+      font-size: 16px; line-height: 1.35;
+      margin: 0 0 10px; color: var(--ink);
+    }
+    .caught-card .cc-issue {
+      font-size: 13.5px; color: var(--ink-soft);
+      line-height: 1.55; margin: 0 0 16px;
+    }
+    .cc-fix {
+      margin-top: auto;
+      padding-top: 14px;
+      border-top: 1px dashed var(--rule);
+      display: flex; flex-direction: column; gap: 4px;
+      font-size: 13px; color: var(--ink); line-height: 1.5;
+    }
+    .cc-fix-lbl {
+      font-family: var(--mono); font-size: 10px; font-weight: 600;
+      letter-spacing: .14em; text-transform: uppercase;
+    }
+    .v-coral::before { background: var(--accent); }
+    .v-coral .cc-num, .v-coral .cc-fix-lbl { color: var(--accent); }
+    .v-sage::before  { background: var(--secondary); }
+    .v-sage .cc-num,  .v-sage .cc-fix-lbl  { color: var(--leaf-deep); }
+    .v-gold::before  { background: #8a6418; }
+    .v-gold .cc-num,  .v-gold .cc-fix-lbl  { color: #8a6418; }
+
 </style>
 </head>
 <body>
@@ -1606,24 +1959,35 @@
         </p>
 
         <div class="process-visual">
-          <div class="world-map-interactive">
-            <div class="world-map-frame">
-              <img src="assets/ibm/world-map.jpg" alt="World map showing contextual inquiry locations" loading="lazy">
-              <button class="map-dot" style="top: 38%; left: 22%;" aria-label="North America">
-                <span class="map-tooltip"><strong>North America</strong>3 partners &middot; Austin, Toronto</span>
+          <div class="research-map">
+            <div class="research-map-head">
+              <span class="research-map-eyebrow">Contextual inquiry footprint</span>
+              <span class="research-map-meta">12 partners &middot; 5 regions &middot; live registrations</span>
+            </div>
+            <div class="research-map-frame">
+              <img src="assets/ibm/world-map.jpg" alt="World map showing contextual inquiry locations across 5 regions" loading="lazy">
+              <button class="map-pin" style="top: 38%; left: 22%;" type="button" aria-label="North America: 3 partners">
+                <span class="map-pin-tip"><strong>North America</strong>3 partners &middot; Austin, Toronto</span>
               </button>
-              <button class="map-dot" style="top: 32%; left: 49%;" aria-label="Europe">
-                <span class="map-tooltip"><strong>Europe</strong>4 partners &middot; London, Berlin, Madrid</span>
+              <button class="map-pin" style="top: 32%; left: 49%;" type="button" aria-label="Europe: 4 partners">
+                <span class="map-pin-tip"><strong>Europe</strong>4 partners &middot; London, Berlin, Madrid</span>
               </button>
-              <button class="map-dot" style="top: 48%; left: 70%;" aria-label="India">
-                <span class="map-tooltip"><strong>India</strong>3 partners &middot; Bangalore</span>
+              <button class="map-pin" style="top: 48%; left: 70%;" type="button" aria-label="India: 3 partners">
+                <span class="map-pin-tip"><strong>India</strong>3 partners &middot; Bangalore</span>
               </button>
-              <button class="map-dot" style="top: 70%; left: 33%;" aria-label="Brazil">
-                <span class="map-tooltip"><strong>Brazil</strong>1 partner &middot; S&atilde;o Paulo</span>
+              <button class="map-pin" style="top: 70%; left: 33%;" type="button" aria-label="Brazil: 1 partner">
+                <span class="map-pin-tip"><strong>Brazil</strong>1 partner &middot; S&atilde;o Paulo</span>
               </button>
-              <button class="map-dot" style="top: 72%; left: 84%;" aria-label="Australia">
-                <span class="map-tooltip"><strong>Australia</strong>1 partner &middot; Sydney</span>
+              <button class="map-pin" style="top: 72%; left: 84%;" type="button" aria-label="Australia: 1 partner">
+                <span class="map-pin-tip"><strong>Australia</strong>1 partner &middot; Sydney</span>
               </button>
+            </div>
+            <div class="research-map-legend">
+              <div class="rml-item"><span class="rml-dot"></span><span class="rml-region">North America</span><span class="rml-count">3</span></div>
+              <div class="rml-item"><span class="rml-dot"></span><span class="rml-region">Europe</span><span class="rml-count">4</span></div>
+              <div class="rml-item"><span class="rml-dot"></span><span class="rml-region">India</span><span class="rml-count">3</span></div>
+              <div class="rml-item"><span class="rml-dot"></span><span class="rml-region">Brazil</span><span class="rml-count">1</span></div>
+              <div class="rml-item"><span class="rml-dot"></span><span class="rml-region">Australia</span><span class="rml-count">1</span></div>
             </div>
           </div>
         </div>
@@ -1683,80 +2047,58 @@
           <p class="process-visual-caption" style="text-align:center;">Mocked journey map &middot; <em>this is a representative version, the original is under NDA</em> &middot; the dip at fill &rarr; submit anchored the redesign brief</p>
         </div>
 
-        <div class="stories-block">
-          <h3 class="subsection-title">32 user stories, written before a single screen</h3>
-          <p class="stories-intro">
-            Journey mapping showed where partners hurt. User stories translated that pain into testable, scope-able units of work. I wrote 32 stories grouped into 5 epics, each tagged with priority and acceptance criteria.
+        <div class="stories">
+          <span class="stories-eyebrow">Backlog</span>
+          <h3 class="stories-title">32 user stories, written before a single screen</h3>
+          <p class="stories-lede">
+            Journey mapping showed where partners hurt. User stories translated that pain into testable, scope-able units of work. I wrote <strong>32 stories across 5 epics</strong>, each tagged with priority and acceptance criteria, before any screen got drawn.
           </p>
 
-          <div class="stories-stats">
-            <div class="sstat">
-              <span class="sstat-num" style="color: #ec6478;">32</span>
-              <span class="sstat-label">User stories</span>
+          <div class="stories-stat-bar">
+            <div class="ssb-cell">
+              <span class="ssb-num">32</span>
+              <span class="ssb-lbl">User stories</span>
             </div>
-            <div class="sstat-divider"></div>
-            <div class="sstat">
-              <span class="sstat-num" style="color: #5e8a4f;">14</span>
-              <span class="sstat-label">Marked P0</span>
+            <div class="ssb-divider"></div>
+            <div class="ssb-cell">
+              <span class="ssb-num">14</span>
+              <span class="ssb-lbl">Marked P0</span>
             </div>
-            <div class="sstat-divider"></div>
-            <div class="sstat">
-              <span class="sstat-num" style="color: #8a6418;">5</span>
-              <span class="sstat-label">Epics covered</span>
+            <div class="ssb-divider"></div>
+            <div class="ssb-cell">
+              <span class="ssb-num">5</span>
+              <span class="ssb-lbl">Epics covered</span>
             </div>
           </div>
 
           <div class="stories-grid">
-            <article class="story-tile story-coral">
-              <div class="story-tile-head">
-                <span class="story-tile-num">01</span>
-                <span class="story-tile-tag">Search</span>
-              </div>
+            <article class="story-card accent-coral">
+              <div class="sc-head"><span class="sc-num">01</span><span class="sc-tag">Search</span></div>
               <h4>Search and add products by name</h4>
               <p>As a partner, I want to type a product name and pick from results so I don't have to memorize SKUs.</p>
             </article>
-
-            <article class="story-tile story-sage">
-              <div class="story-tile-head">
-                <span class="story-tile-num">02</span>
-                <span class="story-tile-tag">Registration</span>
-              </div>
+            <article class="story-card accent-sage">
+              <div class="sc-head"><span class="sc-num">02</span><span class="sc-tag">Registration</span></div>
               <h4>Register multi-product co-sell deals</h4>
-              <p>As a partner, I want to add multiple SKUs in one registration without re-entering account data each time.</p>
+              <p>As a partner, I want to add multiple SKUs in one registration without re-entering account data.</p>
             </article>
-
-            <article class="story-tile story-gold">
-              <div class="story-tile-head">
-                <span class="story-tile-num">03</span>
-                <span class="story-tile-tag">Persistence</span>
-              </div>
+            <article class="story-card accent-gold">
+              <div class="sc-head"><span class="sc-num">03</span><span class="sc-tag">Persistence</span></div>
               <h4>Save partial registrations</h4>
               <p>As a partner, I want to save and resume later so I can stop mid-flow without losing entered data.</p>
             </article>
-
-            <article class="story-tile story-coral">
-              <div class="story-tile-head">
-                <span class="story-tile-num">04</span>
-                <span class="story-tile-tag">Validation</span>
-              </div>
+            <article class="story-card accent-coral">
+              <div class="sc-head"><span class="sc-num">04</span><span class="sc-tag">Validation</span></div>
               <h4>See inline validation errors</h4>
               <p>As a partner, I want to know which field broke before clicking submit so I can fix issues as I go.</p>
             </article>
-
-            <article class="story-tile story-sage">
-              <div class="story-tile-head">
-                <span class="story-tile-num">05</span>
-                <span class="story-tile-tag">Efficiency</span>
-              </div>
+            <article class="story-card accent-sage">
+              <div class="sc-head"><span class="sc-num">05</span><span class="sc-tag">Efficiency</span></div>
               <h4>Auto-fill account data from CRM</h4>
               <p>As a partner, I want pre-populated customer fields from existing CRM records so I don't rekey data.</p>
             </article>
-
-            <article class="story-tile story-more">
-              <div class="story-tile-head">
-                <span class="story-tile-num">+27</span>
-                <span class="story-tile-tag">Edge cases</span>
-              </div>
+            <article class="story-card story-card-more">
+              <div class="sc-head"><span class="sc-num">+27</span><span class="sc-tag">Edge cases</span></div>
               <h4>Renewal, expansion, multi-region</h4>
               <p>Partial submissions, regional compliance variants, expansion flows, and 23 more edge cases mapped end-to-end.</p>
             </article>
@@ -2122,77 +2464,80 @@
 
 
       <!-- ============ 06. VALIDATION ============ -->
-      <section class="section validation-section" id="validation">
-        <p class="section-eyebrow">Validation</p>
-        <h2 class="section-title">8 usability sessions before engineering build</h2>
-        <p class="section-intro">
-          I built a clickable Carbon prototype covering the four critical screens (entry, products, pricing, submit) and ran 8 moderated sessions across the three partner archetypes. Two rounds: discover friction, then confirm it was gone. Three issues caught and fixed before a single line of production code shipped.
+      <section class="case-section validation" id="validation">
+        <span class="validation-eyebrow">06 &middot; Validation</span>
+        <h2 class="validation-title">8 usability sessions before engineering build</h2>
+        <p class="validation-lede">
+          I built a clickable Carbon prototype covering the four critical screens (entry, products, pricing, submit) and ran <strong>8 moderated sessions across three partner archetypes</strong>. Two rounds: discover friction, then confirm it was gone. Three issues caught and fixed before a single line of production code shipped.
         </p>
 
-        <div class="validation-stats">
-          <div class="vstat">
-            <span class="vstat-num" style="color: #ec6478;">8</span>
-            <span class="vstat-label">Usability sessions</span>
-            <span class="vstat-sub">Moderated &middot; 3 archetypes</span>
+        <div class="validation-stat-bar">
+          <div class="vsb-cell">
+            <span class="vsb-num">8</span>
+            <span class="vsb-lbl">Usability sessions</span>
+            <span class="vsb-sub">Moderated &middot; 3 archetypes</span>
           </div>
-          <div class="vstat-divider"></div>
-          <div class="vstat">
-            <span class="vstat-num" style="color: #5e8a4f;">2</span>
-            <span class="vstat-label">Test rounds</span>
-            <span class="vstat-sub">Discover &middot; confirm</span>
+          <div class="vsb-divider"></div>
+          <div class="vsb-cell">
+            <span class="vsb-num vsb-sage">2</span>
+            <span class="vsb-lbl">Test rounds</span>
+            <span class="vsb-sub">Discover &middot; confirm</span>
           </div>
-          <div class="vstat-divider"></div>
-          <div class="vstat">
-            <span class="vstat-num" style="color: #8a6418;">3</span>
-            <span class="vstat-label">Critical fixes</span>
-            <span class="vstat-sub">Caught pre-engineering</span>
+          <div class="vsb-divider"></div>
+          <div class="vsb-cell">
+            <span class="vsb-num vsb-gold">3</span>
+            <span class="vsb-lbl">Critical fixes</span>
+            <span class="vsb-sub">Caught pre-engineering</span>
           </div>
-          <div class="vstat-divider"></div>
-          <div class="vstat">
-            <span class="vstat-num" style="color: #ec6478;">A11y</span>
-            <span class="vstat-label">WCAG 2.1 AA</span>
-            <span class="vstat-sub">Screen reader &amp; keyboard pass</span>
+          <div class="vsb-divider"></div>
+          <div class="vsb-cell">
+            <span class="vsb-num">A11y</span>
+            <span class="vsb-lbl">WCAG 2.1 AA</span>
+            <span class="vsb-sub">Screen reader &amp; keyboard pass</span>
           </div>
         </div>
 
-        <h3 class="caught-heading">Three issues, three fixes</h3>
+        <div class="caught-head">
+          <span class="caught-head-eyebrow">What we caught</span>
+          <span class="caught-head-meta">3 issues &middot; 3 fixes &middot; pre-engineering</span>
+        </div>
 
-        <div class="caught-row">
-          <article class="caught-tile caught-coral">
-            <div class="caught-tile-head">
-              <span class="caught-tile-num">01</span>
-              <span class="caught-tile-tag">Search</span>
+        <div class="caught-grid">
+          <article class="caught-card v-coral">
+            <div class="cc-head">
+              <span class="cc-num">01</span>
+              <span class="cc-tag">Search</span>
             </div>
             <h4>Obsolete SKUs surfaced first</h4>
-            <p>Partners hit deprecated entries before active ones.</p>
-            <div class="caught-fix">
-              <span class="caught-fix-label">Fix</span>
+            <p class="cc-issue">Partners hit deprecated entries before active ones, costing time and confidence.</p>
+            <div class="cc-fix">
+              <span class="cc-fix-lbl">Fix</span>
               <span>Reweighted ranking to favor active catalog entries.</span>
             </div>
           </article>
 
-          <article class="caught-tile caught-sage">
-            <div class="caught-tile-head">
-              <span class="caught-tile-num">02</span>
-              <span class="caught-tile-tag">Form</span>
+          <article class="caught-card v-sage">
+            <div class="cc-head">
+              <span class="cc-num">02</span>
+              <span class="cc-tag">Form</span>
             </div>
             <h4>Conditional fields appeared without warning</h4>
-            <p>New questions popped in mid-flow, startling partners.</p>
-            <div class="caught-fix">
-              <span class="caught-fix-label">Fix</span>
+            <p class="cc-issue">New questions popped in mid-flow, startling partners who'd already mentally committed.</p>
+            <div class="cc-fix">
+              <span class="cc-fix-lbl">Fix</span>
               <span>Added a one-line preface explaining when new fields appear.</span>
             </div>
           </article>
 
-          <article class="caught-tile caught-gold">
-            <div class="caught-tile-head">
-              <span class="caught-tile-num">03</span>
-              <span class="caught-tile-tag">Submit</span>
+          <article class="caught-card v-gold">
+            <div class="cc-head">
+              <span class="cc-num">03</span>
+              <span class="cc-tag">Submit</span>
             </div>
             <h4>Submit confirmation was too quiet</h4>
-            <p>Inline toast left partners unsure if it actually submitted.</p>
-            <div class="caught-fix">
-              <span class="caught-fix-label">Fix</span>
+            <p class="cc-issue">Inline toast left partners unsure if it actually submitted.</p>
+            <div class="cc-fix">
+              <span class="cc-fix-lbl">Fix</span>
               <span>Upgraded to a confirmation page with next-steps and a record ID.</span>
             </div>
           </article>
