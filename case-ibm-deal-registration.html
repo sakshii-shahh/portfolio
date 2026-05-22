@@ -1452,6 +1452,9 @@
     /* Inline link */
     .link-inline {
       display: inline-flex;
+      align-self: flex-start;
+      width: -moz-fit-content;
+      width: fit-content;
       align-items: center;
       gap: 10px;
       background: #fbf6e5;
@@ -1461,7 +1464,7 @@
       text-decoration: none;
       color: #3a2818;
       font-size: 13px;
-      margin: 12px 0 24px;
+      margin: 12px 0 0;
       transition: all 0.2s ease;
     }
     .link-inline:hover { border-color: #ec6478; background: #f7d4dc; }
