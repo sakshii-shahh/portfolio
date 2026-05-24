@@ -2330,84 +2330,7 @@
     }
 
     /* Design system */
-    .token-flow {
-      display: flex; align-items: center; gap: 16px;
-      background: var(--bg-card);
-      border: 1px solid var(--rule);
-      border-radius: var(--r-xl);
-      padding: 24px;
-      margin: 16px 0 8px;
-    }
-    @media (max-width: 760px) { .token-flow { flex-direction: column; gap: 12px; } }
-    .tf-step {
-      flex: 1;
-      background: var(--bg-elev);
-      border: 1px solid var(--rule);
-      border-radius: var(--r-lg);
-      padding: 16px 18px;
-      display: flex; flex-direction: column; gap: 4px;
-      position: relative;
-    }
-    .tf-step::before {
-      content: ""; position: absolute;
-      top: 0; left: 18px; right: 18px;
-      height: 3px; border-radius: 0 0 3px 3px;
-    }
-    .tf-primitive::before { background: var(--ink-mute); }
-    .tf-semantic::before  { background: var(--secondary); }
-    .tf-component::before { background: var(--accent); }
-    .tf-lbl {
-      font-family: var(--mono); font-size: 10.5px; font-weight: 600;
-      letter-spacing: .14em; text-transform: uppercase;
-      color: var(--ink-mute);
-    }
-    .tf-ex { font-family: var(--mono); font-size: 13px; color: var(--ink); }
-    .tf-arrow {
-      font-family: var(--display); font-size: 22px;
-      color: var(--ink-mute);
-    }
-    @media (max-width: 760px) { .tf-arrow { transform: rotate(90deg); } }
-    .ds-caption {
-      font-family: var(--serif); font-style: italic;
-      font-size: 13px; color: var(--ink-mute);
-      text-align: center; margin: 6px 0 0;
-    }
-    .ds-stat-bar {
-      display: flex; align-items: stretch;
-      background: var(--bg-card);
-      border: 1px solid var(--rule);
-      border-radius: var(--r-xl);
-      padding: 26px 28px;
-      margin: 16px 0 24px;
-    }
-    .dsb-cell {
-      flex: 1;
-      display: flex; flex-direction: column; align-items: center;
-      text-align: center; gap: 6px;
-    }
-    .dsb-num {
-      font-family: var(--serif); font-weight: 500;
-      font-size: clamp(32px, 4vw, 44px);
-      line-height: 1; letter-spacing: -.02em;
-      color: var(--accent);
-    }
-    .dsb-cell:nth-child(3) .dsb-num { color: var(--leaf-deep); }
-    .dsb-cell:nth-child(5) .dsb-num { color: #8a6418; }
-    .dsb-cell:nth-child(7) .dsb-num { color: var(--ink); }
-    .dsb-cell:nth-child(9) .dsb-num { color: var(--accent-deep); }
-    .dsb-lbl {
-      font-family: var(--mono); font-size: 10px;
-      letter-spacing: .14em; text-transform: uppercase;
-      color: var(--ink-mute);
-    }
-    .dsb-divider {
-      width: 1px; background: var(--rule);
-      align-self: stretch; margin: 0 14px;
-    }
     @media (max-width: 900px) {
-      .ds-stat-bar { flex-wrap: wrap; gap: 18px 0; padding: 20px; }
-      .dsb-cell { flex-basis: 33.33%; }
-      .dsb-divider { display: none; }
     }
     .doc-frames {
       display: grid;
@@ -2486,9 +2409,6 @@
     .wtp-sage::before  { background: var(--secondary); }
     .wtp-coral::before { background: var(--accent); }
     .wtp-gold::before  { background: #8a6418; }
-    .wtp-featured {
-      background: linear-gradient(180deg, var(--accent-soft) 0%, var(--bg-card) 60%);
-    }
     .wtp-tier {
       font-family: var(--mono); font-size: 11px; font-weight: 600;
       letter-spacing: .16em; text-transform: uppercase;
@@ -2683,6 +2603,277 @@
       border-radius: 999px;
     }
 
+
+    /* ============ INFORMATION ARCHITECTURE ============ */
+    .ia-tree {
+      background: var(--bg-card);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-xl);
+      padding: 32px 28px;
+      display: flex; flex-direction: column; align-items: center;
+      margin: 20px 0 8px;
+    }
+    .ia-root {
+      background: var(--ink);
+      color: #fbf6e5;
+      padding: 12px 28px;
+      border-radius: 999px;
+      font-family: var(--display); font-weight: 600;
+      font-size: 15px;
+      position: relative;
+    }
+    .ia-root::after {
+      content: ""; position: absolute;
+      bottom: -32px; left: 50%;
+      transform: translateX(-50%);
+      width: 2px; height: 32px;
+      background: var(--rule);
+    }
+    .ia-branches {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+      margin-top: 48px;
+      width: 100%;
+      position: relative;
+    }
+    .ia-branches::before {
+      content: ""; position: absolute;
+      top: -20px; left: 10%; right: 10%;
+      height: 1px; background: var(--rule);
+    }
+    @media (max-width: 900px) {
+      .ia-branches { grid-template-columns: 1fr 1fr; }
+      .ia-branches::before { display: none; }
+    }
+    @media (max-width: 540px) { .ia-branches { grid-template-columns: 1fr; } }
+    .ia-node {
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-lg);
+      padding: 16px 14px;
+      position: relative;
+      transition: border-color .2s var(--ease), transform .2s var(--ease);
+    }
+    .ia-node::before {
+      content: ""; position: absolute;
+      top: -20px; left: 50%;
+      transform: translateX(-50%);
+      width: 2px; height: 20px;
+      background: var(--rule);
+    }
+    @media (max-width: 900px) { .ia-node::before { display: none; } }
+    .ia-node:hover { transform: translateY(-2px); border-color: var(--rule-strong); }
+    .ia-node h5 {
+      font-family: var(--display); font-weight: 600;
+      font-size: 14px; margin: 6px 0 4px; color: var(--ink);
+    }
+    .ia-node p {
+      font-size: 12px; line-height: 1.5;
+      color: var(--ink-soft); margin: 0;
+    }
+    .ia-num {
+      font-family: var(--mono); font-size: 9.5px; font-weight: 600;
+      letter-spacing: .14em;
+    }
+    .ia-coral .ia-num { color: var(--accent); }
+    .ia-sage  .ia-num { color: var(--leaf-deep); }
+    .ia-gold  .ia-num { color: #8a6418; }
+
+    /* ============ WIREFRAMING FIDELITY ROW ============ */
+    .fidelity-row {
+      display: flex; align-items: center; gap: 14px;
+      margin: 20px 0 8px;
+    }
+    @media (max-width: 900px) {
+      .fidelity-row { flex-direction: column; align-items: stretch; }
+      .fid-arrow { transform: rotate(90deg); }
+    }
+    .fidelity-card {
+      flex: 1;
+      background: var(--bg-card);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-xl);
+      padding: 22px 22px;
+      position: relative;
+      transition: border-color .2s var(--ease), transform .2s var(--ease);
+    }
+    .fidelity-card::before {
+      content: ""; position: absolute;
+      top: 0; left: 22px; right: 22px; height: 3px;
+      border-radius: 0 0 3px 3px;
+    }
+    .fidelity-card:hover { transform: translateY(-3px); border-color: var(--rule-strong); }
+    .fid-coral::before { background: var(--accent); }
+    .fid-sage::before  { background: var(--secondary); }
+    .fid-gold::before  { background: #8a6418; }
+    .fid-stage {
+      font-family: var(--mono); font-size: 10px; font-weight: 600;
+      letter-spacing: .14em; text-transform: uppercase;
+    }
+    .fid-coral .fid-stage { color: var(--accent-deep); }
+    .fid-sage  .fid-stage { color: var(--leaf-deep); }
+    .fid-gold  .fid-stage { color: #8a6418; }
+    .fidelity-card h5 {
+      font-family: var(--display); font-weight: 600;
+      font-size: 16px; margin: 8px 0 6px; color: var(--ink);
+    }
+    .fidelity-card p {
+      font-size: 13px; color: var(--ink-soft);
+      line-height: 1.55; margin: 0;
+    }
+    .fid-arrow {
+      font-family: var(--display); font-size: 22px;
+      color: var(--ink-mute);
+      flex-shrink: 0;
+    }
+
+    /* ============ HI-FI PROTOTYPE GALLERY ============ */
+    .proto-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 24px 0 12px;
+    }
+    @media (max-width: 900px) { .proto-gallery { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 600px) { .proto-gallery { grid-template-columns: 1fr; } }
+    .proto-tile {
+      all: unset;
+      cursor: pointer;
+      background: var(--bg-card);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      display: flex; flex-direction: column;
+      transition: transform .25s var(--ease), border-color .25s var(--ease), box-shadow .25s var(--ease);
+    }
+    .proto-tile:hover, .proto-tile:focus-visible {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+      box-shadow: 0 14px 30px -16px rgba(20,18,12,.25);
+    }
+    .proto-feature { grid-column: 1 / -1; }
+    .proto-tile img {
+      width: 100%; height: 100%;
+      display: block;
+      object-fit: cover;
+      background: var(--bg-elev);
+      transition: transform .4s var(--ease);
+    }
+    .proto-feature img { max-height: 480px; object-position: top; }
+    .proto-tile:hover img { transform: scale(1.02); }
+    .proto-caption {
+      padding: 14px 16px 16px;
+      display: flex; flex-direction: column; gap: 3px;
+      background: var(--bg-card);
+    }
+    .proto-label {
+      font-family: var(--display); font-weight: 600;
+      font-size: 14px; color: var(--ink);
+    }
+    .proto-desc {
+      font-size: 12.5px; color: var(--ink-soft);
+      line-height: 1.5;
+    }
+
+    /* Lightbox */
+    .proto-lightbox {
+      border: none;
+      background: rgba(20, 18, 12, .92);
+      padding: 0;
+      max-width: 92vw;
+      max-height: 92vh;
+      border-radius: var(--r-xl);
+      overflow: hidden;
+    }
+    .proto-lightbox::backdrop { background: rgba(20, 18, 12, .85); }
+    .proto-lightbox .lb-img {
+      display: block;
+      max-width: 100%;
+      max-height: 80vh;
+      width: auto; height: auto;
+      margin: 0 auto;
+    }
+    .proto-lightbox .lb-caption {
+      padding: 16px 24px;
+      color: #f4ecd0;
+      font-family: var(--sans);
+      font-size: 14px;
+      margin: 0;
+      text-align: center;
+      line-height: 1.5;
+    }
+    .proto-lightbox .lb-caption strong {
+      color: var(--accent-soft);
+      font-weight: 600;
+      margin-right: 8px;
+    }
+    .lb-close {
+      position: absolute;
+      top: 12px; right: 14px;
+      background: rgba(58, 40, 24, .4);
+      border: none;
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      color: #f4ecd0;
+      font-size: 24px;
+      line-height: 1;
+      cursor: pointer;
+      z-index: 2;
+      transition: background .2s var(--ease);
+    }
+    .lb-close:hover { background: var(--accent); }
+
+    /* ============ DESIGN SYSTEM 3-IMAGE GRID ============ */
+    .ds-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin: 24px 0 8px;
+    }
+    @media (max-width: 760px) { .ds-grid { grid-template-columns: 1fr; } }
+    .ds-card {
+      background: var(--bg-card);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      display: flex; flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+      transition: transform .25s var(--ease), border-color .25s var(--ease), box-shadow .25s var(--ease);
+    }
+    .ds-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+      box-shadow: 0 14px 30px -16px rgba(20,18,12,.2);
+    }
+    .ds-card-wide { grid-column: 1 / -1; }
+    .ds-card img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      background: var(--bg-elev);
+      aspect-ratio: 16 / 10;
+    }
+    .ds-card-wide img { aspect-ratio: 21 / 8; }
+    .ds-card-cap {
+      padding: 18px 22px 20px;
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .ds-card-eyebrow {
+      font-family: var(--mono); font-size: 10px; font-weight: 600;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--ink-mute);
+    }
+    .ds-card h4 {
+      font-family: var(--display); font-weight: 600;
+      font-size: 17px; margin: 4px 0 4px; color: var(--ink);
+    }
+    .ds-card p {
+      font-size: 13.5px; color: var(--ink-soft);
+      line-height: 1.55; margin: 0;
+      max-width: none;
+    }
 </style>
 </head>
 <body>
@@ -2703,7 +2894,7 @@
           <li><a href="#solution" class="toc-link"><span class="num">03.</span>The solution</a></li>
           <li><a href="#flows" class="toc-link"><span class="num">04.</span>Key flows</a></li>
           <li><a href="#design-system" class="toc-link"><span class="num">05.</span>Design system</a></li>
-          <li><a href="#impact" class="toc-link"><span class="num">06.</span>Impact</a></li>
+          <li><a href="#impact" class="toc-link"><span class="num">06.</span>Business strategy</a></li>
           <li><a href="#reflection" class="toc-link"><span class="num">07.</span>Reflection</a></li>
         </ol>
       </div>
@@ -3289,7 +3480,143 @@
         </div>
         <p class="nda-caption">Weekly engagement loop &middot; adapted from production flow diagrams.</p>
 
-            </section>
+        <!-- Information Architecture -->
+        <p class="section-eyebrow" style="margin-top:56px;">Information architecture</p>
+        <h3 class="quests-h3">Five sections, organized around the employee journey.</h3>
+        <p>
+          Before designing screens, the product structure was mapped against two audiences: employees who think in growth, and L&amp;D leaders who think in outcomes. The IA reflects that split.
+        </p>
+
+        <div class="ia-tree">
+          <div class="ia-root">
+            <span class="ia-root-label">Stride</span>
+          </div>
+          <div class="ia-branches">
+            <div class="ia-node ia-coral">
+              <span class="ia-num">01</span>
+              <h5>Home</h5>
+              <p>Personalized dashboard, active quest, peer activity, upcoming events.</p>
+            </div>
+            <div class="ia-node ia-sage">
+              <span class="ia-num">02</span>
+              <h5>My Path</h5>
+              <p>Individual trajectory, skill radar across six dimensions, upcoming challenges.</p>
+            </div>
+            <div class="ia-node ia-gold">
+              <span class="ia-num">03</span>
+              <h5>Quests</h5>
+              <p>Task library, filtered by role, skill level, and quest type. Browse beyond your path.</p>
+            </div>
+            <div class="ia-node ia-coral">
+              <span class="ia-num">04</span>
+              <h5>Community</h5>
+              <p>Peer discussions, mentor threads, team activity, shared wins. Weighted by HEXAD type.</p>
+            </div>
+            <div class="ia-node ia-sage">
+              <span class="ia-num">05</span>
+              <h5>Admin</h5>
+              <p>L&amp;D-only proof dashboard. Behavior change metrics, adoption rates, exportable reports.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Wireframing exercise -->
+        <p class="section-eyebrow" style="margin-top:56px;">Wireframing exercise</p>
+        <h3 class="quests-h3">Three fidelities, three different jobs.</h3>
+        <p>
+          Each fidelity served a different purpose. Paper sketches eliminated layout candidates. Grayscale Figma evaluated structure without visual distraction. Hi-fi tested the real Carbon-styled experience.
+        </p>
+
+        <div class="fidelity-row">
+          <article class="fidelity-card fid-coral">
+            <span class="fid-stage">01 &middot; Paper</span>
+            <h5>Layout exploration</h5>
+            <p>12 dashboard layouts sketched in a single afternoon. Team review eliminated 8 based on hierarchy issues.</p>
+          </article>
+          <span class="fid-arrow">&rarr;</span>
+          <article class="fidelity-card fid-sage">
+            <span class="fid-stage">02 &middot; Grayscale</span>
+            <h5>Structure &amp; flow</h5>
+            <p>Final 4 candidates built in Figma without color or imagery. Internal usability tests narrowed to two.</p>
+          </article>
+          <span class="fid-arrow">&rarr;</span>
+          <article class="fidelity-card fid-gold">
+            <span class="fid-stage">03 &middot; Hi-fi</span>
+            <h5>Real components</h5>
+            <p>Built with the Stride design system. Side-by-side comparison surfaced the 2-second faster sticky banner.</p>
+          </article>
+        </div>
+
+        <!-- Hi-fi prototype gallery -->
+        <p class="section-eyebrow" style="margin-top:64px;">Hi-fi prototypes</p>
+        <h3 class="quests-h3">The shipped experience.</h3>
+        <p>
+          Seven screens covering the core loop, dashboard, queue, quest path, challenge prompt, AI chat, video lesson, and the celebration moment that closes every quest.
+        </p>
+
+        <div class="proto-gallery">
+          <button class="proto-tile proto-feature" type="button" data-proto="dashboard">
+            <img src="assets/ai-accel/hifi-dashboard.png" alt="Home dashboard with skill radar, active quest, and trending discussions" loading="lazy">
+            <div class="proto-caption">
+              <span class="proto-label">Home dashboard</span>
+              <span class="proto-desc">Personalized hub. Active quest center, skill radar right rail.</span>
+            </div>
+          </button>
+
+          <button class="proto-tile" type="button" data-proto="queue">
+            <img src="assets/ai-accel/hifi-queue.png" alt="Up Next quest queue" loading="lazy">
+            <div class="proto-caption">
+              <span class="proto-label">Quest queue</span>
+              <span class="proto-desc">Drag-to-reorder. 5-quest limit prevents overwhelm.</span>
+            </div>
+          </button>
+          <button class="proto-tile" type="button" data-proto="path">
+            <img src="assets/ai-accel/hifi-quest-path.png" alt="PRD Mastery quest path with locked and active steps" loading="lazy">
+            <div class="proto-caption">
+              <span class="proto-label">Quest path</span>
+              <span class="proto-desc">Gamified progression. Active challenge highlighted, future steps locked.</span>
+            </div>
+          </button>
+
+          <button class="proto-tile" type="button" data-proto="challenge">
+            <img src="assets/ai-accel/hifi-quest-challenge.png" alt="Quest challenge intro screen" loading="lazy">
+            <div class="proto-caption">
+              <span class="proto-label">Challenge intro</span>
+              <span class="proto-desc">Quest brief + submission requirements + coach tip.</span>
+            </div>
+          </button>
+          <button class="proto-tile" type="button" data-proto="chat">
+            <img src="assets/ai-accel/hifi-quest-chat.png" alt="In-product AI chat for PRD work" loading="lazy">
+            <div class="proto-caption">
+              <span class="proto-label">AI chat</span>
+              <span class="proto-desc">In-product AI thought partner with persistent coach tips.</span>
+            </div>
+          </button>
+          <button class="proto-tile" type="button" data-proto="video">
+            <img src="assets/ai-accel/hifi-quest-video.png" alt="Video lesson with synced transcript" loading="lazy">
+            <div class="proto-caption">
+              <span class="proto-label">Video lesson</span>
+              <span class="proto-desc">Time-coded transcript + key takeaways + scratch notes.</span>
+            </div>
+          </button>
+
+          <button class="proto-tile proto-feature" type="button" data-proto="complete">
+            <img src="assets/ai-accel/hifi-quest-complete.png" alt="Quest Complete celebration screen with confetti" loading="lazy">
+            <div class="proto-caption">
+              <span class="proto-label">Quest complete</span>
+              <span class="proto-desc">Celebration moment with badge, XP, streak, AI feedback, and next quest prompt.</span>
+            </div>
+          </button>
+        </div>
+        <p class="nda-caption">High-fidelity prototype screens &middot; built in Figma + deployed on Vercel for the CGI pilot.</p>
+
+        <dialog class="proto-lightbox" id="protoLightbox">
+          <button class="lb-close" type="button" aria-label="Close">&times;</button>
+          <img class="lb-img" alt="">
+          <p class="lb-caption"></p>
+        </dialog>
+
+      </section>
 
       <!-- ============ 05. STRATEGY ============ -->
 
@@ -3301,42 +3628,36 @@
           Carbon was the north star for documentation rigor and structure. Stride went token-first instead of components-first, so theming and dark mode are native from day one, not retrofitted.
         </p>
 
-        <p class="section-eyebrow" style="margin-top:36px;">Token architecture</p>
-        <div class="token-flow">
-          <div class="tf-step tf-primitive">
-            <span class="tf-lbl">Primitive</span>
-            <span class="tf-ex">#5236AB &middot; 16px</span>
-          </div>
-          <span class="tf-arrow">&rarr;</span>
-          <div class="tf-step tf-semantic">
-            <span class="tf-lbl">Semantic</span>
-            <span class="tf-ex">primary.500 &middot; spacing.md</span>
-          </div>
-          <span class="tf-arrow">&rarr;</span>
-          <div class="tf-step tf-component">
-            <span class="tf-lbl">Component</span>
-            <span class="tf-ex">button.bg &middot; card.padding</span>
-          </div>
-        </div>
-        <p class="ds-caption">3-layer pipeline &middot; brand changes cascade through every component automatically.</p>
+        <div class="ds-grid">
+          <a class="ds-card ds-card-wide" href="assets/ai-accel/ds-colors.png" target="_blank">
+            <img src="assets/ai-accel/ds-colors.png" alt="Stride design system color palette page" loading="lazy">
+            <div class="ds-card-cap">
+              <span class="ds-card-eyebrow">Foundations</span>
+              <h4>Color palette</h4>
+              <p>Primary indigo, secondary teal, accent amber. Every color chosen with behavioral psychology in mind.</p>
+            </div>
+          </a>
 
-        <p class="section-eyebrow" style="margin-top:40px;">Five variable collections, 86 tokens</p>
-        <div class="ds-stat-bar">
-          <div class="dsb-cell"><span class="dsb-num">32</span><span class="dsb-lbl">Colors</span></div>
-          <div class="dsb-divider"></div>
-          <div class="dsb-cell"><span class="dsb-num">21</span><span class="dsb-lbl">Typography</span></div>
-          <div class="dsb-divider"></div>
-          <div class="dsb-cell"><span class="dsb-num">16</span><span class="dsb-lbl">Elevation</span></div>
-          <div class="dsb-divider"></div>
-          <div class="dsb-cell"><span class="dsb-num">11</span><span class="dsb-lbl">Spacing</span></div>
-          <div class="dsb-divider"></div>
-          <div class="dsb-cell"><span class="dsb-num">6</span><span class="dsb-lbl">Radius</span></div>
+          <a class="ds-card" href="assets/ai-accel/ds-buttons.png" target="_blank">
+            <img src="assets/ai-accel/ds-buttons.png" alt="Stride design system buttons and inputs page" loading="lazy">
+            <div class="ds-card-cap">
+              <span class="ds-card-eyebrow">Components</span>
+              <h4>Buttons &amp; inputs</h4>
+              <p>6 variants &times; 4 states. Full anatomy specs with tokens.</p>
+            </div>
+          </a>
+
+          <a class="ds-card" href="assets/ai-accel/ds-graphics.png" target="_blank">
+            <img src="assets/ai-accel/ds-graphics.png" alt="Stride design system graphics page with badges, celebrations, and spot illustrations" loading="lazy">
+            <div class="ds-card-cap">
+              <span class="ds-card-eyebrow">Illustration system</span>
+              <h4>Graphics &amp; rewards</h4>
+              <p>Gradient-rich badges, confetti celebrations, empty states, and persona avatars.</p>
+            </div>
+          </a>
         </div>
 
-        <div class="image-slot wide"></div>
-        <p class="nda-caption">Figma variable collections &middot; adapted from the production library, original is under NDA.</p>
-
-        <p class="section-eyebrow" style="margin-top:24px;">Two-frame documentation model</p>
+        <p class="section-eyebrow" style="margin-top:48px;">Two-frame documentation model</p>
         <div class="doc-frames">
           <article class="doc-card df-coral">
             <span class="df-tag">For developers</span>
@@ -3353,10 +3674,11 @@
       </section>
 
       <section class="section" id="impact">
-        <p class="section-eyebrow">Impact</p>
-        <h2 class="section-title">A behavioral product needs a strategic frame.</h2>
-
-        <p>We sized the opportunity, modeled willingness-to-pay, and structured a defensibility argument. The strategic layer wasn't a separate workstream. Every product decision had a business question attached.</p>
+        <p class="section-eyebrow">Business strategy</p>
+        <h2 class="section-title">A behavioral product needs a business frame.</h2>
+        <p>
+          Market sizing, willingness-to-pay validation, distribution strategy, and pilot outcomes, each product decision had a business question attached.
+        </p>
 
         <h3>Market sizing</h3>
 
@@ -3494,7 +3816,7 @@
               <li>Basic L&amp;D dashboard</li>
             </ul>
           </article>
-          <article class="wtp-card wtp-coral wtp-featured">
+          <article class="wtp-card wtp-coral">
             <span class="wtp-tier">Growth</span>
             <span class="wtp-price">$50<span class="wtp-unit">/seat/mo</span></span>
             <p class="wtp-segment">For organizations scaling AI adoption</p>
@@ -3752,6 +4074,31 @@
         tab.addEventListener('click', () => activate(tab.dataset.target));
       });
     })();
+
+    // Hi-fi prototype lightbox
+    (function() {
+      const dlg = document.getElementById('protoLightbox');
+      if (!dlg) return;
+      const lbImg = dlg.querySelector('.lb-img');
+      const lbCap = dlg.querySelector('.lb-caption');
+      const close = dlg.querySelector('.lb-close');
+      document.querySelectorAll('.proto-tile').forEach(tile => {
+        tile.addEventListener('click', () => {
+          const img = tile.querySelector('img');
+          const label = tile.querySelector('.proto-label')?.textContent || '';
+          const desc = tile.querySelector('.proto-desc')?.textContent || '';
+          lbImg.src = img.src;
+          lbImg.alt = img.alt;
+          lbCap.innerHTML = `<strong>${label}</strong> ${desc}`;
+          dlg.showModal();
+        });
+      });
+      close.addEventListener('click', () => dlg.close());
+      dlg.addEventListener('click', (e) => {
+        if (e.target === dlg) dlg.close();
+      });
+    })();
+
   </script>
 
 </body>
