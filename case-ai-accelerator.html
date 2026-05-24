@@ -2728,101 +2728,6 @@
       flex-shrink: 0;
     }
 
-    /* ============ HI-FI PROTOTYPE GALLERY ============ */
-    .proto-gallery {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin: 24px 0 12px;
-    }
-    @media (max-width: 900px) { .proto-gallery { grid-template-columns: 1fr 1fr; } }
-    @media (max-width: 600px) { .proto-gallery { grid-template-columns: 1fr; } }
-    .proto-tile {
-      all: unset;
-      cursor: pointer;
-      background: var(--bg-card);
-      border: 1px solid var(--rule);
-      border-radius: var(--r-xl);
-      overflow: hidden;
-      display: flex; flex-direction: column;
-      transition: transform .25s var(--ease), border-color .25s var(--ease), box-shadow .25s var(--ease);
-    }
-    .proto-tile:hover, .proto-tile:focus-visible {
-      transform: translateY(-4px);
-      border-color: var(--accent);
-      box-shadow: 0 14px 30px -16px rgba(20,18,12,.25);
-    }
-    .proto-feature { grid-column: 1 / -1; }
-    .proto-tile img {
-      width: 100%; height: 100%;
-      display: block;
-      object-fit: cover;
-      background: var(--bg-elev);
-      transition: transform .4s var(--ease);
-    }
-    .proto-feature img { max-height: 480px; object-position: top; }
-    .proto-tile:hover img { transform: scale(1.02); }
-    .proto-caption {
-      padding: 14px 16px 16px;
-      display: flex; flex-direction: column; gap: 3px;
-      background: var(--bg-card);
-    }
-    .proto-label {
-      font-family: var(--display); font-weight: 600;
-      font-size: 14px; color: var(--ink);
-    }
-    .proto-desc {
-      font-size: 12.5px; color: var(--ink-soft);
-      line-height: 1.5;
-    }
-
-    /* Lightbox */
-    .proto-lightbox {
-      border: none;
-      background: rgba(20, 18, 12, .92);
-      padding: 0;
-      max-width: 92vw;
-      max-height: 92vh;
-      border-radius: var(--r-xl);
-      overflow: hidden;
-    }
-    .proto-lightbox::backdrop { background: rgba(20, 18, 12, .85); }
-    .proto-lightbox .lb-img {
-      display: block;
-      max-width: 100%;
-      max-height: 80vh;
-      width: auto; height: auto;
-      margin: 0 auto;
-    }
-    .proto-lightbox .lb-caption {
-      padding: 16px 24px;
-      color: #f4ecd0;
-      font-family: var(--sans);
-      font-size: 14px;
-      margin: 0;
-      text-align: center;
-      line-height: 1.5;
-    }
-    .proto-lightbox .lb-caption strong {
-      color: var(--accent-soft);
-      font-weight: 600;
-      margin-right: 8px;
-    }
-    .lb-close {
-      position: absolute;
-      top: 12px; right: 14px;
-      background: rgba(58, 40, 24, .4);
-      border: none;
-      width: 36px; height: 36px;
-      border-radius: 50%;
-      color: #f4ecd0;
-      font-size: 24px;
-      line-height: 1;
-      cursor: pointer;
-      z-index: 2;
-      transition: background .2s var(--ease);
-    }
-    .lb-close:hover { background: var(--accent); }
 
     /* ============ DESIGN SYSTEM 3-IMAGE GRID ============ */
     .ds-grid {
@@ -2874,6 +2779,188 @@
       line-height: 1.55; margin: 0;
       max-width: none;
     }
+    /* ============ MENTAL MODELS ============ */
+    .mm-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin: 20px 0 8px;
+    }
+    @media (max-width: 760px) { .mm-grid { grid-template-columns: 1fr; } }
+    .mm-card {
+      background: var(--bg-card);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-xl);
+      padding: 26px 26px 24px;
+      position: relative;
+      transition: border-color .2s var(--ease), transform .2s var(--ease);
+    }
+    .mm-card::before {
+      content: ""; position: absolute;
+      top: 0; left: 26px; right: 26px; height: 3px;
+      border-radius: 0 0 3px 3px;
+    }
+    .mm-card:hover { transform: translateY(-3px); border-color: var(--rule-strong); }
+    .mm-coral::before { background: var(--accent); }
+    .mm-sage::before  { background: var(--secondary); }
+    .mm-tag {
+      font-family: var(--mono); font-size: 10px; font-weight: 600;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--ink-mute);
+    }
+    .mm-coral .mm-tag { color: var(--accent-deep); }
+    .mm-sage  .mm-tag { color: var(--leaf-deep); }
+    .mm-card h5 {
+      font-family: var(--display); font-weight: 600;
+      font-size: 18px; margin: 8px 0 12px; color: var(--ink);
+    }
+    .mm-line {
+      font-family: var(--serif); font-style: italic;
+      font-size: 15px; color: var(--ink); margin: 0 0 16px;
+      padding-left: 14px; border-left: 2px solid var(--rule);
+    }
+    .mm-coral .mm-line { border-left-color: var(--accent); }
+    .mm-sage  .mm-line { border-left-color: var(--secondary); }
+    .mm-bullets {
+      list-style: none; padding: 0; margin: 0;
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .mm-bullets li {
+      font-size: 13.5px; color: var(--ink-soft); line-height: 1.5;
+      padding-left: 18px; position: relative;
+    }
+    .mm-bullets li::before {
+      content: "\2014"; position: absolute; left: 0;
+      color: var(--ink-mute); font-family: var(--mono);
+    }
+
+    /* ============ CARD SORTING ============ */
+    .cs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 20px 0 8px;
+    }
+    @media (max-width: 760px) { .cs-grid { grid-template-columns: 1fr; } }
+    .cs-card {
+      background: var(--bg-card);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-xl);
+      padding: 24px 22px;
+      display: flex; flex-direction: column;
+      position: relative;
+      transition: border-color .2s var(--ease), transform .2s var(--ease);
+    }
+    .cs-card:hover { transform: translateY(-3px); border-color: var(--rule-strong); }
+    .cs-letter {
+      font-family: var(--serif); font-weight: 500;
+      font-size: 48px; line-height: .9;
+      margin-bottom: 8px;
+      color: var(--ink-mute);
+    }
+    .cs-win .cs-letter { color: var(--secondary); }
+    .cs-fail .cs-letter { color: var(--ink-mute); opacity: .55; }
+    .cs-tag {
+      font-family: var(--mono); font-size: 10px; font-weight: 600;
+      letter-spacing: .14em; text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .cs-fail .cs-tag { color: var(--accent-deep); }
+    .cs-win .cs-tag { color: var(--leaf-deep); }
+    .cs-card h5 {
+      font-family: var(--display); font-weight: 600;
+      font-size: 15px; margin: 0 0 8px; color: var(--ink);
+    }
+    .cs-card p {
+      font-size: 13px; color: var(--ink-soft);
+      line-height: 1.55; margin: 0;
+    }
+    .cs-win {
+      background: color-mix(in srgb, var(--secondary) 8%, var(--bg-card));
+      border-color: color-mix(in srgb, var(--secondary) 30%, var(--rule));
+    }
+
+    /* ============ HI-FI EXPLORER (interactive) ============ */
+    .hifi-explorer {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 24px;
+      align-items: start;
+      margin: 24px 0 8px;
+    }
+    @media (max-width: 900px) {
+      .hifi-explorer { grid-template-columns: 1fr; }
+    }
+    .hifi-list {
+      display: flex; flex-direction: column;
+      gap: 10px;
+      position: sticky;
+      top: 36px;
+    }
+    @media (max-width: 900px) { .hifi-list { position: static; } }
+    .hifi-item {
+      all: unset;
+      cursor: pointer;
+      background: var(--bg-card);
+      border: 1.5px solid var(--rule);
+      border-radius: var(--r-lg);
+      padding: 14px 16px;
+      display: flex; flex-direction: column; gap: 4px;
+      transition: border-color .2s var(--ease), background .2s var(--ease), transform .2s var(--ease);
+    }
+    .hifi-item:hover { background: var(--bg-elev); transform: translateX(2px); }
+    .hifi-item.is-active {
+      border-color: var(--accent);
+      background: var(--bg-elev);
+      transform: translateX(4px);
+    }
+    .hifi-item.is-active::before { content: none; }
+    .hifi-item .hifi-num {
+      font-family: var(--mono); font-size: 10px; font-weight: 600;
+      letter-spacing: .14em; color: var(--ink-mute);
+    }
+    .hifi-item.is-active .hifi-num { color: var(--accent); }
+    .hifi-item h5 {
+      font-family: var(--display); font-weight: 600;
+      font-size: 14.5px; margin: 0; color: var(--ink);
+    }
+    .hifi-item p {
+      font-size: 12.5px; color: var(--ink-soft);
+      line-height: 1.45; margin: 0;
+    }
+
+    .hifi-display {
+      position: sticky; top: 36px;
+      background: var(--bg-card);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-xl);
+      padding: 14px;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+    }
+    @media (max-width: 900px) { .hifi-display { position: static; } }
+    .hifi-screen {
+      position: absolute;
+      inset: 14px;
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      opacity: 0;
+      transform: scale(.985);
+      transition: opacity .35s var(--ease), transform .35s var(--ease);
+      pointer-events: none;
+      background: var(--bg-elev);
+    }
+    .hifi-screen.is-active {
+      opacity: 1;
+      transform: scale(1);
+      pointer-events: auto;
+    }
+    .hifi-screen img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: top;
+      display: block;
+    }
+
 </style>
 </head>
 <body>
@@ -3437,6 +3524,132 @@
           </article>
         </div>
 
+        <!-- ============ MENTAL MODELS → CARD SORTING → IA arc ============ -->
+
+        <!-- Mental models -->
+        <p class="section-eyebrow" style="margin-top:56px;">Mental models</p>
+        <h3 class="quests-h3">Two audiences. Two completely different mental models.</h3>
+        <p>
+          Before drawing a single line, interviews surfaced one structural truth: employees and L&amp;D leaders think about the same product in opposite ways. The IA had to serve both without compromising either.
+        </p>
+
+        <div class="mm-grid">
+          <article class="mm-card mm-coral">
+            <span class="mm-tag">Audience 01</span>
+            <h5>Employees think in growth</h5>
+            <p class="mm-line">"What's my next quest? How am I progressing? What are my peers doing?"</p>
+            <ul class="mm-bullets">
+              <li>Skill progression over time</li>
+              <li>Achievement and recognition</li>
+              <li>Peer activity and comparison</li>
+            </ul>
+          </article>
+          <article class="mm-card mm-sage">
+            <span class="mm-tag">Audience 02</span>
+            <h5>L&amp;D leaders think in outcomes</h5>
+            <p class="mm-line">"Did this work? What did the team change? What do I show the CFO?"</p>
+            <ul class="mm-bullets">
+              <li>Adoption rate by team</li>
+              <li>Behavior change, not completion</li>
+              <li>Exportable ROI proof</li>
+            </ul>
+          </article>
+        </div>
+
+        <!-- Card sorting -->
+        <p class="section-eyebrow" style="margin-top:56px;">Card sorting exercise</p>
+        <h3 class="quests-h3">Where does gamification live?</h3>
+        <p>
+          Card sorting with 12 participants surfaced one persistent disagreement: where should leaderboards, badges, and XP live? Three placements got tested on paper.
+        </p>
+
+        <div class="cs-grid">
+          <article class="cs-card cs-fail">
+            <span class="cs-letter">A</span>
+            <span class="cs-tag">Tested &middot; failed</span>
+            <h5>Dedicated Achievements tab</h5>
+            <p>Users opened it once, never returned. Disconnected from the work.</p>
+          </article>
+          <article class="cs-card cs-fail">
+            <span class="cs-letter">B</span>
+            <span class="cs-tag">Tested &middot; failed</span>
+            <h5>Scattered across every screen</h5>
+            <p>Felt noisy. Distracted from the quests themselves.</p>
+          </article>
+          <article class="cs-card cs-win">
+            <span class="cs-letter">C</span>
+            <span class="cs-tag">Shipped</span>
+            <h5>Contextual placement</h5>
+            <p>XP on dashboard, badges at quest completion, leaderboard in Community. Each element appears at the moment of relevance.</p>
+          </article>
+        </div>
+        <p class="nda-caption">Card sorting outcomes &middot; adapted from the original session notes.</p>
+
+        <!-- Information architecture (output of the arc above) -->
+        <p class="section-eyebrow" style="margin-top:56px;">Information architecture</p>
+        <h3 class="quests-h3">Five sections, organized around the employee journey.</h3>
+        <p>
+          The IA reflects both mental models. Employees navigate by growth (Home, Path, Quests, Community). L&amp;D leaders get their own surface (Admin) without polluting the employee experience.
+        </p>
+
+        <div class="ia-tree">
+          <div class="ia-root"><span class="ia-root-label">AI Accelerator</span></div>
+          <div class="ia-branches">
+            <div class="ia-node ia-coral">
+              <span class="ia-num">01</span>
+              <h5>Home</h5>
+              <p>Personalized dashboard, active quest, peer activity, upcoming events.</p>
+            </div>
+            <div class="ia-node ia-sage">
+              <span class="ia-num">02</span>
+              <h5>My Path</h5>
+              <p>Individual trajectory, skill radar across six dimensions, upcoming challenges.</p>
+            </div>
+            <div class="ia-node ia-gold">
+              <span class="ia-num">03</span>
+              <h5>Quests</h5>
+              <p>Task library, filtered by role, skill level, and quest type.</p>
+            </div>
+            <div class="ia-node ia-coral">
+              <span class="ia-num">04</span>
+              <h5>Community</h5>
+              <p>Peer discussions, mentor threads, team activity, leaderboards.</p>
+            </div>
+            <div class="ia-node ia-sage">
+              <span class="ia-num">05</span>
+              <h5>Admin</h5>
+              <p>L&amp;D-only proof dashboard. Behavior change metrics, adoption rates, exportable reports.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Wireframing exercise -->
+        <p class="section-eyebrow" style="margin-top:56px;">Wireframing exercise</p>
+        <h3 class="quests-h3">Three fidelities, three different jobs.</h3>
+        <p>
+          Each fidelity served a different purpose. Paper sketches eliminated layout candidates. Grayscale Figma evaluated structure without visual distraction. Hi-fi tested the real Carbon-styled experience.
+        </p>
+
+        <div class="fidelity-row">
+          <article class="fidelity-card fid-coral">
+            <span class="fid-stage">01 &middot; Paper</span>
+            <h5>Layout exploration</h5>
+            <p>12 dashboard layouts sketched in a single afternoon. Team review eliminated 8 based on hierarchy issues.</p>
+          </article>
+          <span class="fid-arrow">&rarr;</span>
+          <article class="fidelity-card fid-sage">
+            <span class="fid-stage">02 &middot; Grayscale</span>
+            <h5>Structure &amp; flow</h5>
+            <p>Final 4 candidates built in Figma without color or imagery. Internal usability tests narrowed to two.</p>
+          </article>
+          <span class="fid-arrow">&rarr;</span>
+          <article class="fidelity-card fid-gold">
+            <span class="fid-stage">03 &middot; Hi-fi</span>
+            <h5>Real components</h5>
+            <p>Built with the AI Accelerator design system. Side-by-side comparison surfaced the 2-second faster sticky banner.</p>
+          </article>
+        </div>
+
         <!-- User flow -->
         <p class="section-eyebrow" style="margin-top:56px;">User flow</p>
         <h3 class="quests-h3">The weekly engagement loop.</h3>
@@ -3480,141 +3693,77 @@
         </div>
         <p class="nda-caption">Weekly engagement loop &middot; adapted from production flow diagrams.</p>
 
-        <!-- Information Architecture -->
-        <p class="section-eyebrow" style="margin-top:56px;">Information architecture</p>
-        <h3 class="quests-h3">Five sections, organized around the employee journey.</h3>
-        <p>
-          Before designing screens, the product structure was mapped against two audiences: employees who think in growth, and L&amp;D leaders who think in outcomes. The IA reflects that split.
-        </p>
-
-        <div class="ia-tree">
-          <div class="ia-root">
-            <span class="ia-root-label">Stride</span>
-          </div>
-          <div class="ia-branches">
-            <div class="ia-node ia-coral">
-              <span class="ia-num">01</span>
-              <h5>Home</h5>
-              <p>Personalized dashboard, active quest, peer activity, upcoming events.</p>
-            </div>
-            <div class="ia-node ia-sage">
-              <span class="ia-num">02</span>
-              <h5>My Path</h5>
-              <p>Individual trajectory, skill radar across six dimensions, upcoming challenges.</p>
-            </div>
-            <div class="ia-node ia-gold">
-              <span class="ia-num">03</span>
-              <h5>Quests</h5>
-              <p>Task library, filtered by role, skill level, and quest type. Browse beyond your path.</p>
-            </div>
-            <div class="ia-node ia-coral">
-              <span class="ia-num">04</span>
-              <h5>Community</h5>
-              <p>Peer discussions, mentor threads, team activity, shared wins. Weighted by HEXAD type.</p>
-            </div>
-            <div class="ia-node ia-sage">
-              <span class="ia-num">05</span>
-              <h5>Admin</h5>
-              <p>L&amp;D-only proof dashboard. Behavior change metrics, adoption rates, exportable reports.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Wireframing exercise -->
-        <p class="section-eyebrow" style="margin-top:56px;">Wireframing exercise</p>
-        <h3 class="quests-h3">Three fidelities, three different jobs.</h3>
-        <p>
-          Each fidelity served a different purpose. Paper sketches eliminated layout candidates. Grayscale Figma evaluated structure without visual distraction. Hi-fi tested the real Carbon-styled experience.
-        </p>
-
-        <div class="fidelity-row">
-          <article class="fidelity-card fid-coral">
-            <span class="fid-stage">01 &middot; Paper</span>
-            <h5>Layout exploration</h5>
-            <p>12 dashboard layouts sketched in a single afternoon. Team review eliminated 8 based on hierarchy issues.</p>
-          </article>
-          <span class="fid-arrow">&rarr;</span>
-          <article class="fidelity-card fid-sage">
-            <span class="fid-stage">02 &middot; Grayscale</span>
-            <h5>Structure &amp; flow</h5>
-            <p>Final 4 candidates built in Figma without color or imagery. Internal usability tests narrowed to two.</p>
-          </article>
-          <span class="fid-arrow">&rarr;</span>
-          <article class="fidelity-card fid-gold">
-            <span class="fid-stage">03 &middot; Hi-fi</span>
-            <h5>Real components</h5>
-            <p>Built with the Stride design system. Side-by-side comparison surfaced the 2-second faster sticky banner.</p>
-          </article>
-        </div>
-
-        <!-- Hi-fi prototype gallery -->
+        <!-- ============ HI-FI EXPLORER (interactive) ============ -->
         <p class="section-eyebrow" style="margin-top:64px;">Hi-fi prototypes</p>
         <h3 class="quests-h3">The shipped experience.</h3>
         <p>
-          Seven screens covering the core loop, dashboard, queue, quest path, challenge prompt, AI chat, video lesson, and the celebration moment that closes every quest.
+          Click any feature on the left to preview its hi-fi screen. Seven screens covering the full employee loop, dashboard, queue, quest path, challenge brief, AI chat, video lesson, and the celebration moment.
         </p>
 
-        <div class="proto-gallery">
-          <button class="proto-tile proto-feature" type="button" data-proto="dashboard">
-            <img src="assets/ai-accel/hifi-dashboard.png" alt="Home dashboard with skill radar, active quest, and trending discussions" loading="lazy">
-            <div class="proto-caption">
-              <span class="proto-label">Home dashboard</span>
-              <span class="proto-desc">Personalized hub. Active quest center, skill radar right rail.</span>
-            </div>
-          </button>
+        <div class="hifi-explorer">
+          <div class="hifi-list" role="tablist" aria-label="Hi-fi prototype screens">
+            <button class="hifi-item is-active" data-screen="dashboard" type="button" role="tab" aria-selected="true">
+              <span class="hifi-num">01</span>
+              <h5>Home dashboard</h5>
+              <p>Personalized hub. Active quest center, skill radar right.</p>
+            </button>
+            <button class="hifi-item" data-screen="queue" type="button" role="tab" aria-selected="false">
+              <span class="hifi-num">02</span>
+              <h5>Quest queue</h5>
+              <p>Drag-to-reorder. 5-quest limit prevents overwhelm.</p>
+            </button>
+            <button class="hifi-item" data-screen="path" type="button" role="tab" aria-selected="false">
+              <span class="hifi-num">03</span>
+              <h5>Quest path</h5>
+              <p>Gamified progression. Active challenge highlighted.</p>
+            </button>
+            <button class="hifi-item" data-screen="challenge" type="button" role="tab" aria-selected="false">
+              <span class="hifi-num">04</span>
+              <h5>Challenge brief</h5>
+              <p>Quest brief + submission requirements + coach tip.</p>
+            </button>
+            <button class="hifi-item" data-screen="chat" type="button" role="tab" aria-selected="false">
+              <span class="hifi-num">05</span>
+              <h5>AI chat</h5>
+              <p>In-product AI thought partner with persistent coach tips.</p>
+            </button>
+            <button class="hifi-item" data-screen="video" type="button" role="tab" aria-selected="false">
+              <span class="hifi-num">06</span>
+              <h5>Video lesson</h5>
+              <p>Time-coded transcript + key takeaways + scratch notes.</p>
+            </button>
+            <button class="hifi-item" data-screen="complete" type="button" role="tab" aria-selected="false">
+              <span class="hifi-num">07</span>
+              <h5>Quest complete</h5>
+              <p>Badge, XP, streak, AI feedback, and next quest prompt.</p>
+            </button>
+          </div>
 
-          <button class="proto-tile" type="button" data-proto="queue">
-            <img src="assets/ai-accel/hifi-queue.png" alt="Up Next quest queue" loading="lazy">
-            <div class="proto-caption">
-              <span class="proto-label">Quest queue</span>
-              <span class="proto-desc">Drag-to-reorder. 5-quest limit prevents overwhelm.</span>
+          <div class="hifi-display" role="tabpanel">
+            <div class="hifi-screen is-active" data-id="dashboard">
+              <img src="assets/ai-accel/hifi-dashboard.png" alt="Home dashboard">
             </div>
-          </button>
-          <button class="proto-tile" type="button" data-proto="path">
-            <img src="assets/ai-accel/hifi-quest-path.png" alt="PRD Mastery quest path with locked and active steps" loading="lazy">
-            <div class="proto-caption">
-              <span class="proto-label">Quest path</span>
-              <span class="proto-desc">Gamified progression. Active challenge highlighted, future steps locked.</span>
+            <div class="hifi-screen" data-id="queue">
+              <img src="assets/ai-accel/hifi-queue.png" alt="Up Next quest queue">
             </div>
-          </button>
-
-          <button class="proto-tile" type="button" data-proto="challenge">
-            <img src="assets/ai-accel/hifi-quest-challenge.png" alt="Quest challenge intro screen" loading="lazy">
-            <div class="proto-caption">
-              <span class="proto-label">Challenge intro</span>
-              <span class="proto-desc">Quest brief + submission requirements + coach tip.</span>
+            <div class="hifi-screen" data-id="path">
+              <img src="assets/ai-accel/hifi-quest-path.png" alt="PRD Mastery quest path">
             </div>
-          </button>
-          <button class="proto-tile" type="button" data-proto="chat">
-            <img src="assets/ai-accel/hifi-quest-chat.png" alt="In-product AI chat for PRD work" loading="lazy">
-            <div class="proto-caption">
-              <span class="proto-label">AI chat</span>
-              <span class="proto-desc">In-product AI thought partner with persistent coach tips.</span>
+            <div class="hifi-screen" data-id="challenge">
+              <img src="assets/ai-accel/hifi-quest-challenge.png" alt="Tackle this challenge with AI">
             </div>
-          </button>
-          <button class="proto-tile" type="button" data-proto="video">
-            <img src="assets/ai-accel/hifi-quest-video.png" alt="Video lesson with synced transcript" loading="lazy">
-            <div class="proto-caption">
-              <span class="proto-label">Video lesson</span>
-              <span class="proto-desc">Time-coded transcript + key takeaways + scratch notes.</span>
+            <div class="hifi-screen" data-id="chat">
+              <img src="assets/ai-accel/hifi-quest-chat.png" alt="AI chat for PRD work">
             </div>
-          </button>
-
-          <button class="proto-tile proto-feature" type="button" data-proto="complete">
-            <img src="assets/ai-accel/hifi-quest-complete.png" alt="Quest Complete celebration screen with confetti" loading="lazy">
-            <div class="proto-caption">
-              <span class="proto-label">Quest complete</span>
-              <span class="proto-desc">Celebration moment with badge, XP, streak, AI feedback, and next quest prompt.</span>
+            <div class="hifi-screen" data-id="video">
+              <img src="assets/ai-accel/hifi-quest-video.png" alt="Video lesson with synced transcript">
             </div>
-          </button>
+            <div class="hifi-screen" data-id="complete">
+              <img src="assets/ai-accel/hifi-quest-complete.png" alt="Quest Complete celebration screen">
+            </div>
+          </div>
         </div>
         <p class="nda-caption">High-fidelity prototype screens &middot; built in Figma + deployed on Vercel for the CGI pilot.</p>
-
-        <dialog class="proto-lightbox" id="protoLightbox">
-          <button class="lb-close" type="button" aria-label="Close">&times;</button>
-          <img class="lb-img" alt="">
-          <p class="lb-caption"></p>
-        </dialog>
 
       </section>
 
@@ -3625,12 +3774,12 @@
         <p class="section-eyebrow">Design system</p>
         <h2 class="section-title">A design system, built token-first.</h2>
         <p>
-          Carbon was the north star for documentation rigor and structure. Stride went token-first instead of components-first, so theming and dark mode are native from day one, not retrofitted.
+          Carbon was the north star for documentation rigor and structure. AI Accelerator went token-first instead of components-first, so theming and dark mode are native from day one, not retrofitted.
         </p>
 
         <div class="ds-grid">
           <a class="ds-card ds-card-wide" href="assets/ai-accel/ds-colors.png" target="_blank">
-            <img src="assets/ai-accel/ds-colors.png" alt="Stride design system color palette page" loading="lazy">
+            <img src="assets/ai-accel/ds-colors.png" alt="AI Accelerator design system color palette page" loading="lazy">
             <div class="ds-card-cap">
               <span class="ds-card-eyebrow">Foundations</span>
               <h4>Color palette</h4>
@@ -3639,7 +3788,7 @@
           </a>
 
           <a class="ds-card" href="assets/ai-accel/ds-buttons.png" target="_blank">
-            <img src="assets/ai-accel/ds-buttons.png" alt="Stride design system buttons and inputs page" loading="lazy">
+            <img src="assets/ai-accel/ds-buttons.png" alt="AI Accelerator design system buttons and inputs page" loading="lazy">
             <div class="ds-card-cap">
               <span class="ds-card-eyebrow">Components</span>
               <h4>Buttons &amp; inputs</h4>
@@ -3648,7 +3797,7 @@
           </a>
 
           <a class="ds-card" href="assets/ai-accel/ds-graphics.png" target="_blank">
-            <img src="assets/ai-accel/ds-graphics.png" alt="Stride design system graphics page with badges, celebrations, and spot illustrations" loading="lazy">
+            <img src="assets/ai-accel/ds-graphics.png" alt="AI Accelerator design system graphics page with badges, celebrations, and spot illustrations" loading="lazy">
             <div class="ds-card-cap">
               <span class="ds-card-eyebrow">Illustration system</span>
               <h4>Graphics &amp; rewards</h4>
@@ -3776,7 +3925,7 @@
         </p>
 
         <div class="pilot-chart">
-          <svg viewBox="0 0 760 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Engagement chart comparing Stride pilot vs typical enterprise training">
+          <svg viewBox="0 0 760 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Engagement chart comparing AI Accelerator pilot vs typical enterprise training">
             <text x="0" y="20" font-family="ui-monospace, monospace" font-size="10" fill="#8a7a5e" letter-spacing="1.4">ENGAGEMENT</text>
             <line x1="36" y1="200" x2="740" y2="200" stroke="#cdc0a0" stroke-width="1"/>
             <line x1="36" y1="30" x2="36" y2="200" stroke="#cdc0a0" stroke-width="1"/>
@@ -3793,7 +3942,7 @@
             <circle cx="80" cy="55" r="5" fill="#ec6478"/>
             <circle cx="700" cy="68" r="5" fill="#ec6478"/>
             <circle cx="700" cy="198" r="5" fill="#8a7a5e" opacity="0.55"/>
-            <text x="710" y="64" font-family="Geist, sans-serif" font-size="11" fill="#ec6478" font-weight="500">Stride</text>
+            <text x="710" y="64" font-family="Geist, sans-serif" font-size="11" fill="#ec6478" font-weight="500">AI Accelerator</text>
             <text x="710" y="200" font-family="Geist, sans-serif" font-size="11" fill="#8a7a5e">Typical</text>
           </svg>
         </div>
@@ -4075,27 +4224,21 @@
       });
     })();
 
-    // Hi-fi prototype lightbox
+    // Hi-fi explorer tab switching
     (function() {
-      const dlg = document.getElementById('protoLightbox');
-      if (!dlg) return;
-      const lbImg = dlg.querySelector('.lb-img');
-      const lbCap = dlg.querySelector('.lb-caption');
-      const close = dlg.querySelector('.lb-close');
-      document.querySelectorAll('.proto-tile').forEach(tile => {
-        tile.addEventListener('click', () => {
-          const img = tile.querySelector('img');
-          const label = tile.querySelector('.proto-label')?.textContent || '';
-          const desc = tile.querySelector('.proto-desc')?.textContent || '';
-          lbImg.src = img.src;
-          lbImg.alt = img.alt;
-          lbCap.innerHTML = `<strong>${label}</strong> ${desc}`;
-          dlg.showModal();
+      const items = document.querySelectorAll('.hifi-item');
+      const screens = document.querySelectorAll('.hifi-screen');
+      if (!items.length) return;
+      items.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const target = btn.dataset.screen;
+          items.forEach(i => {
+            const active = i === btn;
+            i.classList.toggle('is-active', active);
+            i.setAttribute('aria-selected', active ? 'true' : 'false');
+          });
+          screens.forEach(s => s.classList.toggle('is-active', s.dataset.id === target));
         });
-      });
-      close.addEventListener('click', () => dlg.close());
-      dlg.addEventListener('click', (e) => {
-        if (e.target === dlg) dlg.close();
       });
     })();
 
