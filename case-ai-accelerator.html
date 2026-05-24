@@ -2779,61 +2779,6 @@
       line-height: 1.55; margin: 0;
       max-width: none;
     }
-    /* ============ MENTAL MODELS ============ */
-    .mm-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-      margin: 20px 0 8px;
-    }
-    @media (max-width: 760px) { .mm-grid { grid-template-columns: 1fr; } }
-    .mm-card {
-      background: var(--bg-card);
-      border: 1px solid var(--rule);
-      border-radius: var(--r-xl);
-      padding: 26px 26px 24px;
-      position: relative;
-      transition: border-color .2s var(--ease), transform .2s var(--ease);
-    }
-    .mm-card::before {
-      content: ""; position: absolute;
-      top: 0; left: 26px; right: 26px; height: 3px;
-      border-radius: 0 0 3px 3px;
-    }
-    .mm-card:hover { transform: translateY(-3px); border-color: var(--rule-strong); }
-    .mm-coral::before { background: var(--accent); }
-    .mm-sage::before  { background: var(--secondary); }
-    .mm-tag {
-      font-family: var(--mono); font-size: 10px; font-weight: 600;
-      letter-spacing: .14em; text-transform: uppercase;
-      color: var(--ink-mute);
-    }
-    .mm-coral .mm-tag { color: var(--accent-deep); }
-    .mm-sage  .mm-tag { color: var(--leaf-deep); }
-    .mm-card h5 {
-      font-family: var(--display); font-weight: 600;
-      font-size: 18px; margin: 8px 0 12px; color: var(--ink);
-    }
-    .mm-line {
-      font-family: var(--serif); font-style: italic;
-      font-size: 15px; color: var(--ink); margin: 0 0 16px;
-      padding-left: 14px; border-left: 2px solid var(--rule);
-    }
-    .mm-coral .mm-line { border-left-color: var(--accent); }
-    .mm-sage  .mm-line { border-left-color: var(--secondary); }
-    .mm-bullets {
-      list-style: none; padding: 0; margin: 0;
-      display: flex; flex-direction: column; gap: 6px;
-    }
-    .mm-bullets li {
-      font-size: 13.5px; color: var(--ink-soft); line-height: 1.5;
-      padding-left: 18px; position: relative;
-    }
-    .mm-bullets li::before {
-      content: "\2014"; position: absolute; left: 0;
-      color: var(--ink-mute); font-family: var(--mono);
-    }
-
     /* ============ CARD SORTING ============ */
     .cs-grid {
       display: grid;
@@ -2883,70 +2828,66 @@
     /* ============ HI-FI EXPLORER (interactive) ============ */
     .hifi-explorer {
       display: grid;
-      grid-template-columns: 320px 1fr;
-      gap: 24px;
-      align-items: start;
+      grid-template-columns: 280px 1fr;
+      gap: 18px;
+      align-items: stretch;
       margin: 24px 0 8px;
     }
-    @media (max-width: 900px) {
-      .hifi-explorer { grid-template-columns: 1fr; }
-    }
+    @media (max-width: 900px) { .hifi-explorer { grid-template-columns: 1fr; align-items: start; } }
+
     .hifi-list {
       display: flex; flex-direction: column;
-      gap: 10px;
-      position: sticky;
-      top: 36px;
+      gap: 6px;
     }
-    @media (max-width: 900px) { .hifi-list { position: static; } }
     .hifi-item {
       all: unset;
       cursor: pointer;
       background: var(--bg-card);
       border: 1.5px solid var(--rule);
-      border-radius: var(--r-lg);
-      padding: 14px 16px;
-      display: flex; flex-direction: column; gap: 4px;
+      border-radius: var(--r-md);
+      padding: 12px 14px;
+      display: flex; flex-direction: column; gap: 2px;
       transition: border-color .2s var(--ease), background .2s var(--ease), transform .2s var(--ease);
     }
     .hifi-item:hover { background: var(--bg-elev); transform: translateX(2px); }
     .hifi-item.is-active {
       border-color: var(--accent);
       background: var(--bg-elev);
-      transform: translateX(4px);
+      transform: translateX(3px);
     }
-    .hifi-item.is-active::before { content: none; }
     .hifi-item .hifi-num {
-      font-family: var(--mono); font-size: 10px; font-weight: 600;
+      font-family: var(--mono); font-size: 9.5px; font-weight: 600;
       letter-spacing: .14em; color: var(--ink-mute);
     }
     .hifi-item.is-active .hifi-num { color: var(--accent); }
     .hifi-item h5 {
       font-family: var(--display); font-weight: 600;
-      font-size: 14.5px; margin: 0; color: var(--ink);
+      font-size: 13.5px; margin: 0; color: var(--ink);
+      line-height: 1.25;
     }
     .hifi-item p {
-      font-size: 12.5px; color: var(--ink-soft);
-      line-height: 1.45; margin: 0;
+      font-size: 11.5px; color: var(--ink-soft);
+      line-height: 1.4; margin: 0;
     }
 
     .hifi-display {
-      position: sticky; top: 36px;
       background: var(--bg-card);
       border: 1px solid var(--rule);
       border-radius: var(--r-xl);
-      padding: 14px;
-      aspect-ratio: 16 / 10;
+      padding: 10px;
       overflow: hidden;
+      position: relative;
+      min-height: 100%;
     }
-    @media (max-width: 900px) { .hifi-display { position: static; } }
+    @media (max-width: 900px) { .hifi-display { aspect-ratio: 16 / 10; } }
     .hifi-screen {
       position: absolute;
-      inset: 14px;
+      inset: 10px;
       border-radius: var(--r-lg);
       overflow: hidden;
       opacity: 0;
       transform: scale(.985);
-      transition: opacity .35s var(--ease), transform .35s var(--ease);
+      transition: opacity .3s var(--ease), transform .3s var(--ease);
       pointer-events: none;
       background: var(--bg-elev);
     }
@@ -2957,10 +2898,9 @@
     }
     .hifi-screen img {
       width: 100%; height: 100%;
-      object-fit: cover; object-position: top;
+      object-fit: cover; object-position: center top;
       display: block;
     }
-
 </style>
 </head>
 <body>
@@ -3324,6 +3264,19 @@
           </div>
         </div>
 
+        <p class="section-eyebrow" style="margin-top:48px;">Research synthesis</p>
+        <h3 class="quests-h3">From 5 sessions to 1 problem statement.</h3>
+        <p>
+          Hundreds of sticky notes clustered into five themes: Participants, Onboarding, Learning, Motivation, and System. The synthesis surfaced one through-line, <strong>existing training treats everyone the same, in a domain where everyone is different.</strong>
+        </p>
+
+        <figure class="case-figure">
+          <div class="case-figure-frame full-image" data-placeholder="Affinity board from research synthesis">
+            <img src="https://framerusercontent.com/images/QxgXDWzUfy42iaYCQl9RAZ63Y.png?width=2400" alt="Affinity board from research synthesis" loading="lazy" />
+          </div>
+        </figure>
+        <p class="nda-caption">Affinity board from research synthesis &middot; adapted from the original session notes.</p>
+
             </section>
 
       <!-- ============ 03. SOLUTION ============ -->
@@ -3465,25 +3418,6 @@
           </div>
         </div>
 
-        <figure class="case-figure">
-          <div class="case-figure-frame full-image" data-placeholder="Personalization model: role × behavioral profile generates the experience">
-            <img src="https://framerusercontent.com/images/cc0DNXKydISnrzIKcH33EyUY.png?width=2400" alt="Personalization model" loading="lazy" />
-          </div>
-          <figcaption>Role × behavioral profile combine to generate a personalized experience without dozens of static paths</figcaption>
-        </figure>
-
-        <p class="section-eyebrow" style="margin-top:48px;">The prototype</p>
-        <h3 class="quests-h3">High-fidelity Figma prototype, deployed on Vercel.</h3>
-        <p>
-          The prototype covers the core employee experience: onboarding survey, personalized path, quest flow, dashboard, and proof view. The solution was well received by CGI, and development began the week after handoff.
-        </p>
-
-        <figure class="case-figure">
-          <div class="case-figure-frame full-image" data-placeholder="High-fidelity mockups">
-            <img src="https://framerusercontent.com/images/QxgXDWzUfy42iaYCQl9RAZ63Y.png?width=2400" alt="Hi-fi mockups" loading="lazy" />
-          </div>
-        </figure>
-
         <!-- Feature grid -->
         <p class="section-eyebrow" style="margin-top:48px;">Core features</p>
         <h3 class="quests-h3">Six features, one personalization engine.</h3>
@@ -3533,28 +3467,10 @@
           Before drawing a single line, interviews surfaced one structural truth: employees and L&amp;D leaders think about the same product in opposite ways. The IA had to serve both without compromising either.
         </p>
 
-        <div class="mm-grid">
-          <article class="mm-card mm-coral">
-            <span class="mm-tag">Audience 01</span>
-            <h5>Employees think in growth</h5>
-            <p class="mm-line">"What's my next quest? How am I progressing? What are my peers doing?"</p>
-            <ul class="mm-bullets">
-              <li>Skill progression over time</li>
-              <li>Achievement and recognition</li>
-              <li>Peer activity and comparison</li>
-            </ul>
-          </article>
-          <article class="mm-card mm-sage">
-            <span class="mm-tag">Audience 02</span>
-            <h5>L&amp;D leaders think in outcomes</h5>
-            <p class="mm-line">"Did this work? What did the team change? What do I show the CFO?"</p>
-            <ul class="mm-bullets">
-              <li>Adoption rate by team</li>
-              <li>Behavior change, not completion</li>
-              <li>Exportable ROI proof</li>
-            </ul>
-          </article>
+        <div class="image-slot wide" data-target="mental-models">
+          <img src="assets/ai-accel/mental-models.png" alt="Mental model visualization showing how employees and L&amp;D leaders think differently" loading="lazy">
         </div>
+        <p class="nda-caption">Mental model mapping &middot; adapted from research synthesis.</p>
 
         <!-- Card sorting -->
         <p class="section-eyebrow" style="margin-top:56px;">Card sorting exercise</p>
