@@ -994,45 +994,12 @@
       letter-spacing: .14em; text-transform: uppercase;
       color: var(--ink-mute); text-align: center; margin-bottom: 24px;
     }
-    .fs-diagram {
-      position: relative; width: 100%; max-width: 520px;
-      margin: 0 auto; aspect-ratio: 5/3;
-    }
-    .fs-center {
-      position: absolute; top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 3;
-    }
-    .fs-parent {
-      background: var(--accent); color: #fbf6e5;
-      padding: 14px 22px; border-radius: 999px;
-      font-family: var(--display); font-weight: 600; font-size: 15px;
-      box-shadow: 0 0 0 6px rgba(236, 100, 120, 0.15);
-    }
-    .fs-node {
-      position: absolute; background: var(--bg-elev);
-      border: 1px solid var(--rule); border-radius: 999px;
-      padding: 8px 14px; font-family: var(--mono); font-size: 11px;
-      color: var(--ink-soft); letter-spacing: .06em;
-      z-index: 2;
-    }
-    .fs-node::before {
-      content: ""; position: absolute; top: 50%; left: 50%;
-      width: 60%; height: 1px; background: var(--rule);
-      transform-origin: 0 50%; z-index: -1;
-    }
-    .fs-n1 { top: 5%; left: 15%; }
-    .fs-n2 { top: 5%; right: 15%; }
-    .fs-n3 { top: 50%; left: -6%; transform: translateY(-50%); }
-    .fs-n4 { top: 50%; right: -6%; transform: translateY(-50%); }
-    .fs-n5 { bottom: 5%; left: 50%; transform: translateX(-50%); }
-    @media (max-width: 640px) {
-      .fs-diagram { aspect-ratio: 1; max-width: 320px; font-size: 10px; }
-      .fs-n1 { top: 8%; left: 5%; }
-      .fs-n2 { top: 8%; right: 5%; }
-      .fs-n3 { top: 48%; left: -5%; }
-      .fs-n4 { top: 48%; right: -5%; }
-      .fs-n5 { bottom: 8%; }
+    .fs-svg {
+      display: block;
+      width: 100%;
+      max-width: 620px;
+      height: auto;
+      margin: 0 auto;
     }
 
     /* Problem callout */
@@ -1807,17 +1774,37 @@
           </div>
         </div>
 
-        <!-- Fragmented systems radial -->
+        <!-- Fragmented systems radial (SVG) -->
         <div class="fragmented-systems">
           <p class="fs-legend">The parent, at the center, as translator</p>
-          <div class="fs-diagram">
-            <div class="fs-center"><div class="fs-parent">Parent</div></div>
-            <div class="fs-node fs-n1"><span class="fs-label">WhatsApp</span></div>
-            <div class="fs-node fs-n2"><span class="fs-label">Google Docs</span></div>
-            <div class="fs-node fs-n3"><span class="fs-label">Paper binder</span></div>
-            <div class="fs-node fs-n4"><span class="fs-label">Sticky notes</span></div>
-            <div class="fs-node fs-n5"><span class="fs-label">Clinical ABA tools</span></div>
-          </div>
+          <svg class="fs-svg" viewBox="0 0 700 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Five fragmented systems connecting to the parent">
+            <!-- Connector lines (drawn first, behind everything) -->
+            <g stroke="#b8a988" stroke-width="1.5" stroke-dasharray="4,4" fill="none">
+              <line x1="350" y1="200" x2="180" y2="92"/>
+              <line x1="350" y1="200" x2="520" y2="92"/>
+              <line x1="350" y1="200" x2="92" y2="200"/>
+              <line x1="350" y1="200" x2="608" y2="200"/>
+              <line x1="350" y1="200" x2="350" y2="332"/>
+            </g>
+            <!-- Outer 5 system pills -->
+            <g font-family="ui-monospace, Geist Mono, monospace" font-size="12.5" fill="#5a4632">
+              <rect x="118" y="74" width="124" height="36" rx="18" fill="#f6efdb" stroke="#cdc0a0" stroke-width="1"/>
+              <text x="180" y="97" text-anchor="middle">WhatsApp</text>
+              <rect x="458" y="74" width="124" height="36" rx="18" fill="#f6efdb" stroke="#cdc0a0" stroke-width="1"/>
+              <text x="520" y="97" text-anchor="middle">Google Docs</text>
+              <rect x="30" y="182" width="124" height="36" rx="18" fill="#f6efdb" stroke="#cdc0a0" stroke-width="1"/>
+              <text x="92" y="205" text-anchor="middle">Paper binder</text>
+              <rect x="546" y="182" width="124" height="36" rx="18" fill="#f6efdb" stroke="#cdc0a0" stroke-width="1"/>
+              <text x="608" y="205" text-anchor="middle">Sticky notes</text>
+              <rect x="272" y="314" width="156" height="36" rx="18" fill="#f6efdb" stroke="#cdc0a0" stroke-width="1"/>
+              <text x="350" y="337" text-anchor="middle">Clinical ABA tools</text>
+            </g>
+            <!-- Parent center pill (drawn last so it sits on top) -->
+            <g>
+              <rect x="292" y="178" width="116" height="46" rx="23" fill="#ec6478" stroke="#b13e58" stroke-width="1.5"/>
+              <text x="350" y="207" text-anchor="middle" font-family="Bricolage Grotesque, sans-serif" font-weight="600" font-size="16" fill="#fbf6e5">Parent</text>
+            </g>
+          </svg>
         </div>
 
         <!-- Problem callout -->
