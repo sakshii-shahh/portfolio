@@ -1449,6 +1449,27 @@
       letter-spacing: .1em; opacity: .75;
     }
 
+    .jm-legend {
+      display: flex; flex-wrap: wrap; gap: 20px;
+      justify-content: center;
+      padding: 14px 0 22px;
+      border-bottom: 1px dashed var(--rule);
+      margin-bottom: 24px;
+    }
+    .jm-legend-item {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--ink-mute);
+    }
+    .jm-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+    }
+    .jm-dot-parent { background: var(--accent); }
+    .jm-dot-aide { background: var(--secondary); }
+    .jm-dot-therapist { background: #8a6418; }
+    .jm-dot-ai { background: var(--ink); }
+
     .jm-scene {
       display: none;
       background: var(--bg-card);
@@ -2328,7 +2349,7 @@
           </div>
         </div>
 
-        <h3 class="section-subhead">Three journeys, end to end</h3>
+        <h3 class="section-subhead" style="margin-top: 80px;">Three journeys, end to end</h3>
         <p>The product in the moments that matter. Click a scenario to see the journey unfold.</p>
 
         <div class="journey-map">
@@ -2345,6 +2366,13 @@
               <span class="jm-tab-num">03</span>
               <span class="jm-tab-label">Danielle's shift</span>
             </button>
+          </div>
+
+          <div class="jm-legend">
+            <span class="jm-legend-item"><span class="jm-dot jm-dot-parent"></span> Parent</span>
+            <span class="jm-legend-item"><span class="jm-dot jm-dot-aide"></span> Aide</span>
+            <span class="jm-legend-item"><span class="jm-dot jm-dot-therapist"></span> Therapist</span>
+            <span class="jm-legend-item"><span class="jm-dot jm-dot-ai"></span> Mosaic / AI</span>
           </div>
 
           <!-- Scenario 1: New aide starts Monday -->
