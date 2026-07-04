@@ -1313,13 +1313,28 @@
       display: flex; gap: 10px; flex-wrap: wrap;
     }
     .di-navtab {
+      all: unset;
+      cursor: pointer;
       font-family: var(--display); font-weight: 500; font-size: 13px;
       color: rgba(240,232,210,0.5);
       padding: 6px 12px; border-radius: 6px;
+      transition: background .2s var(--ease), color .2s var(--ease);
+    }
+    .di-navtab:hover, .di-navtab:focus-visible {
+      color: rgba(240,232,210,0.9);
+      background: rgba(240,232,210,0.08);
+      outline: none;
     }
     .di-navtab.is-active {
       color: #fbf6e5;
-      background: rgba(240,232,210,0.12);
+      background: rgba(240,232,210,0.14);
+    }
+    .di-tabcontent {
+      display: none;
+    }
+    .di-tabcontent.is-active {
+      display: block;
+      animation: fadeIn .25s var(--ease);
     }
     .di-fab {
       width: 40px; height: 40px; border-radius: 50%;
@@ -2086,50 +2101,97 @@
 
         <div class="dual-interface">
           <div class="di-toggle" role="tablist" aria-label="Interface view toggle">
-            <button class="di-tab is-active" data-role="parent" type="button" role="tab" aria-selected="true">Parent view &middot; 5 tabs</button>
-            <button class="di-tab" data-role="aide" type="button" role="tab" aria-selected="false">Aide view &middot; 2 tabs</button>
+            <button class="di-tab is-active" data-role="parent" type="button" role="tab" aria-selected="true">Parent view</button>
+            <button class="di-tab" data-role="aide" type="button" role="tab" aria-selected="false">Aide view</button>
           </div>
 
           <div class="di-panels">
             <div class="di-panel is-active" data-panel="parent">
               <div class="di-nav">
                 <div class="di-tabbar">
-                  <span class="di-navtab is-active">Home</span>
-                  <span class="di-navtab">Teen</span>
-                  <span class="di-navtab">Team</span>
-                  <span class="di-navtab">Insights</span>
-                  <span class="di-navtab">Share</span>
+                  <button class="di-navtab is-active" data-innertab="p-home" type="button">Home</button>
+                  <button class="di-navtab" data-innertab="p-teen" type="button">Teen</button>
+                  <button class="di-navtab" data-innertab="p-team" type="button">Team</button>
+                  <button class="di-navtab" data-innertab="p-insights" type="button">Insights</button>
+                  <button class="di-navtab" data-innertab="p-share" type="button">Share</button>
                 </div>
               </div>
               <div class="di-body">
-                <span class="di-eyebrow">What the parent gets</span>
-                <ul class="di-list">
-                  <li>Full read + write on every observation</li>
-                  <li>Behavioral Profile authority (triggers, strategies, routines)</li>
-                  <li>Team management + per-recipient permissions</li>
-                  <li>Pattern validation workflow (v2)</li>
-                  <li>One-page summary composer with privacy toggles</li>
-                </ul>
+                <div class="di-tabcontent is-active" data-tabcontent="p-home">
+                  <span class="di-eyebrow">Home &middot; the personalized hub</span>
+                  <ul class="di-list">
+                    <li>Active quest surface, center of screen</li>
+                    <li>Shared timeline of every caregiver's observations</li>
+                    <li>Skill radar in the right rail</li>
+                    <li>Trending discussions + upcoming events</li>
+                  </ul>
+                </div>
+                <div class="di-tabcontent" data-tabcontent="p-teen">
+                  <span class="di-eyebrow">Teen &middot; the living operating manual</span>
+                  <ul class="di-list">
+                    <li>Behavioral Profile with full edit authority</li>
+                    <li>Triggers &middot; strategies &middot; routines</li>
+                    <li>"What that looks like" concrete examples</li>
+                    <li>Version history + change log</li>
+                  </ul>
+                </div>
+                <div class="di-tabcontent" data-tabcontent="p-team">
+                  <span class="di-eyebrow">Team &middot; roster + permissions</span>
+                  <ul class="di-list">
+                    <li>Invite by role (Aide, Substitute, Therapist, Family)</li>
+                    <li>Per-recipient permission defaults</li>
+                    <li>Member detail view + audit log</li>
+                    <li>Immediate revocation on removal</li>
+                  </ul>
+                </div>
+                <div class="di-tabcontent" data-tabcontent="p-insights">
+                  <span class="di-eyebrow">Insights &middot; find + filter</span>
+                  <ul class="di-list">
+                    <li>Keyword search across all observations</li>
+                    <li>Filter by date, caregiver, environment, tag</li>
+                    <li>Observation detail view with audio playback</li>
+                    <li>v2 lands here: AI cross-environment pattern detection</li>
+                  </ul>
+                </div>
+                <div class="di-tabcontent" data-tabcontent="p-share">
+                  <span class="di-eyebrow">Share &middot; scoped handoff summaries</span>
+                  <ul class="di-list">
+                    <li>Auto-assembled one-page summary per recipient</li>
+                    <li>Per-block privacy toggles (mental health, sensory, etc.)</li>
+                    <li>Mobile-web link, no install for recipient</li>
+                    <li>Audit log of every view event</li>
+                  </ul>
+                </div>
               </div>
             </div>
 
             <div class="di-panel" data-panel="aide">
               <div class="di-nav">
                 <div class="di-tabbar">
-                  <span class="di-navtab is-active">Today</span>
-                  <span class="di-navtab">Profile</span>
+                  <button class="di-navtab is-active" data-innertab="a-today" type="button">Today</button>
+                  <button class="di-navtab" data-innertab="a-profile" type="button">Profile</button>
                 </div>
                 <div class="di-fab" aria-label="Voice log">&#127908;</div>
               </div>
               <div class="di-body">
-                <span class="di-eyebrow">What the aide gets</span>
-                <ul class="di-list">
-                  <li>Persistent 30-second voice-log FAB</li>
-                  <li>Read-only Behavioral Profile with "what that looks like" examples</li>
-                  <li>Today: shift card + 24h timeline of team observations</li>
-                  <li>Suggest-upward workflow, never edit-in-place</li>
-                  <li>Zero configuration required</li>
-                </ul>
+                <div class="di-tabcontent is-active" data-tabcontent="a-today">
+                  <span class="di-eyebrow">Today &middot; start-of-shift context</span>
+                  <ul class="di-list">
+                    <li>Shift card with parent's heads-up note</li>
+                    <li>Read-only 24h timeline of team observations</li>
+                    <li>3 quick-reference triggers pinned to top</li>
+                    <li>Voice log FAB always visible, bottom-right</li>
+                  </ul>
+                </div>
+                <div class="di-tabcontent" data-tabcontent="a-profile">
+                  <span class="di-eyebrow">Profile &middot; read-only behavioral profile</span>
+                  <ul class="di-list">
+                    <li>Every trigger, strategy, and routine visible</li>
+                    <li>"What that looks like" concrete examples under each</li>
+                    <li>Suggest-upward workflow, never edit-in-place</li>
+                    <li>Emergency contacts one-tap reachable</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
@@ -2453,6 +2515,22 @@
             t.setAttribute('aria-selected', active ? 'true' : 'false');
           });
           panels.forEach(p => p.classList.toggle('is-active', p.dataset.panel === target));
+        });
+      });
+    })();
+
+    // Dual-interface INNER tabs (Home/Teen/Team/Insights/Share, Today/Profile)
+    (function(){
+      const innerTabs = document.querySelectorAll('.di-navtab');
+      if (!innerTabs.length) return;
+      innerTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          const target = tab.dataset.innertab;
+          if (!target) return;
+          const panel = tab.closest('.di-panel');
+          if (!panel) return;
+          panel.querySelectorAll('.di-navtab').forEach(t => t.classList.toggle('is-active', t === tab));
+          panel.querySelectorAll('.di-tabcontent').forEach(c => c.classList.toggle('is-active', c.dataset.tabcontent === target));
         });
       });
     })();
