@@ -869,7 +869,9 @@
     }
 
     /* Moodboard figure variant, square instead of 16:10 */
-    .case-figure-frame.moodboard { aspect-ratio: 4/3; }
+    /* Moodboard: let the image's natural aspect drive the container (no crop) */
+    .case-figure-frame.moodboard { aspect-ratio: auto; height: auto; }
+    .case-figure-frame.moodboard img { height: auto; object-fit: contain; }
 
     /* Hero pull-quote */
     .case-pullquote {
@@ -2298,7 +2300,7 @@
 
         <figure class="case-figure">
           <div class="case-figure-frame moodboard" data-placeholder="Mosaic moodboard &middot; visual language, brand direction, type and color">
-            <img src="assets/mosaic/16_moodboard.png" alt="Mosaic moodboard" />
+            <img src="assets/mosaic/16_moodboard.webp" alt="Mosaic moodboard" loading="lazy" />
           </div>
           <figcaption>Mosaic moodboard &middot; visual language and brand direction</figcaption>
         </figure>
