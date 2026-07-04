@@ -1421,66 +1421,154 @@
     }
     .mh-detail-text.is-active { opacity: 1; }
 
-    /* Scenario cards (expandable) */
-    .scenario-list {
-      display: flex; flex-direction: column; gap: 12px;
-      margin: 20px 0 12px;
+    /* ============ USER JOURNEY MAP ============ */
+    .journey-map { margin: 20px 0 12px; }
+
+    .jm-tabs {
+      display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px;
     }
-    .scenario {
-      background: var(--bg-card); border: 1px solid var(--rule);
-      border-radius: var(--r-xl); overflow: hidden;
-      transition: border-color .2s var(--ease);
+    .jm-tab {
+      all: unset; cursor: pointer;
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 18px;
+      background: var(--bg-card); border: 1.5px solid var(--rule);
+      border-radius: 999px;
+      font-family: var(--display); font-weight: 500; font-size: 13px;
+      color: var(--ink-soft);
+      transition: border-color .2s var(--ease), background .2s var(--ease), color .2s var(--ease), transform .2s var(--ease);
     }
-    .scenario[open] { border-color: var(--accent); }
-    .scenario summary {
-      list-style: none; cursor: pointer;
-      padding: 20px 22px;
-      display: flex; align-items: center; gap: 16px;
-      transition: background .2s var(--ease);
+    .jm-tab:hover, .jm-tab:focus-visible {
+      border-color: var(--accent); background: var(--bg-elev); color: var(--ink); outline: none;
     }
-    .scenario summary::-webkit-details-marker { display: none; }
-    .scenario summary:hover { background: var(--bg-elev); }
-    .sc-num {
-      font-family: var(--serif); font-weight: 500; font-size: 26px;
-      color: var(--accent); line-height: 1; flex-shrink: 0;
-      min-width: 40px;
+    .jm-tab.is-active {
+      border-color: var(--accent); background: var(--accent); color: #fbf6e5;
+      transform: translateY(-1px);
     }
-    .sc-header { flex: 1; }
-    .sc-header h4 {
-      font-family: var(--display); font-weight: 600; font-size: 16px;
-      margin: 0 0 4px; color: var(--ink);
+    .jm-tab-num {
+      font-family: var(--mono); font-size: 10.5px; font-weight: 600;
+      letter-spacing: .1em; opacity: .75;
     }
-    .sc-header p {
+
+    .jm-legend {
+      display: flex; flex-wrap: wrap; gap: 16px;
+      justify-content: center;
+      padding: 12px 0 20px;
+      border-bottom: 1px dashed var(--rule);
+      margin-bottom: 24px;
+    }
+    .jm-legend-item {
+      display: inline-flex; align-items: center; gap: 6px;
       font-family: var(--mono); font-size: 10.5px;
       letter-spacing: .12em; text-transform: uppercase;
-      color: var(--ink-mute); margin: 0;
+      color: var(--ink-mute);
     }
-    .sc-toggle {
-      font-family: var(--display); font-weight: 400; font-size: 26px;
-      color: var(--ink-mute); line-height: 1;
-      transition: transform .3s var(--ease);
+    .jm-dot {
+      width: 10px; height: 10px; border-radius: 50%;
     }
-    .scenario[open] .sc-toggle { transform: rotate(45deg); color: var(--accent); }
-    .sc-steps {
-      list-style: none; padding: 0 22px 22px 22px;
-      margin: 0; counter-reset: step;
-      display: flex; flex-direction: column; gap: 12px;
-      border-top: 1px dashed var(--rule); padding-top: 18px;
+    .jm-dot-parent { background: var(--accent); }
+    .jm-dot-aide { background: var(--secondary); }
+    .jm-dot-therapist { background: #8a6418; }
+    .jm-dot-ai { background: var(--ink); }
+
+    .jm-scene {
+      display: none;
+      background: var(--bg-card);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-xl);
+      padding: 28px 24px 24px;
     }
-    .sc-steps li {
-      counter-increment: step;
-      padding-left: 38px; position: relative;
-      font-size: 14px; color: var(--ink); line-height: 1.55;
+    .jm-scene.is-active { display: block; animation: fadeIn .3s var(--ease); }
+    .jm-scene-meta {
+      font-family: var(--mono); font-size: 10.5px; font-weight: 500;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--ink-mute);
+      text-align: center; margin-bottom: 24px;
     }
-    .sc-steps li::before {
-      content: counter(step, decimal-leading-zero);
-      position: absolute; left: 0; top: 1px;
-      font-family: var(--mono); font-size: 11px; font-weight: 600;
-      letter-spacing: .06em; color: var(--ink-mute);
-      background: var(--bg-elev); border: 1px solid var(--rule);
-      border-radius: 6px; padding: 3px 6px; line-height: 1;
+
+    .jm-timeline {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 0; position: relative;
+      padding-top: 8px;
     }
-    .sc-steps li strong { color: var(--ink); font-weight: 600; }
+    /* Horizontal connecting line behind nodes */
+    .jm-timeline::before {
+      content: ""; position: absolute;
+      top: 60px; left: 10%; right: 10%;
+      height: 2px;
+      background: repeating-linear-gradient(to right, var(--rule) 0, var(--rule) 6px, transparent 6px, transparent 12px);
+      z-index: 0;
+    }
+    @media (max-width: 900px) {
+      .jm-timeline { grid-template-columns: 1fr; gap: 20px; }
+      .jm-timeline::before {
+        top: 0; bottom: 0; left: 24px; width: 2px; height: auto;
+        background: repeating-linear-gradient(to bottom, var(--rule) 0, var(--rule) 6px, transparent 6px, transparent 12px);
+      }
+    }
+
+    .jm-step {
+      padding: 0 10px;
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center;
+      position: relative; z-index: 1;
+    }
+    @media (max-width: 900px) {
+      .jm-step { align-items: flex-start; text-align: left; padding-left: 56px; }
+    }
+    .jm-time {
+      font-family: var(--mono); font-size: 10px; font-weight: 600;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--ink-mute); margin-bottom: 10px;
+    }
+    .jm-node {
+      width: 38px; height: 38px; border-radius: 50%;
+      display: grid; place-items: center;
+      font-family: var(--display); font-weight: 700; font-size: 14px;
+      color: #fbf6e5;
+      margin-bottom: 12px;
+      border: 3px solid var(--bg-card);
+      box-shadow: 0 0 0 1px var(--rule);
+    }
+    @media (max-width: 900px) {
+      .jm-node { position: absolute; left: 5px; top: 0; margin-bottom: 0; }
+    }
+    .jm-node-parent { background: var(--accent); }
+    .jm-node-aide { background: var(--secondary); }
+    .jm-node-therapist { background: #8a6418; }
+    .jm-node-ai { background: var(--ink); }
+    .jm-node-silent {
+      background: var(--bg-elev); color: var(--ink-mute);
+      box-shadow: 0 0 0 1px var(--rule);
+    }
+    .jm-title {
+      font-family: var(--display); font-weight: 600;
+      font-size: 13.5px; line-height: 1.3;
+      margin: 0 0 6px; color: var(--ink);
+    }
+    .jm-desc {
+      font-size: 12px; color: var(--ink-soft);
+      line-height: 1.5; margin: 0;
+    }
+
+    .jm-outcome {
+      margin: 24px 0 0;
+      padding: 14px 18px;
+      background: var(--bg-elev);
+      border-left: 3px solid var(--accent);
+      border-radius: var(--r-md);
+      font-family: var(--serif); font-style: italic;
+      font-size: 14px; color: var(--ink);
+      line-height: 1.55;
+    }
+    .jm-outcome-lbl {
+      display: inline-block;
+      font-family: var(--mono); font-style: normal;
+      font-size: 10px; font-weight: 600;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--accent-deep);
+      margin-right: 8px;
+    }
 
     /* North star metric callout */
     .north-star {
@@ -2245,64 +2333,151 @@
           </div>
         </div>
 
-        <h3 class="section-subhead">Three scenarios, end to end</h3>
-        <p>What the product actually feels like in the moments that matter. Click a scenario to walk through it.</p>
+        <h3 class="section-subhead">Three journeys, end to end</h3>
+        <p>The product in the moments that matter. Click a scenario to see the journey unfold.</p>
 
-        <div class="scenario-list">
-          <details class="scenario">
-            <summary>
-              <span class="sc-num">01</span>
-              <div class="sc-header">
-                <h4>The new aide starts Monday</h4>
-                <p>W1 onboarding &middot; Friday to Monday</p>
-              </div>
-              <span class="sc-toggle">+</span>
-            </summary>
-            <ol class="sc-steps">
-              <li><strong>Friday evening.</strong> Priya opens Team &rarr; Invite. Fills Danielle's name and email, sets role to Aide, reviews default permissions, hits Send.</li>
-              <li><strong>Saturday morning.</strong> Danielle taps the magic link. 30-second intro. Lands on Today. No password, no setup.</li>
-              <li><strong>Sunday afternoon.</strong> Danielle reads the Behavioral Profile. Each trigger has "what that looks like" examples underneath. She feels prepared for Monday for the first time in years.</li>
-              <li><strong>Monday 2 PM.</strong> Push notification one hour pre-shift with Priya's heads-up and three quick-reference cards.</li>
-              <li><strong>Monday 7:15 PM.</strong> Danielle taps the voice FAB, records 25 seconds, done. AI transcribes, auto-tags, notifies Priya. Elapsed: 28 seconds.</li>
-            </ol>
-          </details>
+        <div class="journey-map">
+          <div class="jm-tabs" role="tablist" aria-label="User journey scenarios">
+            <button class="jm-tab is-active" data-journey="onboard" type="button" role="tab" aria-selected="true">
+              <span class="jm-tab-num">01</span>
+              <span class="jm-tab-label">New aide starts Monday</span>
+            </button>
+            <button class="jm-tab" data-journey="therapy" type="button" role="tab" aria-selected="false">
+              <span class="jm-tab-num">02</span>
+              <span class="jm-tab-label">Preparing for therapy</span>
+            </button>
+            <button class="jm-tab" data-journey="shift" type="button" role="tab" aria-selected="false">
+              <span class="jm-tab-num">03</span>
+              <span class="jm-tab-label">Danielle's shift</span>
+            </button>
+          </div>
 
-          <details class="scenario">
-            <summary>
-              <span class="sc-num">02</span>
-              <div class="sc-header">
-                <h4>Preparing for therapy on Thursday</h4>
-                <p>W3 clinical handoff &middot; parent to therapist</p>
-              </div>
-              <span class="sc-toggle">+</span>
-            </summary>
-            <ol class="sc-steps">
-              <li><strong>Wednesday 8 PM.</strong> Priya opens Share &rarr; picks Therapist. Dr. Vasquez's contact auto-populates.</li>
-              <li><strong>Reviews the preview.</strong> Top triggers from the last 14 days, strategies working and not, recent context, current routine.</li>
-              <li><strong>Reviews privacy toggles.</strong> Leaves defaults, therapist gets the full picture including MH notes. Substitute wouldn't.</li>
-              <li><strong>Sends shareable link.</strong> Summary Assembly Engine builds a per-recipient URL with an audit token.</li>
-              <li><strong>Thursday 9 AM.</strong> Dr. Vasquez opens the link in mobile Safari. No install. Reads for ninety seconds. Audit log records the open event.</li>
-              <li><strong>Session begins with:</strong> "I saw the new bus-driver thing. Let's talk about transitions today."</li>
-            </ol>
-          </details>
+          <div class="jm-legend">
+            <span class="jm-legend-item"><span class="jm-dot jm-dot-parent"></span> Parent</span>
+            <span class="jm-legend-item"><span class="jm-dot jm-dot-aide"></span> Aide</span>
+            <span class="jm-legend-item"><span class="jm-dot jm-dot-therapist"></span> Therapist</span>
+            <span class="jm-legend-item"><span class="jm-dot jm-dot-ai"></span> Mosaic / AI</span>
+          </div>
 
-          <details class="scenario">
-            <summary>
-              <span class="sc-num">03</span>
-              <div class="sc-header">
-                <h4>Danielle's shift, end to end</h4>
-                <p>W2 daily observation &middot; the 30-second test</p>
+          <!-- Scenario 1: New aide starts Monday -->
+          <div class="jm-scene is-active" data-scene="onboard">
+            <div class="jm-scene-meta">W1 onboarding &middot; Friday to Monday</div>
+            <div class="jm-timeline">
+              <div class="jm-step">
+                <span class="jm-time">Fri &middot; 8 PM</span>
+                <div class="jm-node jm-node-parent">P</div>
+                <h5 class="jm-title">Invite Danielle</h5>
+                <p class="jm-desc">Team &rarr; Invite. Sets role, reviews defaults, hits Send.</p>
               </div>
-              <span class="sc-toggle">+</span>
-            </summary>
-            <ol class="sc-steps">
-              <li><strong>Sunday 8 PM.</strong> Push notification with tomorrow's shift and Priya's heads-up. Danielle reads it in bed.</li>
-              <li><strong>Monday 1:55 PM on the train.</strong> Opens Today (cached, offline-first). Shift card, 24h timeline of two read-only observations, two quick-reference cards. In-app time: 90 seconds.</li>
-              <li><strong>3-6 PM shift.</strong> App is silent. No nudges, no notifications. Mosaic does not interrupt the work.</li>
-              <li><strong>7:12 PM end of shift.</strong> Taps FAB, records 25 seconds, one-tap mood "Easy," done. Elapsed: 28 seconds.</li>
-              <li><strong>Server side.</strong> AI matches the phrase "5-minute countdown" to an existing strategy, flags it for Priya's next-morning validation.</li>
-            </ol>
-          </details>
+              <div class="jm-step">
+                <span class="jm-time">Sat &middot; 9 AM</span>
+                <div class="jm-node jm-node-aide">A</div>
+                <h5 class="jm-title">Magic link, 30-sec intro</h5>
+                <p class="jm-desc">Lands on Today. No password, no setup.</p>
+              </div>
+              <div class="jm-step">
+                <span class="jm-time">Sun &middot; 3 PM</span>
+                <div class="jm-node jm-node-aide">A</div>
+                <h5 class="jm-title">Reads Behavioral Profile</h5>
+                <p class="jm-desc">"What that looks like" under each trigger. Feels prepared.</p>
+              </div>
+              <div class="jm-step">
+                <span class="jm-time">Mon &middot; 2 PM</span>
+                <div class="jm-node jm-node-ai">M</div>
+                <h5 class="jm-title">Pre-shift heads-up</h5>
+                <p class="jm-desc">Push notification with parent's note + 3 quick-refs.</p>
+              </div>
+              <div class="jm-step">
+                <span class="jm-time">Mon &middot; 7:15 PM</span>
+                <div class="jm-node jm-node-aide">A</div>
+                <h5 class="jm-title">Voice log, 25 sec</h5>
+                <p class="jm-desc">AI transcribes, auto-tags, notifies Priya. 28-sec total.</p>
+              </div>
+            </div>
+            <p class="jm-outcome"><span class="jm-outcome-lbl">Outcome</span> A new caregiver started ready, not information-starved. First shift ends with a shared record.</p>
+          </div>
+
+          <!-- Scenario 2: Preparing for therapy -->
+          <div class="jm-scene" data-scene="therapy">
+            <div class="jm-scene-meta">W3 clinical handoff &middot; parent to therapist</div>
+            <div class="jm-timeline">
+              <div class="jm-step">
+                <span class="jm-time">Wed &middot; 8 PM</span>
+                <div class="jm-node jm-node-parent">P</div>
+                <h5 class="jm-title">Opens Share</h5>
+                <p class="jm-desc">Picks Therapist. Dr. Vasquez's contact auto-populates.</p>
+              </div>
+              <div class="jm-step">
+                <span class="jm-time">Wed &middot; 8:05 PM</span>
+                <div class="jm-node jm-node-parent">P</div>
+                <h5 class="jm-title">Reviews preview</h5>
+                <p class="jm-desc">Top triggers, strategies working/not, recent context.</p>
+              </div>
+              <div class="jm-step">
+                <span class="jm-time">Wed &middot; 8:10 PM</span>
+                <div class="jm-node jm-node-parent">P</div>
+                <h5 class="jm-title">Sets privacy toggles</h5>
+                <p class="jm-desc">Leaves defaults. Therapist gets the full picture, MH included.</p>
+              </div>
+              <div class="jm-step">
+                <span class="jm-time">Wed &middot; 8:15 PM</span>
+                <div class="jm-node jm-node-ai">M</div>
+                <h5 class="jm-title">Assembles + sends link</h5>
+                <p class="jm-desc">Per-recipient URL with audit token embedded.</p>
+              </div>
+              <div class="jm-step">
+                <span class="jm-time">Thu &middot; 9 AM</span>
+                <div class="jm-node jm-node-therapist">T</div>
+                <h5 class="jm-title">Opens in Safari</h5>
+                <p class="jm-desc">No install. 90-sec read. Audit log records the open event.</p>
+              </div>
+              <div class="jm-step">
+                <span class="jm-time">Thu &middot; 9:05 AM</span>
+                <div class="jm-node jm-node-therapist">T</div>
+                <h5 class="jm-title">Session begins</h5>
+                <p class="jm-desc">"I saw the new bus-driver thing. Let's talk transitions."</p>
+              </div>
+            </div>
+            <p class="jm-outcome"><span class="jm-outcome-lbl">Outcome</span> Therapist walks in already caught up. Session time goes to insight, not context-setting.</p>
+          </div>
+
+          <!-- Scenario 3: Danielle's shift -->
+          <div class="jm-scene" data-scene="shift">
+            <div class="jm-scene-meta">W2 daily observation &middot; the 30-second test</div>
+            <div class="jm-timeline">
+              <div class="jm-step">
+                <span class="jm-time">Sun &middot; 8 PM</span>
+                <div class="jm-node jm-node-ai">M</div>
+                <h5 class="jm-title">Pre-shift push</h5>
+                <p class="jm-desc">Tomorrow's shift + Priya's heads-up. Danielle reads in bed.</p>
+              </div>
+              <div class="jm-step">
+                <span class="jm-time">Mon &middot; 1:55 PM</span>
+                <div class="jm-node jm-node-aide">A</div>
+                <h5 class="jm-title">Opens Today (offline-first)</h5>
+                <p class="jm-desc">Shift card, 24h timeline, 2 quick-refs. 90 sec in-app.</p>
+              </div>
+              <div class="jm-step">
+                <span class="jm-time">Mon &middot; 3-6 PM</span>
+                <div class="jm-node jm-node-silent">&middot;</div>
+                <h5 class="jm-title">App is silent</h5>
+                <p class="jm-desc">No nudges. Mosaic does not interrupt the work.</p>
+              </div>
+              <div class="jm-step">
+                <span class="jm-time">Mon &middot; 7:12 PM</span>
+                <div class="jm-node jm-node-aide">A</div>
+                <h5 class="jm-title">Voice log + mood</h5>
+                <p class="jm-desc">25 sec + one-tap "Easy." Elapsed 28 sec total.</p>
+              </div>
+              <div class="jm-step">
+                <span class="jm-time">Server-side</span>
+                <div class="jm-node jm-node-ai">M</div>
+                <h5 class="jm-title">AI matches phrase</h5>
+                <p class="jm-desc">"5-minute countdown" flagged for Priya's morning review.</p>
+              </div>
+            </div>
+            <p class="jm-outcome"><span class="jm-outcome-lbl">Outcome</span> Shift start to shift end: 28 seconds of app time. Zero interruptions. One useful observation captured.</p>
+          </div>
         </div>
 
         <p class="deferred-note">Cut from v1 to protect the barrier: AI pattern detection, effectiveness ledger, IEP integration. All in v2. All waiting on observation density.</p>
@@ -2556,6 +2731,24 @@
       img.addEventListener('error', markMissing);
       if (img.complete && img.naturalWidth === 0) markMissing();
     });
+
+    // Journey map: switch between scenarios on tab click
+    (function(){
+      const tabs = document.querySelectorAll('.jm-tab');
+      const scenes = document.querySelectorAll('.jm-scene');
+      if (!tabs.length) return;
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          const target = tab.dataset.journey;
+          tabs.forEach(t => {
+            const active = t === tab;
+            t.classList.toggle('is-active', active);
+            t.setAttribute('aria-selected', active ? 'true' : 'false');
+          });
+          scenes.forEach(s => s.classList.toggle('is-active', s.dataset.scene === target));
+        });
+      });
+    })();
 
     // Active section in TOC
     const tocLinks = document.querySelectorAll('.toc-link');
