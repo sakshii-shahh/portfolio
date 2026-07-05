@@ -1362,66 +1362,81 @@
     .di-panel[data-panel="aide"] .di-list li::before { background: var(--secondary); }
 
     /* Mosaic hi-fi tab explorer */
-    .mosaic-hifi { margin: 20px 0 12px; }
+    /* ============ MOSAIC HI-FI (Money20-style split: left tabs list, right detail panel) ============ */
+    .mosaic-hifi {
+      display: grid;
+      grid-template-columns: minmax(260px, 1fr) 1.6fr;
+      gap: 24px; margin: 24px 0 12px;
+      align-items: start;
+    }
+    @media (max-width: 760px) { .mosaic-hifi { grid-template-columns: 1fr; gap: 16px; } }
     .mh-tabs {
-      display: flex; flex-wrap: wrap; gap: 8px;
-      justify-content: center; padding: 0 4px 16px;
+      display: flex; flex-direction: column; gap: 6px;
     }
     .mh-tab {
-      background: var(--bg-card); border: 1.5px solid var(--rule);
-      border-radius: 999px; padding: 9px 16px;
-      font-family: var(--display); font-weight: 500; font-size: 13px;
-      color: var(--ink-soft); cursor: pointer;
-      transition: border-color .2s var(--ease), background .2s var(--ease), color .2s var(--ease), transform .2s var(--ease);
-      outline: none; white-space: nowrap;
+      all: unset; cursor: pointer;
+      display: grid; grid-template-columns: auto 1fr;
+      align-items: center; gap: 14px;
+      padding: 16px 18px;
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: var(--r-md);
+      transition: background .25s var(--ease), border-color .25s var(--ease);
     }
-    .mh-tab:hover, .mh-tab:focus-visible {
-      border-color: var(--accent); background: var(--bg-elev); color: var(--ink);
-    }
+    .mh-tab:hover, .mh-tab:focus-visible { background: var(--bg-elev); }
     .mh-tab.is-active {
-      border-color: var(--accent); background: var(--accent);
-      color: #fbf6e5; transform: translateY(-1px);
+      background: var(--bg-elev);
+      border-color: var(--accent);
+    }
+    .mh-tab-num {
+      font-family: var(--mono); font-size: 11px; font-weight: 500;
+      letter-spacing: .14em; color: var(--ink-mute);
+    }
+    .mh-tab.is-active .mh-tab-num { color: var(--accent); }
+    .mh-tab-title {
+      font-family: var(--display); font-weight: 500;
+      font-size: 16px; color: var(--ink);
+      letter-spacing: -0.012em;
     }
     .mh-display {
-      background: var(--bg-card); border: 1px solid var(--rule);
-      border-radius: var(--r-xl); padding: 14px;
-      overflow: hidden; position: relative;
-      aspect-ratio: 4/3; max-width: 100%;
-    }
-    .mh-screen {
-      position: absolute; inset: 14px;
-      border-radius: var(--r-lg); overflow: hidden;
-      opacity: 0; transform: scale(.985); pointer-events: none;
-      transition: opacity .3s var(--ease), transform .3s var(--ease);
       background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-lg);
+      padding: 24px;
     }
-    .mh-screen.is-active { opacity: 1; transform: scale(1); pointer-events: auto; }
-    .mh-screen img {
-      width: 100%; height: 100%; object-fit: contain;
-      object-position: center; display: block;
+    .mh-panel { display: none; animation: mhFade .35s var(--ease); }
+    .mh-panel.is-active { display: block; }
+    @keyframes mhFade {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-    .mh-screen.img-missing img { display: none; }
-    .mh-screen.img-missing::after {
+    .mh-panel img {
+      width: 100%; height: auto; display: block;
+      border-radius: var(--r-md); margin-bottom: 18px;
+      background: var(--bg-card);
+    }
+    .mh-panel h4 {
+      font-family: var(--display); font-weight: 500;
+      font-size: 19px; line-height: 1.25;
+      color: var(--ink); margin: 0 0 10px;
+      letter-spacing: -0.012em;
+    }
+    .mh-panel p {
+      font-size: 14.5px; color: var(--ink-soft);
+      line-height: 1.55; margin: 0;
+    }
+    .mh-panel.img-missing img { display: none; }
+    .mh-panel.img-missing::before {
       content: attr(data-placeholder);
-      position: absolute; inset: 0; display: grid; place-items: center;
+      display: grid; place-items: center;
+      aspect-ratio: 16 / 10;
+      border: 1px dashed var(--rule-strong);
+      border-radius: var(--r-md);
+      margin-bottom: 18px;
       font-family: var(--mono); font-size: 11px;
       letter-spacing: .14em; text-transform: uppercase;
       color: var(--ink-mute); padding: 0 32px; text-align: center;
-      border: 1px dashed var(--rule-strong); border-radius: var(--r-lg);
     }
-    .mh-detail {
-      position: relative; min-height: 60px;
-      text-align: center; padding: 20px 24px 0;
-    }
-    .mh-detail-text {
-      position: absolute; inset: 20px 24px 0;
-      font-family: var(--serif); font-style: italic;
-      font-size: 15px; line-height: 1.55;
-      color: var(--ink-soft); margin: 0;
-      opacity: 0; transition: opacity .25s var(--ease);
-      max-width: 70ch; margin: 0 auto;
-    }
-    .mh-detail-text.is-active { opacity: 1; }
 
     /* ============ USER JOURNEY MAP ============ */
     .journey-map { margin: 20px 0 12px; }
@@ -2317,47 +2332,72 @@
 
         <div class="mosaic-hifi">
           <div class="mh-tabs" role="tablist" aria-label="Mosaic hi-fi screens">
-            <button class="mh-tab is-active" data-screen="parent-home" type="button" role="tab" aria-selected="true">Parent home</button>
-            <button class="mh-tab" data-screen="voice-log" type="button" role="tab" aria-selected="false">Voice log</button>
-            <button class="mh-tab" data-screen="aide-today" type="button" role="tab" aria-selected="false">Aide today</button>
-            <button class="mh-tab" data-screen="behavioral" type="button" role="tab" aria-selected="false">Behavioral profile</button>
-            <button class="mh-tab" data-screen="share" type="button" role="tab" aria-selected="false">Share summary</button>
-            <button class="mh-tab" data-screen="recipient" type="button" role="tab" aria-selected="false">Recipient view</button>
-            <button class="mh-tab" data-screen="team" type="button" role="tab" aria-selected="false">Care team</button>
+            <button class="mh-tab is-active" data-screen="parent-home" type="button" role="tab" aria-selected="true">
+              <span class="mh-tab-num">01</span>
+              <span class="mh-tab-title">Parent home</span>
+            </button>
+            <button class="mh-tab" data-screen="voice-log" type="button" role="tab" aria-selected="false">
+              <span class="mh-tab-num">02</span>
+              <span class="mh-tab-title">Voice log</span>
+            </button>
+            <button class="mh-tab" data-screen="aide-today" type="button" role="tab" aria-selected="false">
+              <span class="mh-tab-num">03</span>
+              <span class="mh-tab-title">Aide today</span>
+            </button>
+            <button class="mh-tab" data-screen="behavioral" type="button" role="tab" aria-selected="false">
+              <span class="mh-tab-num">04</span>
+              <span class="mh-tab-title">Behavioral profile</span>
+            </button>
+            <button class="mh-tab" data-screen="share" type="button" role="tab" aria-selected="false">
+              <span class="mh-tab-num">05</span>
+              <span class="mh-tab-title">Share summary</span>
+            </button>
+            <button class="mh-tab" data-screen="recipient" type="button" role="tab" aria-selected="false">
+              <span class="mh-tab-num">06</span>
+              <span class="mh-tab-title">Recipient view</span>
+            </button>
+            <button class="mh-tab" data-screen="team" type="button" role="tab" aria-selected="false">
+              <span class="mh-tab-num">07</span>
+              <span class="mh-tab-title">Care team</span>
+            </button>
           </div>
 
           <div class="mh-display">
-            <div class="mh-screen is-active" data-id="parent-home" data-placeholder="Parent Home &middot; export from Figma → assets/mosaic/hifi-parent-home.png">
-              <img src="assets/mosaic/hifi-parent-home.png" alt="Parent home">
+            <div class="mh-panel is-active" data-id="parent-home" data-placeholder="Parent Home &middot; export from Figma → assets/mosaic/hifi-parent-home.png">
+              <img src="assets/mosaic/hifi-parent-home.png" alt="Parent home" loading="lazy">
+              <h4>Parent home</h4>
+              <p>The parent lands here. Shared timeline from every caregiver, environment chips on each observation, next handoff surface one tap away.</p>
             </div>
-            <div class="mh-screen" data-id="voice-log" data-placeholder="Voice log &middot; export from Figma → assets/mosaic/hifi-voice-log.png">
-              <img src="assets/mosaic/hifi-voice-log.png" alt="Voice log">
+            <div class="mh-panel" data-id="voice-log" data-placeholder="Voice log &middot; export from Figma → assets/mosaic/hifi-voice-log.png">
+              <img src="assets/mosaic/hifi-voice-log.png" alt="Voice log" loading="lazy">
+              <h4>Voice log</h4>
+              <p>Persistent FAB. Tap, talk, done. AI handles transcription, auto-tagging, and environment inference after capture. Zero structured input required at the point of logging.</p>
             </div>
-            <div class="mh-screen" data-id="aide-today" data-placeholder="Aide Today &middot; export from Figma → assets/mosaic/hifi-aide-today.png">
-              <img src="assets/mosaic/hifi-aide-today.png" alt="Aide today">
+            <div class="mh-panel" data-id="aide-today" data-placeholder="Aide Today &middot; export from Figma → assets/mosaic/hifi-aide-today.png">
+              <img src="assets/mosaic/hifi-aide-today.png" alt="Aide today" loading="lazy">
+              <h4>Aide today</h4>
+              <p>Aide-only start-of-shift surface. Shift card, last 24 hours of team observations, and three quick-reference triggers pinned to the top.</p>
             </div>
-            <div class="mh-screen" data-id="behavioral" data-placeholder="Behavioral Profile &middot; export from Figma → assets/mosaic/hifi-behavioral.png">
-              <img src="assets/mosaic/hifi-behavioral.png" alt="Behavioral profile">
+            <div class="mh-panel" data-id="behavioral" data-placeholder="Behavioral Profile &middot; export from Figma → assets/mosaic/hifi-behavioral.png">
+              <img src="assets/mosaic/hifi-behavioral.png" alt="Behavioral profile" loading="lazy">
+              <h4>Behavioral profile</h4>
+              <p>The living operating manual. Parents edit triggers, strategies, and routines. Aides read the same content with concrete "what that looks like" examples underneath.</p>
             </div>
-            <div class="mh-screen" data-id="share" data-placeholder="Share Summary &middot; export from Figma → assets/mosaic/hifi-share.png">
-              <img src="assets/mosaic/hifi-share.png" alt="Share summary">
+            <div class="mh-panel" data-id="share" data-placeholder="Share Summary &middot; export from Figma → assets/mosaic/hifi-share.png">
+              <img src="assets/mosaic/hifi-share.png" alt="Share summary" loading="lazy">
+              <h4>Share summary</h4>
+              <p>Auto-assembled handoff document, scoped per recipient. Toggle privacy for each block. Send as a shareable link, no install required.</p>
             </div>
-            <div class="mh-screen" data-id="recipient" data-placeholder="Recipient Web View &middot; export from Figma → assets/mosaic/hifi-recipient.png">
-              <img src="assets/mosaic/hifi-recipient.png" alt="Recipient view">
+            <div class="mh-panel" data-id="recipient" data-placeholder="Recipient Web View &middot; export from Figma → assets/mosaic/hifi-recipient.png">
+              <img src="assets/mosaic/hifi-recipient.png" alt="Recipient view" loading="lazy">
+              <h4>Recipient view</h4>
+              <p>Mobile-web recipient view. A substitute teacher opens the link in Safari and reads for ninety seconds. No app to download, no account to create.</p>
             </div>
-            <div class="mh-screen" data-id="team" data-placeholder="Care Team &middot; export from Figma → assets/mosaic/hifi-team.png">
-              <img src="assets/mosaic/hifi-team.png" alt="Care team">
+            <div class="mh-panel" data-id="team" data-placeholder="Care Team &middot; export from Figma → assets/mosaic/hifi-team.png">
+              <img src="assets/mosaic/hifi-team.png" alt="Care team" loading="lazy">
+              <h4>Care team</h4>
+              <p>Care team roster. Invite new caregivers by role with default permissions per role. Every recipient view event lives in the audit log.</p>
             </div>
-          </div>
-
-          <div class="mh-detail">
-            <p class="mh-detail-text is-active" data-detail="parent-home">The parent lands here. Shared timeline from every caregiver, environment chips on each observation, next handoff surface one tap away.</p>
-            <p class="mh-detail-text" data-detail="voice-log">Persistent FAB. Tap, talk, done. AI handles transcription, auto-tagging, and environment inference after capture. Zero structured input required at the point of logging.</p>
-            <p class="mh-detail-text" data-detail="aide-today">Aide-only start-of-shift surface. Shift card, last 24 hours of team observations, and three quick-reference triggers pinned to the top.</p>
-            <p class="mh-detail-text" data-detail="behavioral">The living operating manual. Parents edit triggers, strategies, and routines. Aides read the same content with concrete "what that looks like" examples underneath.</p>
-            <p class="mh-detail-text" data-detail="share">Auto-assembled handoff document, scoped per recipient. Toggle privacy for each block. Send as a shareable link, no install required.</p>
-            <p class="mh-detail-text" data-detail="recipient">Mobile-web recipient view. A substitute teacher opens the link in Safari and reads for ninety seconds. No app to download, no account to create.</p>
-            <p class="mh-detail-text" data-detail="team">Care team roster. Invite new caregivers by role with default permissions per role. Every recipient view event lives in the audit log.</p>
           </div>
         </div>
 
@@ -2730,12 +2770,11 @@
       });
     })();
 
-    // Hi-fi tab explorer (Product section) — hover / focus / click swaps image + description
+    // Hi-fi feature tabs (Product section) — hover / focus / click swaps panel
     (function(){
       const tabs = document.querySelectorAll('.mh-tab');
-      const screens = document.querySelectorAll('.mh-screen');
-      const details = document.querySelectorAll('.mh-detail-text');
-      if (!tabs.length) return;
+      const panels = document.querySelectorAll('.mh-panel');
+      if (!tabs.length || !panels.length) return;
       function activate(tab) {
         const target = tab.dataset.screen;
         tabs.forEach(t => {
@@ -2743,8 +2782,7 @@
           t.classList.toggle('is-active', active);
           t.setAttribute('aria-selected', active ? 'true' : 'false');
         });
-        screens.forEach(s => s.classList.toggle('is-active', s.dataset.id === target));
-        details.forEach(d => d.classList.toggle('is-active', d.dataset.detail === target));
+        panels.forEach(p => p.classList.toggle('is-active', p.dataset.id === target));
       }
       tabs.forEach(tab => {
         tab.addEventListener('mouseenter', () => activate(tab));
@@ -2753,8 +2791,8 @@
       });
     })();
 
-    // Mark missing hi-fi screens so placeholder text shows
-    document.querySelectorAll('.mh-screen img').forEach(img => {
+    // Mark missing hi-fi panels so placeholder text shows
+    document.querySelectorAll('.mh-panel img').forEach(img => {
       const markMissing = () => img.parentElement.classList.add('img-missing');
       img.addEventListener('error', markMissing);
       if (img.complete && img.naturalWidth === 0) markMissing();
