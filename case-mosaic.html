@@ -1411,7 +1411,11 @@
       to { opacity: 1; transform: translateY(0); }
     }
     .mh-panel img {
-      width: 100%; height: auto; display: block;
+      display: block;
+      width: 100%; height: auto;
+      max-height: 52vh;
+      object-fit: contain;
+      object-position: center;
       border-radius: var(--r-md); margin-bottom: 18px;
       background: var(--bg-card);
     }
