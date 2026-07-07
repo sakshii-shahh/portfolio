@@ -686,7 +686,12 @@
       transition: transform .25s var(--ease), background .25s var(--ease), border-color .25s var(--ease), color .25s var(--ease), box-shadow .25s var(--ease);
       outline: none;
     }
-    .pg-btn-arr { transition: transform .25s var(--ease); font-family: var(--display); }
+    .pg-btn-arr {
+      display: inline-flex;
+      align-items: center;
+      transition: transform .25s var(--ease);
+    }
+    .pg-btn-arr svg { display: block; }
     .pg-btn:hover .pg-btn-arr, .pg-btn:focus-visible .pg-btn-arr { transform: translateX(3px); }
     .pg-btn-primary {
       background: var(--accent);
@@ -783,6 +788,24 @@
       font-family: var(--display); font-weight: 600;
     }
     .pg-story-outbound a:hover { color: var(--accent-deep); }
+    .pg-story-lead {
+      font-family: var(--serif); font-style: italic;
+      font-size: 20px; line-height: 1.5;
+      color: var(--ink); margin: 20px 0 28px;
+      padding-left: 20px;
+      border-left: 3px solid var(--accent);
+    }
+    .pg-story-em {
+      font-family: var(--serif); font-style: italic;
+      font-size: 17px; color: var(--accent-deep);
+      margin: 18px 0; text-align: center;
+    }
+    .pg-story strong {
+      color: var(--ink); font-weight: 600;
+    }
+    .pg-story em {
+      color: var(--accent-deep); font-style: italic;
+    }
 
     @media (max-width: 640px) {
       .pg-modal { padding: 16px; }
@@ -1178,16 +1201,19 @@
           <article class="seed seed-featured">
             <div class="seed-marker" aria-hidden="true">
               <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <path d="M50 92 L50 50" stroke="#3d6b2c" stroke-width="2" stroke-linecap="round" fill="none"/>
-                <path d="M50 72 Q 34 66 28 54 Q 40 60 50 68 Z" fill="#5e8a4f"/>
-                <path d="M50 64 Q 66 58 72 46 Q 60 52 50 60 Z" fill="#5e8a4f"/>
-                <g transform="translate(50, 40)">
-                  <ellipse cx="0" cy="-14" rx="8" ry="12" fill="#ec6478" opacity=".92"/>
-                  <ellipse cx="13" cy="-4" rx="8" ry="12" fill="#ec6478" opacity=".92" transform="rotate(65)"/>
-                  <ellipse cx="8" cy="11" rx="8" ry="12" fill="#ec6478" opacity=".92" transform="rotate(140)"/>
-                  <ellipse cx="-8" cy="11" rx="8" ry="12" fill="#ec6478" opacity=".92" transform="rotate(-140)"/>
-                  <ellipse cx="-13" cy="-4" rx="8" ry="12" fill="#ec6478" opacity=".92" transform="rotate(-65)"/>
-                  <circle r="6" fill="#f6e4a8"/>
+                <!-- Peacock feather (Mayura) -->
+                <path d="M50 96 L50 60" stroke="#3d6b2c" stroke-width="2" stroke-linecap="round" fill="none"/>
+                <ellipse cx="50" cy="38" rx="20" ry="34" fill="#5e8a4f" opacity=".95"/>
+                <ellipse cx="50" cy="38" rx="14" ry="26" fill="#8a6418" opacity=".92"/>
+                <ellipse cx="50" cy="38" rx="10" ry="18" fill="#ec6478" opacity=".95"/>
+                <ellipse cx="50" cy="38" rx="6" ry="10" fill="#3a2818"/>
+                <circle cx="50" cy="38" r="3" fill="#f6e4a8"/>
+                <!-- barbs -->
+                <g stroke="#3d6b2c" stroke-width=".8" opacity=".55" fill="none">
+                  <path d="M50 12 Q 44 20 40 22"/>
+                  <path d="M50 12 Q 56 20 60 22"/>
+                  <path d="M50 66 Q 44 62 38 62"/>
+                  <path d="M50 66 Q 56 62 62 62"/>
                 </g>
               </svg>
             </div>
@@ -1195,16 +1221,26 @@
             <div class="seed-bloom">
               <span class="seed-tag">Computer vision &middot; Interactive</span>
               <p class="seed-line">Where the hand moves, the gaze follows.</p>
-              <p class="seed-desc">Live camera experiment classifying Indian classical hand gestures in real time.</p>
+              <p class="seed-desc">A live camera experiment that recognizes the hand gestures of Indian classical dance in real time. Hold a mudra up to your webcam and it names the shape, tells you what it means, and speaks it aloud in Sanskrit &mdash; no machine-learning model, just the geometry of the hand itself.</p>
               <div class="seed-preview">
                 <video src="assets/playground/hastamudra.mp4" autoplay loop muted playsinline></video>
               </div>
               <div class="seed-actions">
                 <button class="pg-btn pg-btn-primary" type="button" data-launch="https://sakshii-shahh.github.io/hastamudra/" data-title="Hastamudra">
-                  <span>Try it</span><span class="pg-btn-arr">&rarr;</span>
+                  <span>Try it</span>
+                  <span class="pg-btn-arr" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M5 12h14M13 6l6 6-6 6"/>
+                    </svg>
+                  </span>
                 </button>
                 <button class="pg-btn pg-btn-secondary" type="button" data-story="story-hastamudra" data-title="How I built Hastamudra">
-                  <span>How I built it</span><span class="pg-btn-arr">&nearr;</span>
+                  <span>How I built it</span>
+                  <span class="pg-btn-arr" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M7 17L17 7M9 7h8v8"/>
+                    </svg>
+                  </span>
                 </button>
               </div>
             </div>
@@ -1230,20 +1266,55 @@
         <template id="story-hastamudra">
           <div class="pg-story">
             <span class="pg-story-eyebrow">The build</span>
-            <h4 class="pg-story-title">How I built Hastamudra</h4>
-            <p>I wanted to see if I could get a browser to recognize Indian classical dance mudras from a webcam feed, with no backend, no heavy ML infra, and no install for the user.</p>
-            <h5>The stack</h5>
+            <h4 class="pg-story-title">I taught my browser to read the hand gestures I grew up with.</h4>
+
+            <p class="pg-story-lead">For nine years, before I understood what any of it meant, my hands knew what to do.</p>
+
+            <p>I trained in Bharatanatyam, the classical dance form from South India, and like every student, the very first thing I learned wasn't a step. It was the hands. Mudras. Small, exact shapes the fingers make, each one carrying a meaning that's been passed down for centuries. One position is a flag. Another is a deer, a lotus, the moon, a blessing. You learn them before you learn what to do with them, the way you learn letters before words.</p>
+
+            <p>Life moved on the way it does, and I dance less than I used to. But the vocabulary never really leaves you. So when I started getting curious about how technology could fit into ordinary, everyday life, not big abstract AI, but small useful things, my mind kept circling back to my hands.</p>
+
+            <p class="pg-story-em"><em>What if a browser could learn the mudras too?</em></p>
+
+            <h5>The idea</h5>
+            <p>I'd been wanting to play with hand-tracking for a while. Most demos you see are the usual thing: wave at the screen, count your fingers. Fun for a minute. But I kept thinking there had to be a more meaningful thing to point it at, something I actually cared about.</p>
+            <p>Then it clicked. Mudras. A gesture language I already spoke, that almost no software understands. I could build a little mirror: hold your hand up to the camera, and it tells you which mudra you're making, the Sanskrit name, what it represents, where it lives in the classical forms, and says it out loud.</p>
+            <p>Honestly, part of the appeal was selfish. It felt like a way to stay connected to something I'd drifted from. A way to put my two worlds, the very old and the very new, in the same room and see if they'd get along. They did. Beautifully.</p>
+
+            <h5>What it does</h5>
+            <p>I called it <strong>Hastamudra</strong> (<em>hasta</em> = hand, <em>mudra</em> = gesture).</p>
+            <p>You open it, allow the camera, and raise one hand. It draws the skeleton of your hand in gold, works out which of the 28 single-hand gestures you're holding, and shows you the name in Sanskrit and Devanagari, its meaning, what it symbolizes, and which dance forms use it, then pronounces the name aloud. Hold Pataka and it tells you: <em>flag; clouds, a forest, a river, a blessing.</em></p>
+            <p>It turns a private, muscle-memory language into something you can just&hellip; show a screen, and have it understood.</p>
+
+            <h5>How I actually made it</h5>
+            <p>I'm not an engineer. I didn't write this the traditional way, I built it in conversation. I described what I wanted in plain language, watched it take shape, broke things, fixed things, and slowly shaped it into mine. Here's what each piece did:</p>
             <ul>
-              <li>MediaPipe Hands for real-time hand landmark detection (21 points per hand, ~30 fps in the browser)</li>
-              <li>A small custom classifier trained on landmark geometry, not raw images</li>
-              <li>Vanilla JS + HTML + CSS. No framework.</li>
-              <li>GitHub Pages for hosting</li>
+              <li><strong>MediaPipe Hands (Google)</strong> &mdash; the eyes. It finds 21 points on your hand, 30 times a second: knuckles, fingertips, wrist.</li>
+              <li><strong>Rule-based geometry</strong> &mdash; the brain, and the part I'm proudest of. No machine-learning model, nothing trained on thousands of images. Each mudra is described by the shape itself: which fingers are straight, which are bent, how far the thumb sits from the others. Essentially the same way a teacher would describe a gesture to you, translated into math.</li>
+              <li><strong>The browser's Indian voice</strong> &mdash; so the Sanskrit names are actually pronounced, not mangled by an English accent.</li>
+              <li><strong>Reference photographs</strong> &mdash; demonstrated by Dr. Rajashree Warrier, courtesy of NatyaSutra, so you can hold your hand against the "correct" version.</li>
+              <li><strong>AI tools to build and ship</strong> &mdash; I used Claude in a workspace to build and endlessly iterate the app, and Claude Code to help deploy and debug. GitHub and a static host put it online.</li>
             </ul>
-            <h5>The tricky part</h5>
-            <p>Landmark detection is easy. Deciding which landmark positions equal which mudra was the hard part. I hand-tagged reference examples for each mudra, then compared each frame's landmark geometry against those templates.</p>
-            <h5>What's next</h5>
-            <p>Expanding the reference library. Adding more classical mudras beyond the initial set. Would love to eventually pair each mudra with the story it tells in dance.</p>
-            <p class="pg-story-outbound"><a href="https://sakshii-shahh.github.io/hastamudra/" target="_blank" rel="noopener">Try it live &nearr;</a></p>
+
+            <h5>The messy, honest middle</h5>
+            <p>It did not arrive polished.</p>
+            <p>It started as a handful of gestures and grew to all 28. The design went through eras, busy, then minimal, then a proper Indian display typeface and a little Nataraja up top. I went back and forth on the voice, on the layout, on whether the camera should be centered or beside the panel.</p>
+            <p>The hardest part was accuracy, and it taught me something. Some mudras are almost identical to a flat camera, they differ by a curl of one finger or a small turn of the palm the lens simply can't see. I kept pushing for it to recognize everything, and kept running into the same wall: the stricter I made it so it wouldn't guess wrong while I sat still, the harder it became for the subtle gestures to register. There's no clean win there, only an honest tradeoff. Learning to name that tradeoff instead of fighting it was half the project.</p>
+            <p>And there was a stubborn little bug where the reference images refused to show. We chased it through caching, file paths, a sneaky layout quirk. Deeply unglamorous. Extremely real.</p>
+
+            <h5>Why it mattered to me</h5>
+            <p>I think we set up "art" and "technology" as opposites too easily. This didn't feel like that at all. It felt like using a new tool to hold an old thing a little more carefully.</p>
+            <p>A centuries-old gesture, a webcam, and a line of geometry met in the middle and recognized each other. And for a few minutes, I got to be a beginner again, holding my hand up to a screen, waiting to be told the name of a shape I've known since I was a kid.</p>
+            <p>That made me really happy. So glad to be building in a time when the distance between <em>I wonder if&hellip;</em> and <em>here, try it</em> has never been shorter.</p>
+
+            <p class="pg-story-outbound">
+              <a href="https://sakshii-shahh.github.io/hastamudra/" target="_blank" rel="noopener">
+                Try it live
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-left: 6px;">
+                  <path d="M5 12h14M13 6l6 6-6 6"/>
+                </svg>
+              </a>
+            </p>
           </div>
         </template>
 
