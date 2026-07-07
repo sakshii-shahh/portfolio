@@ -1048,19 +1048,34 @@
       margin: 0 !important;
       border-radius: 0 !important;
       max-width: none !important;
-      position: relative !important;
-      padding-top: 120px !important;
     }
 
-    /* Tulip row decoration on top of footer */
-    .footer-tulips {
-      position: absolute;
-      top: 32px; left: 0; right: 0;
-      height: 68px;
-      pointer-events: none;
-      overflow: visible;
+    /* Ensure the sidebar's beige column extends the full shell height */
+    .shell {
+      position: relative;
     }
-    .footer-tulips svg { width: 100%; height: 100%; display: block; }
+    .shell::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; bottom: 0;
+      width: 320px;
+      background: var(--bg);
+      z-index: 0;
+      pointer-events: none;
+    }
+    @media (max-width: 980px) {
+      .shell::before { display: none; }
+    }
+    .sidebar {
+      position: sticky;
+      background: transparent;
+      z-index: 1;
+    }
+    .main {
+      position: relative;
+      z-index: 1;
+    }
+
   </style>
 </head>
 <body>
@@ -1279,50 +1294,6 @@
   </div>
 
   <footer>
-    <div class="footer-tulips" aria-hidden="true">
-      <svg viewBox="0 0 1600 68" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
-        <g stroke="#3d6b2c" stroke-width="1.5" fill="none" stroke-linecap="round">
-          <path d="M60 68 L60 26"/><path d="M140 68 L140 32"/><path d="M220 68 L220 22"/>
-          <path d="M300 68 L300 30"/><path d="M380 68 L380 24"/><path d="M460 68 L460 34"/>
-          <path d="M540 68 L540 20"/><path d="M620 68 L620 30"/><path d="M700 68 L700 26"/>
-          <path d="M780 68 L780 32"/><path d="M860 68 L860 24"/><path d="M940 68 L940 30"/>
-          <path d="M1020 68 L1020 22"/><path d="M1100 68 L1100 32"/><path d="M1180 68 L1180 26"/>
-          <path d="M1260 68 L1260 30"/><path d="M1340 68 L1340 24"/><path d="M1420 68 L1420 32"/>
-          <path d="M1500 68 L1500 22"/><path d="M1580 68 L1580 28"/>
-        </g>
-        <g>
-          <path d="M55 24 Q 55 12 60 10 Q 65 12 65 24 Z" fill="#ec6478"/>
-          <path d="M135 30 Q 135 18 140 16 Q 145 18 145 30 Z" fill="#f6c54a"/>
-          <path d="M215 20 Q 215 8 220 6 Q 225 8 225 20 Z" fill="#ec6478"/>
-          <path d="M295 28 Q 295 16 300 14 Q 305 16 305 28 Z" fill="#f6c54a"/>
-          <path d="M375 22 Q 375 10 380 8 Q 385 10 385 22 Z" fill="#ec6478"/>
-          <path d="M455 32 Q 455 20 460 18 Q 465 20 465 32 Z" fill="#f6c54a"/>
-          <path d="M535 18 Q 535 6 540 4 Q 545 6 545 18 Z" fill="#ec6478"/>
-          <path d="M615 28 Q 615 16 620 14 Q 625 16 625 28 Z" fill="#f6c54a"/>
-          <path d="M695 24 Q 695 12 700 10 Q 705 12 705 24 Z" fill="#ec6478"/>
-          <path d="M775 30 Q 775 18 780 16 Q 785 18 785 30 Z" fill="#f6c54a"/>
-          <path d="M855 22 Q 855 10 860 8 Q 865 10 865 22 Z" fill="#ec6478"/>
-          <path d="M935 28 Q 935 16 940 14 Q 945 16 945 28 Z" fill="#f6c54a"/>
-          <path d="M1015 20 Q 1015 8 1020 6 Q 1025 8 1025 20 Z" fill="#ec6478"/>
-          <path d="M1095 30 Q 1095 18 1100 16 Q 1105 18 1105 30 Z" fill="#f6c54a"/>
-          <path d="M1175 24 Q 1175 12 1180 10 Q 1185 12 1185 24 Z" fill="#ec6478"/>
-          <path d="M1255 28 Q 1255 16 1260 14 Q 1265 16 1265 28 Z" fill="#f6c54a"/>
-          <path d="M1335 22 Q 1335 10 1340 8 Q 1345 10 1345 22 Z" fill="#ec6478"/>
-          <path d="M1415 30 Q 1415 18 1420 16 Q 1425 18 1425 30 Z" fill="#f6c54a"/>
-          <path d="M1495 20 Q 1495 8 1500 6 Q 1505 8 1505 20 Z" fill="#ec6478"/>
-          <path d="M1575 26 Q 1575 14 1580 12 Q 1585 14 1585 26 Z" fill="#ec6478"/>
-        </g>
-        <g fill="#5e8a4f" opacity=".85">
-          <ellipse cx="70" cy="45" rx="3" ry="6" transform="rotate(30 70 45)"/>
-          <ellipse cx="260" cy="48" rx="3" ry="6" transform="rotate(-25 260 48)"/>
-          <ellipse cx="500" cy="46" rx="3" ry="6" transform="rotate(35 500 46)"/>
-          <ellipse cx="740" cy="50" rx="3" ry="6" transform="rotate(-30 740 50)"/>
-          <ellipse cx="980" cy="46" rx="3" ry="6" transform="rotate(28 980 46)"/>
-          <ellipse cx="1220" cy="48" rx="3" ry="6" transform="rotate(-30 1220 48)"/>
-          <ellipse cx="1460" cy="46" rx="3" ry="6" transform="rotate(30 1460 46)"/>
-        </g>
-      </svg>
-    </div>
     <div class="footer-grid">
       <div>
         <h2 class="footer-quote">
