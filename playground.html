@@ -713,15 +713,20 @@
       flex: 1;
       position: relative;
       background: #fff;
+      overflow: hidden;
+      min-height: 0;
     }
     .pg-modal-body iframe {
+      position: absolute; inset: 0;
       width: 100%; height: 100%;
       border: none; display: none;
     }
     .pg-modal-body iframe.is-active { display: block; }
     .pg-modal-content {
+      position: absolute; inset: 0;
       display: none;
-      height: 100%; overflow-y: auto;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
       background: var(--bg-elev);
       color: var(--ink);
     }
