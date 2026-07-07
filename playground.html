@@ -592,41 +592,18 @@
 
     /* ============ PLAYGROUND V2 ============ */
     .pg-intro {
-      max-width: 720px; margin: 0 auto 48px; text-align: center;
-      position: relative; z-index: 4;
-    }
-    .pg-eyebrow {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-family: var(--mono); font-size: 11px; font-weight: 600;
-      letter-spacing: .2em; text-transform: uppercase;
-      color: rgba(240,232,210,.7);
-      padding: 6px 14px; border-radius: 999px;
-      background: rgba(240,232,210,.06);
-      border: 1px solid rgba(240,232,210,.14);
-      margin-bottom: 18px;
-    }
-    .pg-pulse {
-      width: 8px; height: 8px; border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 0 4px rgba(236,100,120,.24);
-      animation: pgPulse 1.8s ease-in-out infinite;
-    }
-    @keyframes pgPulse {
-      0%, 100% { box-shadow: 0 0 0 4px rgba(236,100,120,.24); }
-      50% { box-shadow: 0 0 0 8px rgba(236,100,120,.08); }
+      max-width: 720px; margin: 0 auto 32px; text-align: center;
+      position: relative; z-index: 4; padding-top: 20px;
     }
     .pg-title {
       font-family: var(--serif); font-weight: 500;
-      font-size: clamp(30px, 4.4vw, 52px);
+      font-size: clamp(24px, 3.4vw, 40px);
       line-height: 1.1; letter-spacing: -.015em;
-      color: #f4ecd0; margin: 0 0 12px;
-    }
-    .pg-title em {
-      font-style: italic; color: var(--accent);
+      color: #f4ecd0; margin: 0 0 10px;
     }
     .pg-sub {
-      font-family: var(--sans); font-size: 15px;
-      color: rgba(240,232,210,.7);
+      font-family: var(--sans); font-size: 14px;
+      color: rgba(240,232,210,.65);
       margin: 0; line-height: 1.55;
     }
 
@@ -689,15 +666,121 @@
       background: rgba(240,232,210,.14);
       border-color: rgba(240,232,210,.28);
     }
-    .pg-modal-frame {
-      flex: 1;
-      background: #fff;
-      position: relative;
+    /* Buttons — primary + secondary */
+    .pg-btn {
+      all: unset; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 12px 22px;
+      border-radius: 999px;
+      font-family: var(--display); font-weight: 500; font-size: 14px;
+      transition: transform .25s var(--ease), background .25s var(--ease), border-color .25s var(--ease), color .25s var(--ease), box-shadow .25s var(--ease);
+      outline: none;
     }
-    .pg-modal-frame iframe {
+    .pg-btn-arr { transition: transform .25s var(--ease); font-family: var(--display); }
+    .pg-btn:hover .pg-btn-arr, .pg-btn:focus-visible .pg-btn-arr { transform: translateX(3px); }
+    .pg-btn-primary {
+      background: var(--accent);
+      color: #fbf6e5;
+      box-shadow: 0 4px 14px -6px rgba(236,100,120,.5);
+    }
+    .pg-btn-primary:hover, .pg-btn-primary:focus-visible {
+      background: var(--accent-deep);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px -6px rgba(236,100,120,.6);
+    }
+    .pg-btn-secondary {
+      background: transparent;
+      color: rgba(240,232,210,.9);
+      border: 1px solid rgba(240,232,210,.3);
+    }
+    .pg-btn-secondary:hover, .pg-btn-secondary:focus-visible {
+      border-color: rgba(240,232,210,.6);
+      background: rgba(240,232,210,.06);
+      color: #f4ecd0;
+      transform: translateY(-2px);
+    }
+
+    /* Title mark (subtle star before title) */
+    .pg-title-mark {
+      color: var(--accent);
+      font-size: .5em; margin-right: 10px;
+      vertical-align: .35em;
+    }
+    .pg-plot-empty .pg-title-mark { display: none; }
+
+    /* Modal body handles both iframe and content view */
+    .pg-modal-body {
+      flex: 1;
+      position: relative;
+      background: #fff;
+    }
+    .pg-modal-body iframe {
       width: 100%; height: 100%;
-      border: none;
-      display: block;
+      border: none; display: none;
+    }
+    .pg-modal-body iframe.is-active { display: block; }
+    .pg-modal-content {
+      display: none;
+      height: 100%; overflow-y: auto;
+      background: var(--bg-elev);
+      color: var(--ink);
+    }
+    .pg-modal-content.is-active { display: block; }
+
+    /* Story content style */
+    .pg-story {
+      max-width: 720px; margin: 0 auto;
+      padding: 56px 40px;
+    }
+    .pg-story-eyebrow {
+      display: inline-block;
+      font-family: var(--mono); font-size: 11px; font-weight: 600;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: var(--accent-deep);
+      margin-bottom: 12px;
+    }
+    .pg-story-title {
+      font-family: var(--serif); font-weight: 500;
+      font-size: clamp(28px, 3.6vw, 40px);
+      color: var(--ink); margin: 0 0 24px;
+      letter-spacing: -.015em; line-height: 1.15;
+    }
+    .pg-story h5 {
+      font-family: var(--display); font-weight: 600;
+      font-size: 16px; color: var(--ink);
+      margin: 28px 0 8px;
+    }
+    .pg-story p {
+      font-size: 15px; line-height: 1.7;
+      color: var(--ink-soft); margin: 0 0 14px;
+    }
+    .pg-story ul { padding-left: 22px; margin: 0 0 16px; }
+    .pg-story ul li {
+      font-size: 15px; line-height: 1.7;
+      color: var(--ink-soft); margin-bottom: 8px;
+    }
+    .pg-story-outbound {
+      margin-top: 24px; padding-top: 20px;
+      border-top: 1px solid var(--rule);
+    }
+    .pg-story-outbound a {
+      color: var(--accent);
+      font-family: var(--display); font-weight: 600;
+    }
+    .pg-story-outbound a:hover { color: var(--accent-deep); }
+
+    /* Fix: stage min-height back to viewport for seamless footer transition */
+    .stage {
+      min-height: 100vh !important;
+      padding-top: 40px !important;
+      padding-bottom: 80px !important;
+    }
+
+    /* Fix: footer flush with stage (no beige gap, no rounded corners bleed) */
+    footer {
+      margin-top: 0 !important;
+      border-radius: 0 !important;
+      max-width: none !important;
     }
 
     @media (max-width: 640px) {
@@ -902,9 +985,6 @@
     <main class="main">
       <div class="stage">
 
-        <!-- moon -->
-        <div class="moon" aria-hidden="true"></div>
-
         <!-- fireflies -->
         <span class="firefly ff-1"></span><span class="firefly ff-2"></span><span class="firefly ff-3"></span>
         <span class="firefly ff-4"></span><span class="firefly ff-5"></span><span class="firefly ff-6"></span>
@@ -917,13 +997,16 @@
           <p class="pg-sub">Hover a plot to peek. Tap "Try it" to plant yourself in.</p>
         </div>
 
-        <!-- Playground projects: horizontal rows, alternating sides -->
+        <!-- Playground projects: horizontal rows -->
         <div class="pg-projects reveal d3">
 
           <article class="pg-plot">
             <div class="pg-plot-content">
               <span class="pg-plot-tag">Computer vision &middot; Interactive</span>
-              <h3 class="pg-plot-title">Hastamudra</h3>
+              <h3 class="pg-plot-title">
+                <span class="pg-title-mark" aria-hidden="true">✦</span>
+                Hastamudra
+              </h3>
               <p class="pg-plot-line">Where the hand moves, the gaze follows.</p>
               <p class="pg-plot-desc">A live camera experiment that classifies Indian classical hand gestures (mudras) in real time. Hold your hand in front of the camera and watch it name the shape.</p>
               <div class="pg-plot-tools">
@@ -931,13 +1014,14 @@
                 <span class="pg-tools-list">MediaPipe &middot; TensorFlow.js &middot; Vanilla JS</span>
               </div>
               <div class="pg-plot-actions">
-                <button class="plot-try" type="button" data-launch="https://sakshii-shahh.github.io/hastamudra/" data-title="Hastamudra">
+                <button class="pg-btn pg-btn-primary" type="button" data-launch="https://sakshii-shahh.github.io/hastamudra/" data-title="Hastamudra">
                   <span>Try it</span>
-                  <span class="plot-try-arr">&rarr;</span>
+                  <span class="pg-btn-arr">&rarr;</span>
                 </button>
-                <a class="plot-source" href="https://sakshii-shahh.github.io/hastamudra/" target="_blank" rel="noopener">
-                  Open in tab &nearr;
-                </a>
+                <button class="pg-btn pg-btn-secondary" type="button" data-story="story-hastamudra" data-title="How I built Hastamudra">
+                  <span>How I built it</span>
+                  <span class="pg-btn-arr">&nearr;</span>
+                </button>
               </div>
             </div>
             <div class="pg-plot-media" data-placeholder="Add preview at assets/playground/hastamudra.mp4 (or .png)">
@@ -965,9 +1049,30 @@
 
         </div>
 
+        <!-- Story templates (hidden, injected into modal when needed) -->
+        <template id="story-hastamudra">
+          <div class="pg-story">
+            <span class="pg-story-eyebrow">The build</span>
+            <h4 class="pg-story-title">How I built Hastamudra</h4>
+            <p>I wanted to see if I could get a browser to recognize Indian classical dance mudras from a webcam feed, with no backend, no heavy ML infra, and no install for the user.</p>
+            <h5>The stack</h5>
+            <ul>
+              <li>MediaPipe Hands for real-time hand landmark detection (21 points per hand, ~30 fps in the browser)</li>
+              <li>A small custom classifier trained on landmark geometry, not raw images</li>
+              <li>Vanilla JS + HTML + CSS. No framework.</li>
+              <li>GitHub Pages for hosting</li>
+            </ul>
+            <h5>The tricky part</h5>
+            <p>Landmark detection is easy. Deciding which landmark positions equal which mudra was the hard part. I hand-tagged reference examples for each mudra, then compared each frame's landmark geometry against those templates.</p>
+            <h5>What's next</h5>
+            <p>Expanding the reference library. Adding more classical mudras beyond the initial set. Would love to eventually pair each mudra with the story it tells in dance.</p>
+            <p class="pg-story-outbound"><a href="https://sakshii-shahh.github.io/hastamudra/" target="_blank" rel="noopener">Try it live &nearr;</a></p>
+          </div>
+        </template>
+
       </div>
 
-      <!-- Try-it modal -->
+      <!-- Modal (supports iframe demo + story text) -->
       <div class="pg-modal" id="pgModal" role="dialog" aria-modal="true" aria-labelledby="pgModalTitle">
         <div class="pg-modal-inner">
           <div class="pg-modal-bar">
@@ -977,8 +1082,9 @@
             </span>
             <button class="pg-modal-close" type="button" id="pgModalClose">Close &times;</button>
           </div>
-          <div class="pg-modal-frame">
+          <div class="pg-modal-body">
             <iframe id="pgFrame" title="Playground demo" allow="camera; microphone; autoplay"></iframe>
+            <div class="pg-modal-content" id="pgModalContent"></div>
           </div>
         </div>
       </div>
@@ -1087,36 +1193,54 @@
       });
     })();
 
-    // Playground "Try it" modal launcher
+    // Playground modal: supports iframe (Try it) + story content (How I built it)
     (function(){
       const modal = document.getElementById('pgModal');
       const frame = document.getElementById('pgFrame');
+      const content = document.getElementById('pgModalContent');
       const title = document.getElementById('pgModalTitle');
       const closeBtn = document.getElementById('pgModalClose');
-      const buttons = document.querySelectorAll('.plot-try');
-      if (!modal || !frame) return;
-      function open(url, name) {
+      if (!modal) return;
+
+      function openIframe(url, name) {
         title.textContent = name || 'Live demo';
         frame.src = url;
+        frame.classList.add('is-active');
+        content.classList.remove('is-active');
+        content.innerHTML = '';
+        modal.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      }
+      function openStory(templateId, name) {
+        const tpl = document.getElementById(templateId);
+        title.textContent = name || 'The build';
+        content.innerHTML = tpl ? tpl.innerHTML : '<div class="pg-story"><p>Story coming soon.</p></div>';
+        content.classList.add('is-active');
+        frame.classList.remove('is-active');
+        frame.src = '';
         modal.classList.add('is-open');
         document.body.style.overflow = 'hidden';
       }
       function close() {
         modal.classList.remove('is-open');
         frame.src = '';
+        content.innerHTML = '';
+        content.classList.remove('is-active');
+        frame.classList.remove('is-active');
         document.body.style.overflow = '';
       }
-      buttons.forEach(btn => {
+
+      document.querySelectorAll('.pg-btn').forEach(btn => {
         btn.addEventListener('click', () => {
           const url = btn.dataset.launch;
+          const storyId = btn.dataset.story;
           const name = btn.dataset.title;
-          if (url) open(url, name);
+          if (url) openIframe(url, name);
+          else if (storyId) openStory(storyId, name);
         });
       });
       closeBtn.addEventListener('click', close);
-      modal.addEventListener('click', (e) => {
-        if (e.target === modal) close();
-      });
+      modal.addEventListener('click', (e) => { if (e.target === modal) close(); });
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && modal.classList.contains('is-open')) close();
       });
