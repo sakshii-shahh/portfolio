@@ -1362,15 +1362,13 @@
     .di-panel[data-panel="aide"] .di-list li::before { background: var(--secondary); }
 
     /* Mosaic hi-fi tab explorer */
-    /* Mosaic hi-fi explorer — left list + right screen + caption below */
+    /* Mosaic hi-fi explorer — 3-col: tabs | screen | caption */
     .mosaic-hifi {
       display: grid;
-      grid-template-columns: 240px 1fr;
-      grid-template-areas:
-        "tabs display"
-        "tabs detail";
-      gap: 12px 40px;
-      align-items: start;
+      grid-template-columns: 200px auto 1fr;
+      grid-template-areas: "tabs display detail";
+      gap: 32px;
+      align-items: center;
       margin: 20px 0 12px;
     }
     @media (max-width: 900px) {
@@ -1378,6 +1376,7 @@
         grid-template-columns: 1fr;
         grid-template-areas: "tabs" "display" "detail";
         gap: 20px;
+        align-items: start;
       }
     }
 
@@ -1472,22 +1471,36 @@
     .mh-detail {
       grid-area: detail;
       position: relative;
-      min-height: 60px;
-      padding-top: 20px;
-      text-align: center;
+      display: grid;
+      min-height: 460px;
+      align-items: center;
+      padding: 0 8px;
     }
     .mh-detail-text {
-      position: absolute;
-      inset: 20px 0 0;
+      grid-area: 1 / 1;
       font-family: var(--serif); font-style: italic;
-      font-size: 15px; color: var(--ink-soft);
-      line-height: 1.55; margin: 0;
+      font-size: 16px; color: var(--ink-soft);
+      line-height: 1.6; margin: 0;
       opacity: 0;
       transition: opacity .25s var(--ease);
-      max-width: 68ch;
-      margin-left: auto; margin-right: auto;
+      max-width: 36ch;
+      text-align: left;
     }
     .mh-detail-text.is-active { opacity: 1; }
+    @media (max-width: 900px) {
+      .mh-detail {
+        min-height: 60px;
+        padding: 20px 0 0;
+        text-align: center;
+        align-items: start;
+      }
+      .mh-detail-text {
+        text-align: center;
+        max-width: 68ch;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
 
     /* ============ USER JOURNEY MAP ============ */
     .journey-map { margin: 20px 0 12px; }
