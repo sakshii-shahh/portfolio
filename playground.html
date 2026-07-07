@@ -601,8 +601,9 @@
 
     /* ============ PLAYGROUND V2 ============ */
     .pg-intro {
-      max-width: 720px; margin: 0 auto 32px; text-align: center;
-      position: relative; z-index: 4; padding-top: 20px;
+      max-width: 720px; margin: 0 auto 40px; text-align: center;
+      position: relative; z-index: 4;
+      padding-top: 80px;
     }
     .pg-title {
       font-family: var(--serif); font-weight: 500;
@@ -911,6 +912,155 @@
     .pg-plot-empty {
       opacity: .72;
     }
+    /* Variant A v2: Featured center + flanking seedlings */
+    .seed-bed {
+      display: grid;
+      grid-template-columns: 1fr 2fr 1fr;
+      gap: 24px;
+      max-width: 1180px; margin: 0 auto;
+      padding: 24px 24px 100px;
+      align-items: center;
+      position: relative; z-index: 4;
+    }
+    @media (max-width: 900px) {
+      .seed-bed { grid-template-columns: 1fr; padding-bottom: 60px; }
+    }
+
+    .seed {
+      background: linear-gradient(155deg, rgba(240,232,210,.07) 0%, rgba(240,232,210,.02) 100%);
+      border: 1px solid rgba(240,232,210,.14);
+      border-radius: 26px;
+      padding: 48px 32px 40px;
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: flex-start; text-align: center;
+      position: relative; overflow: hidden;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      transition: transform .5s var(--ease), box-shadow .5s var(--ease), border-color .5s var(--ease);
+    }
+    .seed-marker { width: 84px; height: 84px; margin-bottom: 20px; transition: transform .6s var(--ease); }
+    .seed-marker svg { width: 100%; height: 100%; display: block; }
+    .seed-name {
+      font-family: var(--serif); font-weight: 500;
+      font-size: 24px; line-height: 1.15;
+      color: #f4ecd0; letter-spacing: -.01em;
+    }
+
+    /* Side seedlings — compact, aspirational */
+    .seed-side {
+      min-height: 320px;
+      opacity: .78;
+      cursor: default;
+    }
+    .seed-side .seed-name {
+      color: rgba(240,232,210,.72);
+      font-size: 20px;
+    }
+    .seed-side-line {
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: .16em; text-transform: uppercase;
+      color: rgba(240,232,210,.42);
+      margin-top: 8px;
+    }
+    .seed-side:hover {
+      opacity: .9;
+      transform: translateY(-4px);
+      border-color: rgba(240,232,210,.24);
+    }
+    .seed-side:hover .seed-marker {
+      transform: rotate(-8deg) scale(1.06);
+    }
+
+    /* Featured — always expanded, bigger, coral-tinted */
+    .seed-featured {
+      min-height: 640px;
+      background: linear-gradient(155deg, rgba(240,232,210,.11) 0%, rgba(240,232,210,.04) 100%);
+      border: 1px solid rgba(236,100,120,.4);
+      padding: 56px 40px 48px;
+      box-shadow:
+        0 30px 60px -20px rgba(0,0,0,.5),
+        0 0 40px -12px rgba(236,100,120,.25);
+    }
+    .seed-featured::before {
+      content: ""; position: absolute;
+      top: -60px; right: -60px;
+      width: 200px; height: 200px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(236,100,120,.16) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .seed-featured .seed-marker { width: 96px; height: 96px; }
+    .seed-featured .seed-name {
+      font-size: 30px; color: #f4ecd0;
+    }
+    .seed-featured:hover .seed-marker {
+      transform: rotate(-10deg) scale(1.08);
+    }
+    .seed-featured:hover {
+      transform: translateY(-4px);
+      box-shadow:
+        0 40px 70px -20px rgba(0,0,0,.55),
+        0 0 50px -12px rgba(236,100,120,.35);
+    }
+
+    /* Featured content — always visible */
+    .seed-bloom {
+      opacity: 1; width: 100%; margin-top: 24px;
+    }
+    .seed-tag {
+      font-family: var(--mono); font-size: 11px; font-weight: 600;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: rgba(236,100,120,.95);
+      display: block; margin-bottom: 12px;
+    }
+    .seed-line {
+      font-family: var(--serif); font-style: italic; font-size: 17px;
+      color: rgba(240,232,210,.9); margin: 0 0 14px; line-height: 1.4;
+    }
+    .seed-desc {
+      font-size: 13.5px; color: rgba(240,232,210,.68);
+      line-height: 1.6; margin: 0 0 22px;
+      max-width: 42ch; margin-left: auto; margin-right: auto;
+    }
+    .seed-preview {
+      aspect-ratio: 16/10; border-radius: 14px; overflow: hidden;
+      background: rgba(240,232,210,.06);
+      border: 1px solid rgba(236,100,120,.22);
+      margin-bottom: 22px;
+      box-shadow: 0 14px 32px -14px rgba(0,0,0,.5);
+    }
+    .seed-preview video, .seed-preview img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .seed-actions {
+      display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+    }
+    /* Playground A stage override */
+    .stage {
+      min-height: 100vh !important;
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+    }
+    /* Playground A: dark body so no beige gap shows between shell and footer */
+    body { background: var(--footer-bg) !important; }
+    .sidebar { background: var(--bg); }
+
+    footer {
+      margin: 0 !important;
+      border-radius: 0 !important;
+      max-width: none !important;
+      position: relative !important;
+      padding-top: 120px !important;
+    }
+
+    /* Tulip row decoration on top of footer */
+    .footer-tulips {
+      position: absolute;
+      top: 32px; left: 0; right: 0;
+      height: 68px;
+      pointer-events: none;
+      overflow: visible;
+    }
+    .footer-tulips svg { width: 100%; height: 100%; display: block; }
   </style>
 </head>
 <body>
@@ -992,54 +1142,71 @@
           <p class="pg-sub">Hover a plot to peek. Tap "Try it" to plant yourself in.</p>
         </div>
 
-        <!-- Playground projects: horizontal rows -->
-        <div class="pg-projects reveal d3">
+        <!-- Playground projects: featured center + flanking seedlings (Variant A v2) -->
+        <div class="seed-bed reveal d3">
 
-          <article class="pg-plot">
-            <div class="pg-plot-content">
-              <span class="pg-plot-tag">Computer vision &middot; Interactive</span>
-              <h3 class="pg-plot-title">
-                <span class="pg-title-mark" aria-hidden="true">✦</span>
-                Hastamudra
-              </h3>
-              <p class="pg-plot-line">Where the hand moves, the gaze follows.</p>
-              <p class="pg-plot-desc">A live camera experiment that classifies Indian classical hand gestures (mudras) in real time. Hold your hand in front of the camera and watch it name the shape.</p>
-              <div class="pg-plot-tools">
-                <span class="pg-tools-label">Tools</span>
-                <span class="pg-tools-list">MediaPipe &middot; TensorFlow.js &middot; Vanilla JS</span>
+          <!-- Left seedling: coming up -->
+          <article class="seed seed-side">
+            <div class="seed-marker" aria-hidden="true">
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50 92 L50 60" stroke="#5e8a4f" stroke-width="2" stroke-linecap="round" fill="none"/>
+                <path d="M50 74 Q 40 68 34 58 Q 44 64 50 72 Z" fill="#5e8a4f" opacity=".75"/>
+                <path d="M50 68 Q 60 64 66 54 Q 56 60 50 66 Z" fill="#5e8a4f" opacity=".75"/>
+                <circle cx="50" cy="56" r="5" fill="#8a6418" opacity=".55"/>
+              </svg>
+            </div>
+            <div class="seed-name">Coming up</div>
+            <div class="seed-side-line">Still blooming</div>
+          </article>
+
+          <!-- Featured: Hastamudra (always expanded) -->
+          <article class="seed seed-featured">
+            <div class="seed-marker" aria-hidden="true">
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50 92 L50 50" stroke="#3d6b2c" stroke-width="2" stroke-linecap="round" fill="none"/>
+                <path d="M50 72 Q 34 66 28 54 Q 40 60 50 68 Z" fill="#5e8a4f"/>
+                <path d="M50 64 Q 66 58 72 46 Q 60 52 50 60 Z" fill="#5e8a4f"/>
+                <g transform="translate(50, 40)">
+                  <ellipse cx="0" cy="-14" rx="8" ry="12" fill="#ec6478" opacity=".92"/>
+                  <ellipse cx="13" cy="-4" rx="8" ry="12" fill="#ec6478" opacity=".92" transform="rotate(65)"/>
+                  <ellipse cx="8" cy="11" rx="8" ry="12" fill="#ec6478" opacity=".92" transform="rotate(140)"/>
+                  <ellipse cx="-8" cy="11" rx="8" ry="12" fill="#ec6478" opacity=".92" transform="rotate(-140)"/>
+                  <ellipse cx="-13" cy="-4" rx="8" ry="12" fill="#ec6478" opacity=".92" transform="rotate(-65)"/>
+                  <circle r="6" fill="#f6e4a8"/>
+                </g>
+              </svg>
+            </div>
+            <div class="seed-name">Hastamudra</div>
+            <div class="seed-bloom">
+              <span class="seed-tag">Computer vision &middot; Interactive</span>
+              <p class="seed-line">Where the hand moves, the gaze follows.</p>
+              <p class="seed-desc">Live camera experiment classifying Indian classical hand gestures in real time.</p>
+              <div class="seed-preview">
+                <video src="assets/playground/hastamudra.mp4" autoplay loop muted playsinline></video>
               </div>
-              <div class="pg-plot-actions">
+              <div class="seed-actions">
                 <button class="pg-btn pg-btn-primary" type="button" data-launch="https://sakshii-shahh.github.io/hastamudra/" data-title="Hastamudra">
-                  <span>Try it</span>
-                  <span class="pg-btn-arr">&rarr;</span>
+                  <span>Try it</span><span class="pg-btn-arr">&rarr;</span>
                 </button>
                 <button class="pg-btn pg-btn-secondary" type="button" data-story="story-hastamudra" data-title="How I built Hastamudra">
-                  <span>How I built it</span>
-                  <span class="pg-btn-arr">&nearr;</span>
+                  <span>How I built it</span><span class="pg-btn-arr">&nearr;</span>
                 </button>
               </div>
-            </div>
-            <div class="pg-plot-media" data-placeholder="Add preview at assets/playground/hastamudra.mp4 (or .png)">
-              <video src="assets/playground/hastamudra.mp4" autoplay loop muted playsinline poster="assets/playground/hastamudra.png"></video>
             </div>
           </article>
 
-          <article class="pg-plot pg-plot-empty">
-            <div class="pg-plot-content">
-              <span class="pg-plot-tag">Coming soon</span>
-              <h3 class="pg-plot-title">Something's growing.</h3>
-              <p class="pg-plot-line">The next patch is being seeded.</p>
-              <p class="pg-plot-desc">Weekend prototypes brewing. Come back later for the next one.</p>
-            </div>
-            <div class="pg-plot-media pg-plot-media-empty" aria-hidden="true">
-              <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                <path d="M100 190 L100 130" stroke="#5e8a4f" stroke-width="3" stroke-linecap="round" fill="none"/>
-                <path d="M100 150 Q 76 140 66 120 Q 84 128 100 144 Z" fill="#5e8a4f" opacity=".75"/>
-                <path d="M100 138 Q 124 130 134 110 Q 116 118 100 132 Z" fill="#5e8a4f" opacity=".75"/>
-                <circle cx="100" cy="122" r="10" fill="#8a6418" opacity=".55"/>
-                <circle cx="100" cy="122" r="4" fill="#f6e4a8" opacity=".7"/>
+          <!-- Right seedling: still blooming -->
+          <article class="seed seed-side">
+            <div class="seed-marker" aria-hidden="true">
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50 92 L50 66" stroke="#5e8a4f" stroke-width="2" stroke-linecap="round" fill="none" opacity=".7"/>
+                <circle cx="50" cy="62" r="5" fill="#8a6418" opacity=".5"/>
+                <path d="M42 78 Q 40 72 44 68" stroke="#5e8a4f" stroke-width="1.5" fill="none" opacity=".55"/>
+                <path d="M58 78 Q 60 72 56 68" stroke="#5e8a4f" stroke-width="1.5" fill="none" opacity=".55"/>
               </svg>
             </div>
+            <div class="seed-name">Still blooming</div>
+            <div class="seed-side-line">Weekend brewing</div>
           </article>
 
         </div>
@@ -1112,6 +1279,50 @@
   </div>
 
   <footer>
+    <div class="footer-tulips" aria-hidden="true">
+      <svg viewBox="0 0 1600 68" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+        <g stroke="#3d6b2c" stroke-width="1.5" fill="none" stroke-linecap="round">
+          <path d="M60 68 L60 26"/><path d="M140 68 L140 32"/><path d="M220 68 L220 22"/>
+          <path d="M300 68 L300 30"/><path d="M380 68 L380 24"/><path d="M460 68 L460 34"/>
+          <path d="M540 68 L540 20"/><path d="M620 68 L620 30"/><path d="M700 68 L700 26"/>
+          <path d="M780 68 L780 32"/><path d="M860 68 L860 24"/><path d="M940 68 L940 30"/>
+          <path d="M1020 68 L1020 22"/><path d="M1100 68 L1100 32"/><path d="M1180 68 L1180 26"/>
+          <path d="M1260 68 L1260 30"/><path d="M1340 68 L1340 24"/><path d="M1420 68 L1420 32"/>
+          <path d="M1500 68 L1500 22"/><path d="M1580 68 L1580 28"/>
+        </g>
+        <g>
+          <path d="M55 24 Q 55 12 60 10 Q 65 12 65 24 Z" fill="#ec6478"/>
+          <path d="M135 30 Q 135 18 140 16 Q 145 18 145 30 Z" fill="#f6c54a"/>
+          <path d="M215 20 Q 215 8 220 6 Q 225 8 225 20 Z" fill="#ec6478"/>
+          <path d="M295 28 Q 295 16 300 14 Q 305 16 305 28 Z" fill="#f6c54a"/>
+          <path d="M375 22 Q 375 10 380 8 Q 385 10 385 22 Z" fill="#ec6478"/>
+          <path d="M455 32 Q 455 20 460 18 Q 465 20 465 32 Z" fill="#f6c54a"/>
+          <path d="M535 18 Q 535 6 540 4 Q 545 6 545 18 Z" fill="#ec6478"/>
+          <path d="M615 28 Q 615 16 620 14 Q 625 16 625 28 Z" fill="#f6c54a"/>
+          <path d="M695 24 Q 695 12 700 10 Q 705 12 705 24 Z" fill="#ec6478"/>
+          <path d="M775 30 Q 775 18 780 16 Q 785 18 785 30 Z" fill="#f6c54a"/>
+          <path d="M855 22 Q 855 10 860 8 Q 865 10 865 22 Z" fill="#ec6478"/>
+          <path d="M935 28 Q 935 16 940 14 Q 945 16 945 28 Z" fill="#f6c54a"/>
+          <path d="M1015 20 Q 1015 8 1020 6 Q 1025 8 1025 20 Z" fill="#ec6478"/>
+          <path d="M1095 30 Q 1095 18 1100 16 Q 1105 18 1105 30 Z" fill="#f6c54a"/>
+          <path d="M1175 24 Q 1175 12 1180 10 Q 1185 12 1185 24 Z" fill="#ec6478"/>
+          <path d="M1255 28 Q 1255 16 1260 14 Q 1265 16 1265 28 Z" fill="#f6c54a"/>
+          <path d="M1335 22 Q 1335 10 1340 8 Q 1345 10 1345 22 Z" fill="#ec6478"/>
+          <path d="M1415 30 Q 1415 18 1420 16 Q 1425 18 1425 30 Z" fill="#f6c54a"/>
+          <path d="M1495 20 Q 1495 8 1500 6 Q 1505 8 1505 20 Z" fill="#ec6478"/>
+          <path d="M1575 26 Q 1575 14 1580 12 Q 1585 14 1585 26 Z" fill="#ec6478"/>
+        </g>
+        <g fill="#5e8a4f" opacity=".85">
+          <ellipse cx="70" cy="45" rx="3" ry="6" transform="rotate(30 70 45)"/>
+          <ellipse cx="260" cy="48" rx="3" ry="6" transform="rotate(-25 260 48)"/>
+          <ellipse cx="500" cy="46" rx="3" ry="6" transform="rotate(35 500 46)"/>
+          <ellipse cx="740" cy="50" rx="3" ry="6" transform="rotate(-30 740 50)"/>
+          <ellipse cx="980" cy="46" rx="3" ry="6" transform="rotate(28 980 46)"/>
+          <ellipse cx="1220" cy="48" rx="3" ry="6" transform="rotate(-30 1220 48)"/>
+          <ellipse cx="1460" cy="46" rx="3" ry="6" transform="rotate(30 1460 46)"/>
+        </g>
+      </svg>
+    </div>
     <div class="footer-grid">
       <div>
         <h2 class="footer-quote">
