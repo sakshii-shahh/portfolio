@@ -1063,41 +1063,6 @@
       padding-top: 0 !important;
       padding-bottom: 0 !important;
     }
-    /* Playground A: dark body so no beige gap shows between shell and footer */
-    body { background: var(--footer-bg) !important; }
-    .sidebar { background: var(--bg); }
-
-    footer {
-      margin: 0 !important;
-      border-radius: 0 !important;
-      max-width: none !important;
-    }
-
-    /* Ensure the sidebar's beige column extends the full shell height */
-    .shell {
-      position: relative;
-    }
-    .shell::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; bottom: 0;
-      width: 320px;
-      background: var(--bg);
-      z-index: 0;
-      pointer-events: none;
-    }
-    @media (max-width: 980px) {
-      .shell::before { display: none; }
-    }
-    .sidebar {
-      position: sticky;
-      background: transparent;
-      z-index: 1;
-    }
-    .main {
-      position: relative;
-      z-index: 1;
-    }
 
   </style>
 </head>
