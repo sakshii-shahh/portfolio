@@ -439,14 +439,6 @@
     }
 
     /* Dark strip that extends the .stage image down to the footer */
-    .tulip-area {
-      background: #1f2a1c;
-      position: relative;
-      width: 100%;
-      margin-top: -48px;
-      z-index: 0;
-    }
-    @media (max-width: 980px) { .tulip-area { margin-top: -32px; } }
 
         /* ============ TULIP BAND ============ */
     .tulip-band {
@@ -489,6 +481,23 @@
     }
     @media (max-width: 600px) {
       .tulip-band > :nth-child(even) { display: none; }
+    }
+    .planted-tulip {
+      position: absolute;
+      bottom: 100%;
+      pointer-events: none;
+      width: auto; height: 0;
+      transition: height .5s cubic-bezier(.4, 1.4, .5, 1);
+      transform: translateX(-50%) rotate(var(--tulip-rotate, 0deg));
+      transform-origin: bottom center;
+      z-index: 3;
+      filter: drop-shadow(0 2px 4px rgba(20, 18, 12, 0.15));
+    }
+    .planted-tulip.grown {
+      height: 88px;
+    }
+    @media (max-width: 980px) {
+      .planted-tulip.grown { height: 56px; }
     }
     @media (prefers-reduced-motion: reduce) {
       .tulip,
@@ -774,30 +783,12 @@
     }
     .pg-story-outbound a:hover { color: var(--accent-deep); }
 
-    /* Fix: stage min-height back to viewport for seamless footer transition */
-    .stage {
-      min-height: 100vh !important;
-      padding-top: 40px !important;
-      padding-bottom: 80px !important;
-    }
-
-    /* Fix: footer flush with stage (no beige gap, no rounded corners bleed) */
-    footer {
-      margin-top: 0 !important;
-      border-radius: 0 !important;
-      max-width: none !important;
-    }
-
     @media (max-width: 640px) {
       .pg-modal { padding: 16px; }
       .pg-modal-inner { height: 90vh; border-radius: 18px; }
       .plot-title { font-size: 24px; }
     }
 
-    .stage {
-      min-height: auto !important;
-      padding-top: 80px; padding-bottom: 120px;
-    }
     /* ============ PLAYGROUND PROJECTS (horizontal rows) ============ */
     .pg-projects {
       max-width: 1080px;
@@ -1097,8 +1088,6 @@
   </div>
 
   <!-- ============ FOOTER ============ -->
-  <!-- Dark "ground" strip extends the stage image down to the footer; tulips overlap the stage above and the footer below -->
-  <div class="tulip-area" aria-hidden="true">
   <!-- ====================== TULIP BAND (decorative, sits behind footer top) ====================== -->
   <div class="tulip-band" aria-hidden="true">
     <img src="assets/tulips/tulip-1.svg" alt="" class="tulip t-yellow" loading="lazy" />
@@ -1120,7 +1109,6 @@
     <img src="assets/tulips/leaf-2.svg" alt="" class="leaf tilt-r" loading="lazy" />
     <img src="assets/tulips/tulip-3.svg" alt="" class="tulip t-coral" loading="lazy" />
     <img src="assets/tulips/tulip-5.svg" alt="" class="tulip t-pink tilt-l" loading="lazy" />
-  </div>
   </div>
 
   <footer>
@@ -1178,6 +1166,29 @@
       el.addEventListener('mouseenter', () => document.body.classList.add('cursor-grow'));
       el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-grow'));
     });
+
+    // ============ Click anywhere on the footer to plant a tulip ============
+    (function setupFooterClickPlant() {
+      const footerEl = document.querySelector('footer');
+      if (!footerEl) return;
+      const variants = ['tulip-1.svg', 'tulip-2.svg', 'tulip-3.svg', 'tulip-4.svg', 'tulip-5.svg', 'tulip-6.svg'];
+      footerEl.addEventListener('click', (e) => {
+        if (e.target.closest('a, button')) return;
+        const rect = footerEl.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const variant = variants[Math.floor(Math.random() * variants.length)];
+        const rotation = (Math.random() * 12 - 6).toFixed(1);
+        const tulip = document.createElement('img');
+        tulip.src = `assets/tulips/${variant}`;
+        tulip.className = 'planted-tulip';
+        tulip.alt = '';
+        tulip.setAttribute('aria-hidden', 'true');
+        tulip.style.left = x + 'px';
+        tulip.style.setProperty('--tulip-rotate', rotation + 'deg');
+        footerEl.appendChild(tulip);
+        requestAnimationFrame(() => { tulip.classList.add('grown'); });
+      });
+    })();
 
     // Playground media: mark missing so placeholder shows
     (function(){
