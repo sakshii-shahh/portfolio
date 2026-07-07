@@ -1362,39 +1362,75 @@
     .di-panel[data-panel="aide"] .di-list li::before { background: var(--secondary); }
 
     /* Mosaic hi-fi tab explorer */
-    /* Mosaic hi-fi tab explorer — compact horizontal pills */
-    .mosaic-hifi { margin: 20px 0 12px; }
+    /* Mosaic hi-fi explorer — left list + right screen + caption below */
+    .mosaic-hifi {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      grid-template-areas:
+        "tabs display"
+        "tabs detail";
+      gap: 12px 40px;
+      align-items: start;
+      margin: 20px 0 12px;
+    }
+    @media (max-width: 900px) {
+      .mosaic-hifi {
+        grid-template-columns: 1fr;
+        grid-template-areas: "tabs" "display" "detail";
+        gap: 20px;
+      }
+    }
 
     .mh-tabs {
-      display: flex; flex-wrap: wrap; gap: 8px;
-      justify-content: center;
-      padding: 0 4px 24px;
+      grid-area: tabs;
+      display: flex; flex-direction: column;
+      gap: 2px;
+      position: sticky; top: 36px;
     }
+    @media (max-width: 900px) {
+      .mh-tabs { position: static; flex-direction: row; flex-wrap: wrap; gap: 6px; }
+    }
+
     .mh-tab {
-      background: var(--bg-card); border: 1.5px solid var(--rule);
-      border-radius: 999px; padding: 8px 14px;
-      font-family: var(--display); font-weight: 500; font-size: 12.5px;
-      color: var(--ink-soft); cursor: pointer;
-      transition: border-color .2s var(--ease), background .2s var(--ease), color .2s var(--ease), transform .2s var(--ease);
-      outline: none; white-space: nowrap;
+      all: unset; cursor: pointer;
+      display: flex; align-items: center; gap: 12px;
+      padding: 10px 14px;
+      border-radius: var(--r-md);
+      transition: background .2s var(--ease);
+      outline: none;
+    }
+    .mh-tab-num {
+      font-family: var(--mono); font-size: 10.5px; font-weight: 600;
+      letter-spacing: .12em; color: var(--ink-mute);
+      min-width: 20px;
+    }
+    .mh-tab-label {
+      font-family: var(--display); font-size: 14px; font-weight: 500;
+      color: var(--ink-soft);
+      transition: color .2s var(--ease);
     }
     .mh-tab:hover, .mh-tab:focus-visible {
-      border-color: var(--accent); background: var(--bg-elev); color: var(--ink);
+      background: var(--bg-elev);
+    }
+    .mh-tab:hover .mh-tab-label,
+    .mh-tab:focus-visible .mh-tab-label {
+      color: var(--ink);
     }
     .mh-tab.is-active {
-      border-color: var(--accent); background: var(--accent);
-      color: #fbf6e5; transform: translateY(-1px);
+      background: var(--accent-soft);
+    }
+    .mh-tab.is-active .mh-tab-num { color: var(--accent-deep); }
+    .mh-tab.is-active .mh-tab-label {
+      color: var(--accent-deep);
+      font-weight: 600;
     }
 
     .mh-display {
-      position: relative;
+      grid-area: display;
       display: grid;
       place-items: center;
-      min-height: 520px;
+      min-height: 460px;
       padding: 0;
-      overflow: visible;
-      background: transparent;
-      border: none;
     }
     .mh-screen {
       grid-area: 1 / 1;
@@ -1402,8 +1438,7 @@
       transform: scale(.985);
       transition: opacity .3s var(--ease), transform .3s var(--ease);
       pointer-events: none;
-      display: grid;
-      place-items: center;
+      display: grid; place-items: center;
       max-width: 100%;
     }
     .mh-screen.is-active {
@@ -1413,55 +1448,46 @@
     }
     .mh-screen img {
       max-width: 100%;
-      max-height: 620px;
+      max-height: 460px;
       width: auto;
       height: auto;
       display: block;
       border-radius: 12px;
-      box-shadow: 0 20px 40px -20px rgba(20,18,12,.15);
+      box-shadow: 0 16px 32px -16px rgba(20,18,12,.15);
     }
     .mh-screen.img-missing img { display: none; }
     .mh-screen.img-missing::after {
       content: attr(data-placeholder);
-      font-family: var(--mono); font-size: 11px;
-      letter-spacing: .14em; text-transform: uppercase;
-      color: var(--ink-mute); padding: 60px 40px;
-      text-align: center;
+      padding: 60px 40px;
       border: 1px dashed var(--rule-strong);
       border-radius: var(--r-lg);
-      min-width: 320px; min-height: 400px;
+      min-width: 280px; min-height: 360px;
       display: grid; place-items: center;
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--ink-mute); text-align: center;
       background: var(--bg-elev);
     }
 
     .mh-detail {
+      grid-area: detail;
       position: relative;
-      min-height: 56px;
+      min-height: 60px;
+      padding-top: 20px;
       text-align: center;
-      padding: 20px 24px 0;
     }
     .mh-detail-text {
       position: absolute;
-      inset: 20px 24px 0;
+      inset: 20px 0 0;
       font-family: var(--serif); font-style: italic;
-      font-size: 15px; line-height: 1.55;
-      color: var(--ink-soft); margin: 0;
+      font-size: 15px; color: var(--ink-soft);
+      line-height: 1.55; margin: 0;
       opacity: 0;
       transition: opacity .25s var(--ease);
       max-width: 68ch;
       margin-left: auto; margin-right: auto;
     }
     .mh-detail-text.is-active { opacity: 1; }
-
-    @media (max-width: 760px) {
-      .mh-tabs {
-        justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap;
-        padding-bottom: 8px; -webkit-overflow-scrolling: touch;
-      }
-      .mh-tab { flex-shrink: 0; }
-      .mh-display { aspect-ratio: 4 / 3; padding: 12px; }
-      .mh-screen { inset: 12px; }
-    }
 
     /* ============ USER JOURNEY MAP ============ */
     .journey-map { margin: 20px 0 12px; }
@@ -2357,47 +2383,77 @@
 
         <div class="mosaic-hifi">
           <div class="mh-tabs" role="tablist" aria-label="Mosaic hi-fi screens">
-            <button class="mh-tab is-active" data-screen="welcome" type="button" role="tab" aria-selected="true">Welcome</button>
-            <button class="mh-tab" data-screen="parent-home" type="button" role="tab" aria-selected="false">Parent home</button>
-            <button class="mh-tab" data-screen="voice-log" type="button" role="tab" aria-selected="false">Voice log</button>
-            <button class="mh-tab" data-screen="pattern-detail" type="button" role="tab" aria-selected="false">Pattern detail</button>
-            <button class="mh-tab" data-screen="share" type="button" role="tab" aria-selected="false">Share summary</button>
-            <button class="mh-tab" data-screen="behavioral" type="button" role="tab" aria-selected="false">Behavioral profile</button>
-            <button class="mh-tab" data-screen="team" type="button" role="tab" aria-selected="false">Care team</button>
-            <button class="mh-tab" data-screen="recipient" type="button" role="tab" aria-selected="false">Recipient view</button>
-            <button class="mh-tab" data-screen="aide-today" type="button" role="tab" aria-selected="false">Aide today</button>
-            <button class="mh-tab" data-screen="aide-profile" type="button" role="tab" aria-selected="false">Aide profile</button>
+            <button class="mh-tab is-active" data-screen="welcome" type="button" role="tab" aria-selected="true">
+              <span class="mh-tab-num">01</span>
+              <span class="mh-tab-label">Welcome</span>
+            </button>
+            <button class="mh-tab" data-screen="parent-home" type="button" role="tab" aria-selected="false">
+              <span class="mh-tab-num">02</span>
+              <span class="mh-tab-label">Parent home</span>
+            </button>
+            <button class="mh-tab" data-screen="voice-log" type="button" role="tab" aria-selected="false">
+              <span class="mh-tab-num">03</span>
+              <span class="mh-tab-label">Voice log</span>
+            </button>
+            <button class="mh-tab" data-screen="pattern-detail" type="button" role="tab" aria-selected="false">
+              <span class="mh-tab-num">04</span>
+              <span class="mh-tab-label">Pattern detail</span>
+            </button>
+            <button class="mh-tab" data-screen="share" type="button" role="tab" aria-selected="false">
+              <span class="mh-tab-num">05</span>
+              <span class="mh-tab-label">Share summary</span>
+            </button>
+            <button class="mh-tab" data-screen="behavioral" type="button" role="tab" aria-selected="false">
+              <span class="mh-tab-num">06</span>
+              <span class="mh-tab-label">Behavioral profile</span>
+            </button>
+            <button class="mh-tab" data-screen="team" type="button" role="tab" aria-selected="false">
+              <span class="mh-tab-num">07</span>
+              <span class="mh-tab-label">Care team</span>
+            </button>
+            <button class="mh-tab" data-screen="recipient" type="button" role="tab" aria-selected="false">
+              <span class="mh-tab-num">08</span>
+              <span class="mh-tab-label">Recipient view</span>
+            </button>
+            <button class="mh-tab" data-screen="aide-today" type="button" role="tab" aria-selected="false">
+              <span class="mh-tab-num">09</span>
+              <span class="mh-tab-label">Aide today</span>
+            </button>
+            <button class="mh-tab" data-screen="aide-profile" type="button" role="tab" aria-selected="false">
+              <span class="mh-tab-num">10</span>
+              <span class="mh-tab-label">Aide profile</span>
+            </button>
           </div>
 
           <div class="mh-display" role="tabpanel">
-            <div class="mh-screen is-active" data-id="welcome" data-placeholder="Welcome &middot; assets/mosaic/hifi-welcome.png">
+            <div class="mh-screen is-active" data-id="welcome" data-placeholder="Welcome · assets/mosaic/hifi-welcome.png">
               <img src="assets/mosaic/hifi-welcome.png" alt="Welcome screen">
             </div>
-            <div class="mh-screen" data-id="parent-home" data-placeholder="Parent home &middot; assets/mosaic/hifi-parent-home.png">
+            <div class="mh-screen" data-id="parent-home" data-placeholder="Parent home · assets/mosaic/hifi-parent-home.png">
               <img src="assets/mosaic/hifi-parent-home.png" alt="Parent home">
             </div>
-            <div class="mh-screen" data-id="voice-log" data-placeholder="Voice log &middot; assets/mosaic/hifi-voice-log.png">
+            <div class="mh-screen" data-id="voice-log" data-placeholder="Voice log · assets/mosaic/hifi-voice-log.png">
               <img src="assets/mosaic/hifi-voice-log.png" alt="Voice log">
             </div>
-            <div class="mh-screen" data-id="pattern-detail" data-placeholder="Pattern detail &middot; assets/mosaic/hifi-pattern-detail.png">
+            <div class="mh-screen" data-id="pattern-detail" data-placeholder="Pattern detail · assets/mosaic/hifi-pattern-detail.png">
               <img src="assets/mosaic/hifi-pattern-detail.png" alt="Pattern detail">
             </div>
-            <div class="mh-screen" data-id="share" data-placeholder="Share summary &middot; assets/mosaic/hifi-share.png">
+            <div class="mh-screen" data-id="share" data-placeholder="Share summary · assets/mosaic/hifi-share.png">
               <img src="assets/mosaic/hifi-share.png" alt="Share summary">
             </div>
-            <div class="mh-screen" data-id="behavioral" data-placeholder="Behavioral profile &middot; assets/mosaic/hifi-behavioral.png">
+            <div class="mh-screen" data-id="behavioral" data-placeholder="Behavioral profile · assets/mosaic/hifi-behavioral.png">
               <img src="assets/mosaic/hifi-behavioral.png" alt="Behavioral profile">
             </div>
-            <div class="mh-screen" data-id="team" data-placeholder="Care team &middot; assets/mosaic/hifi-team.png">
+            <div class="mh-screen" data-id="team" data-placeholder="Care team · assets/mosaic/hifi-team.png">
               <img src="assets/mosaic/hifi-team.png" alt="Care team">
             </div>
-            <div class="mh-screen" data-id="recipient" data-placeholder="Recipient view &middot; assets/mosaic/hifi-recipient.png">
+            <div class="mh-screen" data-id="recipient" data-placeholder="Recipient view · assets/mosaic/hifi-recipient.png">
               <img src="assets/mosaic/hifi-recipient.png" alt="Recipient view">
             </div>
-            <div class="mh-screen" data-id="aide-today" data-placeholder="Aide today &middot; assets/mosaic/hifi-aide-today.png">
+            <div class="mh-screen" data-id="aide-today" data-placeholder="Aide today · assets/mosaic/hifi-aide-today.png">
               <img src="assets/mosaic/hifi-aide-today.png" alt="Aide today">
             </div>
-            <div class="mh-screen" data-id="aide-profile" data-placeholder="Aide profile &middot; assets/mosaic/hifi-aide-profile.png">
+            <div class="mh-screen" data-id="aide-profile" data-placeholder="Aide profile · assets/mosaic/hifi-aide-profile.png">
               <img src="assets/mosaic/hifi-aide-profile.png" alt="Aide profile">
             </div>
           </div>
