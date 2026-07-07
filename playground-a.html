@@ -1,0 +1,1350 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <!-- Google Analytics (GA4) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0BF0CGE4R3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-0BF0CGE4R3');
+  </script>
+  <link rel="icon" type="image/png" href="assets/avatar.png" />
+  <title>Playground -Sakshi Shah</title>
+  <meta name="description" content="Product designer with a research and strategy backbone." />
+  <!-- OpenGraph + Twitter for link previews -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Sakshi Shah" />
+  <meta property="og:title" content="Playground -Sakshi Shah" />
+  <meta property="og:description" content="Product designer with a research and strategy backbone." />
+  <meta property="og:image" content="https://portfolio-sakshi-shah.vercel.app/assets/avatar.png" />
+  <meta property="og:url" content="https://portfolio-sakshi-shah.vercel.app/playground.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Playground -Sakshi Shah" />
+  <meta name="twitter:description" content="Product designer with a research and strategy backbone." />
+  <meta name="twitter:image" content="https://portfolio-sakshi-shah.vercel.app/assets/avatar.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Fraunces:ital,wght@0,400..600;1,400..600&family=Geist:wght@400;500&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="assets/page-transition.js" defer></script>
+  <style>
+    :root {
+      --bg: #f0e8d2;
+      --bg-elev: #f6efdb;
+      --bg-card: #e8e0c5;
+      --ink: #3a2818;
+      --ink-soft: #5a4632;
+      --ink-mute: #8a7a5e;
+      --rule: #cdc0a0;
+      --rule-strong: #b8a988;
+      --accent: #ec6478;
+      --accent-soft: #f7d4dc;
+      --accent-deep: #b13e58;
+      --secondary: #5e8a4f;
+      --secondary-soft: #d4dfb8;
+      --leaf: #4ea862;
+      --leaf-deep: #3d6b2c;
+      --black-card: #1c1a13;
+      --footer-bg: #2c4a36;
+
+      --display: "Bricolage Grotesque", system-ui, sans-serif;
+      --serif: "Fraunces", Georgia, serif;
+      --sans: "Geist", "Inter", system-ui, -apple-system, sans-serif;
+      --mono: "Geist Mono", ui-monospace, monospace;
+
+      --r-md: 12px;
+      --r-lg: 18px;
+      --r-xl: 22px;
+      --ease: cubic-bezier(.22,.61,.36,1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; }
+    html { -webkit-font-smoothing: antialiased; }
+
+    body::before {
+      content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 1;
+      opacity: .35;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='2' seed='4'/><feColorMatrix values='0 0 0 0 0.55  0 0 0 0 0.42  0 0 0 0 0.22  0 0 0 0.07 0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>");
+      mix-blend-mode: multiply;
+    }
+
+    body {
+      background: var(--bg); color: var(--ink);
+      font-family: var(--sans); font-size: 15px; line-height: 1.6;
+      min-height: 100vh;
+    
+      overflow-x: clip;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    button { font-family: inherit; cursor: pointer; }
+
+    @media (hover: hover) and (pointer: fine) {
+      body, body * { cursor: none !important; }
+    }
+    /* ============ CURSOR, arrow with state-driven pill variants ============ */
+    .cursor-dot {
+      position: fixed; top: 0; left: 0; pointer-events: none; z-index: 999;
+      width: 22px; height: 22px;
+      background: transparent;
+      border-radius: 0;
+      transform: translate(-2px, -2px);
+      display: flex; align-items: center; justify-content: center;
+      overflow: visible;
+      transition: width .3s var(--ease), height .3s var(--ease),
+                  background .25s var(--ease), border-radius .3s var(--ease),
+                  opacity .2s var(--ease), transform .15s var(--ease);
+      will-change: left, top;
+    }
+    .cursor-dot .cursor-arrow {
+      width: 100%; height: 100%;
+      display: block;
+      filter: drop-shadow(0 1px 2px rgba(20, 18, 12, 0.25));
+      transition: opacity .15s var(--ease);
+    }
+    .cursor-dot .cursor-arrow path {
+      fill: var(--ink);
+      stroke: var(--bg);
+      stroke-width: 1.5;
+      stroke-linejoin: round;
+      stroke-linecap: round;
+      paint-order: stroke fill;
+    }
+    .cursor-dot .label {
+      position: absolute;
+      font-family: var(--mono); font-size: 0;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: #f4f0e2; font-weight: 500;
+      opacity: 0; pointer-events: none;
+      white-space: nowrap;
+      transition: opacity .2s var(--ease) .05s, font-size .25s var(--ease);
+    }
+    body.cursor-grow .cursor-dot { width: 28px; height: 28px; }
+    body.cursor-grow .cursor-dot .cursor-arrow path { fill: var(--accent); stroke: var(--bg); }
+    body.cursor-text .cursor-dot {
+      width: 2px; height: 20px;
+      background: var(--ink);
+      transform: translate(-50%, -50%);
+    }
+    body.cursor-text .cursor-dot .cursor-arrow { opacity: 0; }
+    body.cursor-pill .cursor-dot {
+      width: 158px; height: 38px;
+      background: var(--accent);
+      border-radius: 999px;
+      transform: translate(-50%, -50%);
+      opacity: 1;
+    }
+    body.cursor-pill .cursor-dot .cursor-arrow { opacity: 0; display: none; }
+    body.cursor-pill .cursor-dot .label { position: relative; font-size: 11px; opacity: 1; }
+    body.cursor-soon .cursor-dot {
+      width: 138px; height: 38px;
+      background: var(--ink);
+      border-radius: 999px;
+      transform: translate(-50%, -50%);
+      opacity: 1;
+    }
+    body.cursor-soon .cursor-dot .cursor-arrow { opacity: 0; display: none; }
+    body.cursor-soon .cursor-dot .label { position: relative; font-size: 11px; opacity: 1; }
+    body.cursor-soon .cursor-dot .label::before { content: "Coming soon"; }
+    body.cursor-soon .cursor-dot .label-default { display: none; }
+    @media (hover: none) { .cursor-dot { display: none; } }
+
+    /* ============ SHELL, same as home/about/ai ============ */
+    .shell {
+      display: grid;
+      grid-template-columns: 308px 1fr;
+      max-width: 1480px; margin: 0 auto;
+      min-height: 100vh;
+    }
+    .sidebar {
+      padding: 32px 28px 24px;
+      position: sticky; top: 0;
+      height: 100vh;
+      display: flex; flex-direction: column;
+      overflow-y: auto;
+      border-right: 1px solid var(--rule);
+      background: var(--bg);
+    }
+    .sidebar::-webkit-scrollbar { width: 0; }
+    .main {
+      padding: 0;
+      display: flex; flex-direction: column;
+      min-width: 0;
+    }
+
+    @media (max-width: 980px) {
+      .shell { grid-template-columns: 1fr; }
+      .sidebar {
+        padding: 24px 24px 18px;
+        position: static; height: auto;
+        border-right: 0; border-bottom: 1px solid var(--rule);
+      }
+    }
+
+    /* ============ AVATAR ============ */
+    .avatar {
+      width: 64px; height: 64px; border-radius: 16px; overflow: hidden;
+      background: transparent;
+      margin-bottom: 22px; position: relative;
+      animation: avatarWobble 4s ease-in-out infinite;
+      transform-origin: 50% 100%;
+    }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; image-rendering: pixelated; image-rendering: crisp-edges; }
+    @keyframes avatarWobble {
+      0%, 100% { transform: rotate(-3deg); }
+      50%      { transform: rotate(3deg); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .avatar { animation: none; }
+    }
+
+    /* ============ SIDEBAR TYPE ============ */
+    .name {
+      font-family: var(--display); font-weight: 600;
+      font-size: 38px; line-height: .95; letter-spacing: -.025em;
+      margin: 0 0 6px;
+    }
+    .role-label {
+      font-family: var(--mono); font-size: 10.5px; font-weight: 500;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--ink-soft); margin: 0 0 16px;
+    }
+    .bio { color: var(--ink-soft); margin: 0 0 10px; font-size: 14px; line-height: 1.55; }
+    .bio:last-of-type { margin-bottom: 18px; }
+    .bio strong { color: var(--ink); font-weight: 500; }
+    .bio .at {
+      color: var(--ink);
+      font-weight: 500;
+      text-decoration: underline;
+      text-decoration-color: var(--rule-strong);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+      cursor: pointer;
+      transition: color .2s var(--ease), text-decoration-color .2s var(--ease), text-decoration-thickness .2s var(--ease);
+    }
+    .bio .at:hover {
+      color: var(--accent);
+      text-decoration-color: var(--accent);
+      text-decoration-thickness: 2px;
+    }
+
+    /* explore pill */
+    .explore-wrap { margin-bottom: 16px; position: relative; }
+    .explore {
+      background: var(--bg-elev); border-radius: var(--r-lg);
+      padding: 12px 10px 10px;
+      border: 1px solid var(--rule);
+    }
+    .explore-label {
+      font-family: var(--mono); font-size: 10px; font-weight: 500;
+      letter-spacing: .16em; text-transform: uppercase;
+      color: var(--ink-mute); margin: 0 0 8px; padding-left: 6px;
+    }
+    .explore-list { display: flex; flex-direction: column; gap: 1px; }
+    .explore-item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 7px 10px; border-radius: 7px;
+      font-size: 14px; color: var(--ink);
+      transition: background .2s var(--ease);
+      position: relative;
+    }
+    .explore-item .num {
+      color: var(--ink-mute); font-feature-settings: "tnum"; margin-right: 10px;
+      font-family: var(--mono); font-size: 12px;
+    }
+    .explore-item .default-label { display: inline-flex; align-items: center; flex: 1; }
+    .explore-item .arrow {
+      opacity: .4; transition: all .2s var(--ease);
+      font-family: var(--mono); font-size: 13px;
+      color: var(--ink-soft);
+    }
+    .explore-item:hover { background: var(--bg-card); }
+    .explore-item:hover .arrow { opacity: 1; transform: translateX(2px); color: var(--ink); }
+    .explore-item.active {
+      background: var(--bg-card);
+      color: var(--ink); font-weight: 500;
+    }
+    .explore-item.active .num { color: var(--accent); font-weight: 500; }
+    .explore-item.active .arrow { opacity: 1; color: var(--accent); }
+
+    .explore-item .default-label,
+    .explore-item .hover-label {
+      transition: opacity .25s var(--ease), transform .25s var(--ease);
+    }
+    .explore-item .hover-label {
+      position: absolute; left: 36px; top: 50%;
+      transform: translateY(calc(-50% + 4px));
+      font-family: var(--display); font-style: normal; font-weight: 500;
+      color: var(--leaf-deep);
+      font-size: 14px; letter-spacing: -.005em;
+      opacity: 0; pointer-events: none; white-space: nowrap;
+    }
+    .explore-item:has(.hover-label):hover .label-text { opacity: 0; transform: translateX(-3px); }
+    .explore-item:has(.hover-label):hover .hover-label { opacity: 1; transform: translateY(-50%); }
+    .explore-item.active:has(.hover-label):hover .label-text { opacity: 0; }
+    .explore-item.active:has(.hover-label):hover .hover-label { opacity: 1; }
+
+    .find-label {
+      font-family: var(--mono); font-size: 10px; font-weight: 500;
+      letter-spacing: .16em; text-transform: uppercase;
+      color: var(--ink-mute); margin: 10px 0 6px;
+    }
+    .find-links { display: flex; flex-wrap: wrap; gap: 4px; font-size: 13.5px; color: var(--ink-soft); }
+    .find-links a { transition: color .2s var(--ease); padding: 1px 0; }
+    .find-links a + a::before { content: ","; color: var(--ink-mute); margin-right: 4px; }
+    .find-links a:hover { color: var(--accent); }
+
+    .lawn-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-top: 14px;
+      padding: 7px 12px 7px 9px;
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      font-family: var(--mono); font-size: 10.5px;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--ink-soft);
+      transition: background .2s var(--ease), border-color .2s var(--ease), transform .2s var(--ease);
+      width: fit-content;
+    }
+    .lawn-pill:hover {
+      background: var(--bg-card); border-color: var(--rule-strong);
+      transform: translateX(2px);
+    }
+    .lawn-pill .plant-ico {
+      width: 22px; height: 22px;
+      display: grid; place-items: center;
+      background: var(--secondary-soft);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .lawn-pill .plant-ico svg { width: 16px; height: 16px; }
+
+    .sidebar-bottom {
+      margin-top: auto; padding-top: 18px;
+      font-family: var(--mono); font-size: 10.5px;
+      color: var(--ink-mute); letter-spacing: .03em;
+      display: flex; flex-direction: column; gap: 3px;
+    }
+    .clock { display: none; }
+
+    /* ============ MAIN, twilight garden coming-soon scene ============ */
+    .stage {
+      flex: 1;
+      position: relative;
+      background:
+        radial-gradient(ellipse 80% 50% at 50% 0%, #5a4a3a 0%, #2a3528 60%, #1c2820 100%);
+      overflow: hidden;
+      min-height: calc(100vh - 0px);
+      display: grid; place-items: center;
+    }
+    @media (max-width: 980px) {
+      .stage { min-height: 70vh; }
+    }
+
+    /* fireflies */
+    .firefly {
+      position: absolute;
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: #f6c54a;
+      box-shadow: 0 0 12px 3px rgba(246,197,74,.7), 0 0 22px 6px rgba(246,197,74,.4);
+      animation: fly 12s ease-in-out infinite, glow 2.4s ease-in-out infinite;
+    }
+    .ff-1 { top: 18%; left: 12%; animation-delay: 0s, .2s; }
+    .ff-2 { top: 26%; left: 78%; animation-delay: 1.5s, 0s; width: 4px; height: 4px; }
+    .ff-3 { top: 56%; left: 22%; animation-delay: 4s, 1s; }
+    .ff-4 { top: 38%; left: 60%; animation-delay: 2.5s, 1.6s; width: 6px; height: 6px; }
+    .ff-5 { top: 70%; left: 86%; animation-delay: 6s, .4s; }
+    .ff-6 { top: 22%; left: 42%; animation-delay: 8s, .8s; width: 4px; height: 4px; }
+    .ff-7 { top: 64%; left: 50%; animation-delay: 3s, 2s; }
+    .ff-8 { top: 80%; left: 16%; animation-delay: 5s, 1.2s; width: 5px; height: 5px; }
+    .ff-9 { top: 12%; left: 88%; animation-delay: 7.5s, .6s; width: 3px; height: 3px; }
+    @keyframes fly {
+      0%, 100% { transform: translate(0, 0); }
+      25% { transform: translate(40px, -28px); }
+      50% { transform: translate(-30px, -16px); }
+      75% { transform: translate(20px, 26px); }
+    }
+    @keyframes glow {
+      0%, 100% { opacity: .5; }
+      50% { opacity: 1; }
+    }
+
+    /* moon */
+    .moon {
+      position: absolute;
+      top: 12%; right: 12%;
+      width: 84px; height: 84px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #fbf6e5 0%, #f0e8d2 60%, #d8c8a0 100%);
+      box-shadow: 0 0 60px 12px rgba(246,232,210,.18);
+    }
+    .moon::after {
+      content: ""; position: absolute; inset: 0; border-radius: 50%;
+      box-shadow:
+        inset -10px -8px 24px rgba(180,160,120,.35),
+        inset 4px 6px 12px rgba(255,250,232,.4);
+    }
+
+    /* watercolor plant silhouettes, bottom border of the scene */
+    .silhouette {
+      position: absolute; left: 0; right: 0; bottom: 0;
+      height: 38%; pointer-events: none;
+    }
+    .silhouette svg { width: 100%; height: 100%; display: block; }
+
+    /* COMING SOON pill, center */
+    .soon-pill {
+      position: relative;
+      z-index: 5;
+      display: inline-flex; align-items: center; gap: 14px;
+      padding: 18px 32px;
+      background: rgba(28, 26, 19, 0.78);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(246, 232, 210, 0.14);
+      border-radius: 18px;
+      font-family: var(--mono); font-size: 13.5px; font-weight: 500;
+      letter-spacing: .26em; text-transform: uppercase;
+      color: #fbf6e5;
+      box-shadow: 0 18px 44px -16px rgba(0,0,0,.5);
+    }
+    .soon-pill .pulse {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(236,100,120,.25);
+      animation: pulse-ring 2s ease-in-out infinite;
+    }
+    @keyframes pulse-ring {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(236,100,120,.45); }
+      50% { box-shadow: 0 0 0 8px rgba(236,100,120,0); }
+    }
+
+    .soon-sub {
+      position: absolute; left: 0; right: 0; bottom: 18%;
+      text-align: center;
+      z-index: 5;
+      pointer-events: none;
+    }
+    .soon-sub p {
+      font-family: var(--serif); font-style: italic;
+      font-size: clamp(15px, 1.4vw, 18px);
+      color: rgba(246, 232, 210, 0.78);
+      max-width: 38ch; margin: 0 auto;
+      line-height: 1.5;
+    }
+
+    /* Dark strip that extends the .stage image down to the footer */
+
+        /* ============ TULIP BAND ============ */
+    .tulip-band {
+      position: relative;
+      z-index: 0;
+      overflow: hidden;
+      max-width: 1480px;
+      margin: 0 auto -48px;
+      padding: 0 64px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 4px;
+      pointer-events: none;
+    }
+    .tulip,
+    .leaf {
+      width: auto;
+      flex-shrink: 0;
+      transform-origin: bottom center;
+      filter: drop-shadow(0 2px 4px rgba(20, 18, 12, 0.08));
+    }
+    .tulip { height: 88px; }
+    .tulip:nth-child(3n) { height: 76px; }
+    .tulip:nth-child(4n+1) { height: 95px; }
+    .tulip:nth-child(5n) { height: 82px; }
+    .leaf { height: 72px; }
+    .leaf:nth-child(odd) { height: 80px; }
+    .tulip.tilt-l,
+    .leaf.tilt-l { transform: rotate(-7deg); }
+    .tulip.tilt-r,
+    .leaf.tilt-r { transform: rotate(6deg); }
+    @media (max-width: 980px) {
+      .tulip-band { padding: 0 24px; gap: 2px; margin-bottom: -36px; }
+      .tulip { height: 64px; }
+      .tulip:nth-child(3n) { height: 56px; }
+      .tulip:nth-child(4n+1) { height: 70px; }
+      .leaf { height: 54px; }
+      .leaf:nth-child(odd) { height: 60px; }
+    }
+    @media (max-width: 600px) {
+      .tulip-band > :nth-child(even) { display: none; }
+    }
+    .planted-tulip {
+      position: absolute;
+      bottom: 100%;
+      pointer-events: none;
+      width: auto; height: 0;
+      transition: height .5s cubic-bezier(.4, 1.4, .5, 1);
+      transform: translateX(-50%) rotate(var(--tulip-rotate, 0deg));
+      transform-origin: bottom center;
+      z-index: 3;
+      filter: drop-shadow(0 2px 4px rgba(20, 18, 12, 0.15));
+    }
+    .planted-tulip.grown {
+      height: 88px;
+    }
+    @media (max-width: 980px) {
+      .planted-tulip.grown { height: 56px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .tulip,
+      .leaf { transition: none; }
+    }
+
+/* ============ FOOTER ============ */
+    footer {
+      grid-column: 1 / -1;
+      background: var(--footer-bg);
+      color: rgba(240, 232, 210, 0.85);
+      border-radius: 28px 28px 0 0;
+      padding: 96px 64px 64px;
+      position: relative; overflow: hidden;
+      z-index: 1;
+      max-width: 1480px;
+      margin: 32px auto 0;
+    }
+    @media (max-width: 980px) { footer { padding: 64px 32px 48px; border-radius: 24px 24px 0 0; } }
+    @media (max-width: 600px) { footer { padding: 48px 20px 36px; border-radius: 20px 20px 0 0; } }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      column-gap: 56px;
+      position: relative; z-index: 2;
+      align-items: start;
+    }
+    .footer-grid .footer-col { min-width: 160px; }
+    @media (max-width: 980px) { .footer-grid { grid-template-columns: 1fr 1fr; column-gap: 32px; } }
+    @media (max-width: 600px) { .footer-grid { grid-template-columns: 1fr; column-gap: 0; row-gap: 32px; } }
+
+    .footer-quote {
+      font-family: var(--serif); font-weight: 400;
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: 1.18; letter-spacing: -.012em;
+      color: #f4ecd0; margin: 0 0 18px; max-width: 20ch;
+    }
+    .footer-quote .em { font-style: italic; color: #f4ecd0; }
+    .footer-attr {
+      font-family: var(--mono); font-size: 10.5px; letter-spacing: .18em;
+      text-transform: uppercase; color: rgba(240, 232, 210, 0.5);
+    }
+    .footer-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+    .footer-col a {
+      color: rgba(240, 232, 210, 0.55);
+      font-family: var(--mono); font-size: 11.5px; font-weight: 500;
+      letter-spacing: .2em; text-transform: uppercase;
+      transition: color .2s var(--ease);
+    }
+    .footer-col a:hover { color: #f4ecd0; }
+    .footer-col li.divider { height: 14px; }
+    .footer-col li.back a {
+      color: rgba(240, 232, 210, 0.78);
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .footer-col li.back a::before { content: "+ "; color: rgba(240, 232, 210, 0.5); }
+    .footer-col li.back a:hover { color: var(--accent-soft); }
+
+    .reveal { opacity: 0; transform: translateY(10px); animation: rise .7s var(--ease) forwards; }
+    .reveal.d1 { animation-delay: .05s; } .reveal.d2 { animation-delay: .12s; }
+    .reveal.d3 { animation-delay: .2s; } .reveal.d4 { animation-delay: .28s; }
+    .reveal.d5 { animation-delay: .36s; }
+    @keyframes rise { to { opacity: 1; transform: none; } }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+      /* ============ MOBILE PERF: drop expensive effects ============ */
+    @media (max-width: 760px) {
+      body::before { opacity: 0.15; }
+      .card,
+      .case-figure-frame,
+      .community-card,
+      .insight-card,
+      .reframe-item,
+      .frag-card,
+      .layer-card,
+      .reflect-card,
+      .market-tier,
+      .defensibility-card,
+      .phase-card,
+      .loop-step,
+      .agent-card,
+      .resource-mini { transition: none !important; }
+      .tulip,
+      .leaf,
+      .latest-log-tulip { filter: none; }
+    }
+      /* ============ CONTENT-VISIBILITY: skip layout for off-screen sections ============ */
+    .section,
+    .agents-grid,
+    .stack-grid,
+    .resources-grid-9,
+    .communities-cards,
+    .fun-facts-grid,
+    .testi-section,
+    .grid {
+      content-visibility: auto;
+      contain-intrinsic-size: auto 600px;
+    }
+
+    /* ============ PLAYGROUND V2 ============ */
+    .pg-intro {
+      max-width: 720px; margin: 0 auto 32px; text-align: center;
+      position: relative; z-index: 4; padding-top: 20px;
+    }
+    .pg-title {
+      font-family: var(--serif); font-weight: 500;
+      font-size: clamp(24px, 3.4vw, 40px);
+      line-height: 1.1; letter-spacing: -.015em;
+      color: #f4ecd0; margin: 0 0 10px;
+    }
+    .pg-sub {
+      font-family: var(--sans); font-size: 14px;
+      color: rgba(240,232,210,.65);
+      margin: 0; line-height: 1.55;
+    }
+
+
+    /* ============ TRY-IT MODAL ============ */
+    .pg-modal {
+      position: fixed; inset: 0;
+      background: rgba(12, 14, 10, .82);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: none;
+      z-index: 1000;
+      padding: 32px;
+      align-items: center; justify-content: center;
+    }
+    .pg-modal.is-open { display: flex; animation: pgFade .3s var(--ease); }
+    @keyframes pgFade { from { opacity: 0; } to { opacity: 1; } }
+
+    .pg-modal-inner {
+      position: relative;
+      width: 100%; max-width: 1200px;
+      height: min(85vh, 800px);
+      background: #0f120d;
+      border: 1px solid rgba(240,232,210,.18);
+      border-radius: 24px;
+      overflow: hidden;
+      display: flex; flex-direction: column;
+      box-shadow: 0 40px 80px -20px rgba(0,0,0,.6);
+      animation: pgSlide .35s var(--ease);
+    }
+    @keyframes pgSlide { from { transform: translateY(20px) scale(.98); opacity: 0; } to { transform: none; opacity: 1; } }
+
+    .pg-modal-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 20px;
+      background: rgba(240,232,210,.04);
+      border-bottom: 1px solid rgba(240,232,210,.1);
+    }
+    .pg-modal-title {
+      font-family: var(--display); font-weight: 600; font-size: 14px;
+      color: #f4ecd0;
+      display: inline-flex; align-items: center; gap: 10px;
+    }
+    .pg-modal-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 3px rgba(236,100,120,.24);
+    }
+    .pg-modal-close {
+      background: rgba(240,232,210,.08);
+      border: 1px solid rgba(240,232,210,.16);
+      color: #f4ecd0;
+      padding: 8px 14px; border-radius: 999px;
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: .12em; text-transform: uppercase;
+      cursor: pointer;
+      transition: background .2s var(--ease), border-color .2s var(--ease);
+    }
+    .pg-modal-close:hover {
+      background: rgba(240,232,210,.14);
+      border-color: rgba(240,232,210,.28);
+    }
+    /* Buttons — primary + secondary */
+    .pg-btn {
+      all: unset; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 12px 22px;
+      border-radius: 999px;
+      font-family: var(--display); font-weight: 500; font-size: 14px;
+      transition: transform .25s var(--ease), background .25s var(--ease), border-color .25s var(--ease), color .25s var(--ease), box-shadow .25s var(--ease);
+      outline: none;
+    }
+    .pg-btn-arr { transition: transform .25s var(--ease); font-family: var(--display); }
+    .pg-btn:hover .pg-btn-arr, .pg-btn:focus-visible .pg-btn-arr { transform: translateX(3px); }
+    .pg-btn-primary {
+      background: var(--accent);
+      color: #fbf6e5;
+      box-shadow: 0 4px 14px -6px rgba(236,100,120,.5);
+    }
+    .pg-btn-primary:hover, .pg-btn-primary:focus-visible {
+      background: var(--accent-deep);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px -6px rgba(236,100,120,.6);
+    }
+    .pg-btn-secondary {
+      background: transparent;
+      color: rgba(240,232,210,.9);
+      border: 1px solid rgba(240,232,210,.3);
+    }
+    .pg-btn-secondary:hover, .pg-btn-secondary:focus-visible {
+      border-color: rgba(240,232,210,.6);
+      background: rgba(240,232,210,.06);
+      color: #f4ecd0;
+      transform: translateY(-2px);
+    }
+
+    /* Title mark (subtle star before title) */
+    .pg-title-mark {
+      color: var(--accent);
+      font-size: .5em; margin-right: 10px;
+      vertical-align: .35em;
+    }
+    .pg-plot-empty .pg-title-mark { display: none; }
+
+    /* Modal body handles both iframe and content view */
+    .pg-modal-body {
+      flex: 1;
+      position: relative;
+      background: #fff;
+      overflow: hidden;
+      min-height: 0;
+    }
+    .pg-modal-body iframe {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      border: none; display: none;
+    }
+    .pg-modal-body iframe.is-active { display: block; }
+    .pg-modal-content {
+      position: absolute; inset: 0;
+      display: none;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      background: var(--bg-elev);
+      color: var(--ink);
+    }
+    .pg-modal-content.is-active { display: block; }
+
+    /* Story content style */
+    .pg-story {
+      max-width: 720px; margin: 0 auto;
+      padding: 56px 40px;
+    }
+    .pg-story-eyebrow {
+      display: inline-block;
+      font-family: var(--mono); font-size: 11px; font-weight: 600;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: var(--accent-deep);
+      margin-bottom: 12px;
+    }
+    .pg-story-title {
+      font-family: var(--serif); font-weight: 500;
+      font-size: clamp(28px, 3.6vw, 40px);
+      color: var(--ink); margin: 0 0 24px;
+      letter-spacing: -.015em; line-height: 1.15;
+    }
+    .pg-story h5 {
+      font-family: var(--display); font-weight: 600;
+      font-size: 16px; color: var(--ink);
+      margin: 28px 0 8px;
+    }
+    .pg-story p {
+      font-size: 15px; line-height: 1.7;
+      color: var(--ink-soft); margin: 0 0 14px;
+    }
+    .pg-story ul { padding-left: 22px; margin: 0 0 16px; }
+    .pg-story ul li {
+      font-size: 15px; line-height: 1.7;
+      color: var(--ink-soft); margin-bottom: 8px;
+    }
+    .pg-story-outbound {
+      margin-top: 24px; padding-top: 20px;
+      border-top: 1px solid var(--rule);
+    }
+    .pg-story-outbound a {
+      color: var(--accent);
+      font-family: var(--display); font-weight: 600;
+    }
+    .pg-story-outbound a:hover { color: var(--accent-deep); }
+
+    @media (max-width: 640px) {
+      .pg-modal { padding: 16px; }
+      .pg-modal-inner { height: 90vh; border-radius: 18px; }
+      .plot-title { font-size: 24px; }
+    }
+
+    /* ============ PLAYGROUND PROJECTS (horizontal rows) ============ */
+    .pg-projects {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 40px 32px 0;
+      position: relative; z-index: 4;
+    }
+
+    .pg-plot {
+      display: grid;
+      grid-template-columns: 5fr 6fr;
+      gap: 64px;
+      padding: 72px 0;
+      align-items: center;
+      border-bottom: 1px solid rgba(240,232,210,.1);
+    }
+    .pg-plot:last-child { border-bottom: none; padding-bottom: 40px; }
+    /* Alternate: even plots swap sides */
+    .pg-plot:nth-child(even) .pg-plot-content { order: 2; }
+    .pg-plot:nth-child(even) .pg-plot-media { order: 1; }
+    @media (max-width: 900px) {
+      .pg-plot {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        padding: 48px 0;
+      }
+      .pg-plot:nth-child(even) .pg-plot-content,
+      .pg-plot:nth-child(even) .pg-plot-media { order: unset; }
+    }
+
+    .pg-plot-content { display: flex; flex-direction: column; }
+    .pg-plot-tag {
+      font-family: var(--mono); font-size: 11px; font-weight: 600;
+      letter-spacing: .2em; text-transform: uppercase;
+      color: rgba(236,100,120,.9);
+      margin-bottom: 18px;
+    }
+    .pg-plot-empty .pg-plot-tag { color: rgba(240,232,210,.5); }
+    .pg-plot-title {
+      font-family: var(--serif); font-weight: 500;
+      font-size: clamp(28px, 3.6vw, 44px);
+      line-height: 1.05; letter-spacing: -.015em;
+      color: #f4ecd0; margin: 0 0 14px;
+    }
+    .pg-plot-line {
+      font-family: var(--serif); font-style: italic;
+      font-size: 18px; color: rgba(240,232,210,.85);
+      margin: 0 0 18px; line-height: 1.4;
+      max-width: 40ch;
+    }
+    .pg-plot-desc {
+      font-size: 15px; color: rgba(240,232,210,.62);
+      line-height: 1.65; margin: 0 0 28px;
+      max-width: 42ch;
+    }
+    .pg-plot-tools {
+      display: flex; align-items: baseline; gap: 16px;
+      padding: 16px 0;
+      margin-bottom: 28px;
+      border-top: 1px solid rgba(240,232,210,.08);
+      border-bottom: 1px solid rgba(240,232,210,.08);
+    }
+    .pg-tools-label {
+      font-family: var(--mono); font-size: 10.5px; font-weight: 600;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: rgba(240,232,210,.5);
+      min-width: 60px;
+    }
+    .pg-tools-list {
+      font-family: var(--mono); font-size: 12.5px;
+      letter-spacing: .04em; color: rgba(240,232,210,.78);
+    }
+    .pg-plot-actions {
+      display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+    }
+
+    .pg-plot-media {
+      position: relative;
+      aspect-ratio: 16/10;
+      border-radius: 22px;
+      overflow: hidden;
+      background: rgba(240,232,210,.04);
+      border: 1px solid rgba(240,232,210,.14);
+      box-shadow: 0 24px 48px -24px rgba(0,0,0,.5);
+      transition: transform .4s var(--ease), border-color .4s var(--ease), box-shadow .4s var(--ease);
+    }
+    .pg-plot:hover .pg-plot-media {
+      transform: translateY(-6px) scale(1.01);
+      border-color: rgba(236,100,120,.35);
+      box-shadow: 0 32px 60px -24px rgba(0,0,0,.55);
+    }
+    .pg-plot-media img,
+    .pg-plot-media video {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+    }
+    .pg-plot-media.img-missing video,
+    .pg-plot-media.img-missing img { display: none; }
+    .pg-plot-media.img-missing::after {
+      content: attr(data-placeholder);
+      position: absolute; inset: 0;
+      display: grid; place-items: center;
+      padding: 40px;
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: rgba(240,232,210,.45);
+      text-align: center;
+      border: 1px dashed rgba(240,232,210,.2);
+      border-radius: 22px;
+    }
+
+    .pg-plot-empty .pg-plot-media-empty {
+      display: grid; place-items: center;
+      border-style: dashed;
+      background: rgba(240,232,210,.02);
+    }
+    .pg-plot-empty .pg-plot-media-empty svg {
+      width: 120px; height: auto; opacity: .55;
+    }
+    .pg-plot-empty {
+      opacity: .72;
+    }
+    /* Variant A: Blooming seed grid */
+    .seed-bed {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 1080px; margin: 0 auto;
+      padding: 20px 24px 60px;
+      position: relative; z-index: 4;
+    }
+    @media (max-width: 900px) { .seed-bed { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 640px) { .seed-bed { grid-template-columns: 1fr; } }
+
+    .seed {
+      background: rgba(240,232,210,.04);
+      border: 1px solid rgba(240,232,210,.14);
+      border-radius: 22px;
+      padding: 32px 26px;
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center; text-align: center;
+      cursor: pointer;
+      position: relative; overflow: hidden;
+      min-height: 260px;
+      transition: transform .5s var(--ease), background .5s var(--ease), border-color .5s var(--ease), min-height .5s var(--ease);
+    }
+    .seed:hover {
+      background: rgba(240,232,210,.08);
+      border-color: rgba(236,100,120,.4);
+      min-height: 560px;
+      transform: translateY(-6px);
+    }
+    .seed-bed:has(.seed:hover) .seed:not(:hover) { opacity: .45; }
+
+    .seed-marker { width: 96px; height: 96px; margin-bottom: 16px; transition: transform .6s var(--ease); }
+    .seed:hover .seed-marker { transform: rotate(360deg) scale(1.1); }
+    .seed-name {
+      font-family: var(--serif); font-weight: 500; font-size: 24px;
+      color: #f4ecd0; letter-spacing: -.01em;
+    }
+    .seed-empty .seed-name { color: rgba(240,232,210,.55); }
+
+    .seed-bloom {
+      opacity: 0;
+      max-height: 0;
+      overflow: hidden;
+      width: 100%;
+      transition: opacity .4s var(--ease), max-height .5s var(--ease), margin-top .5s var(--ease);
+      margin-top: 0;
+    }
+    .seed:hover .seed-bloom {
+      opacity: 1;
+      max-height: 600px;
+      margin-top: 20px;
+    }
+    .seed-tag {
+      font-family: var(--mono); font-size: 10.5px; font-weight: 600;
+      letter-spacing: .16em; text-transform: uppercase;
+      color: rgba(236,100,120,.9);
+      display: block; margin-bottom: 8px;
+    }
+    .seed-line {
+      font-family: var(--serif); font-style: italic; font-size: 15px;
+      color: rgba(240,232,210,.85); margin: 0 0 10px; line-height: 1.4;
+    }
+    .seed-desc {
+      font-size: 13px; color: rgba(240,232,210,.65);
+      line-height: 1.55; margin: 0 0 16px;
+    }
+    .seed-preview {
+      aspect-ratio: 16/10; border-radius: 12px; overflow: hidden;
+      background: rgba(240,232,210,.06); border: 1px solid rgba(240,232,210,.14);
+      margin-bottom: 16px;
+    }
+    .seed-preview video, .seed-preview img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .seed-actions {
+      display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor-dot" aria-hidden="true"><svg class="cursor-arrow" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M3 3 L17 9 L10 11 L7 17 L3 3 Z" /></svg><span class="label"></span></div>
+
+  <div class="shell">
+
+    <!-- ============ SIDEBAR ============ -->
+    <aside class="sidebar">
+      <div class="avatar reveal">
+        <img src="assets/avatar.png" alt="Sakshi Shah" />
+      </div>
+
+      <h1 class="name reveal d1">Sakshi Shah</h1>
+      <p class="role-label reveal d1">Product Design @ Northwestern</p>
+
+      <p class="bio reveal d2">
+        I'm a product designer with a <strong>research and strategy backbone</strong>. I use <strong>empathy</strong> to find the right problem, and <strong>analytical thinking</strong> to shape the answer.
+      </p>
+      <p class="bio reveal d2">
+        Currently <a class="at" href="https://www.mccormick.northwestern.edu/product-design-development/" target="_blank" rel="noopener">@Northwestern</a>, <a class="at" href="https://www.cgi.com/" target="_blank" rel="noopener">@CGI</a><br>
+        Previously <a class="at" href="https://www.ibm.com/" target="_blank" rel="noopener">@IBM</a>
+      </p>
+
+      <div class="explore-wrap reveal d3">
+        <div class="explore">
+          <p class="explore-label">Explore</p>
+          <nav class="explore-list">
+            <a class="explore-item" href="home.html">
+              <span class="default-label"><span class="num">01.</span><span class="label-text">My Work</span></span>
+              <span class="hover-label">the cuttings</span>
+              <span class="arrow">→</span>
+            </a>
+            <a class="explore-item" href="about.html">
+              <span class="default-label"><span class="num">02.</span><span class="label-text">About Me</span></span>
+              <span class="hover-label">where I'm rooted</span>
+              <span class="arrow">→</span>
+            </a>
+            <a class="explore-item active" href="playground.html">
+              <span class="default-label"><span class="num">03.</span><span class="label-text">Playground</span></span>
+              <span class="hover-label">the wild patch</span>
+              <span class="arrow">→</span>
+            </a>
+            <a class="explore-item" href="ai.html">
+              <span class="default-label"><span class="num">04.</span><span class="label-text">AI Practices</span></span>
+              <span class="hover-label">tools in the shed</span>
+              <span class="arrow">→</span>
+            </a>
+          </nav>
+        </div>
+      </div>
+
+      <p class="find-label reveal d4">Find me at</p>
+      <div class="find-links reveal d4">
+        <a href="mailto:sakshishah@u.northwestern.edu">Email</a>
+        <a href="https://www.linkedin.com/in/sakshiishahh/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://drive.google.com/file/d/1afD_cw5tKiNqtMyKyFIy7jgnxFl-OphD/view?usp=sharing" target="_blank" rel="noopener">Resume</a>
+      </div>
+
+      <div class="sidebar-bottom">
+        <span class="clock" id="clock">, </span>
+        <span>© 2026 Sakshi Shah</span>
+      </div>
+    </aside>
+
+    <!-- ============ MAIN, twilight garden ============ -->
+    <main class="main">
+      <div class="stage">
+
+        <!-- fireflies -->
+        <span class="firefly ff-1"></span><span class="firefly ff-2"></span><span class="firefly ff-3"></span>
+        <span class="firefly ff-4"></span><span class="firefly ff-5"></span><span class="firefly ff-6"></span>
+        <span class="firefly ff-7"></span><span class="firefly ff-8"></span><span class="firefly ff-9"></span>
+
+        <!-- Playground intro -->
+        <div class="pg-intro reveal d2">
+          <h1 class="pg-title">Weekend prototypes, technical toys, and things I made just to see if I could.</h1>
+          <p class="pg-sub">Hover a plot to peek. Tap "Try it" to plant yourself in.</p>
+        </div>
+
+        <!-- Playground projects: blooming seed grid (Variant A) -->
+        <div class="seed-bed reveal d3">
+          <article class="seed">
+            <div class="seed-marker" aria-hidden="true">
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50 92 L50 50" stroke="#3d6b2c" stroke-width="2" stroke-linecap="round" fill="none"/>
+                <path d="M50 72 Q 34 66 28 54 Q 40 60 50 68 Z" fill="#5e8a4f"/>
+                <path d="M50 64 Q 66 58 72 46 Q 60 52 50 60 Z" fill="#5e8a4f"/>
+                <g transform="translate(50, 40)">
+                  <ellipse cx="0" cy="-14" rx="8" ry="12" fill="#ec6478" opacity=".9"/>
+                  <ellipse cx="13" cy="-4" rx="8" ry="12" fill="#ec6478" opacity=".9" transform="rotate(65)"/>
+                  <ellipse cx="8" cy="11" rx="8" ry="12" fill="#ec6478" opacity=".9" transform="rotate(140)"/>
+                  <ellipse cx="-8" cy="11" rx="8" ry="12" fill="#ec6478" opacity=".9" transform="rotate(-140)"/>
+                  <ellipse cx="-13" cy="-4" rx="8" ry="12" fill="#ec6478" opacity=".9" transform="rotate(-65)"/>
+                  <circle r="6" fill="#f6e4a8"/>
+                </g>
+              </svg>
+            </div>
+            <div class="seed-name">Hastamudra</div>
+            <div class="seed-bloom">
+              <span class="seed-tag">Computer vision &middot; Interactive</span>
+              <p class="seed-line">Where the hand moves, the gaze follows.</p>
+              <p class="seed-desc">Live camera experiment classifying Indian classical hand gestures in real time.</p>
+              <div class="seed-preview">
+                <video src="assets/playground/hastamudra.mp4" autoplay loop muted playsinline></video>
+              </div>
+              <div class="seed-actions">
+                <button class="pg-btn pg-btn-primary" type="button" data-launch="https://sakshii-shahh.github.io/hastamudra/" data-title="Hastamudra">
+                  <span>Try it</span><span class="pg-btn-arr">&rarr;</span>
+                </button>
+                <button class="pg-btn pg-btn-secondary" type="button" data-story="story-hastamudra" data-title="How I built Hastamudra">
+                  <span>How I built it</span><span class="pg-btn-arr">&nearr;</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="seed seed-empty">
+            <div class="seed-marker" aria-hidden="true">
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50 92 L50 62" stroke="#5e8a4f" stroke-width="2" stroke-linecap="round" fill="none"/>
+                <path d="M50 74 Q 40 70 36 62 Q 44 66 50 72 Z" fill="#5e8a4f" opacity=".7"/>
+                <path d="M50 68 Q 60 64 64 56 Q 56 60 50 66 Z" fill="#5e8a4f" opacity=".7"/>
+                <circle cx="50" cy="58" r="6" fill="#8a6418" opacity=".55"/>
+              </svg>
+            </div>
+            <div class="seed-name">Coming soon</div>
+          </article>
+
+          <article class="seed seed-empty">
+            <div class="seed-marker" aria-hidden="true">
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50 92 L50 68" stroke="#5e8a4f" stroke-width="2" opacity=".5" stroke-linecap="round" fill="none"/>
+                <circle cx="50" cy="66" r="4" fill="#8a6418" opacity=".4"/>
+              </svg>
+            </div>
+            <div class="seed-name">Seed</div>
+          </article>
+        </div>
+
+        <!-- Story templates (hidden, injected into modal when needed) -->
+        <template id="story-hastamudra">
+          <div class="pg-story">
+            <span class="pg-story-eyebrow">The build</span>
+            <h4 class="pg-story-title">How I built Hastamudra</h4>
+            <p>I wanted to see if I could get a browser to recognize Indian classical dance mudras from a webcam feed, with no backend, no heavy ML infra, and no install for the user.</p>
+            <h5>The stack</h5>
+            <ul>
+              <li>MediaPipe Hands for real-time hand landmark detection (21 points per hand, ~30 fps in the browser)</li>
+              <li>A small custom classifier trained on landmark geometry, not raw images</li>
+              <li>Vanilla JS + HTML + CSS. No framework.</li>
+              <li>GitHub Pages for hosting</li>
+            </ul>
+            <h5>The tricky part</h5>
+            <p>Landmark detection is easy. Deciding which landmark positions equal which mudra was the hard part. I hand-tagged reference examples for each mudra, then compared each frame's landmark geometry against those templates.</p>
+            <h5>What's next</h5>
+            <p>Expanding the reference library. Adding more classical mudras beyond the initial set. Would love to eventually pair each mudra with the story it tells in dance.</p>
+            <p class="pg-story-outbound"><a href="https://sakshii-shahh.github.io/hastamudra/" target="_blank" rel="noopener">Try it live &nearr;</a></p>
+          </div>
+        </template>
+
+      </div>
+
+      <!-- Modal (supports iframe demo + story text) -->
+      <div class="pg-modal" id="pgModal" role="dialog" aria-modal="true" aria-labelledby="pgModalTitle">
+        <div class="pg-modal-inner">
+          <div class="pg-modal-bar">
+            <span class="pg-modal-title">
+              <span class="pg-modal-dot"></span>
+              <span id="pgModalTitle">Live demo</span>
+            </span>
+            <button class="pg-modal-close" type="button" id="pgModalClose">Close &times;</button>
+          </div>
+          <div class="pg-modal-body">
+            <iframe id="pgFrame" title="Playground demo" allow="camera; microphone; autoplay"></iframe>
+            <div class="pg-modal-content" id="pgModalContent"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+  </div>
+
+  <!-- ============ FOOTER ============ -->
+  <!-- ====================== TULIP BAND (decorative, sits behind footer top) ====================== -->
+  <div class="tulip-band" aria-hidden="true">
+    <img src="assets/tulips/tulip-1.svg" alt="" class="tulip t-yellow" loading="lazy" />
+    <img src="assets/tulips/tulip-3.svg" alt="" class="tulip t-coral" loading="lazy" />
+    <img src="assets/tulips/tulip-5.svg" alt="" class="tulip t-yellow tilt-l" loading="lazy" />
+    <img src="assets/tulips/leaf-2.svg" alt="" class="leaf" loading="lazy" />
+    <img src="assets/tulips/tulip-2.svg" alt="" class="tulip t-pink" loading="lazy" />
+    <img src="assets/tulips/tulip-4.svg" alt="" class="tulip t-sage tilt-r" loading="lazy" />
+    <img src="assets/tulips/tulip-6.svg" alt="" class="tulip t-yellow" loading="lazy" />
+    <img src="assets/tulips/leaf-1.svg" alt="" class="leaf tilt-l" loading="lazy" />
+    <img src="assets/tulips/tulip-1.svg" alt="" class="tulip t-coral tilt-l" loading="lazy" />
+    <img src="assets/tulips/tulip-3.svg" alt="" class="tulip t-pink" loading="lazy" />
+    <img src="assets/tulips/tulip-2.svg" alt="" class="tulip t-yellow tilt-r" loading="lazy" />
+    <img src="assets/tulips/tulip-4.svg" alt="" class="tulip t-coral" loading="lazy" />
+    <img src="assets/tulips/leaf-3.svg" alt="" class="leaf" loading="lazy" />
+    <img src="assets/tulips/tulip-5.svg" alt="" class="tulip t-pink tilt-l" loading="lazy" />
+    <img src="assets/tulips/tulip-6.svg" alt="" class="tulip t-sage" loading="lazy" />
+    <img src="assets/tulips/tulip-1.svg" alt="" class="tulip t-yellow tilt-r" loading="lazy" />
+    <img src="assets/tulips/leaf-2.svg" alt="" class="leaf tilt-r" loading="lazy" />
+    <img src="assets/tulips/tulip-3.svg" alt="" class="tulip t-coral" loading="lazy" />
+    <img src="assets/tulips/tulip-5.svg" alt="" class="tulip t-pink tilt-l" loading="lazy" />
+  </div>
+
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <h2 class="footer-quote">
+          Growing and blooming products.<br/>
+          <span class="em">Why not yours?</span>
+        </h2>
+        <span class="footer-attr">— a thing I believe</span>
+      </div>
+      <div class="footer-col">
+        <ul>
+          <li><a href="mailto:sakshishah@u.northwestern.edu">Email</a></li>
+          <li><a href="https://www.linkedin.com/in/sakshiishahh/" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://drive.google.com/file/d/1afD_cw5tKiNqtMyKyFIy7jgnxFl-OphD/view?usp=sharing" target="_blank" rel="noopener">Resume</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <ul>
+          <li><a href="home.html">Work</a></li>
+          <li><a href="about.html">About Me</a></li>
+          <li><a href="ai.html">AI Practices</a></li>
+          <li class="divider"></li>
+          <li class="back"><a href="#" class="back-to-top">Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Live clock — disabled (clock element is hidden via CSS)
+
+    // Cursor
+    const dotEl = document.querySelector('.cursor-dot');
+    let mx = innerWidth/2, my = innerHeight/2;
+    let visible = false;
+    document.addEventListener('mousemove', (e) => {
+      mx = e.clientX; my = e.clientY;
+      if (!visible) { dotEl.style.opacity = '1'; visible = true; }
+    scheduleCursorTick();
+    });
+    document.addEventListener('mouseleave', () => { dotEl.style.opacity = '0'; visible = false; });
+    dotEl.style.opacity = '0';
+    let cursorRafId = null;
+    function tick() {
+      dotEl.style.left = mx + 'px';
+      dotEl.style.top = my + 'px';
+      cursorRafId = null;
+    }
+    function scheduleCursorTick() {
+      if (cursorRafId === null) cursorRafId = requestAnimationFrame(tick);
+    }
+    document.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => document.body.classList.add('cursor-grow'));
+      el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-grow'));
+    });
+
+    // ============ Click anywhere on the footer to plant a tulip ============
+    (function setupFooterClickPlant() {
+      const footerEl = document.querySelector('footer');
+      if (!footerEl) return;
+      const variants = ['tulip-1.svg', 'tulip-2.svg', 'tulip-3.svg', 'tulip-4.svg', 'tulip-5.svg', 'tulip-6.svg'];
+      footerEl.addEventListener('click', (e) => {
+        if (e.target.closest('a, button')) return;
+        const rect = footerEl.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const variant = variants[Math.floor(Math.random() * variants.length)];
+        const rotation = (Math.random() * 12 - 6).toFixed(1);
+        const tulip = document.createElement('img');
+        tulip.src = `assets/tulips/${variant}`;
+        tulip.className = 'planted-tulip';
+        tulip.alt = '';
+        tulip.setAttribute('aria-hidden', 'true');
+        tulip.style.left = x + 'px';
+        tulip.style.setProperty('--tulip-rotate', rotation + 'deg');
+        footerEl.appendChild(tulip);
+        requestAnimationFrame(() => { tulip.classList.add('grown'); });
+      });
+    })();
+
+    // Playground media: mark missing so placeholder shows
+    (function(){
+      document.querySelectorAll('.pg-plot-media video, .pg-plot-media img').forEach(el => {
+        const mark = () => el.parentElement.classList.add('img-missing');
+        el.addEventListener('error', mark);
+        if (el.tagName === 'VIDEO') {
+          el.addEventListener('loadeddata', () => {
+            if (el.readyState === 0) mark();
+          });
+          setTimeout(() => {
+            if (el.networkState === 3) mark();
+          }, 500);
+        } else if (el.complete && el.naturalWidth === 0) {
+          mark();
+        }
+      });
+    })();
+
+    // Playground modal: supports iframe (Try it) + story content (How I built it)
+    (function(){
+      const modal = document.getElementById('pgModal');
+      const frame = document.getElementById('pgFrame');
+      const content = document.getElementById('pgModalContent');
+      const title = document.getElementById('pgModalTitle');
+      const closeBtn = document.getElementById('pgModalClose');
+      if (!modal) return;
+
+      function openIframe(url, name) {
+        title.textContent = name || 'Live demo';
+        frame.src = url;
+        frame.classList.add('is-active');
+        content.classList.remove('is-active');
+        content.innerHTML = '';
+        modal.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      }
+      function openStory(templateId, name) {
+        const tpl = document.getElementById(templateId);
+        title.textContent = name || 'The build';
+        content.innerHTML = tpl ? tpl.innerHTML : '<div class="pg-story"><p>Story coming soon.</p></div>';
+        content.classList.add('is-active');
+        frame.classList.remove('is-active');
+        frame.src = '';
+        modal.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      }
+      function close() {
+        modal.classList.remove('is-open');
+        frame.src = '';
+        content.innerHTML = '';
+        content.classList.remove('is-active');
+        frame.classList.remove('is-active');
+        document.body.style.overflow = '';
+      }
+
+      document.querySelectorAll('.pg-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const url = btn.dataset.launch;
+          const storyId = btn.dataset.story;
+          const name = btn.dataset.title;
+          if (url) openIframe(url, name);
+          else if (storyId) openStory(storyId, name);
+        });
+      });
+      closeBtn.addEventListener('click', close);
+      modal.addEventListener('click', (e) => { if (e.target === modal) close(); });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('is-open')) close();
+      });
+    })();
+  </script>
+
+</body>
+</html>
