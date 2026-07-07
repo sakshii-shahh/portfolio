@@ -911,82 +911,180 @@
     .pg-plot-empty {
       opacity: .72;
     }
-    /* Variant A: Blooming seed grid */
+    /* Variant A: Blooming seed grid (refined) */
     .seed-bed {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      max-width: 1080px; margin: 0 auto;
-      padding: 20px 24px 60px;
+      gap: 24px;
+      max-width: 1120px; margin: 0 auto;
+      padding: 48px 24px 100px;
       position: relative; z-index: 4;
     }
     @media (max-width: 900px) { .seed-bed { grid-template-columns: 1fr 1fr; } }
     @media (max-width: 640px) { .seed-bed { grid-template-columns: 1fr; } }
 
     .seed {
-      background: rgba(240,232,210,.04);
+      background: linear-gradient(155deg, rgba(240,232,210,.07) 0%, rgba(240,232,210,.02) 100%);
       border: 1px solid rgba(240,232,210,.14);
-      border-radius: 22px;
-      padding: 32px 26px;
+      border-radius: 26px;
+      padding: 56px 32px 40px;
       display: flex; flex-direction: column; align-items: center;
-      justify-content: center; text-align: center;
+      justify-content: flex-start; text-align: center;
       cursor: pointer;
       position: relative; overflow: hidden;
-      min-height: 260px;
-      transition: transform .5s var(--ease), background .5s var(--ease), border-color .5s var(--ease), min-height .5s var(--ease);
+      min-height: 320px;
+      transition:
+        transform .5s cubic-bezier(.22,.61,.36,1),
+        background .5s var(--ease),
+        border-color .5s var(--ease),
+        min-height .55s cubic-bezier(.22,.61,.36,1),
+        box-shadow .5s var(--ease);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
     }
+
+    /* Decorative coral glow blob in top-right corner, appears on hover */
+    .seed::before {
+      content: ""; position: absolute;
+      top: -50px; right: -50px;
+      width: 180px; height: 180px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(236,100,120,.16) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity .6s var(--ease);
+      pointer-events: none;
+    }
+    /* Small firefly dot in bottom-left, blinks on hover */
+    .seed::after {
+      content: ""; position: absolute;
+      bottom: 20px; left: 20px;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: #f6c54a;
+      box-shadow: 0 0 8px rgba(246,197,74,.6);
+      opacity: 0;
+      transition: opacity .4s var(--ease);
+    }
+
     .seed:hover {
-      background: rgba(240,232,210,.08);
-      border-color: rgba(236,100,120,.4);
-      min-height: 560px;
+      background: linear-gradient(155deg, rgba(240,232,210,.11) 0%, rgba(240,232,210,.04) 100%);
+      border-color: rgba(236,100,120,.45);
+      min-height: 640px;
       transform: translateY(-6px);
+      box-shadow:
+        0 30px 60px -20px rgba(0,0,0,.5),
+        0 0 40px -12px rgba(236,100,120,.25);
     }
-    .seed-bed:has(.seed:hover) .seed:not(:hover) { opacity: .45; }
+    .seed:hover::before { opacity: 1; }
+    .seed:hover::after {
+      opacity: .9;
+      animation: seedBlink 1.6s ease-in-out infinite;
+    }
+    @keyframes seedBlink {
+      0%, 100% { opacity: .5; }
+      50% { opacity: 1; }
+    }
+    .seed-bed:has(.seed:hover) .seed:not(:hover) {
+      opacity: .38;
+      transform: scale(.98);
+    }
 
-    .seed-marker { width: 96px; height: 96px; margin-bottom: 16px; transition: transform .6s var(--ease); }
-    .seed:hover .seed-marker { transform: rotate(360deg) scale(1.1); }
+    .seed-marker {
+      width: 84px; height: 84px;
+      margin-bottom: 24px;
+      transition: transform .7s cubic-bezier(.22,.61,.36,1);
+      position: relative;
+    }
+    .seed:hover .seed-marker {
+      transform: rotate(180deg) scale(1.15);
+    }
+    .seed-marker svg { width: 100%; height: 100%; display: block; }
+
     .seed-name {
-      font-family: var(--serif); font-weight: 500; font-size: 24px;
-      color: #f4ecd0; letter-spacing: -.01em;
+      font-family: var(--serif); font-weight: 500;
+      font-size: 26px; line-height: 1.1;
+      color: #f4ecd0; letter-spacing: -.015em;
+      transition: transform .5s var(--ease), color .3s var(--ease);
     }
-    .seed-empty .seed-name { color: rgba(240,232,210,.55); }
+    .seed:hover .seed-name {
+      transform: translateY(-2px);
+      color: #fff;
+    }
+    .seed-empty .seed-name {
+      color: rgba(240,232,210,.55);
+      font-size: 22px;
+    }
 
+    /* Bloom content — staggered reveal */
     .seed-bloom {
       opacity: 0;
       max-height: 0;
       overflow: hidden;
       width: 100%;
-      transition: opacity .4s var(--ease), max-height .5s var(--ease), margin-top .5s var(--ease);
       margin-top: 0;
+      transition:
+        opacity .5s var(--ease),
+        max-height .6s cubic-bezier(.22,.61,.36,1),
+        margin-top .5s var(--ease);
     }
     .seed:hover .seed-bloom {
       opacity: 1;
-      max-height: 600px;
-      margin-top: 20px;
+      max-height: 640px;
+      margin-top: 24px;
     }
+    /* Stagger children in the bloom */
+    .seed-bloom > * {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity .45s var(--ease), transform .45s var(--ease);
+    }
+    .seed:hover .seed-tag       { opacity: 1; transform: none; transition-delay: .18s; }
+    .seed:hover .seed-line      { opacity: 1; transform: none; transition-delay: .26s; }
+    .seed:hover .seed-desc      { opacity: 1; transform: none; transition-delay: .32s; }
+    .seed:hover .seed-preview   { opacity: 1; transform: none; transition-delay: .38s; }
+    .seed:hover .seed-actions   { opacity: 1; transform: none; transition-delay: .48s; }
+
     .seed-tag {
       font-family: var(--mono); font-size: 10.5px; font-weight: 600;
-      letter-spacing: .16em; text-transform: uppercase;
-      color: rgba(236,100,120,.9);
-      display: block; margin-bottom: 8px;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: rgba(236,100,120,.95);
+      display: block; margin-bottom: 12px;
     }
     .seed-line {
-      font-family: var(--serif); font-style: italic; font-size: 15px;
-      color: rgba(240,232,210,.85); margin: 0 0 10px; line-height: 1.4;
+      font-family: var(--serif); font-style: italic; font-size: 16px;
+      color: rgba(240,232,210,.9); margin: 0 0 12px; line-height: 1.4;
     }
     .seed-desc {
-      font-size: 13px; color: rgba(240,232,210,.65);
-      line-height: 1.55; margin: 0 0 16px;
+      font-size: 13.5px; color: rgba(240,232,210,.68);
+      line-height: 1.6; margin: 0 0 20px;
     }
     .seed-preview {
-      aspect-ratio: 16/10; border-radius: 12px; overflow: hidden;
-      background: rgba(240,232,210,.06); border: 1px solid rgba(240,232,210,.14);
-      margin-bottom: 16px;
+      aspect-ratio: 16/10; border-radius: 14px; overflow: hidden;
+      background: rgba(240,232,210,.06);
+      border: 1px solid rgba(236,100,120,.22);
+      margin-bottom: 20px;
+      box-shadow: 0 12px 28px -14px rgba(0,0,0,.5);
     }
-    .seed-preview video, .seed-preview img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .seed-preview video, .seed-preview img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
     .seed-actions {
-      display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
+      display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
     }
+
+    /* Empty seeds behave differently: no expand, no glow */
+    .seed-empty {
+      opacity: .65;
+      cursor: default;
+    }
+    .seed-empty:hover {
+      opacity: .78;
+      min-height: 320px;
+      transform: translateY(-3px);
+      box-shadow: none;
+      border-color: rgba(240,232,210,.22);
+    }
+    .seed-empty:hover .seed-marker { transform: none; }
+    .seed-empty::before, .seed-empty::after { display: none; }
+    .seed-bed:has(.seed:hover) .seed-empty { opacity: .25; }
   </style>
 </head>
 <body>
