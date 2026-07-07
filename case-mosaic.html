@@ -309,6 +309,17 @@
       border-color: color-mix(in srgb, var(--leaf) 38%, transparent);
       color: color-mix(in srgb, var(--leaf-deep) 80%, var(--ink));
     }
+    .case-tag.concept {
+      background: var(--accent-soft);
+      border-color: var(--accent-soft);
+      color: var(--accent-deep);
+    }
+    .case-tag.zero-one {
+      background: #cee1ff;
+      border-color: #b5cdf5;
+      color: #2a4a7a;
+      font-weight: 500;
+    }
 
     .case-title {
       font-family: var(--serif);
@@ -373,7 +384,7 @@
       padding: 28px 36px;
       margin-bottom: 80px;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 36px;
     }
     @media (max-width: 760px) {
@@ -1934,6 +1945,14 @@
           <p class="pb-col-label">Timeframe</p>
           <div class="pb-col-val">
             <span>May – Jun 2026</span>
+          </div>
+        </div>
+        <div>
+          <p class="pb-col-label">Skills</p>
+          <div class="pb-col-val">
+            <span>PRD</span>
+            <span>Design thinking</span>
+            <span>Product strategy</span>
           </div>
         </div>
       </div>
