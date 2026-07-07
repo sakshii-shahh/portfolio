@@ -589,6 +589,228 @@
       content-visibility: auto;
       contain-intrinsic-size: auto 600px;
     }
+
+    /* ============ PLAYGROUND V2 ============ */
+    .pg-intro {
+      max-width: 720px; margin: 0 auto 48px; text-align: center;
+      position: relative; z-index: 4;
+    }
+    .pg-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--mono); font-size: 11px; font-weight: 600;
+      letter-spacing: .2em; text-transform: uppercase;
+      color: rgba(240,232,210,.7);
+      padding: 6px 14px; border-radius: 999px;
+      background: rgba(240,232,210,.06);
+      border: 1px solid rgba(240,232,210,.14);
+      margin-bottom: 18px;
+    }
+    .pg-pulse {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(236,100,120,.24);
+      animation: pgPulse 1.8s ease-in-out infinite;
+    }
+    @keyframes pgPulse {
+      0%, 100% { box-shadow: 0 0 0 4px rgba(236,100,120,.24); }
+      50% { box-shadow: 0 0 0 8px rgba(236,100,120,.08); }
+    }
+    .pg-title {
+      font-family: var(--serif); font-weight: 500;
+      font-size: clamp(30px, 4.4vw, 52px);
+      line-height: 1.1; letter-spacing: -.015em;
+      color: #f4ecd0; margin: 0 0 12px;
+    }
+    .pg-title em {
+      font-style: italic; color: var(--accent);
+    }
+    .pg-sub {
+      font-family: var(--sans); font-size: 15px;
+      color: rgba(240,232,210,.7);
+      margin: 0; line-height: 1.55;
+    }
+
+    .garden-plots {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      max-width: 1080px; margin: 0 auto;
+      padding: 0 20px;
+      position: relative; z-index: 4;
+    }
+    .plot {
+      background: rgba(240,232,210,.04);
+      border: 1px solid rgba(240,232,210,.14);
+      border-radius: 24px;
+      padding: 28px 26px 24px;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      display: flex; flex-direction: column;
+      transition: transform .35s var(--ease), border-color .35s var(--ease), background .35s var(--ease);
+      position: relative;
+      overflow: hidden;
+    }
+    .plot:hover {
+      transform: translateY(-6px) rotate(-.4deg);
+      border-color: rgba(236,100,120,.45);
+      background: rgba(240,232,210,.07);
+    }
+    .plot::before {
+      content: ""; position: absolute;
+      top: -30px; right: -30px;
+      width: 140px; height: 140px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(236,100,120,.14) 0%, transparent 70%);
+      opacity: 0; transition: opacity .5s var(--ease);
+      pointer-events: none;
+    }
+    .plot:hover::before { opacity: 1; }
+
+    .plot-visual {
+      width: 96px; height: 96px;
+      margin: 0 0 20px -6px;
+      display: grid; place-items: center;
+      transition: transform .5s var(--ease);
+    }
+    .plot-visual svg { width: 100%; height: 100%; }
+    .plot:hover .plot-visual {
+      transform: rotate(-6deg) scale(1.08);
+    }
+
+    .plot-tag {
+      font-family: var(--mono); font-size: 10.5px; font-weight: 600;
+      letter-spacing: .16em; text-transform: uppercase;
+      color: rgba(236,100,120,.85);
+      margin-bottom: 10px;
+    }
+    .plot-seedling .plot-tag { color: rgba(240,232,210,.55); }
+    .plot-title {
+      font-family: var(--serif); font-weight: 500;
+      font-size: 28px; line-height: 1.1; letter-spacing: -.01em;
+      color: #f4ecd0; margin: 0 0 8px;
+    }
+    .plot-line {
+      font-family: var(--serif); font-style: italic;
+      font-size: 15px; color: rgba(240,232,210,.82);
+      margin: 0 0 12px; line-height: 1.4;
+    }
+    .plot-desc {
+      font-size: 13.5px; color: rgba(240,232,210,.6);
+      line-height: 1.6; margin: 0 0 20px;
+    }
+    .plot-actions {
+      margin-top: auto;
+      display: flex; align-items: center; gap: 16px;
+      flex-wrap: wrap;
+    }
+    .plot-try {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 12px 20px;
+      background: var(--accent); color: #fbf6e5;
+      border: none; border-radius: 999px;
+      font-family: var(--display); font-weight: 600; font-size: 14px;
+      transition: transform .25s var(--ease), background .25s var(--ease), box-shadow .25s var(--ease);
+      box-shadow: 0 4px 14px -6px rgba(236,100,120,.5);
+    }
+    .plot-try:hover {
+      transform: translateY(-2px);
+      background: var(--accent-deep);
+      box-shadow: 0 8px 20px -6px rgba(236,100,120,.6);
+    }
+    .plot-try-arr { transition: transform .25s var(--ease); }
+    .plot-try:hover .plot-try-arr { transform: translateX(3px); }
+    .plot-source {
+      font-family: var(--mono); font-size: 11.5px;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: rgba(240,232,210,.55);
+      transition: color .2s var(--ease);
+    }
+    .plot-source:hover { color: #f4ecd0; }
+
+    .plot-seedling {
+      opacity: .68;
+      border-style: dashed;
+    }
+    .plot-seedling:hover { opacity: .85; }
+
+    /* ============ TRY-IT MODAL ============ */
+    .pg-modal {
+      position: fixed; inset: 0;
+      background: rgba(12, 14, 10, .82);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: none;
+      z-index: 1000;
+      padding: 32px;
+      align-items: center; justify-content: center;
+    }
+    .pg-modal.is-open { display: flex; animation: pgFade .3s var(--ease); }
+    @keyframes pgFade { from { opacity: 0; } to { opacity: 1; } }
+
+    .pg-modal-inner {
+      position: relative;
+      width: 100%; max-width: 1200px;
+      height: min(85vh, 800px);
+      background: #0f120d;
+      border: 1px solid rgba(240,232,210,.18);
+      border-radius: 24px;
+      overflow: hidden;
+      display: flex; flex-direction: column;
+      box-shadow: 0 40px 80px -20px rgba(0,0,0,.6);
+      animation: pgSlide .35s var(--ease);
+    }
+    @keyframes pgSlide { from { transform: translateY(20px) scale(.98); opacity: 0; } to { transform: none; opacity: 1; } }
+
+    .pg-modal-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 20px;
+      background: rgba(240,232,210,.04);
+      border-bottom: 1px solid rgba(240,232,210,.1);
+    }
+    .pg-modal-title {
+      font-family: var(--display); font-weight: 600; font-size: 14px;
+      color: #f4ecd0;
+      display: inline-flex; align-items: center; gap: 10px;
+    }
+    .pg-modal-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 3px rgba(236,100,120,.24);
+    }
+    .pg-modal-close {
+      background: rgba(240,232,210,.08);
+      border: 1px solid rgba(240,232,210,.16);
+      color: #f4ecd0;
+      padding: 8px 14px; border-radius: 999px;
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: .12em; text-transform: uppercase;
+      cursor: pointer;
+      transition: background .2s var(--ease), border-color .2s var(--ease);
+    }
+    .pg-modal-close:hover {
+      background: rgba(240,232,210,.14);
+      border-color: rgba(240,232,210,.28);
+    }
+    .pg-modal-frame {
+      flex: 1;
+      background: #fff;
+      position: relative;
+    }
+    .pg-modal-frame iframe {
+      width: 100%; height: 100%;
+      border: none;
+      display: block;
+    }
+
+    @media (max-width: 640px) {
+      .pg-modal { padding: 16px; }
+      .pg-modal-inner { height: 90vh; border-radius: 18px; }
+      .plot-title { font-size: 24px; }
+    }
+
+    .stage {
+      min-height: auto !important;
+      padding-top: 80px; padding-bottom: 120px;
+    }
   </style>
 </head>
 <body>
@@ -704,17 +926,83 @@
           </svg>
         </div>
 
-        <!-- coming soon pill -->
-        <div class="soon-pill reveal d2">
-          <span class="pulse" aria-hidden="true"></span>
-          <span>Coming Soon</span>
+        <!-- Playground intro -->
+        <div class="pg-intro reveal d2">
+          <span class="pg-eyebrow"><span class="pg-pulse"></span> The wild patch</span>
+          <h1 class="pg-title">Weekend prototypes, technical toys, and things I made <em>just to see if I could</em>.</h1>
+          <p class="pg-sub">Hover a plot to peek. Tap "Try it" to plant yourself in.</p>
         </div>
 
-        <!-- subtitle below -->
-        <div class="soon-sub reveal d3">
-          <p>The wild patch is being seeded. Side projects, experiments, and weekend prototypes, coming soon.</p>
+        <!-- Garden plots (project cards) -->
+        <div class="garden-plots reveal d3">
+
+          <article class="plot plot-hastamudra">
+            <div class="plot-visual" aria-hidden="true">
+              <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                <path d="M60 118 L60 60" stroke="#3d6b2c" stroke-width="2" stroke-linecap="round" fill="none"/>
+                <path d="M60 90 Q 40 82 32 66 Q 46 70 60 84 Z" fill="#5e8a4f"/>
+                <path d="M60 78 Q 82 70 92 54 Q 76 58 60 74 Z" fill="#5e8a4f"/>
+                <g transform="translate(60, 46)">
+                  <ellipse cx="0" cy="-18" rx="10" ry="14" fill="#ec6478" opacity=".85"/>
+                  <ellipse cx="17" cy="-6" rx="10" ry="14" fill="#ec6478" opacity=".85" transform="rotate(65)"/>
+                  <ellipse cx="10" cy="14" rx="10" ry="14" fill="#ec6478" opacity=".85" transform="rotate(140)"/>
+                  <ellipse cx="-10" cy="14" rx="10" ry="14" fill="#ec6478" opacity=".85" transform="rotate(-140)"/>
+                  <ellipse cx="-17" cy="-6" rx="10" ry="14" fill="#ec6478" opacity=".85" transform="rotate(-65)"/>
+                  <circle r="7" fill="#f6e4a8"/>
+                </g>
+              </svg>
+            </div>
+            <div class="plot-content">
+              <span class="plot-tag">Computer vision &middot; Interactive</span>
+              <h3 class="plot-title">Hastamudra</h3>
+              <p class="plot-line">Where the hand moves, the gaze follows.</p>
+              <p class="plot-desc">A live camera experiment that classifies Indian classical hand gestures (mudras) in real time. Hold your hand in front of the camera and watch it name the shape.</p>
+              <div class="plot-actions">
+                <button class="plot-try" type="button" data-launch="https://sakshii-shahh.github.io/hastamudra/" data-title="Hastamudra">
+                  <span>Try it</span>
+                  <span class="plot-try-arr">&rarr;</span>
+                </button>
+                <a class="plot-source" href="https://sakshii-shahh.github.io/hastamudra/" target="_blank" rel="noopener">
+                  Open in tab &nearr;
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="plot plot-seedling">
+            <div class="plot-visual" aria-hidden="true">
+              <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                <path d="M60 118 L60 78" stroke="#3d6b2c" stroke-width="2" stroke-linecap="round" fill="none"/>
+                <path d="M60 92 Q 48 86 42 76 Q 52 80 60 88 Z" fill="#5e8a4f" opacity=".7"/>
+                <path d="M60 84 Q 72 78 78 68 Q 68 72 60 80 Z" fill="#5e8a4f" opacity=".7"/>
+                <circle cx="60" cy="72" r="6" fill="#8a6418" opacity=".5"/>
+              </svg>
+            </div>
+            <div class="plot-content">
+              <span class="plot-tag">Coming soon</span>
+              <h3 class="plot-title">Something's growing.</h3>
+              <p class="plot-desc">The next patch is in the works. Come back later.</p>
+            </div>
+          </article>
+
         </div>
 
+      </div>
+
+      <!-- Try-it modal -->
+      <div class="pg-modal" id="pgModal" role="dialog" aria-modal="true" aria-labelledby="pgModalTitle">
+        <div class="pg-modal-inner">
+          <div class="pg-modal-bar">
+            <span class="pg-modal-title">
+              <span class="pg-modal-dot"></span>
+              <span id="pgModalTitle">Live demo</span>
+            </span>
+            <button class="pg-modal-close" type="button" id="pgModalClose">Close &times;</button>
+          </div>
+          <div class="pg-modal-frame">
+            <iframe id="pgFrame" title="Playground demo" allow="camera; microphone; autoplay"></iframe>
+          </div>
+        </div>
       </div>
     </main>
 
@@ -802,6 +1090,41 @@
       el.addEventListener('mouseenter', () => document.body.classList.add('cursor-grow'));
       el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-grow'));
     });
+
+    // Playground "Try it" modal launcher
+    (function(){
+      const modal = document.getElementById('pgModal');
+      const frame = document.getElementById('pgFrame');
+      const title = document.getElementById('pgModalTitle');
+      const closeBtn = document.getElementById('pgModalClose');
+      const buttons = document.querySelectorAll('.plot-try');
+      if (!modal || !frame) return;
+      function open(url, name) {
+        title.textContent = name || 'Live demo';
+        frame.src = url;
+        modal.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      }
+      function close() {
+        modal.classList.remove('is-open');
+        frame.src = '';
+        document.body.style.overflow = '';
+      }
+      buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const url = btn.dataset.launch;
+          const name = btn.dataset.title;
+          if (url) open(url, name);
+        });
+      });
+      closeBtn.addEventListener('click', close);
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) close();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('is-open')) close();
+      });
+    })();
   </script>
 
 </body>
