@@ -820,6 +820,64 @@
       .polaroid-pile { min-height: 420px; max-width: 100%; }
       .polaroid { width: 240px; padding: 14px 14px 16px; }
       .polaroid-caption { font-size: 12.5px; }
+
+    /* Pink accents in intro */
+    .intro-name {
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .pink-word {
+      color: var(--accent-deep);
+      font-style: italic;
+    }
+    .pink-underline {
+      color: var(--ink);
+      background: linear-gradient(180deg, transparent 62%, var(--accent-soft) 62%, var(--accent-soft) 92%, transparent 92%);
+      padding: 0 3px;
+    }
+
+    /* Thought bubble hint over the polaroid */
+    .photo-hint {
+      position: absolute;
+      top: -18px; right: -28px;
+      z-index: 6;
+      animation: hintFloat 3.5s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @media (max-width: 900px) {
+      .photo-hint { top: -12px; right: 0; }
+    }
+    .photo-hint-bubble {
+      background: var(--accent);
+      color: #fbf6e5;
+      padding: 12px 18px;
+      border-radius: 24px;
+      font-family: var(--serif);
+      font-size: 14px;
+      line-height: 1.35;
+      max-width: 200px;
+      box-shadow: 0 8px 20px -8px rgba(236, 100, 120, 0.5);
+      transform: rotate(3deg);
+    }
+    .photo-hint-bubble em { font-style: italic; }
+    .photo-hint-dot {
+      position: absolute;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 4px 8px -4px rgba(236,100,120,.4);
+    }
+    .photo-hint-dot-1 {
+      width: 10px; height: 10px;
+      bottom: -8px; left: 30%;
+    }
+    .photo-hint-dot-2 {
+      width: 6px; height: 6px;
+      bottom: -18px; left: 24%;
+    }
+    @keyframes hintFloat {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-6px) rotate(-1deg); }
+    }
       .polaroid[data-stack="0"] { transform: translate(-50%, -50%) rotate(-2deg) scale(1.05); }
       .polaroid[data-stack="1"] { transform: translate(-50%, -50%) translate(-26px, -14px) rotate(-8deg) scale(0.93); }
       .polaroid[data-stack="2"] { transform: translate(-50%, -50%) translate(28px, -10px)  rotate(7deg)  scale(0.89); }
@@ -1349,6 +1407,13 @@
         <!-- Hero: photo + bio -->
         <div class="about-hero">
           <div class="polaroid-pile reveal" id="polaroidPile" aria-label="Polaroid photos of Sakshi. Click the top one to cycle through.">
+            <div class="photo-hint" aria-hidden="true">
+              <div class="photo-hint-bubble">
+                <em>tap to see crazy things I'm up to&hellip;</em>
+              </div>
+              <span class="photo-hint-dot photo-hint-dot-1"></span>
+              <span class="photo-hint-dot photo-hint-dot-2"></span>
+            </div>
             <div class="polaroid" data-id="beach">
               <img src="assets/about/03-beach-and-sunshine.webp" alt="At the beach" loading="lazy" />
               <p class="polaroid-caption">hey there!</p>
@@ -1372,10 +1437,10 @@
           </div>
 
           <div class="about-bio reveal d2">
-            <p class="intro">Hi, I'm <strong>Sakshi</strong>.</p>
-            <p class="sub" style="font-family: var(--display); font-style: italic; font-size: clamp(20px, 2vw, 24px); color: var(--ink); margin-bottom: 24px;">Designing where research, strategy, and empathy meet.</p>
-            <p class="sub">I'm fascinated by how good products can quietly shape the way we live, the kind of design that feels obvious once you see it, but only because someone put in the work to make it simple. That's what drew me into product design: the chance to take messy, complex problems and turn them into something people actually enjoy using.</p>
-            <p class="sub">What grounds my work is the conviction that the best decisions come from listening hard, to users, to data, and to people across the table with very different priorities. I'm at my best in cross-functional teams where empathy and analytical rigor pull in the same direction.</p>
+            <p class="intro">Hi, I'm <strong class="intro-name">Sakshi</strong>!</p>
+            <p class="sub" style="font-family: var(--display); font-style: italic; font-size: clamp(20px, 2vw, 24px); color: var(--ink); margin-bottom: 24px;">Designing where <span class="pink-word">research</span>, <span class="pink-word">strategy</span>, and <span class="pink-word">empathy</span> meet.</p>
+            <p class="sub">I'm fascinated by how good products can <span class="pink-underline">quietly shape the way we live</span>, the kind of design that feels obvious once you see it, but only because someone put in the work to make it simple. That's what drew me into product design: the chance to take messy, complex problems and turn them into something people actually enjoy using.</p>
+            <p class="sub">What grounds my work is the conviction that the best decisions come from <span class="pink-underline">listening hard</span>, to users, to data, and to people across the table with very different priorities. I'm at my best in cross-functional teams where empathy and analytical rigor pull in the same direction.</p>
           </div>
         </div>
 
