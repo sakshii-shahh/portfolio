@@ -987,16 +987,13 @@
       border-radius: var(--r-lg);
       padding: 22px 24px 22px;
       display: flex; flex-direction: column; gap: 10px;
-      transition: transform .3s var(--ease), border-color .3s var(--ease), box-shadow .3s var(--ease);
+      transition: transform .3s var(--ease), border-color .25s var(--ease), background .25s var(--ease);
       position: relative;
-      will-change: transform;
-      backface-visibility: hidden;
-      -webkit-backface-visibility: hidden;
     }
     .agent-card:hover {
-      transform: translateY(-3px);
-      border-color: var(--accent-soft);
-      box-shadow: 0 12px 28px -14px rgba(20,18,12,.16);
+      transform: translateY(-2px);
+      border-color: var(--rule-strong);
+      background: var(--bg-card);
     }
     .agent-status-row {
       display: inline-flex; align-items: center; gap: 8px;
@@ -1451,7 +1448,6 @@
     }
       /* ============ CONTENT-VISIBILITY: skip layout for off-screen sections ============ */
     .section,
-    .agents-grid,
     .stack-grid,
     .resources-grid-9,
     .communities-cards,
