@@ -537,6 +537,14 @@
       color: #f4ecd0; margin: 0 0 18px; max-width: 20ch;
     }
     .footer-quote .em { font-style: italic; color: #f4ecd0; }
+    .footer-sub {
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.55;
+      color: rgba(240, 232, 210, 0.72);
+      margin: 16px 0 20px;
+      max-width: 42ch;
+    }
     .footer-attr {
       font-family: var(--mono); font-size: 10.5px; letter-spacing: .18em;
       text-transform: uppercase; color: rgba(240, 232, 210, 0.5);
@@ -670,8 +678,10 @@
       font-family: var(--mono); font-size: 11px;
       letter-spacing: .12em; text-transform: uppercase;
       cursor: pointer;
+      display: inline-flex; align-items: center; gap: 8px;
       transition: background .2s var(--ease), border-color .2s var(--ease);
     }
+    .pg-modal-close svg { display: block; }
     .pg-modal-close:hover {
       background: rgba(240,232,210,.14);
       border-color: rgba(240,232,210,.28);
@@ -689,11 +699,14 @@
     .pg-btn-arr {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
+      width: 18px; height: 18px;
       transition: transform .3s var(--ease);
+      flex-shrink: 0;
     }
     .pg-btn-arr svg {
       display: block;
-      width: 16px; height: 16px;
+      width: 18px; height: 18px;
     }
     .pg-btn:hover .pg-btn-arr, .pg-btn:focus-visible .pg-btn-arr {
       transform: translateX(5px);
@@ -793,10 +806,16 @@
       border-top: 1px solid var(--rule);
     }
     .pg-story-outbound a {
-      color: var(--accent);
+      color: var(--accent-deep);
       font-family: var(--display); font-weight: 600;
+      display: inline-flex; align-items: center; gap: 8px;
+      transition: gap .25s var(--ease), color .2s var(--ease);
     }
-    .pg-story-outbound a:hover { color: var(--accent-deep); }
+    .pg-story-outbound a:hover {
+      color: var(--accent);
+      gap: 12px;
+    }
+    .pg-story-outbound svg { display: block; flex-shrink: 0; }
     .pg-story-lead {
       font-family: var(--serif); font-style: italic;
       font-size: 20px; line-height: 1.5;
@@ -1228,8 +1247,8 @@
         I'm a product designer with a <strong>research and strategy backbone</strong>. I use <strong>empathy</strong> to find the right problem, and <strong>analytical thinking</strong> to shape the answer.
       </p>
       <p class="bio reveal d2">
-        Currently <a class="at" href="https://www.mccormick.northwestern.edu/product-design-development/" target="_blank" rel="noopener">@Northwestern</a>, <a class="at" href="https://www.cgi.com/" target="_blank" rel="noopener">@CGI</a><br>
-        Previously <a class="at" href="https://www.ibm.com/" target="_blank" rel="noopener">@IBM</a>
+        Currently <a class="at" href="https://www.mccormick.northwestern.edu/product-design-development/" target="_blank" rel="noopener">@Northwestern</a>, <a class="at" href="https://subjecttoclimate.org/" target="_blank" rel="noopener">@SubjectToClimate</a><br>
+        Previously <a class="at" href="https://www.cgi.com/" target="_blank" rel="noopener">@CGI</a>, <a class="at" href="https://www.ibm.com/" target="_blank" rel="noopener">@IBM</a>
       </p>
 
       <div class="explore-wrap reveal d3">
@@ -1326,16 +1345,16 @@
                 <button class="pg-btn pg-btn-primary" type="button" data-launch="https://sakshii-shahh.github.io/hastamudra/" data-title="Hastamudra">
                   <span>Try it</span>
                   <span class="pg-btn-arr" aria-hidden="true">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M5 12h14M13 6l6 6-6 6"/>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M5 12h14M13 6l6 6-6 6" stroke="#fbf6e5" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                   </span>
                 </button>
                 <button class="pg-btn pg-btn-secondary" type="button" data-story="story-hastamudra" data-title="How I built Hastamudra">
                   <span>How I built it</span>
                   <span class="pg-btn-arr" aria-hidden="true">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M7 17L17 7M9 7h8v8"/>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M7 17L17 7M9 7h8v8" stroke="#f4ecd0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                   </span>
                 </button>
@@ -1406,9 +1425,9 @@
 
             <p class="pg-story-outbound">
               <a href="https://sakshii-shahh.github.io/hastamudra/" target="_blank" rel="noopener">
-                Try it live
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-left: 6px;">
-                  <path d="M5 12h14M13 6l6 6-6 6"/>
+                <span>Try it live</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5 12h14M13 6l6 6-6 6" stroke="#b13e58" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </a>
             </p>
@@ -1425,7 +1444,12 @@
               <span class="pg-modal-dot"></span>
               <span id="pgModalTitle">Live demo</span>
             </span>
-            <button class="pg-modal-close" type="button" id="pgModalClose">Close &times;</button>
+            <button class="pg-modal-close" type="button" id="pgModalClose" aria-label="Close">
+              <span>Close</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 6L18 18M18 6L6 18" stroke="#f4ecd0" stroke-width="2.5" stroke-linecap="round"/>
+              </svg>
+            </button>
           </div>
           <div class="pg-modal-body">
             <iframe id="pgFrame" title="Playground demo" allow="camera; microphone; autoplay"></iframe>
@@ -1465,10 +1489,10 @@
     <div class="footer-grid">
       <div>
         <h2 class="footer-quote">
-          Growing and blooming products.<br/>
-          <span class="em">Why not yours?</span>
+          Growing products with <span class="em">intention.</span>
         </h2>
-        <span class="footer-attr">— a thing I believe</span>
+        <p class="footer-sub">Every meaningful product begins with curiosity and grows through thoughtful design. If you're cultivating the next one, let's talk.</p>
+        <span class="footer-attr">— Let's grow something</span>
       </div>
       <div class="footer-col">
         <ul>
@@ -1481,6 +1505,7 @@
         <ul>
           <li><a href="home.html">Work</a></li>
           <li><a href="about.html">About Me</a></li>
+          <li><a href="playground.html">Playground</a></li>
           <li><a href="ai.html">AI Practices</a></li>
           <li class="divider"></li>
           <li class="back"><a href="#" class="back-to-top">Back to top</a></li>
