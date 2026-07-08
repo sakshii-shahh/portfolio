@@ -821,6 +821,11 @@
       .polaroid-pile { min-height: 420px; max-width: 100%; }
       .polaroid { width: 240px; padding: 14px 14px 16px; }
       .polaroid-caption { font-size: 12.5px; }
+      .polaroid[data-stack="0"] { transform: translate(-50%, -50%) rotate(-2deg) scale(1.05); }
+      .polaroid[data-stack="1"] { transform: translate(-50%, -50%) translate(-26px, -14px) rotate(-8deg) scale(0.93); }
+      .polaroid[data-stack="2"] { transform: translate(-50%, -50%) translate(28px, -10px)  rotate(7deg)  scale(0.89); }
+      .polaroid[data-stack="3"] { transform: translate(-50%, -50%) translate(-14px, 18px)  rotate(-4deg) scale(0.85); }
+      .polaroid[data-stack="4"] { transform: translate(-50%, -50%) translate(18px, 22px)   rotate(6deg)  scale(0.82); }
     }
 
     /* Pink accents in intro */
@@ -879,12 +884,6 @@
     @keyframes hintFloat {
       0%, 100% { transform: translateY(0) rotate(0deg); }
       50% { transform: translateY(-6px) rotate(-1deg); }
-    }
-      .polaroid[data-stack="0"] { transform: translate(-50%, -50%) rotate(-2deg) scale(1.05); }
-      .polaroid[data-stack="1"] { transform: translate(-50%, -50%) translate(-26px, -14px) rotate(-8deg) scale(0.93); }
-      .polaroid[data-stack="2"] { transform: translate(-50%, -50%) translate(28px, -10px)  rotate(7deg)  scale(0.89); }
-      .polaroid[data-stack="3"] { transform: translate(-50%, -50%) translate(-14px, 18px)  rotate(-4deg) scale(0.85); }
-      .polaroid[data-stack="4"] { transform: translate(-50%, -50%) translate(18px, 22px)   rotate(6deg)  scale(0.82); }
     }
 
     .about-bio {
