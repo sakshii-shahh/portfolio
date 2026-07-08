@@ -601,21 +601,17 @@
 
     /* ============ PLAYGROUND V2 ============ */
     .pg-intro {
-      max-width: 720px; margin: 0 auto 40px; text-align: center;
+      max-width: 780px; margin: 0 auto 40px; text-align: center;
       position: relative; z-index: 4;
-      padding-top: 80px;
+      padding-top: 120px;
     }
     .pg-title {
       font-family: var(--serif); font-weight: 500;
-      font-size: clamp(24px, 3.4vw, 40px);
+      font-size: clamp(28px, 4vw, 48px);
       line-height: 1.1; letter-spacing: -.015em;
-      color: #f4ecd0; margin: 0 0 10px;
+      color: #f4ecd0; margin: 0;
     }
-    .pg-sub {
-      font-family: var(--sans); font-size: 14px;
-      color: rgba(240,232,210,.65);
-      margin: 0; line-height: 1.55;
-    }
+    .pg-title em { font-style: italic; color: var(--accent); }
 
 
     /* ============ TRY-IT MODAL ============ */
@@ -689,10 +685,19 @@
     .pg-btn-arr {
       display: inline-flex;
       align-items: center;
-      transition: transform .25s var(--ease);
+      transition: transform .3s var(--ease);
     }
-    .pg-btn-arr svg { display: block; }
-    .pg-btn:hover .pg-btn-arr, .pg-btn:focus-visible .pg-btn-arr { transform: translateX(3px); }
+    .pg-btn-arr svg {
+      display: block;
+      width: 16px; height: 16px;
+    }
+    .pg-btn:hover .pg-btn-arr, .pg-btn:focus-visible .pg-btn-arr {
+      transform: translateX(5px);
+    }
+    .pg-btn-secondary:hover .pg-btn-arr,
+    .pg-btn-secondary:focus-visible .pg-btn-arr {
+      transform: translate(3px, -3px);
+    }
     .pg-btn-primary {
       background: var(--accent);
       color: #fbf6e5;
@@ -994,12 +999,12 @@
       transform: rotate(-8deg) scale(1.06);
     }
 
-    /* Featured — always expanded, bigger, coral-tinted */
+    /* Featured — always expanded, coral-tinted */
     .seed-featured {
-      min-height: 640px;
+      min-height: 560px;
       background: linear-gradient(155deg, rgba(240,232,210,.11) 0%, rgba(240,232,210,.04) 100%);
       border: 1px solid rgba(236,100,120,.4);
-      padding: 56px 40px 48px;
+      padding: 40px 32px 36px;
       box-shadow:
         0 30px 60px -20px rgba(0,0,0,.5),
         0 0 40px -12px rgba(236,100,120,.25);
@@ -1011,10 +1016,13 @@
       background: radial-gradient(circle, rgba(236,100,120,.16) 0%, transparent 70%);
       pointer-events: none;
     }
-    .seed-featured .seed-marker { width: 96px; height: 96px; }
-    .seed-featured .seed-name {
-      font-size: 30px; color: #f4ecd0;
-    }
+    .seed-featured .seed-marker { width: 72px; height: 72px; margin-bottom: 14px; }
+    .seed-featured .seed-name { font-size: 26px; color: #f4ecd0; }
+    .seed-featured .seed-tag { font-size: 10px; margin-bottom: 10px; }
+    .seed-featured .seed-line { font-size: 15px; margin-bottom: 10px; }
+    .seed-featured .seed-desc { font-size: 12.5px; line-height: 1.55; margin-bottom: 18px; max-width: 38ch; }
+    .seed-featured .seed-preview { aspect-ratio: 16/9; margin-bottom: 16px; }
+    .seed-featured .seed-bloom { margin-top: 18px; }
     .seed-featured:hover .seed-marker {
       transform: rotate(-10deg) scale(1.08);
     }
@@ -1141,8 +1149,7 @@
 
         <!-- Playground intro -->
         <div class="pg-intro reveal d2">
-          <h1 class="pg-title">Weekend prototypes, technical toys, and things I made just to see if I could.</h1>
-          <p class="pg-sub">Hover a plot to peek. Tap "Try it" to plant yourself in.</p>
+          <h1 class="pg-title">Every project here started with <em>"I wonder if I could&hellip;"</em></h1>
         </div>
 
         <!-- Playground projects: featured center + flanking seedlings (Variant A v2) -->
@@ -1152,10 +1159,9 @@
           <article class="seed seed-side">
             <div class="seed-marker" aria-hidden="true">
               <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <path d="M50 92 L50 60" stroke="#5e8a4f" stroke-width="2" stroke-linecap="round" fill="none"/>
-                <path d="M50 74 Q 40 68 34 58 Q 44 64 50 72 Z" fill="#5e8a4f" opacity=".75"/>
-                <path d="M50 68 Q 60 64 66 54 Q 56 60 50 66 Z" fill="#5e8a4f" opacity=".75"/>
-                <circle cx="50" cy="56" r="5" fill="#8a6418" opacity=".55"/>
+                <path d="M50 92 L50 52" stroke="#5e8a4f" stroke-width="2" stroke-linecap="round" fill="none"/>
+                <path d="M50 52 Q 40 52 40 42 Q 40 30 50 26 Q 60 30 60 42 Q 60 52 50 52 Z" fill="#5e8a4f" opacity=".8"/>
+                <path d="M50 30 L50 22" stroke="#3d6b2c" stroke-width="1" opacity=".5" stroke-linecap="round"/>
               </svg>
             </div>
             <div class="seed-name">Coming up</div>
@@ -1166,19 +1172,16 @@
           <article class="seed seed-featured">
             <div class="seed-marker" aria-hidden="true">
               <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <!-- Peacock feather (Mayura) -->
-                <path d="M50 96 L50 60" stroke="#3d6b2c" stroke-width="2" stroke-linecap="round" fill="none"/>
-                <ellipse cx="50" cy="38" rx="20" ry="34" fill="#5e8a4f" opacity=".95"/>
-                <ellipse cx="50" cy="38" rx="14" ry="26" fill="#8a6418" opacity=".92"/>
-                <ellipse cx="50" cy="38" rx="10" ry="18" fill="#ec6478" opacity=".95"/>
-                <ellipse cx="50" cy="38" rx="6" ry="10" fill="#3a2818"/>
-                <circle cx="50" cy="38" r="3" fill="#f6e4a8"/>
-                <!-- barbs -->
-                <g stroke="#3d6b2c" stroke-width=".8" opacity=".55" fill="none">
-                  <path d="M50 12 Q 44 20 40 22"/>
-                  <path d="M50 12 Q 56 20 60 22"/>
-                  <path d="M50 66 Q 44 62 38 62"/>
-                  <path d="M50 66 Q 56 62 62 62"/>
+                <g fill="#ec6478">
+                  <path d="M50 8 L55 44 L91 50 L55 56 L50 92 L45 56 L9 50 L45 44 Z"/>
+                </g>
+                <g fill="#f6c54a" opacity=".85">
+                  <path d="M22 18 L24 28 L34 30 L24 32 L22 42 L20 32 L10 30 L20 28 Z"/>
+                  <path d="M78 62 L80 72 L90 74 L80 76 L78 86 L76 76 L66 74 L76 72 Z"/>
+                </g>
+                <g fill="#8a6418" opacity=".5">
+                  <circle cx="80" cy="20" r="2.5"/>
+                  <circle cx="18" cy="80" r="2.5"/>
                 </g>
               </svg>
             </div>
@@ -1194,7 +1197,7 @@
                 <button class="pg-btn pg-btn-primary" type="button" data-launch="https://sakshii-shahh.github.io/hastamudra/" data-title="Hastamudra">
                   <span>Try it</span>
                   <span class="pg-btn-arr" aria-hidden="true">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                       <path d="M5 12h14M13 6l6 6-6 6"/>
                     </svg>
                   </span>
@@ -1202,7 +1205,7 @@
                 <button class="pg-btn pg-btn-secondary" type="button" data-story="story-hastamudra" data-title="How I built Hastamudra">
                   <span>How I built it</span>
                   <span class="pg-btn-arr" aria-hidden="true">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                       <path d="M7 17L17 7M9 7h8v8"/>
                     </svg>
                   </span>
@@ -1215,10 +1218,10 @@
           <article class="seed seed-side">
             <div class="seed-marker" aria-hidden="true">
               <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <path d="M50 92 L50 66" stroke="#5e8a4f" stroke-width="2" stroke-linecap="round" fill="none" opacity=".7"/>
-                <circle cx="50" cy="62" r="5" fill="#8a6418" opacity=".5"/>
-                <path d="M42 78 Q 40 72 44 68" stroke="#5e8a4f" stroke-width="1.5" fill="none" opacity=".55"/>
-                <path d="M58 78 Q 60 72 56 68" stroke="#5e8a4f" stroke-width="1.5" fill="none" opacity=".55"/>
+                <path d="M50 92 L50 55" stroke="#5e8a4f" stroke-width="2" stroke-linecap="round" fill="none"/>
+                <path d="M50 55 Q 42 55 42 46 Q 42 35 50 32 Q 58 35 58 46 Q 58 55 50 55 Z" fill="#5e8a4f" opacity=".72"/>
+                <path d="M40 70 Q 38 62 44 60" stroke="#5e8a4f" stroke-width="1.5" fill="none" opacity=".65" stroke-linecap="round"/>
+                <path d="M60 70 Q 62 62 56 60" stroke="#5e8a4f" stroke-width="1.5" fill="none" opacity=".65" stroke-linecap="round"/>
               </svg>
             </div>
             <div class="seed-name">Still blooming</div>
@@ -1275,7 +1278,7 @@
             <p class="pg-story-outbound">
               <a href="https://sakshii-shahh.github.io/hastamudra/" target="_blank" rel="noopener">
                 Try it live
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-left: 6px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-left: 6px;">
                   <path d="M5 12h14M13 6l6 6-6 6"/>
                 </svg>
               </a>
