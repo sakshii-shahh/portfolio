@@ -607,8 +607,8 @@
     }
     .pg-title {
       font-family: var(--serif); font-weight: 500;
-      font-size: clamp(28px, 4vw, 48px);
-      line-height: 1.1; letter-spacing: -.015em;
+      font-size: clamp(26px, 3.6vw, 44px);
+      line-height: 1.2; letter-spacing: -.015em;
       color: #f4ecd0; margin: 0;
     }
     .pg-title em { font-style: italic; color: var(--accent); }
@@ -974,6 +974,24 @@
       color: #f4ecd0; letter-spacing: -.01em;
     }
 
+    .seed-name-mark {
+      width: 20px; height: 20px;
+      display: inline-block;
+      vertical-align: -3px;
+      margin-right: 8px;
+    }
+    .seed-featured .seed-name {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .seed-featured .seed-name-mark {
+      width: 22px; height: 22px;
+      margin-right: 0;
+      vertical-align: baseline;
+    }
+
     /* Side seedlings — compact, aspirational */
     .seed-side {
       min-height: 320px;
@@ -1001,10 +1019,10 @@
 
     /* Featured — always expanded, coral-tinted */
     .seed-featured {
-      min-height: 560px;
+      min-height: 480px;
       background: linear-gradient(155deg, rgba(240,232,210,.11) 0%, rgba(240,232,210,.04) 100%);
       border: 1px solid rgba(236,100,120,.4);
-      padding: 40px 32px 36px;
+      padding: 36px 32px 32px;
       box-shadow:
         0 30px 60px -20px rgba(0,0,0,.5),
         0 0 40px -12px rgba(236,100,120,.25);
@@ -1016,16 +1034,19 @@
       background: radial-gradient(circle, rgba(236,100,120,.16) 0%, transparent 70%);
       pointer-events: none;
     }
-    .seed-featured .seed-marker { width: 72px; height: 72px; margin-bottom: 14px; }
     .seed-featured .seed-name { font-size: 26px; color: #f4ecd0; }
     .seed-featured .seed-tag { font-size: 10px; margin-bottom: 10px; }
     .seed-featured .seed-line { font-size: 15px; margin-bottom: 10px; }
-    .seed-featured .seed-desc { font-size: 12.5px; line-height: 1.55; margin-bottom: 18px; max-width: 38ch; }
-    .seed-featured .seed-preview { aspect-ratio: 16/9; margin-bottom: 16px; }
-    .seed-featured .seed-bloom { margin-top: 18px; }
-    .seed-featured:hover .seed-marker {
-      transform: rotate(-10deg) scale(1.08);
+    .seed-featured .seed-desc {
+      font-size: 12.5px; line-height: 1.55;
+      margin-bottom: 14px; max-width: 38ch;
     }
+    .seed-featured .seed-preview {
+      aspect-ratio: 16/9;
+      max-height: 180px;
+      margin-bottom: 14px;
+    }
+    .seed-featured .seed-bloom { margin-top: 14px; }
     .seed-featured:hover {
       transform: translateY(-4px);
       box-shadow:
@@ -1149,7 +1170,7 @@
 
         <!-- Playground intro -->
         <div class="pg-intro reveal d2">
-          <h1 class="pg-title">Every project here started with <em>"I wonder if I could&hellip;"</em></h1>
+          <h1 class="pg-title">Every project here started with<br><em>"I wonder if I could&hellip;"</em></h1>
         </div>
 
         <!-- Playground projects: featured center + flanking seedlings (Variant A v2) -->
@@ -1170,22 +1191,12 @@
 
           <!-- Featured: Hastamudra (always expanded) -->
           <article class="seed seed-featured">
-            <div class="seed-marker" aria-hidden="true">
-              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <g fill="#ec6478">
-                  <path d="M50 8 L55 44 L91 50 L55 56 L50 92 L45 56 L9 50 L45 44 Z"/>
-                </g>
-                <g fill="#f6c54a" opacity=".85">
-                  <path d="M22 18 L24 28 L34 30 L24 32 L22 42 L20 32 L10 30 L20 28 Z"/>
-                  <path d="M78 62 L80 72 L90 74 L80 76 L78 86 L76 76 L66 74 L76 72 Z"/>
-                </g>
-                <g fill="#8a6418" opacity=".5">
-                  <circle cx="80" cy="20" r="2.5"/>
-                  <circle cx="18" cy="80" r="2.5"/>
-                </g>
+            <div class="seed-name">
+              <svg class="seed-name-mark" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M12 1 L13.4 10.6 L23 12 L13.4 13.4 L12 23 L10.6 13.4 L1 12 L10.6 10.6 Z" fill="#ec6478"/>
               </svg>
+              Hastamudra
             </div>
-            <div class="seed-name">Hastamudra</div>
             <div class="seed-bloom">
               <span class="seed-tag">Computer vision &middot; Interactive</span>
               <p class="seed-line">Where the hand moves, the gaze follows.</p>
