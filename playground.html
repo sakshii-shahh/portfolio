@@ -454,12 +454,28 @@
     }
 
     /* ============ TULIP BAND ============ */
+    /* Wrapper carries the two-tone background so the beige strip aligns with
+       the sidebar column (308px inside the shell) and the dark strip with the
+       stage. Formula: sidebar's right edge in viewport space = shell's left
+       margin (0 on narrow, (100vw - 1480px)/2 when wider) + 308px. */
+    .tulip-band-wrap {
+      position: relative;
+      z-index: 0;
+      margin-bottom: -48px;
+      background: linear-gradient(
+        to right,
+        var(--bg) 0,
+        var(--bg) calc(max(0px, (100vw - 1480px) / 2) + 308px),
+        var(--footer-bg) calc(max(0px, (100vw - 1480px) / 2) + 308px),
+        var(--footer-bg) 100%
+      );
+    }
     .tulip-band {
       position: relative;
       z-index: 0;
       overflow: hidden;
       max-width: 1480px;
-      margin: 0 auto -48px;
+      margin: 0 auto;
       padding: 0 64px;
       display: flex;
       justify-content: space-between;
@@ -485,7 +501,10 @@
     .tulip.tilt-r,
     .leaf.tilt-r { transform: rotate(6deg); }
     @media (max-width: 980px) {
-      .tulip-band { padding: 0 24px; gap: 2px; margin-bottom: -36px; }
+      /* Shell stacks to one column; the tulip band sits under the dark stage,
+         so let it be one solid dark strip instead of a split. */
+      .tulip-band-wrap { background: var(--footer-bg); margin-bottom: -36px; }
+      .tulip-band { padding: 0 24px; gap: 2px; }
       .tulip { height: 64px; }
       .tulip:nth-child(3n) { height: 56px; }
       .tulip:nth-child(4n+1) { height: 70px; }
@@ -1529,26 +1548,28 @@
   </div>
 
   <!-- ====================== TULIP BAND (decorative, sits behind footer top) ====================== -->
-  <div class="tulip-band" aria-hidden="true">
-    <img src="assets/tulips/tulip-1.svg" alt="" class="tulip t-yellow" loading="lazy" />
-    <img src="assets/tulips/tulip-3.svg" alt="" class="tulip t-coral" loading="lazy" />
-    <img src="assets/tulips/tulip-5.svg" alt="" class="tulip t-yellow tilt-l" loading="lazy" />
-    <img src="assets/tulips/leaf-2.svg" alt="" class="leaf" loading="lazy" />
-    <img src="assets/tulips/tulip-2.svg" alt="" class="tulip t-pink" loading="lazy" />
-    <img src="assets/tulips/tulip-4.svg" alt="" class="tulip t-sage tilt-r" loading="lazy" />
-    <img src="assets/tulips/tulip-6.svg" alt="" class="tulip t-yellow" loading="lazy" />
-    <img src="assets/tulips/leaf-1.svg" alt="" class="leaf tilt-l" loading="lazy" />
-    <img src="assets/tulips/tulip-1.svg" alt="" class="tulip t-coral tilt-l" loading="lazy" />
-    <img src="assets/tulips/tulip-3.svg" alt="" class="tulip t-pink" loading="lazy" />
-    <img src="assets/tulips/tulip-2.svg" alt="" class="tulip t-yellow tilt-r" loading="lazy" />
-    <img src="assets/tulips/tulip-4.svg" alt="" class="tulip t-coral" loading="lazy" />
-    <img src="assets/tulips/leaf-3.svg" alt="" class="leaf" loading="lazy" />
-    <img src="assets/tulips/tulip-5.svg" alt="" class="tulip t-pink tilt-l" loading="lazy" />
-    <img src="assets/tulips/tulip-6.svg" alt="" class="tulip t-sage" loading="lazy" />
-    <img src="assets/tulips/tulip-1.svg" alt="" class="tulip t-yellow tilt-r" loading="lazy" />
-    <img src="assets/tulips/leaf-2.svg" alt="" class="leaf tilt-r" loading="lazy" />
-    <img src="assets/tulips/tulip-3.svg" alt="" class="tulip t-coral" loading="lazy" />
-    <img src="assets/tulips/tulip-5.svg" alt="" class="tulip t-pink tilt-l" loading="lazy" />
+  <div class="tulip-band-wrap" aria-hidden="true">
+    <div class="tulip-band">
+      <img src="assets/tulips/tulip-1.svg" alt="" class="tulip t-yellow" loading="lazy" />
+      <img src="assets/tulips/tulip-3.svg" alt="" class="tulip t-coral" loading="lazy" />
+      <img src="assets/tulips/tulip-5.svg" alt="" class="tulip t-yellow tilt-l" loading="lazy" />
+      <img src="assets/tulips/leaf-2.svg" alt="" class="leaf" loading="lazy" />
+      <img src="assets/tulips/tulip-2.svg" alt="" class="tulip t-pink" loading="lazy" />
+      <img src="assets/tulips/tulip-4.svg" alt="" class="tulip t-sage tilt-r" loading="lazy" />
+      <img src="assets/tulips/tulip-6.svg" alt="" class="tulip t-yellow" loading="lazy" />
+      <img src="assets/tulips/leaf-1.svg" alt="" class="leaf tilt-l" loading="lazy" />
+      <img src="assets/tulips/tulip-1.svg" alt="" class="tulip t-coral tilt-l" loading="lazy" />
+      <img src="assets/tulips/tulip-3.svg" alt="" class="tulip t-pink" loading="lazy" />
+      <img src="assets/tulips/tulip-2.svg" alt="" class="tulip t-yellow tilt-r" loading="lazy" />
+      <img src="assets/tulips/tulip-4.svg" alt="" class="tulip t-coral" loading="lazy" />
+      <img src="assets/tulips/leaf-3.svg" alt="" class="leaf" loading="lazy" />
+      <img src="assets/tulips/tulip-5.svg" alt="" class="tulip t-pink tilt-l" loading="lazy" />
+      <img src="assets/tulips/tulip-6.svg" alt="" class="tulip t-sage" loading="lazy" />
+      <img src="assets/tulips/tulip-1.svg" alt="" class="tulip t-yellow tilt-r" loading="lazy" />
+      <img src="assets/tulips/leaf-2.svg" alt="" class="leaf tilt-r" loading="lazy" />
+      <img src="assets/tulips/tulip-3.svg" alt="" class="tulip t-coral" loading="lazy" />
+      <img src="assets/tulips/tulip-5.svg" alt="" class="tulip t-pink tilt-l" loading="lazy" />
+    </div>
   </div>
 
   <!-- ============ FOOTER ============ -->
