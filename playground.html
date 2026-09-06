@@ -462,12 +462,15 @@
       position: relative;
       z-index: 0;
       margin-bottom: -48px;
+      /* Dark side matches the .stage radial-gradient's outer color (#1c2820)
+         so the tulip strip flows continuously out of the stage above it,
+         instead of jumping to the footer's green (#2c4a36). */
       background: linear-gradient(
         to right,
         var(--bg) 0,
         var(--bg) calc(max(0px, (100vw - 1480px) / 2) + 308px),
-        var(--footer-bg) calc(max(0px, (100vw - 1480px) / 2) + 308px),
-        var(--footer-bg) 100%
+        #1c2820 calc(max(0px, (100vw - 1480px) / 2) + 308px),
+        #1c2820 100%
       );
     }
     .tulip-band {
@@ -503,7 +506,7 @@
     @media (max-width: 980px) {
       /* Shell stacks to one column; the tulip band sits under the dark stage,
          so let it be one solid dark strip instead of a split. */
-      .tulip-band-wrap { background: var(--footer-bg); margin-bottom: -36px; }
+      .tulip-band-wrap { background: #1c2820; margin-bottom: -36px; }
       .tulip-band { padding: 0 24px; gap: 2px; }
       .tulip { height: 64px; }
       .tulip:nth-child(3n) { height: 56px; }
